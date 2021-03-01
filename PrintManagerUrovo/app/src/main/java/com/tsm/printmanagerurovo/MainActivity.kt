@@ -33,17 +33,29 @@ class MainActivity : AppCompatActivity() {
         mFontStylePanel = FontStylePanel(this)
 
         btn_print.setOnClickListener {
-            val content = """
+            contentPrint()
+        }
+        btn_print_02.setOnClickListener {
+            mFontStylePanel.fontName = "Roboto"
+            mFontStylePanel.fontSize = 30
+            contentPrint()
+        }
+        btn_print_03.setOnClickListener {
+            mFontStylePanel.fontName = "Roboto"
+            mFontStylePanel.fontSize = 15
+            contentPrint()
+        }
+    }
+    private fun contentPrint() {
+        val content = """
                     Print test content!
                     0123456789
                     abcdefghijklmnopqrstuvwsyz
                     ABCDEFGHIJKLMNOPQRSTUVWSYZ
                     """.trimIndent()
-
-            val msg: Message? = mPrintHandler?.obtainMessage(PRINT_TEXT)
-            msg?.obj = content
-            msg?.sendToTarget()
-        }
+        val msg: Message? = mPrintHandler?.obtainMessage(PRINT_TEXT)
+        msg?.obj = content
+        msg?.sendToTarget()
     }
 
     internal inner class CustomThread : Thread() {
@@ -77,13 +89,9 @@ class MainActivity : AppCompatActivity() {
             printerManager.setupPage(384, -1) //Set paper size
             when (type) {
                 PRINT_TEXT -> {
-                    val fontInfo: Bundle = mFontStylePanel.fontInfo //Get font format
-                    mFontStylePanel.fontSize = 32
-                    mFontStylePanel.fontName = "Roboto"
-
                     val fontSize = mFontStylePanel.fontSize
                     val fontStyle = 0x0000
-                    var fontName: String? = mFontStylePanel.fontName
+                    val fontName: String? = mFontStylePanel.fontName
                     var height = 0
                     val texts = (content as String).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
                     for (text in texts) {

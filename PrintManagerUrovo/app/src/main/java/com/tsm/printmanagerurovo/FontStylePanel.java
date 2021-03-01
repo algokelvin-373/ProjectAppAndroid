@@ -26,15 +26,8 @@ public class FontStylePanel {
     private boolean isTextStrikeout = false;
     private int mFontStyle = FONT_STYLE_NULL;
 
-    private String[] mFontNames;
-    private String[] mFontSizes;
-
     public FontStylePanel(Activity context) {
         mContext = context;
-
-        mFontNames = mContext.getResources().getStringArray(R.array.font_name);
-        mFontSizes = mContext.getResources().getStringArray(R.array.font_size);
-
     }
     public void setFontSize(int mFontSize) {
         this.mFontSize = mFontSize;
