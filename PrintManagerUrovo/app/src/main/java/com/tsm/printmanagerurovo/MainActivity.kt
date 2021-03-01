@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        const val TAG = "PrintManagerUrovo"
         const val PRINT_TEXT = 0
         const val PRNSTS_OK = 0
         const val PRNSTS_OUT_OF_PAPER = -1 //Out of paper
