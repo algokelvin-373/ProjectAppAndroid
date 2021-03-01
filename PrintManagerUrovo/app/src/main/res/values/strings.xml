@@ -50,6 +50,7 @@
     <string name="tst_hint_content">Please input right content!!!</string>
     <string name="print_font_roboto_30">Print Font Roboto, 30</string>
     <string name="print_font_roboto_15">Print Font Roboto, 15</string>
+    <string name="print_logo">Print Logo</string>
 
     <string-array name="barcode_type">
         <item>C25INTER</item>

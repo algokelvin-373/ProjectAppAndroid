@@ -2,6 +2,8 @@ package com.tsm.printmanagerurovo
 
 import android.annotation.SuppressLint
 import android.device.PrinterManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     companion object {
         const val PRINT_TEXT = 0
+        const val PRINT_BITMAP = 1
         const val PRNSTS_OK = 0
         const val PRNSTS_OUT_OF_PAPER = -1 //Out of paper
         const val PRNSTS_OVER_HEAT = -2 //Over heat
@@ -44,6 +47,17 @@ class MainActivity : AppCompatActivity() {
             mFontStylePanel.fontSize = 15
             contentPrint()
         }
+        btn_print_04.setOnClickListener {
+            //Print a default picture
+            val opts = BitmapFactory.Options()
+            opts.inPreferredConfig = Bitmap.Config.ARGB_8888
+            opts.inDensity = resources.displayMetrics.densityDpi
+            opts.inTargetDensity = resources.displayMetrics.densityDpi
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_logo, opts)
+            val msg = mPrintHandler?.obtainMessage(PRINT_BITMAP)
+            msg?.obj = bitmap
+            msg?.sendToTarget()
+        }
     }
     private fun contentPrint() {
         val content = """
@@ -64,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             object : Handler() {
                 override fun handleMessage(msg: Message) {
                     when (msg.what) {
-                        PRINT_TEXT -> {
+                        PRINT_TEXT, PRINT_BITMAP -> {
                             doPrint(PrinterManager(), msg.what, msg.obj)
                         }
                     }
@@ -81,16 +95,16 @@ class MainActivity : AppCompatActivity() {
             when (type) {
                 PRINT_TEXT -> {
                     val fontSize = mFontStylePanel.fontSize
-                    val fontStyle = 0x0000
                     val fontName: String? = mFontStylePanel.fontName
                     var height = 0
                     val texts = (content as String).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
                     for (text in texts) {
                         height += printerManager.drawText(text, 0, height, fontName, fontSize, false, false, 0) //Printed text
                     }
-                    for (text in texts) {
-                        height += printerManager.drawTextEx(text, 5, height, 384, -1, fontName, fontSize, 0, fontStyle, 0) ////Printed text
-                    }
+                }
+                PRINT_BITMAP -> {
+                    val bitmap = content as Bitmap
+                    printerManager.drawBitmap(bitmap, 50, 0)
                 }
             }
             ret = printerManager.printPage(0) //Execution printing
