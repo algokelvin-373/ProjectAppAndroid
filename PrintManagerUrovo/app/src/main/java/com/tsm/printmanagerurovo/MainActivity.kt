@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         const val PRNSTS_ERR_DRIVER = -257 //Printer Driver error
     }
     private var mPrintHandler: Handler? = null
-    private var mPrinterManager: PrinterManager? = null
     private lateinit var mFontStylePanel: FontStylePanel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,21 +65,13 @@ class MainActivity : AppCompatActivity() {
                 override fun handleMessage(msg: Message) {
                     when (msg.what) {
                         PRINT_TEXT -> {
-                            doPrint(getPrinterManager(), msg.what, msg.obj)
+                            doPrint(PrinterManager(), msg.what, msg.obj)
                         }
                     }
                 }
             }
             Looper.loop() //4.Start message loop
         }
-    }
-
-    private fun getPrinterManager(): PrinterManager {
-        if (mPrinterManager == null) {
-            mPrinterManager = PrinterManager()
-            mPrinterManager?.open()
-        }
-        return mPrinterManager!!
     }
 
     private fun doPrint(printerManager: PrinterManager, type: Int, content: Any) {
