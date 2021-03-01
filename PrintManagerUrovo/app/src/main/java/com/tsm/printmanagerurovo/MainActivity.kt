@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
+        const val TAG = "PrintManagerUrovo"
         const val PRINT_TEXT = 0
         const val PRNSTS_OK = 0
         const val PRNSTS_OUT_OF_PAPER = -1 //Out of paper
@@ -78,14 +80,12 @@ class MainActivity : AppCompatActivity() {
             when (type) {
                 PRINT_TEXT -> {
                     val fontInfo: Bundle = mFontStylePanel.fontInfo //Get font format
-                    var fontSize = 24
-                    var fontStyle = 0x0000
-                    var fontName: String? = "simsun"
-                    if (fontInfo != null) {
-                        fontSize = fontInfo.getInt("font-size", 24)
-                        fontStyle = fontInfo.getInt("font-style", 0)
-                        fontName = fontInfo.getString("font-name", "simsun")
-                    }
+                    mFontStylePanel.fontSize = 32
+                    mFontStylePanel.fontName = "Roboto"
+
+                    val fontSize = mFontStylePanel.fontSize
+                    val fontStyle = 0x0000
+                    var fontName: String? = mFontStylePanel.fontName
                     var height = 0
                     val texts = (content as String).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
                     for (text in texts) {
@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
                     for (text in texts) {
                         height += printerManager.drawTextEx(text, 5, height, 384, -1, fontName, fontSize, 0, fontStyle, 0) ////Printed text
                     }
-                    height = 0
                 }
             }
             ret = printerManager.printPage(0) //Execution printing
