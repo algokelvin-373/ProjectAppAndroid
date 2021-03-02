@@ -51,6 +51,7 @@
     <string name="print_font_roboto_30">Print Font Roboto, 30</string>
     <string name="print_font_roboto_15">Print Font Roboto, 15</string>
     <string name="print_logo">Print Logo</string>
+    <string name="print_custome_font_size">Print Custome Font Size</string>
 
     <string-array name="barcode_type">
         <item>C25INTER</item>

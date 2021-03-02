@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -58,13 +59,27 @@ class MainActivity : AppCompatActivity() {
             msg?.obj = bitmap
             msg?.sendToTarget()
         }
+        btn_print_05.setOnClickListener {
+            mFontStylePanel.fontName = "Roboto"
+            mFontStylePanel.fontSize = 30
+            contentPrint()
+
+            mFontStylePanel.fontName = "Arial"
+            mFontStylePanel.fontSize = 15
+            contentPrintTwo()
+        }
     }
     private fun contentPrint() {
         val content = """
-                    Print test content!
-                    0123456789
-                    abcdefghijklmnopqrstuvwsyz
-                    ABCDEFGHIJKLMNOPQRSTUVWSYZ
+                    Print test content! One
+                    """.trimIndent()
+        val msg: Message? = mPrintHandler?.obtainMessage(PRINT_TEXT)
+        msg?.obj = content
+        msg?.sendToTarget()
+    }
+    private fun contentPrintTwo() {
+        val content = """
+                    Print test content! Two
                     """.trimIndent()
         val msg: Message? = mPrintHandler?.obtainMessage(PRINT_TEXT)
         msg?.obj = content
@@ -97,6 +112,7 @@ class MainActivity : AppCompatActivity() {
                     val fontSize = mFontStylePanel.fontSize
                     val fontName: String? = mFontStylePanel.fontName
                     var height = 0
+                    Log.i("print-manager", fontSize.toString())
                     val texts = (content as String).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
                     for (text in texts) {
                         height += printerManager.drawText(text, 0, height, fontName, fontSize, false, false, 0) //Printed text
