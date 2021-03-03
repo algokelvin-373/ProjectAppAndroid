@@ -8,15 +8,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
     companion object {
         const val PRINT_TEXT = 0
         const val PRINT_BITMAP = 1
+        const val PRINT_CUSTOM = 2
         const val PRNSTS_OK = 0
         const val PRNSTS_OUT_OF_PAPER = -1 //Out of paper
         const val PRNSTS_OVER_HEAT = -2 //Over heat
@@ -60,12 +61,6 @@ class MainActivity : AppCompatActivity() {
             msg?.sendToTarget()
         }
         btn_print_05.setOnClickListener {
-            mFontStylePanel.fontName = "Roboto"
-            mFontStylePanel.fontSize = 30
-            contentPrint()
-
-            mFontStylePanel.fontName = "Arial"
-            mFontStylePanel.fontSize = 15
             contentPrintTwo()
         }
     }
@@ -78,10 +73,16 @@ class MainActivity : AppCompatActivity() {
         msg?.sendToTarget()
     }
     private fun contentPrintTwo() {
-        val content = """
-                    Print test content! Two
-                    """.trimIndent()
-        val msg: Message? = mPrintHandler?.obtainMessage(PRINT_TEXT)
+        val content = ArrayList<CustomPrint>()
+        content.add(CustomPrint("Print test 1", "Roboto", 15))
+        content.add(CustomPrint("", "Roboto", 15))
+        content.add(CustomPrint("Print test 2", "Arial", 20))
+        content.add(CustomPrint("", "Roboto", 15))
+        content.add(CustomPrint("Print test 3", "Times New Roman", 25))
+        content.add(CustomPrint("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL", "Courier", 15))
+        content.add(CustomPrint("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL", "Courier", 20))
+        content.add(CustomPrint("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL", "Courier", 25))
+        val msg: Message? = mPrintHandler?.obtainMessage(PRINT_CUSTOM)
         msg?.obj = content
         msg?.sendToTarget()
     }
@@ -95,6 +96,9 @@ class MainActivity : AppCompatActivity() {
                     when (msg.what) {
                         PRINT_TEXT, PRINT_BITMAP -> {
                             doPrint(PrinterManager(), msg.what, msg.obj)
+                        }
+                        PRINT_CUSTOM -> {
+                            doPrintCustom(PrinterManager(), msg.obj)
                         }
                     }
                 }
@@ -112,7 +116,6 @@ class MainActivity : AppCompatActivity() {
                     val fontSize = mFontStylePanel.fontSize
                     val fontName: String? = mFontStylePanel.fontName
                     var height = 0
-                    Log.i("print-manager", fontSize.toString())
                     val texts = (content as String).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
                     for (text in texts) {
                         height += printerManager.drawText(text, 0, height, fontName, fontSize, false, false, 0) //Printed text
@@ -123,6 +126,29 @@ class MainActivity : AppCompatActivity() {
                     printerManager.drawBitmap(bitmap, 50, 0)
                 }
             }
+            ret = printerManager.printPage(0) //Execution printing
+            printerManager.paperFeed(16) //paper feed
+        }
+        updatePrintStatus(ret)
+    }
+    private fun doPrintCustom(printerManager: PrinterManager, content: Any) {
+        var ret = printerManager.status //Get printer status
+        if (ret == PRNSTS_OK) {
+            printerManager.setupPage(384, -1) //Set paper size
+
+            val data = content as ArrayList<CustomPrint>
+            var height = 0
+            for (i in data) {
+                val texts = (i.text).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
+                for (text in texts) {
+                    height += if (text.isEmpty()) {
+                        16
+                    } else {
+                        printerManager.drawText(text, 0, height, i.fontName, i.fontSize, false, false, 0) //Printed text
+                    }
+                }
+            }
+
             ret = printerManager.printPage(0) //Execution printing
             printerManager.paperFeed(16) //paper feed
         }
