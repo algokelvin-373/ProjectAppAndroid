@@ -63,6 +63,9 @@ class MainActivity : AppCompatActivity() {
         btn_print_05.setOnClickListener {
             contentPrintTwo()
         }
+        btn_print_06.setOnClickListener {
+            contentPrintThree()
+        }
     }
     private fun contentPrint() {
         val content = """
@@ -74,6 +77,29 @@ class MainActivity : AppCompatActivity() {
     }
     private fun contentPrintTwo() {
         val content = ArrayList<CustomPrint>()
+        content.add(CustomPrint("Print test 1", "Roboto", 15))
+        content.add(CustomPrint("", "Roboto", 15))
+        content.add(CustomPrint("Print test 2", "Arial", 20))
+        content.add(CustomPrint("", "Roboto", 15))
+        content.add(CustomPrint("Print test 3", "Times New Roman", 25))
+        content.add(CustomPrint("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL", "Courier", 15))
+        content.add(CustomPrint("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL", "Courier", 20))
+        content.add(CustomPrint("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKL", "Courier", 25))
+        val msg: Message? = mPrintHandler?.obtainMessage(PRINT_CUSTOM)
+        msg?.obj = content
+        msg?.sendToTarget()
+    }
+    private fun contentPrintThree() {
+        val content = ArrayList<Any>()
+
+        val opts = BitmapFactory.Options()
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888
+        opts.inDensity = resources.displayMetrics.densityDpi
+        opts.inTargetDensity = resources.displayMetrics.densityDpi
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_logo, opts)
+
+        content.add(bitmap)
+        content.add(CustomPrint("", "Roboto", 15))
         content.add(CustomPrint("Print test 1", "Roboto", 15))
         content.add(CustomPrint("", "Roboto", 15))
         content.add(CustomPrint("Print test 2", "Arial", 20))
@@ -136,15 +162,19 @@ class MainActivity : AppCompatActivity() {
         if (ret == PRNSTS_OK) {
             printerManager.setupPage(384, -1) //Set paper size
 
-            val data = content as ArrayList<CustomPrint>
+            val data = content as ArrayList<Any>
             var height = 0
             for (i in data) {
-                val texts = (i.text).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
-                for (text in texts) {
-                    height += if (text.isEmpty()) {
-                        16
-                    } else {
-                        printerManager.drawText(text, 0, height, i.fontName, i.fontSize, false, false, 0) //Printed text
+                if (i is Bitmap) {
+                    printerManager.drawBitmap(i, 50, 0) //Printed Logo
+                    height += 50
+                } else {
+                    val texts = ((i as CustomPrint).text).split("\n".toRegex()).toTypedArray() //Split print content into multiple lines
+                    for (text in texts) {
+                        height += when {
+                            text.isEmpty() -> 16 //Make Space
+                            else -> printerManager.drawText(text, 0, height, i.fontName, i.fontSize, false, false, 0) //Printed text
+                        }
                     }
                 }
             }
