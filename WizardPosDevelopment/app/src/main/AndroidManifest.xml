@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.algokelvin.wizardpos">
 
+    <uses-permission android:name="android.permission.CLOUDPOS_MSR" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
