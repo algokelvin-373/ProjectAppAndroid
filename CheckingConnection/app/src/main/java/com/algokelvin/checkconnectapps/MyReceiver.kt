@@ -3,14 +3,26 @@ package com.algokelvin.checkconnectapps
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.widget.Toast
 
 class MyReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        var status: String? = NetworkUtil().getConnectivityStatusString(context)
-        if (status?.isEmpty()!!) {
-            status = "No Internet Connection"
+        if (connectivityReceiverListener != null) {
+            connectivityReceiverListener?.onNetworkConnectionChanged(isConnectedOrConnecting(context))
         }
-        Toast.makeText(context, status, Toast.LENGTH_LONG).show()
+    }
+    private fun isConnectedOrConnecting(context: Context): Boolean {
+        val connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connMgr.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnectedOrConnecting
+    }
+
+    interface ConnectivityReceiverListener {
+        fun onNetworkConnectionChanged(isConnected: Boolean)
+    }
+
+    companion object {
+        var connectivityReceiverListener: ConnectivityReceiverListener? = null
     }
 }
