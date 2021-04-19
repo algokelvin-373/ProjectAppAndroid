@@ -14,14 +14,11 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.max
 
 class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     private lateinit var mSelectedImage: Bitmap
-
-    // Max width (portrait mode)
     private var mImageMaxWidth: Int? = null
-
-    // Max height (portrait mode)
     private var mImageMaxHeight: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +30,7 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         }
 
         val dropdown = findViewById<Spinner>(R.id.spinner)
-        val items = arrayOf("Test Image 1 (Text)", "Test Image 2 (Face)")
+        val items = arrayOf("Test Image 1 (Text)", "Car 1", "Car 2")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, items)
         dropdown.adapter = adapter
         dropdown.onItemSelectedListener = this
@@ -58,7 +55,7 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     private fun processTextRecognitionResult(texts: Text) {
         val blocks = texts.textBlocks
         if (blocks.size == 0) {
-            showToast("No text found")
+            Toast.makeText(this, "No Text Found", Toast.LENGTH_SHORT).show()
             return
         }
         graphic_overlay.clear()
@@ -75,10 +72,6 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
                 }
             }
         }
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun getImageMaxWidth(): Int? {
@@ -116,22 +109,20 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         graphic_overlay.clear()
         when (position) {
             0 -> mSelectedImage = getBitmapFromAsset(this, "Please_walk_on_the_grass.jpg")
-            1 -> mSelectedImage = getBitmapFromAsset(this, "grace_hopper.jpg")
+            1 -> mSelectedImage = getBitmapFromAsset(this, "Car01.jpg")
+            2 -> mSelectedImage = getBitmapFromAsset(this, "Car02.jpg")
         }
-        if (mSelectedImage != null) {
-            // Get the dimensions of the View
-            val targetedSize: Pair<Int?, Int?> = getTargetedWidthHeight()
-            val targetWidth = targetedSize.first
-            val maxHeight = targetedSize.second
+        // Get the dimensions of the View
+        val targetedSize: Pair<Int?, Int?> = getTargetedWidthHeight()
+        val targetWidth = targetedSize.first
+        val maxHeight = targetedSize.second
 
-            // Determine how much to scale down the image
-            Log.i("textRecognition-blocks", "$targetWidth $maxHeight")
-            if (targetWidth != null && maxHeight != null) {
-                val scaleFactor = Math.max(mSelectedImage.getWidth().toFloat() / targetWidth.toFloat(), mSelectedImage.getHeight().toFloat() / maxHeight.toFloat())
-                val resizedBitmap = Bitmap.createScaledBitmap(mSelectedImage, (mSelectedImage.getWidth() / scaleFactor).toInt(), (mSelectedImage.getHeight() / scaleFactor).toInt(), true)
-                image_view.setImageBitmap(resizedBitmap)
-                mSelectedImage = resizedBitmap
-            }
+        // Determine how much to scale down the image
+        if (targetWidth != null && maxHeight != null) {
+            val scaleFactor = max(mSelectedImage.width.toFloat() / targetWidth.toFloat(), mSelectedImage.height.toFloat() / maxHeight.toFloat())
+            val resizedBitmap = Bitmap.createScaledBitmap(mSelectedImage, (mSelectedImage.width / scaleFactor).toInt(), (mSelectedImage.height / scaleFactor).toInt(), true)
+            image_view.setImageBitmap(resizedBitmap)
+            mSelectedImage = resizedBitmap
         }
     }
 }
