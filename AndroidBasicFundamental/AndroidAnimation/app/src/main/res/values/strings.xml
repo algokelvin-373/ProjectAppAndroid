@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AnimationAndroid</string>
+    <string name="hello_translation_part01">Hello Translation Part01</string>
+    <string name="translation">Translation</string>
 </resources>
