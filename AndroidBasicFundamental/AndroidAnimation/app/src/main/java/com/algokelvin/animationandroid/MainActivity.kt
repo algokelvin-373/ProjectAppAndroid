@@ -3,7 +3,6 @@ package com.algokelvin.animationandroid
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.algokelvin.animationandroid.translation.TranslationOne
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnTranslation.setOnClickListener {
-            startActivity(Intent(this, TranslationOne::class.java))
+            startActivity(Intent(this, MenuTranslation::class.java))
         }
     }
 }
