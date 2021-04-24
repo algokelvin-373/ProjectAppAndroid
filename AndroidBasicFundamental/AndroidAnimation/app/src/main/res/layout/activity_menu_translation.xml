@@ -15,13 +15,23 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/btnTranslation"
+            android:id="@+id/translation01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/translation"
+            android:text="@string/translation01"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/translation02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/translation02"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/translation01" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

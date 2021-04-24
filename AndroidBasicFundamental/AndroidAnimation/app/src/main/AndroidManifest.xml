@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimationAndroid">
+        <activity android:name=".translation.TranslationOne"/>
+        <activity android:name=".translation.TranslationTwo"/>
+        <activity android:name=".MenuTranslation"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
