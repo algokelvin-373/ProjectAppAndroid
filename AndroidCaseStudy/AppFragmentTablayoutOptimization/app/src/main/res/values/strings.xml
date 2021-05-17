@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">App-Fragment-Tablayout-Optimization</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">%s</string>
+</resources>
