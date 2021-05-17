@@ -1,6 +1,7 @@
 package com.algokelvin.training.android.fragment.tablayout
 
 import algokelvin.android.tablayout.AppsViewPageAdapter
+import algokelvin.android.tablayout.SetupViewPager.setTextNameTabs
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,11 +22,7 @@ class PageFragment : Fragment() {
         layoutViewPager.adapter = appsViewPageAdapter
         tabsLayout.setupWithViewPager(layoutViewPager)
 
-        tabsLayout.getTabAt(0)?.text = "Tab 1"
-        tabsLayout.getTabAt(1)?.text = "Tab 2"
-        tabsLayout.getTabAt(2)?.text = "Tab 3"
-        tabsLayout.getTabAt(3)?.text = "Tab 4"
-        tabsLayout.getTabAt(4)?.text = "Tab 5"
+        tabsLayout.setTextNameTabs("Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5")
     }
 
 }
