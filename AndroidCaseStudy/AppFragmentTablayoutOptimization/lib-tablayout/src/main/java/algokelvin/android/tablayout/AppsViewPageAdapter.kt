@@ -1,4 +1,4 @@
-package com.algokelvin.training.android.fragment.tablayout
+package algokelvin.android.tablayout
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

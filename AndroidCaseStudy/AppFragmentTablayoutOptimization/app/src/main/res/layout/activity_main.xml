@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabsLayout">
 
-        <com.algokelvin.training.android.fragment.ViewPagerManual
+        <algokelvin.android.tablayout.ViewPagerManual
             android:id="@+id/layoutViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -1,5 +1,6 @@
 package com.algokelvin.training.android.fragment.tablayout
 
+import algokelvin.android.tablayout.AppsViewPageAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

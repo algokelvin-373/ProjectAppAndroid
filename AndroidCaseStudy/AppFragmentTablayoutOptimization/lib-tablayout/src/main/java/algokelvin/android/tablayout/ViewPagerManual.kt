@@ -1,4 +1,4 @@
-package com.algokelvin.training.android.fragment
+package algokelvin.android.tablayout
 
 import android.annotation.SuppressLint
 import android.content.Context

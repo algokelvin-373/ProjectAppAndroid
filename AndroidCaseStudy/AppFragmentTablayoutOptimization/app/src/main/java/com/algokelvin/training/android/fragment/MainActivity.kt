@@ -1,5 +1,7 @@
 package com.algokelvin.training.android.fragment
 
+import algokelvin.android.tablayout.AppsViewPageAdapter
+import algokelvin.android.tablayout.SetupViewPager.setTextNameTabs
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
