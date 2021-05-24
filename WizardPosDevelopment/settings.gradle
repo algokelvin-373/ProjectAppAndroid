@@ -1,3 +1,0 @@
-include ':cloudpossdkV1.5.3.034_Standard'
-include ':app'
-rootProject.name = "WizardPos"
