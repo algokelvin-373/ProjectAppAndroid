@@ -1,7 +1,6 @@
 package com.algokelvin.timer;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
