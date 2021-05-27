@@ -22,22 +22,19 @@ public class MainActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             public void run() {
-                // need to do tasks on the UI thread
-                Log.d("HandlerPost", "Run test count: " + count);
                 if (count++ < 5) {
                     txtHello.setText(String.valueOf(count));
-                    handler.postDelayed(this, 2500);
-                    Log.d("HandlerPost", "---THIS---");
+                    handler.postDelayed(this, 2500); // WAIT 2.5 SECONDS
                 } else {
                     handler.removeCallbacks(this);
                     txt = "Finish";
                     txtHello.setText(txt);
-                    Log.d("HandlerPost", "---FINISH REAL---");
+                    // FINISH REAL
                 }
-                Log.d("HandlerPost", "---CONTINUE---");
+                // CONTINUE
             }
         };
-        handler.post(runnable);
+        handler.post(runnable); // START
         Log.d("HandlerPost", "---START---");
     }
 }
