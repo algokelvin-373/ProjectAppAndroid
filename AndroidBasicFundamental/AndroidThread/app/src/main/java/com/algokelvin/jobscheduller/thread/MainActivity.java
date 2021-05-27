@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private String txt = "empty data";
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,24 @@ public class MainActivity extends AppCompatActivity {
         txtHello.setText(txt);
 
         final Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            Log.d("Handler", "Running Handler");
-            Log.d("Handler", "Running Success");
-            txt = "Handle Run Success";
-            txtHello.setText(txt);
-        }, 2500);
+        final Runnable runnable = new Runnable() {
+            public void run() {
+                // need to do tasks on the UI thread
+                Log.d("HandlerPost", "Run test count: " + count);
+                if (count++ < 5) {
+                    txtHello.setText(String.valueOf(count));
+                    handler.postDelayed(this, 2500);
+                    Log.d("HandlerPost", "---THIS---");
+                } else {
+                    handler.removeCallbacks(this);
+                    txt = "Finish";
+                    txtHello.setText(txt);
+                    Log.d("HandlerPost", "---FINISH REAL---");
+                }
+                Log.d("HandlerPost", "---CONTINUE---");
+            }
+        };
+        handler.post(runnable);
+        Log.d("HandlerPost", "---START---");
     }
 }
