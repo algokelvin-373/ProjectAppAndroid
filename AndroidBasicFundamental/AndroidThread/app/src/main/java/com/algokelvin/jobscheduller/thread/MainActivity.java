@@ -3,6 +3,7 @@ package com.algokelvin.jobscheduller.thread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
         TextView txtHello = findViewById(R.id.txt_hello);
         txtHello.setText(txt);
 
-        new Thread(() -> {
-            // a potentially time consuming task
-            Log.i("thread-run", "Thread run");
-            txt = "Thread Run Post";
+        final Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            Log.d("Handler", "Running Handler");
+            Log.d("Handler", "Running Success");
+            txt = "Handle Run Success";
             txtHello.setText(txt);
-        }).start();
+        }, 2500);
     }
 }
