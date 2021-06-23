@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity() {
 
                 var rotatedBitmap: Bitmap? = theBitmap
                 val deviceRotate = bitmapPhoto?.rotationDegrees
-                Log.i("imgBase64", deviceRotate.toString())
 
                 if (deviceRotate == 270) {
                     rotatedBitmap = rotateBitmap(theBitmap!!, 90f)
@@ -91,7 +90,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 strComp = Base64.getEncoder().encodeToString(encodedImg)
-                Log.i("imgBase64", strComp)
                 Glide.with(pictKtp).load(gvBitmap).into(pictKtp)
             }
         }

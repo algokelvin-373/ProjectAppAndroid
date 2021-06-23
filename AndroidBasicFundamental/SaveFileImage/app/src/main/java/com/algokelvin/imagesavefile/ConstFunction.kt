@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.configuration.UpdateConfiguration
 import io.fotoapparat.log.logcat
@@ -17,7 +16,10 @@ import io.fotoapparat.log.loggers
 import io.fotoapparat.parameter.ScaleType
 import io.fotoapparat.selector.*
 import io.fotoapparat.view.CameraView
-import java.io.*
+import java.io.ByteArrayInputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 
 object ConstFunction {
     fun Context.createFotoapparat(camera_View: CameraView, isFlash: Int): Fotoapparat {
@@ -60,25 +62,20 @@ object ConstFunction {
         matrix.postRotate(angle)
         return Bitmap.createBitmap(source, 0, 0, source.width, source.height, matrix, true)
     }
-    fun saveImage(context: Context, bitmap: Bitmap?, folderName: String, fileName: String): Uri? {
+    fun saveImage(context: Context, bitmap: Bitmap?, folderName: String, fileName: String): File {
         val fos: OutputStream?
-        var imageFile: File?
-        var imageUri: Uri? = null
+        var imageFile: File? = null
+        val imageUri: Uri?
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            Log.i("liveness", "if save image")
             val resolver = context.contentResolver
             val contentValues = ContentValues()
             contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
             contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM + File.separator + folderName)
-            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + File.separator + folderName
-            imageFile = File(imagesDir)
             imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-            Log.i("liveness", imageUri?.path.toString())
-            Log.i("liveness", imageFile.path)
             fos = resolver.openOutputStream(imageUri!!)
         } else {
-            Log.i("liveness", "else save image")
             val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + File.separator + folderName
             imageFile = File(imagesDir)
             if (!imageFile.exists()) {
@@ -97,11 +94,12 @@ object ConstFunction {
         resized.compress(Bitmap.CompressFormat.JPEG, 100, fos)
         fos?.flush()
         fos?.close()
-        /*if (imageFile != null) // pre Q
-        {
-            MediaScannerConnection.scanFile(context, arrayOf(imageFile.toString()), null, null)
-            imageUri = Uri.fromFile(imageFile)
-        }*/
-        return imageUri
+
+        if (imageFile == null) {
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + File.separator + folderName
+            imageFile = File(imagesDir)
+        }
+
+        return imageFile
     }
 }
