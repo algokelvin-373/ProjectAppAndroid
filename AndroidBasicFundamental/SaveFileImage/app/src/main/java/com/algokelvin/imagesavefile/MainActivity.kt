@@ -21,7 +21,6 @@ import io.fotoapparat.configuration.UpdateConfiguration
 import io.fotoapparat.selector.firstAvailable
 import io.fotoapparat.selector.off
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

@@ -71,7 +71,11 @@ object ConstFunction {
             contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
             contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM + File.separator + folderName)
+            val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).toString() + File.separator + folderName
+            imageFile = File(imagesDir)
             imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            Log.i("liveness", imageUri?.path.toString())
+            Log.i("liveness", imageFile.path)
             fos = resolver.openOutputStream(imageUri!!)
         } else {
             Log.i("liveness", "else save image")
@@ -83,7 +87,14 @@ object ConstFunction {
             imageFile = File(imagesDir, "$fileName.jpeg")
             fos = FileOutputStream(imageFile)
         }
-        bitmap?.compress(Bitmap.CompressFormat.PNG, 90, fos)
+
+        // Resized Image 10%
+        val width = (0.1 * bitmap?.width!!).toInt()
+        val height = (0.1 * bitmap.height).toInt()
+        val resized = Bitmap.createScaledBitmap(bitmap, width, height, true)
+        
+        // Write Images
+        resized.compress(Bitmap.CompressFormat.JPEG, 100, fos)
         fos?.flush()
         fos?.close()
         /*if (imageFile != null) // pre Q
