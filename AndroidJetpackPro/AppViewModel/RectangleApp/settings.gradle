@@ -1,0 +1,3 @@
+rootProject.name = "RectangleApp"
+include ':app'
+include ':app-v-java'
