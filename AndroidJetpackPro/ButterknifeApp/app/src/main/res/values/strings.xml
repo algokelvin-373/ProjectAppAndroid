@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ButterKnifeApp</string>
+    <string name="name">Name</string>
+    <string name="ok">OK</string>
+    <string name="dot">...</string>
+    <string name="no_butter_knife">No Butter Knife</string>
+</resources>
