@@ -13,7 +13,7 @@ The Dictionary of All Projects Android
   7. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/SaveFileImage">Save File Image</a>
   8. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/SubFolderLayoutApp">Sub Folder Layout App</a>
 - ## Android Jetpack Pro ( includes Jetpack Compose )
-  1. None
+  1. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/AppViewModel/RectangleApp">Rectangle App (View Model)</a>
 - ## Android Expert
   1. None
 - ## Android Machine Learning
@@ -22,13 +22,18 @@ The Dictionary of All Projects Android
   - ## Beginner
       1. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/AndroidBuildApps">AndroidBuild App</a>
   - ## Fundametal
-      1. NONE
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/AppFragmentTablayoutOptimization">AppFragmentTablayoutOptimization</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/CameraRotation">Camera Rotation</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/CheckingConnection">Checking Connection</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/GenerateQR">Generate QR</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/RecorderApps">Recorder Apps</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/TimerApps">Timer Apps</a>
   - ## Jetpack Pro / Jetpack Compose
-      1. NONE
+      * NONE
   - ## Expert
-      1. NONE
+      * NONE
   - ## Machine Learning
-      1. NONE
+      * NONE
 
 ## Contributors
 Thanks all contributors for build this repository
