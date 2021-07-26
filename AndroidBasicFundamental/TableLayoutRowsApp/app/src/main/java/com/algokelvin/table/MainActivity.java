@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -30,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
         tr.addView(txt);
         tr.addView(txt1);
-        tl.addView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tl.addView(tr);
+
+        TableRow tr2 = new TableRow(this);
+        tr2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+
+        TextView txt3 = new TextView(this);
+        txt3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+        txt3.setText("Title 1");
+
+        TextView txt4 = new TextView(this);
+        txt4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+        txt4.setGravity(Gravity.END);
+        txt4.setText("Data 1");
+
+        tr2.addView(txt3);
+        tr2.addView(txt4);
+        tl.addView(tr2);
     }
 }
