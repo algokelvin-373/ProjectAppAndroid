@@ -1,7 +1,6 @@
 package com.algokelvin.table;
 
 import android.content.Context;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 

@@ -8,31 +8,41 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private int z = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Sample Data Details
+        String[][] data = new String[3][2];
+        data[0][0] = "Name Channel : "; data[0][1] = "Algokelvin";
+        data[1][0] = "Name : "; data[1][1] = "Kelvin Herwanda Tandrio";
+        data[2][0] = "Instagram : "; data[2][1] = "kelvin_373";
+
         TableLayout tl = (TableLayout) findViewById(R.id.tb_details);
 
-        TextView txt = new TextView(this);
-        TextView txt1 = new TextView(this);
-        RowColumns rowColumns1 = new RowColumns(this, txt, txt1);
-        rowColumns1.setTextViews(0, "Title");
-        rowColumns1.setGravityTextView(1, Gravity.END);
-        rowColumns1.setTextViews(1, "Data");
-        rowColumns1.addTableData();
-        tl.addView(rowColumns1.getTr());
+        int row = data.length;
+        int column = data[0].length;
+        TextView[] txt = new TextView[row * column];
 
-        TextView txt3 = new TextView(this);
-        TextView txt4 = new TextView(this);
-        RowColumns rowColumns2 = new RowColumns(this, txt3, txt4);
-        rowColumns2.setTextViews(0, "Title 1");
-        rowColumns2.setGravityTextView(1, Gravity.END);
-        rowColumns2.setTextViews(1, "Data 1");
-        rowColumns2.addTableData();
-        tl.addView(rowColumns2.getTr());
+        for (int x = 0; x < row * column; x++) {
+            txt[x] = new TextView(this);
+        }
+        for (int y = 0; y < row * column; y += 2) {
+            RowColumns rowColumns1;
+            rowColumns1 = new RowColumns(this, txt[y], txt[y + 1]);
+
+            rowColumns1.setTextViews(0, data[y - z][0]);
+
+            rowColumns1.setGravityTextView(1, Gravity.END);
+            rowColumns1.setTextViews(1, data[y - z][1]);
+
+            rowColumns1.addTableData();
+            tl.addView(rowColumns1.getTr());
+            z++;
+        }
 
     }
 }
