@@ -6,12 +6,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class RowColumns {
-    private final TableLayout tl;
     private final TableRow tr;
     private final TextView[] textViews;
 
-    public RowColumns(TableLayout tl, Context ctx, TextView ...txt) {
-        this.tl = tl;
+    public RowColumns(Context ctx, TextView... txt) {
         tr = new TableRow(ctx);
         this.textViews = txt;
         for (int i = 0; i < txt.length; i++) {
@@ -34,7 +32,10 @@ public class RowColumns {
         for (TextView textView : textViews) {
             tr.addView(textView);
         }
-        tl.addView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+    }
+
+    public TableRow getTr() {
+        return tr;
     }
 
 }
