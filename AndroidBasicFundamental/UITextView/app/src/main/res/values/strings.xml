@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TextViewUI</string>
+    <string name="textview_xml">TextView Xml</string>
+</resources>
