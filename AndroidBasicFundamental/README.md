@@ -13,3 +13,5 @@
 * Retrofit
 * Save File Image
 * Sub Folder Layout
+* Table Layout Rows
+* UI TextView

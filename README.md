@@ -17,6 +17,8 @@ The Dictionary of All Projects Android
   11. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/RetrofitApp">Retrofit</a>
   12. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/SaveFileImage">Save File Image</a>
   13. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/SubFolderLayoutApp">Sub Folder Layout</a>
+  14. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/TableLayoutRowsApp">Table Layout Rows</a>
+  15. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/UITextView">UI TextView</a>
 - ## Android Jetpack Pro ( includes Jetpack Compose )
   1. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/AppViewModel/ButterknifeApp">Butterknife</a>
   2. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/AppViewModel/RealmDatabaseApp">RealmDatabase</a>
