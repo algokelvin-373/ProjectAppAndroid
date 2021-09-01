@@ -1,0 +1,2 @@
+rootProject.name = "JetpackComposeRoomMVVM"
+include ':app'
