@@ -116,4 +116,7 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
             imgCrossInput.setVisibility(View.GONE);
         }
     }
+    public void setTextBefore(String txt) {
+        this.txt = txt;
+    }
 }
