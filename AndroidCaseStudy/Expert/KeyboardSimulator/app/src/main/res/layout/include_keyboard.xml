@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clKeyboard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/keyBtn_01"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_01"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/keyBtn_02"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_02"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_01"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/keyBtn_03"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_03"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_02"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/keyBtn_Cancel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_cancel"
+        android:textColor="@color/red_ff"
+        app:layout_constraintBottom_toBottomOf="@+id/keyBtn_06"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_03"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/keyBtn_04"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_04"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_01" />
+
+    <TextView
+        android:id="@+id/keyBtn_05"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_05"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_04"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_02" />
+
+    <TextView
+        android:id="@+id/keyBtn_06"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_06"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_05"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_03" />
+
+    <TextView
+        android:id="@+id/keyBtn_07"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_07"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_04" />
+
+    <TextView
+        android:id="@+id/keyBtn_08"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_08"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_07"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_05" />
+
+    <TextView
+        android:id="@+id/keyBtn_09"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_09"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_08"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_06" />
+
+    <TextView
+        android:id="@+id/keyBtn_00"
+        android:layout_width="92dp"
+        android:layout_height="64dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/key_00"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_07" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/keyBtn_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        app:layout_constraintBottom_toBottomOf="@+id/keyBtn_00"
+        app:layout_constraintEnd_toEndOf="@+id/keyBtn_09"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_00"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_08" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_exclude"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/img_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/keyBtn_OK"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_bg_keyboard_digit"
+        android:gravity="center"
+        android:text="@string/ok"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/keyBtn_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/keyBtn_back"
+        app:layout_constraintTop_toBottomOf="@+id/keyBtn_06" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
