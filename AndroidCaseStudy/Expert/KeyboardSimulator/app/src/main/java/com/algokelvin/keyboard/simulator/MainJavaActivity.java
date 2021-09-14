@@ -8,82 +8,94 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class MainJavaActivity extends KeyboardController {
-    private ConstraintLayout clFirstName, clSecondName, clThirdName;
-    private ImageView crossFirstName, crossSecondName, crossThirdName;
-    private TextView txtFirstName, txtSecondName, txtThirdName;
-    private String txtOne = "", txtTwo = "", txtThird = "";
-    private int position = 1;
+    private ImageView[] crossData;
+    private ConstraintLayout[] clData;
+    private TextView[] txtData;
     private ConstraintLayout clBefore , clNow;
     private ImageView crossBefore, crossNow;
     private TextView txtBefore, txtNow;
-    private String dataBefore, dataAfter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        clFirstName = findViewById(R.id.cl_first_name);
-        clSecondName = findViewById(R.id.cl_second_name);
-        clThirdName = findViewById(R.id.cl_third_name);
-        crossFirstName = findViewById(R.id.cross_first_name);
-        crossSecondName = findViewById(R.id.cross_second_name);
-        crossThirdName = findViewById(R.id.cross_third_name);
-        txtFirstName = findViewById(R.id.first_name);
-        txtSecondName = findViewById(R.id.second_name);
-        txtThirdName = findViewById(R.id.third_name);
+        int[] clIntData = new int[]{
+                R.id.cl_first_name, R.id.cl_second_name, R.id.cl_third_name
+        };
+        clData = new ConstraintLayout[clIntData.length];
+        for (int x = 0; x < clData.length; x++) {
+            clData[x] = findViewById(clIntData[x]);
+        }
 
-        clBefore = clFirstName;
-        clNow = clFirstName;
-        crossBefore = crossFirstName;
-        crossNow = crossFirstName;
-        txtBefore = txtFirstName;
-        txtNow = txtFirstName;
+        int[] crossIntData = new int[]{
+                R.id.cross_first_name, R.id.cross_second_name, R.id.cross_third_name
+        };
+        crossData = new ImageView[crossIntData.length];
+        for (int x = 0; x < crossData.length; x++) {
+            crossData[x] = findViewById(crossIntData[x]);
+        }
+
+        int[] txtIntData = new int[]{
+                R.id.first_name, R.id.second_name, R.id.third_name
+        };
+        txtData = new TextView[txtIntData.length];
+        for (int x = 0; x < txtData.length; x++) {
+            txtData[x] = findViewById(txtIntData[x]);
+        }
+
+        clBefore = clData[0];
+        clNow = clData[0];
+        crossBefore = crossData[0];
+        crossNow = crossData[0];
+        txtBefore = txtData[0];
+        txtNow = txtData[0];
+
         setControllerInputData(R.id.first_name);
         setImgCrossInput(R.id.cross_first_name);
         setControllerKeyboard();
         setKeyboardOnClickListener();
 
-        clFirstName.setOnClickListener (v -> {
+        clData[0].setOnClickListener (v -> {
             txtBefore.setText(txtInputData.getText().toString());
             setActionTextKeyboardSimulator(
                     R.drawable.bg_menu_grey,
                     R.drawable.bg_menu_white,
-                    clFirstName,
+                    clData[0],
                     View.GONE,
                     View.VISIBLE,
-                    crossFirstName,
-                    txtFirstName
+                    crossData[0],
+                    txtData[0]
             );
-            setTextBefore(txtFirstName.getText().toString());
+            setTextBefore(txtData[0].getText().toString());
         });
 
-        clSecondName.setOnClickListener (v -> {
+        clData[1].setOnClickListener (v -> {
             txtBefore.setText(txtInputData.getText().toString());
             setActionTextKeyboardSimulator(
                     R.drawable.bg_menu_grey,
                     R.drawable.bg_menu_white,
-                    clSecondName,
+                    clData[1],
                     View.GONE,
                     View.VISIBLE,
-                    crossSecondName,
-                    txtSecondName
+                    crossData[1],
+                    txtData[1]
             );
-            setTextBefore(txtSecondName.getText().toString());
+            setTextBefore(txtData[1].getText().toString());
         });
 
-        clThirdName.setOnClickListener(v -> {
+        clData[2].setOnClickListener(v -> {
             txtBefore.setText(txtInputData.getText().toString());
             setActionTextKeyboardSimulator(
                     R.drawable.bg_menu_grey,
                     R.drawable.bg_menu_white,
-                    clThirdName,
+                    clData[2],
                     View.GONE,
                     View.VISIBLE,
-                    crossThirdName,
-                    txtThirdName
+                    crossData[2],
+                    txtData[2]
             );
-            setTextBefore(txtThirdName.getText().toString());
+            setTextBefore(txtData[2].getText().toString());
         });
 
     }
