@@ -9,16 +9,13 @@ public class MainJavaActivity extends KeyboardController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setKeyboardController();
-        setControllerInputData(R.id.first_name);
-        setImgCrossInput(R.id.cross_first_name);
-        setControllerKeyboard();
-        setKeyboardOnClickListener();
+        setClData(R.id.cl_first_name, R.id.cl_second_name, R.id.cl_third_name);
+        setCrossData(R.id.cross_first_name, R.id.cross_second_name, R.id.cross_third_name);
+        setTxtData(R.id.first_name, R.id.second_name, R.id.third_name);
+        setKeyboardController(R.id.first_name, R.id.cross_first_name);
 
         getClData(0).setOnClickListener (v -> setTextAction(0));
-
         getClData(1).setOnClickListener (v -> setTextAction(1));
-
         getClData(2).setOnClickListener(v -> setTextAction(2));
 
     }

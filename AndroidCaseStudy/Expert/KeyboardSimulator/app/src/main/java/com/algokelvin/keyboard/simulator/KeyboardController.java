@@ -23,53 +23,58 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
     public ImageView imgCrossInput;
     private String txt = "";
 
-    public void setKeyboardController() {
-        int[] clIntData = new int[]{
-                R.id.cl_first_name, R.id.cl_second_name, R.id.cl_third_name
-        };
-        clData = new ConstraintLayout[clIntData.length];
+    public void setClData(int ...cl) {
+        clData = new ConstraintLayout[cl.length];
         for (int x = 0; x < clData.length; x++) {
-            clData[x] = findViewById(clIntData[x]);
+            clData[x] = findViewById(cl[x]);
         }
-
-        int[] crossIntData = new int[]{
-                R.id.cross_first_name, R.id.cross_second_name, R.id.cross_third_name
-        };
-        crossData = new ImageView[crossIntData.length];
+    }
+    public void setCrossData(int ...cross) {
+        crossData = new ImageView[cross.length];
         for (int x = 0; x < crossData.length; x++) {
-            crossData[x] = findViewById(crossIntData[x]);
+            crossData[x] = findViewById(cross[x]);
         }
-
-        int[] txtIntData = new int[]{
-                R.id.first_name, R.id.second_name, R.id.third_name
-        };
-        txtData = new TextView[txtIntData.length];
+    }
+    public void setTxtData(int ...txt) {
+        txtData = new TextView[txt.length];
         for (int x = 0; x < txtData.length; x++) {
-            txtData[x] = findViewById(txtIntData[x]);
+            txtData[x] = findViewById(txt[x]);
         }
-
+    }
+    public void setKeyboardController(int idTxt, int idCross) {
         clBefore = clData[0];
         clNow = clData[0];
         crossBefore = crossData[0];
         crossNow = crossData[0];
         txtBefore = txtData[0];
         txtNow = txtData[0];
+
+        setControllerInputData(idTxt);
+        setImgCrossInput(idCross);
+        setControllerKeyboard();
+        setKeyboardOnClickListener();
+    }
+
+    public void setTextAction(int x) {
+        txtBefore.setText(txtInputData.getText().toString());
+        setActionTextKeyboardSimulator(clData[x], crossData[x], txtData[x]);
+        setTextBefore(txtData[x].getText().toString());
     }
 
     public ConstraintLayout getClData(int x) {
         return clData[x];
     }
 
-    public void setControllerInputData(int id) {
+    private void setControllerInputData(int id) {
         txtInputData = findViewById(id);
     }
 
-    public void setImgCrossInput(int id) {
+    private void setImgCrossInput(int id) {
         imgCrossInput = findViewById(id);
         imgCrossInput.setOnClickListener(v -> removeAllCharacter());
     }
 
-    public void setControllerKeyboard() {
+    private void setControllerKeyboard() {
          keyboard00 = findViewById(R.id.keyBtn_00);
          keyboard01 = findViewById(R.id.keyBtn_01);
          keyboard02 = findViewById(R.id.keyBtn_02);
@@ -84,7 +89,7 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
          keyboardOK = findViewById(R.id.keyBtn_OK);
          keyBtnBack = findViewById(R.id.keyBtn_back);
     }
-    public void setKeyboardOnClickListener() {
+    private void setKeyboardOnClickListener() {
         keyboard01.setOnClickListener(this);
         keyboard02.setOnClickListener(this);
         keyboard03.setOnClickListener(this);
@@ -163,11 +168,6 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
         crossBefore = crossNow;
         setImgCrossInput(crossNow.getId());
     }
-    public void setTextAction(int x) {
-        txtBefore.setText(txtInputData.getText().toString());
-        setActionTextKeyboardSimulator(clData[x], crossData[x], txtData[x]);
-        setTextBefore(txtData[x].getText().toString());
-    }
     private void setActionTextKeyboardSimulator(ConstraintLayout cl, ImageView cross, TextView txt) {
         setConstrainLayoutTextView(cl);
         setCrossTextView(cross);
@@ -177,17 +177,17 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
         txtBefore = txtNow;
         setControllerInputData(txt.getId());
     }
-    public String removeLastCharacter(String str) {
+    private String removeLastCharacter(String str) {
         return (str == null) ? null : str.replaceAll(".$", "");
     }
-    public void removeAllCharacter() {
+    private void removeAllCharacter() {
         txt = "";
         txtInputData.setText(txt);
         if (imgCrossInput != null) {
             imgCrossInput.setVisibility(View.GONE);
         }
     }
-    public void setTextBefore(String txt) {
+    private void setTextBefore(String txt) {
         this.txt = txt;
     }
 }
