@@ -58,64 +58,40 @@ public class MainJavaActivity extends KeyboardController {
 
         clData[0].setOnClickListener (v -> {
             txtBefore.setText(txtInputData.getText().toString());
-            setActionTextKeyboardSimulator(
-                    R.drawable.bg_menu_grey,
-                    R.drawable.bg_menu_white,
-                    clData[0],
-                    View.GONE,
-                    View.VISIBLE,
-                    crossData[0],
-                    txtData[0]
-            );
+            setActionTextKeyboardSimulator(clData[0], crossData[0], txtData[0]);
             setTextBefore(txtData[0].getText().toString());
         });
 
         clData[1].setOnClickListener (v -> {
             txtBefore.setText(txtInputData.getText().toString());
-            setActionTextKeyboardSimulator(
-                    R.drawable.bg_menu_grey,
-                    R.drawable.bg_menu_white,
-                    clData[1],
-                    View.GONE,
-                    View.VISIBLE,
-                    crossData[1],
-                    txtData[1]
-            );
+            setActionTextKeyboardSimulator(clData[1], crossData[1], txtData[1]);
             setTextBefore(txtData[1].getText().toString());
         });
 
         clData[2].setOnClickListener(v -> {
             txtBefore.setText(txtInputData.getText().toString());
-            setActionTextKeyboardSimulator(
-                    R.drawable.bg_menu_grey,
-                    R.drawable.bg_menu_white,
-                    clData[2],
-                    View.GONE,
-                    View.VISIBLE,
-                    crossData[2],
-                    txtData[2]
-            );
+            setActionTextKeyboardSimulator(clData[2], crossData[2], txtData[2]);
             setTextBefore(txtData[2].getText().toString());
         });
 
     }
 
-    private void setConstrainLayoutTextView(int bg1, int bg2, ConstraintLayout cl) {
-        clBefore.setBackgroundResource(bg2);
+    private void setConstrainLayoutTextView(ConstraintLayout cl) {
+        clBefore.setBackgroundResource(R.drawable.bg_menu_white);
         clNow = cl;
-        clNow.setBackgroundResource(bg1);
+        clNow.setBackgroundResource(R.drawable.bg_menu_grey);
         clBefore = clNow;
     }
-    private void setCrossTextView(int v1, int v2, ImageView cross) {
-        crossBefore.setVisibility(v1);
+    private void setCrossTextView(ImageView cross) {
+        crossBefore.setVisibility(View.GONE);
         crossNow = cross;
-        crossNow.setVisibility(v2);
+        crossNow.setVisibility(View.VISIBLE);
         crossBefore = crossNow;
         setImgCrossInput(crossNow.getId());
     }
-    private void setActionTextKeyboardSimulator(int bg1, int bg2, ConstraintLayout cl, int v1, int v2, ImageView cross, TextView txt) {
-        setConstrainLayoutTextView(bg1, bg2, cl);
-        setCrossTextView(v1, v2, cross);
+    private void setActionTextKeyboardSimulator(ConstraintLayout cl, ImageView cross, TextView txt) {
+        setConstrainLayoutTextView(cl);
+        setCrossTextView(cross);
         if (txtBefore != null)
             setTextBefore(txtBefore.getText().toString());
         txtNow = txt;
