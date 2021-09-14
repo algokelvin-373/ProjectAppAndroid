@@ -56,23 +56,11 @@ public class MainJavaActivity extends KeyboardController {
         setControllerKeyboard();
         setKeyboardOnClickListener();
 
-        clData[0].setOnClickListener (v -> {
-            txtBefore.setText(txtInputData.getText().toString());
-            setActionTextKeyboardSimulator(clData[0], crossData[0], txtData[0]);
-            setTextBefore(txtData[0].getText().toString());
-        });
+        clData[0].setOnClickListener (v -> setTextAction(0));
 
-        clData[1].setOnClickListener (v -> {
-            txtBefore.setText(txtInputData.getText().toString());
-            setActionTextKeyboardSimulator(clData[1], crossData[1], txtData[1]);
-            setTextBefore(txtData[1].getText().toString());
-        });
+        clData[1].setOnClickListener (v -> setTextAction(1));
 
-        clData[2].setOnClickListener(v -> {
-            txtBefore.setText(txtInputData.getText().toString());
-            setActionTextKeyboardSimulator(clData[2], crossData[2], txtData[2]);
-            setTextBefore(txtData[2].getText().toString());
-        });
+        clData[2].setOnClickListener(v -> setTextAction(2));
 
     }
 
@@ -88,6 +76,11 @@ public class MainJavaActivity extends KeyboardController {
         crossNow.setVisibility(View.VISIBLE);
         crossBefore = crossNow;
         setImgCrossInput(crossNow.getId());
+    }
+    private void setTextAction(int x) {
+        txtBefore.setText(txtInputData.getText().toString());
+        setActionTextKeyboardSimulator(clData[x], crossData[x], txtData[x]);
+        setTextBefore(txtData[x].getText().toString());
     }
     private void setActionTextKeyboardSimulator(ConstraintLayout cl, ImageView cross, TextView txt) {
         setConstrainLayoutTextView(cl);
