@@ -1,15 +1,18 @@
 package com.algokelvin.tablayout;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class TabLayoutFunction {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private final Fragment[] fragments;
+    private final TabLayout tabLayout;
+    private final ViewPager viewPager;
 
-    public TabLayoutFunction(TabLayout tabLayout, ViewPager viewPager) {
+    public TabLayoutFunction(Fragment[] fragments, TabLayout tabLayout, ViewPager viewPager) {
+        this.fragments = fragments;
         this.tabLayout = tabLayout;
         this.viewPager = viewPager;
     }
@@ -21,7 +24,7 @@ public class TabLayoutFunction {
     }
 
     public void setTabLayoutAction(FragmentManager fm) {
-        TabPageAdapter tabPageAdapter = new TabPageAdapter(fm, tabLayout.getTabCount());
+        TabPageAdapter tabPageAdapter = new TabPageAdapter(fm, fragments, tabLayout.getTabCount());
         viewPager.setAdapter(tabPageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

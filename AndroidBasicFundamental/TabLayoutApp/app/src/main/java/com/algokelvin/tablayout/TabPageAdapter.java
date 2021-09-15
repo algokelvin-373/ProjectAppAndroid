@@ -7,22 +7,19 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class TabPageAdapter extends FragmentStatePagerAdapter {
-    int totalTabs;
+    private final Fragment[] fragments;
+    private final int totalTabs;
 
-    public TabPageAdapter(FragmentManager fm, int totalTabs) {
+    public TabPageAdapter(FragmentManager fm, Fragment[] fragment, int totalTabs) {
         super(fm);
+        this.fragments = fragment;
         this.totalTabs = totalTabs;
     }
 
     @NotNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0: return new OneFragment();
-            case 1: return new TwoFragment();
-            case 2: return new ThreeFragment();
-            default: return null;
-        }
+        return fragments[position];
     }
 
     @Override
