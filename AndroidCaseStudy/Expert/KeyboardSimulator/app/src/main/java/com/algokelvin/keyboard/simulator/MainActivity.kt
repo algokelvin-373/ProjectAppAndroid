@@ -12,10 +12,10 @@ class MainActivity : KeyboardController() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setControllerInputData(R.id.first_name)
-        setImgCrossInput(R.id.cross_first_name)
-        setControllerKeyboard()
-        setKeyboardOnClickListener()
+//        setControllerInputData(R.id.first_name)
+//        setImgCrossInput(R.id.cross_first_name)
+//        setControllerKeyboard()
+//        setKeyboardOnClickListener()
 
         cl_first_name.setOnClickListener {
             txtTwo = txtInputData.text.toString()
@@ -26,7 +26,7 @@ class MainActivity : KeyboardController() {
                 R.id.first_name,
                 R.id.cross_first_name
             )
-            setTextBefore(txtOne)
+//            setTextBefore(txtOne)
         }
         cl_second_name.setOnClickListener {
             txtOne = txtInputData.text.toString()
@@ -37,7 +37,7 @@ class MainActivity : KeyboardController() {
                 R.id.second_name,
                 R.id.cross_second_name
             )
-            setTextBefore(txtTwo)
+//            setTextBefore(txtTwo)
         }
 
     }
@@ -47,8 +47,8 @@ class MainActivity : KeyboardController() {
         cl_first_name.setBackgroundResource(bg2)
         cross_second_name.visibility = v1
         cross_first_name.visibility = v2
-        setControllerInputData(txt)
-        setImgCrossInput(cross)
+//        setControllerInputData(txt)
+//        setImgCrossInput(cross)
     }
 
 }
