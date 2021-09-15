@@ -1,64 +1,23 @@
 package com.algokelvin.keyboard.simulator;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class MainJavaActivity extends KeyboardController {
-    private ConstraintLayout clFirstName, clSecondName;
-    private ImageView crossFirstName, crossSecondName;
-    private String txtOne = "", txtTwo = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        clFirstName = findViewById(R.id.cl_first_name);
-        clSecondName = findViewById(R.id.cl_second_name);
-        crossFirstName = findViewById(R.id.cross_first_name);
-        crossSecondName = findViewById(R.id.cross_second_name);
+        setClData(R.id.cl_first_name, R.id.cl_second_name, R.id.cl_third_name);
+        setCrossData(R.id.cross_first_name, R.id.cross_second_name, R.id.cross_third_name);
+        setTxtData(R.id.first_name, R.id.second_name, R.id.third_name);
+        setKeyboardController(R.id.first_name, R.id.cross_first_name);
 
-        setControllerInputData(R.id.first_name);
-        setImgCrossInput(R.id.cross_first_name);
-        setControllerKeyboard();
-        setKeyboardOnClickListener();
+        getClData(0).setOnClickListener (v -> setTextAction(0));
+        getClData(1).setOnClickListener (v -> setTextAction(1));
+        getClData(2).setOnClickListener(v -> setTextAction(2));
 
-        clFirstName.setOnClickListener (v -> {
-            txtTwo = txtInputData.getText().toString();
-            setActionTextKeyboardSimulator(
-                    R.drawable.bg_menu_white,
-                    R.drawable.bg_menu_grey,
-                    View.GONE, View.VISIBLE,
-                    R.id.first_name,
-                    R.id.cross_first_name
-            );
-            setTextBefore(txtOne);
-        });
-
-        clSecondName.setOnClickListener (v -> {
-            txtOne = txtInputData.getText().toString();
-            setActionTextKeyboardSimulator(
-                    R.drawable.bg_menu_grey,
-                    R.drawable.bg_menu_white,
-                    View.VISIBLE, View.GONE,
-                    R.id.second_name,
-                    R.id.cross_second_name
-            );
-            setTextBefore(txtTwo);
-        });
-
-    }
-
-    private void setActionTextKeyboardSimulator(int bg1, int bg2, int v1, int v2, int txt, int cross) {
-        clSecondName.setBackgroundResource(bg1);
-        clFirstName.setBackgroundResource(bg2);
-        crossSecondName.setVisibility(v1);
-        crossFirstName.setVisibility(v2);
-        setControllerInputData(txt);
-        setImgCrossInput(cross);
     }
 
 }
