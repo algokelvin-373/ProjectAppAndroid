@@ -5,7 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 
 public class TextViewFunction {
     private GradientDrawable border;
-    private Context context;
+    private final Context context;
 
     public TextViewFunction(Context context) {
         this.context = context;
@@ -17,7 +17,7 @@ public class TextViewFunction {
 
     public void setBackgroundOne(int color, int dp) {
         border = new GradientDrawable();
-        border.setColor(context.getResources().getColor(R.color.sample_color_2));
+        border.setColor(color);
         border.setCornerRadius((float) (getDp(dp)));
     }
 
