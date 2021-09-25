@@ -1,0 +1,2 @@
+rootProject.name = "LifecycleActivityFragment"
+include ':androidactivityfragment_one'
