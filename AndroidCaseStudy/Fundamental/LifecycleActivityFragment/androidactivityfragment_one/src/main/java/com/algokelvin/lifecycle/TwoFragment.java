@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TwoFragment extends Fragment {
     private OnDataPass onDataPass;
+    private String data2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,12 +33,13 @@ public class TwoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView txtFragment = view.findViewById(R.id.txt_fragment_two);
-        passData(txtFragment.getText().toString());
+        this.data2 = txtFragment.getText().toString();
+        passData();
 
     }
 
-    private void passData(String data) {
-        onDataPass.onDataPass(data);
+    public void passData() {
+        onDataPass.onDataPass(data2);
     }
 
 }
