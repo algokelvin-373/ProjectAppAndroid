@@ -1,2 +1,3 @@
 rootProject.name = "LifecycleActivityFragment"
 include ':androidactivityfragment_one'
+include ':androidactivityfragment_two'
