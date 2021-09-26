@@ -1,4 +1,4 @@
-package com.algokelvin.lifecycle;
+package com.algokelvin.lifecycle.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,15 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.algokelvin.lifecycle.utils.OnDataPass;
+import com.algokelvin.lifecycle.R;
+
 import org.jetbrains.annotations.NotNull;
 
-public class TwoFragment extends Fragment {
+public class ThreeFragment extends Fragment {
     private OnDataPass onDataPass;
-    private String data2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_two, container, false);
+        return inflater.inflate(R.layout.fragment_three, container, false);
     }
 
     @Override
@@ -32,14 +34,13 @@ public class TwoFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView txtFragment = view.findViewById(R.id.txt_fragment_two);
-        this.data2 = txtFragment.getText().toString();
-        passData();
+        TextView txtFragment = view.findViewById(R.id.txt_fragment_three);
+        passData(txtFragment.getText().toString());
 
     }
 
-    public void passData() {
-        onDataPass.onDataPass(data2);
+    private void passData(String data) {
+        onDataPass.onDataPass(data);
     }
 
 }

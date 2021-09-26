@@ -1,4 +1,4 @@
-package com.algokelvin.lifecycle;
+package com.algokelvin.lifecycle.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.algokelvin.lifecycle.utils.OnDataPass;
+import com.algokelvin.lifecycle.R;
 
 import org.jetbrains.annotations.NotNull;
 

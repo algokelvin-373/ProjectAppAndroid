@@ -1,4 +1,4 @@
-package com.algokelvin.lifecycle;
+package com.algokelvin.lifecycle.utils;
 
 import androidx.viewpager.widget.ViewPager;
 
