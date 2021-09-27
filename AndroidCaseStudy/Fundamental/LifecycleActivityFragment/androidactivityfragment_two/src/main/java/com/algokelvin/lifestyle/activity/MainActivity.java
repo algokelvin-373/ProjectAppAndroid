@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnViewPager {
         TabPageAdapter tabPageAdapter = new TabPageAdapter(getSupportFragmentManager(), count, fragments);
         viewPager.setAdapter(tabPageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
-        viewPager.scr
 
     }
 
