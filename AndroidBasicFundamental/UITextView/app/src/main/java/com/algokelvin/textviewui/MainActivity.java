@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextViewFunction textViewFunction = new TextViewFunction(this);
+
         // TextView Programmatically
         TextView txtProgrammatically = findViewById(R.id.txt_programmatically);
         txtProgrammatically.setText("TextView Programmatically");
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         txtBorderProgrammatically1.setTypeface(Typeface.SANS_SERIF);
         txtBorderProgrammatically1.setLayoutParams(params1);
         txtBorderProgrammatically1.setPadding(0, getDp(size16InDp), 0, getDp(size16InDp));
+
+        //TextView with Background Programmatically
+        TextView txtXmlBgProgrammatically = findViewById(R.id.txt_xml_bg_programmatically);
+        textViewFunction.setBackgroundOne(getResources().getColor(R.color.sample_color_2), 10);
+        txtXmlBgProgrammatically.setBackground(textViewFunction.getBorder());
 
     }
 
