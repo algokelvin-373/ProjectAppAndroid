@@ -11,11 +11,10 @@ import com.algokelvin.lifestyle.fragment.PageOneFragment;
 import com.algokelvin.lifestyle.fragment.PageThreeFragment;
 import com.algokelvin.lifestyle.fragment.PageTwoFragment;
 import com.algokelvin.lifestyle.utils.OnViewPager;
-import com.algokelvin.lifestyle.utils.TabPageAdapter;
+import com.algokelvin.lifestyle.utils.TabLayoutFunction;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity implements OnViewPager {
-    private int count = 0;
     private ViewPager viewPager;
 
     @Override
@@ -25,21 +24,13 @@ public class MainActivity extends AppCompatActivity implements OnViewPager {
 
         TabLayout tablayout = findViewById(R.id.tabHome);
         viewPager = findViewById(R.id.viewPager);
+        String[] title = {"1", "2", "3"};
+        Fragment[] fragments = {new PageOneFragment(), new PageTwoFragment(), new PageThreeFragment()};
 
-        tablayout.addTab(tablayout.newTab().setText("One"));
-        tablayout.addTab(tablayout.newTab().setText("Two"));
-        tablayout.addTab(tablayout.newTab().setText("Three"));
-        tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        count = tablayout.getTabCount();
-
-        PageOneFragment oneFragment = new PageOneFragment();
-        PageTwoFragment twoFragment = new PageTwoFragment();
-        PageThreeFragment threeFragment = new PageThreeFragment();
-        Fragment[] fragments = {oneFragment, twoFragment, threeFragment};
-
-        TabPageAdapter tabPageAdapter = new TabPageAdapter(getSupportFragmentManager(), count, fragments);
-        viewPager.setAdapter(tabPageAdapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
+        TabLayoutFunction tabLayoutFunction = new TabLayoutFunction(getSupportFragmentManager(), tablayout, viewPager);
+        tabLayoutFunction.setTitleTabLayout(title);
+        tabLayoutFunction.setViewPagerTabLayout(fragments);
+        viewPager = tabLayoutFunction.getViewPager();
 
     }
 
