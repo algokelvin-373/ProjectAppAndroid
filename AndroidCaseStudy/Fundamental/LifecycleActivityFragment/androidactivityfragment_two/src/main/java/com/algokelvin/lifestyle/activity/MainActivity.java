@@ -1,7 +1,6 @@
 package com.algokelvin.lifestyle.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -11,12 +10,13 @@ import com.algokelvin.lifestyle.R;
 import com.algokelvin.lifestyle.fragment.PageOneFragment;
 import com.algokelvin.lifestyle.fragment.PageThreeFragment;
 import com.algokelvin.lifestyle.fragment.PageTwoFragment;
+import com.algokelvin.lifestyle.utils.OnViewPager;
 import com.algokelvin.lifestyle.utils.TabPageAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnViewPager {
     private int count = 0;
-    private String data;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TabLayout tablayout = findViewById(R.id.tabHome);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
 
         tablayout.addTab(tablayout.newTab().setText("One"));
         tablayout.addTab(tablayout.newTab().setText("Two"));
@@ -40,27 +40,12 @@ public class MainActivity extends AppCompatActivity {
         TabPageAdapter tabPageAdapter = new TabPageAdapter(getSupportFragmentManager(), count, fragments);
         viewPager.setAdapter(tabPageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
-        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                /*switch (tab.getPosition()) {
-                    case 0: oneFragment.passData();
-                        break;
-                    case 1: twoFragment.passData();
-                        break;
-                }*/
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                Log.i("tabUnselected", "" + tab.getPosition());
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        viewPager.scr
 
     }
 
+    @Override
+    public void onSetPage(int page) {
+        viewPager.setCurrentItem(page);
+    }
 }
