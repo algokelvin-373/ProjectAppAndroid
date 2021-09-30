@@ -46,22 +46,6 @@ public class RowColumns {
         }
     }
 
-    public void setSizesTextView(int ...sizes) {
-        this.sizesTextView = sizes;
-    }
-
-    public void setFontTextView(int ...fontTextView) {
-        this.fontTextView = fontTextView;
-    }
-
-    public void setBgTextView(int ...bgTextView) {
-        this.bgTextView = bgTextView;
-    }
-
-    public void setGravityTextView(int ...gravityTextView) {
-        this.gravityTextView = gravityTextView;
-    }
-
     public void setTableData(String[][] data) {
         for (int y = 0; y < rows * columns; y += 2) {
             setTextViews(y, data[y - z][0]);
@@ -99,6 +83,22 @@ public class RowColumns {
             tl.addView(tr);
             z++;
         }
+    }
+
+    public void setSizesTextView(int ...sizes) {
+        this.sizesTextView = sizes;
+    }
+
+    public void setFontTextView(int ...fontTextView) {
+        this.fontTextView = fontTextView;
+    }
+
+    public void setBgTextView(int ...bgTextView) {
+        this.bgTextView = bgTextView;
+    }
+
+    public void setGravityTextView(int ...gravityTextView) {
+        this.gravityTextView = gravityTextView;
     }
 
     public void setTableLayout(TableLayout tl) {
