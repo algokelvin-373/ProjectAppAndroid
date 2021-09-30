@@ -10,11 +10,11 @@ import androidx.core.content.res.ResourcesCompat;
 
 public class RowColumns {
     private final int rows, columns;
-    private int z = 0;
+    private int z = 0, size = 0;
     private TableLayout tl;
     private final Context ctx;
     private final TextView[] textViews;
-    private int[] txtColors, sizesTextView, fontTextView, bgTextView, gravityTextView;
+    private int[] txtColors, fontTextView, bgTextView, gravityTextView;
 
     public RowColumns(Context ctx, int r, int c) {
         this.rows = r;
@@ -30,10 +30,11 @@ public class RowColumns {
         }
     }
 
-    public RowColumns(Context ctx, int r, int c, int m) {
-        this.rows = r;
-        this.columns = c;
+    public RowColumns(Context ctx, int rows, int columns, int margin, int size) {
+        this.rows = rows;
+        this.columns = columns;
         this.textViews = new TextView[rows * columns];
+        this.size = size;
         this.ctx = ctx;
         for (int i = 0; i < textViews.length; i++) {
             textViews[i] = new TextView(ctx);
@@ -41,7 +42,7 @@ public class RowColumns {
                     TableRow.LayoutParams.WRAP_CONTENT,
                     TableRow.LayoutParams.WRAP_CONTENT,
                     1f);
-            lp.setMargins(0, m, 0, 0);
+            lp.setMargins(10, margin, 0, 0);
             textViews[i].setLayoutParams(lp);
         }
     }
@@ -65,14 +66,14 @@ public class RowColumns {
         for (int y = 0; y < rows * columns; y += 2) {
             setGravTextView(y + 1, gravityTextView[0]);
             setTextViews(y, data[y - z][0]);
-            setSizeTextView(y, sizesTextView[0]);
+            setSizeTextView(y, size);
             setColorTextView(y, txtColors[0]);
             setFontFamily(y, fontTextView[0]);
             setBackgroundTextView(y, bgTextView[0]);
 
             setGravTextView(y + 1, gravityTextView[1]);
             setTextViews(y + 1, data[y - z][1]);
-            setSizeTextView(y + 1, sizesTextView[1]);
+            setSizeTextView(y + 1, size);
             setColorTextView(y + 1, txtColors[1]);
             setFontFamily(y + 1, fontTextView[1]);
             setBackgroundTextView(y + 1, bgTextView[1]);
@@ -83,10 +84,6 @@ public class RowColumns {
             tl.addView(tr);
             z++;
         }
-    }
-
-    public void setSizesTextView(int ...sizes) {
-        this.sizesTextView = sizes;
     }
 
     public void setFontTextView(int ...fontTextView) {

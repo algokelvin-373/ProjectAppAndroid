@@ -35,12 +35,11 @@ public class MainActivity extends AppCompatActivity {
         int row2 = data.length;
         int column2 = data[0].length;
 
-        RowColumns rowColumns2 = new RowColumns(this, row2, column2, 8);
+        RowColumns rowColumns2 = new RowColumns(this, row2, column2, 8, 14);
         rowColumns2.setBgTextView(R.color.green, R.color.green);
         rowColumns2.setGravityTextView(0, Gravity.END);
         rowColumns2.setTextColors(R.color.red, R.color.blue);
-        rowColumns2.setSizesTextView(8, 16);
-        rowColumns2.setFontTextView(0, R.font.montserrat_regular);
+        rowColumns2.setFontTextView(R.font.montserrat_regular, R.font.montserrat_regular);
         rowColumns2.setTableLayout(tl2);
         rowColumns2.setTableData2(data);
 
