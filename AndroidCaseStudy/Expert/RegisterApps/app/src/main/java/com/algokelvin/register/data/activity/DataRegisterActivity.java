@@ -20,7 +20,13 @@ public class DataRegisterActivity extends AppCompatActivity {
         txtDataRegister.setText(
                 getFullName() + "\n" +
                 getNickName() + "\n" +
-                getPlaceBirth()
+                getPlaceBirth() + "\n" +
+                getAddress() + "\n" +
+                getCity() + "\n" +
+                getNoHP() + "\n" +
+                getJob() + "\n" +
+                getHobby() + "\n" +
+                getFavoritePlace()
         );
     }
 }
