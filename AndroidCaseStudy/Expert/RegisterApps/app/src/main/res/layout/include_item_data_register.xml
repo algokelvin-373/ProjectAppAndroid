@@ -38,7 +38,6 @@
             android:focusable="true"
             android:background="@drawable/bg_input_data"
             android:importantForAutofill="no"
-            android:maxLength="15"
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:singleLine="true"
