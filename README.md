@@ -41,7 +41,8 @@ The Dictionary of All Projects Android
   - ## Jetpack Pro / Jetpack Compose
       * NONE
   - ## Expert
-      * NONE
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/release/v1.23.13/AndroidCaseStudy/Expert/KeyboardSimulator">Keyboard Simulator</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/release/v1.23.13/AndroidCaseStudy/Expert/RegisterApps">Register Apps</a>
   - ## Machine Learning
       * NONE
 
