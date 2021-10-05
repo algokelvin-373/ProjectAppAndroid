@@ -22,9 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         // START - TextView Programmatically
         TextView txtProgrammatically = findViewById(R.id.txt_programmatically);
-        txtProgrammatically.setText("TextView Programmatically");
-        txtProgrammatically.setTextSize(20.0f);
-        txtProgrammatically.setTextColor(getResources().getColor(R.color.black));
+        TextViewFunction txtFunction1 = new TextViewFunction(this, txtProgrammatically);
+        txtFunction1.setTextStyle("TextView Programmatically", 20.0f, getResources().getColor(R.color.black));
         txtProgrammatically.setGravity(Gravity.CENTER);
         Typeface typeface = ResourcesCompat.getFont(this ,R.font.roboto_mono_thin);
         txtProgrammatically.setTypeface(typeface);
