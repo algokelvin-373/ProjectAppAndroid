@@ -20,16 +20,16 @@ public class MainActivity extends AppCompatActivity {
 
         TextViewFunction textViewFunction = new TextViewFunction(this);
 
-        // TextView Programmatically
+        // START - TextView Programmatically
         TextView txtProgrammatically = findViewById(R.id.txt_programmatically);
-        txtProgrammatically.setText("TextView Programmatically");
-        txtProgrammatically.setTextSize(20.0f);
-        txtProgrammatically.setTextColor(getResources().getColor(R.color.black));
+        TextViewFunction txtFunction1 = new TextViewFunction(this, txtProgrammatically);
+        txtFunction1.setTextStyle("TextView Programmatically", 20.0f, getResources().getColor(R.color.black));
         txtProgrammatically.setGravity(Gravity.CENTER);
         Typeface typeface = ResourcesCompat.getFont(this ,R.font.roboto_mono_thin);
         txtProgrammatically.setTypeface(typeface);
+        // END - TextView Programmatically
 
-        //TextView with Border Programmatically 1
+        // START - TextView with Border Programmatically 1
         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         int size16InDp = 16, size8InDp = 8;
         params1.setMargins(getDp(size16InDp), getDp(size8InDp), getDp(size16InDp), 0);
@@ -47,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
         txtBorderProgrammatically1.setTypeface(Typeface.SANS_SERIF);
         txtBorderProgrammatically1.setLayoutParams(params1);
         txtBorderProgrammatically1.setPadding(0, getDp(size16InDp), 0, getDp(size16InDp));
+        // END - TextView with Border Programmatically 1
 
-        //TextView with Background Programmatically
+        // START - TextView with Background Programmatically
         TextView txtXmlBgProgrammatically = findViewById(R.id.txt_xml_bg_programmatically);
         textViewFunction.setBackgroundOne(getResources().getColor(R.color.sample_color_2), 10);
         txtXmlBgProgrammatically.setBackground(textViewFunction.getBorder());
+        // END - TextView with Background Programmatically
 
     }
 
