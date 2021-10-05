@@ -6,13 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Switch
+        android:id="@+id/switch_android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:checked="false"
+        android:text="Switch Android"
+        android:textOff="OFF"
+        android:textOn="ON"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <TextView
+        android:id="@+id/txt_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch is OFF"
+        android:textColor="#FF0000"
+        app:layout_constraintEnd_toEndOf="@+id/switch_android"
+        app:layout_constraintStart_toStartOf="@+id/switch_android"
+        app:layout_constraintTop_toBottomOf="@+id/switch_android" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
