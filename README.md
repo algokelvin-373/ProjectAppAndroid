@@ -2,7 +2,7 @@
 
 The Dictionary of All Projects Android
 
-# Version 1.16.8
+# Version 1.23.13
 - ## Android Basic Fundamental ( Beginner & Fundamental )
   1. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/AndroidActivity">Android Activity</a>
   2. <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidBasicFundamental/AndroidAnimation">Android Animation</a>
@@ -41,7 +41,8 @@ The Dictionary of All Projects Android
   - ## Jetpack Pro / Jetpack Compose
       * NONE
   - ## Expert
-      * NONE
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/release/v1.23.13/AndroidCaseStudy/Expert/KeyboardSimulator">Keyboard Simulator</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/release/v1.23.13/AndroidCaseStudy/Expert/RegisterApps">Register Apps</a>
   - ## Machine Learning
       * NONE
 

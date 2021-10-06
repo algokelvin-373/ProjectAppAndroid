@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ShowDialogApp</string>
+    <string name="dialog_bottom">This is Dialog Bottom Layout</string>
+    <string name="dialog_general">Dialog Layout General</string>
+</resources>
