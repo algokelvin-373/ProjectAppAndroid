@@ -39,7 +39,13 @@ The Dictionary of All Projects Android
       * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/RecorderApps">Recorder Apps</a>
       * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidCaseStudy/TimerApps">Timer Apps</a>
   - ## Jetpack Pro / Jetpack Compose
-      * NONE
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/AndroidJetpackComposeActivity">Android Jetpack Compose Activity</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/AppViewModel/RectangleApp">App View Model</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/ButterknifeApp">Butterknife</a> ( Not Recommended because depreceated )
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/JetpackComposeOne">Jetpack Compose One</a>
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/LatihanPagination">Pagination</a> 
+      * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/master/AndroidJetpackPro/RealmDatabaseApp">Realm Database</a>
+
   - ## Expert
       * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/release/v1.23.13/AndroidCaseStudy/Expert/KeyboardSimulator">Keyboard Simulator</a>
       * <a href="https://github.com/kelvin373-ht/ProjectAppAndroid/tree/release/v1.23.13/AndroidCaseStudy/Expert/RegisterApps">Register Apps</a>
