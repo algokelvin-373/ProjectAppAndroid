@@ -1,4 +1,4 @@
-# The Dictionary of All Projects Android - Android Basic Fundamental
+# The Dictionary of All Projects Android - Android Jetpack Pro
 
 * Android Jetpack Compose Activity
 * App View Model
