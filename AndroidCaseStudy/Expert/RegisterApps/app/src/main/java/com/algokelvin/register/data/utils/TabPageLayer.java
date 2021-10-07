@@ -10,9 +10,9 @@ public class TabPageLayer extends AppCompatActivity implements OnViewPager {
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
-    public void setTabPageLayer(int idTabLayout, int idViewPager, String[] titles, Fragment[] fragments) {
+    public void setTabPageLayer(int idTabLayout, int idViewPager, Fragment[] fragments) {
         setUI(idTabLayout, idViewPager);
-        setTabPageFragment(titles, fragments);
+        setTabPageFragment(fragments);
     }
 
     private void setUI(int idTabLayout, int idViewPager) {
@@ -20,10 +20,9 @@ public class TabPageLayer extends AppCompatActivity implements OnViewPager {
         viewPager = findViewById(idViewPager);
     }
 
-    private void setTabPageFragment(String[] titles, Fragment[] fragments) {
+    private void setTabPageFragment(Fragment[] fragments) {
         TabLayoutFunction tabLayoutFunction = new TabLayoutFunction(getSupportFragmentManager(), tabLayout, viewPager);
-        tabLayoutFunction.setTitleTabLayout(titles);
-        tabLayoutFunction.setViewPagerTabLayout(fragments);
+        tabLayoutFunction.setViewPagerTabLayout(fragments.length, fragments);
         viewPager = tabLayoutFunction.getViewPager();
     }
 

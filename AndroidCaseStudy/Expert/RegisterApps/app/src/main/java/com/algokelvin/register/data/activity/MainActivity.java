@@ -17,9 +17,8 @@ public class MainActivity extends TabPageLayer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] title = {"1", "2", "3"};
         Fragment[] fragments = {new PageOneFragment(), new PageTwoFragment(), new PageThreeFragment()};
-        setTabPageLayer(R.id.tabHome, R.id.viewPager, title, fragments);
+        setTabPageLayer(R.id.tabHome, R.id.viewPager, fragments);
 
     }
 
