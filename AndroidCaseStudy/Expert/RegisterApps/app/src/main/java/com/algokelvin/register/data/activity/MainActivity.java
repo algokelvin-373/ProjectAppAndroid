@@ -2,38 +2,24 @@ package com.algokelvin.register.data.activity;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import com.algokelvin.register.data.R;
-import com.algokelvin.register.data.fragment.*;
-import com.algokelvin.register.data.utils.OnViewPager;
-import com.algokelvin.register.data.utils.TabLayoutFunction;
-import com.google.android.material.tabs.TabLayout;
+import com.algokelvin.register.data.fragment.PageOneFragment;
+import com.algokelvin.register.data.fragment.PageThreeFragment;
+import com.algokelvin.register.data.fragment.PageTwoFragment;
+import com.algokelvin.register.data.utils.TabPageLayer;
 
-public class MainActivity extends AppCompatActivity implements OnViewPager {
-    private ViewPager viewPager;
+public class MainActivity extends TabPageLayer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabLayout tablayout = findViewById(R.id.tabHome);
-        viewPager = findViewById(R.id.viewPager);
-        String[] title = {"1", "2", "3"};
         Fragment[] fragments = {new PageOneFragment(), new PageTwoFragment(), new PageThreeFragment()};
-
-        TabLayoutFunction tabLayoutFunction = new TabLayoutFunction(getSupportFragmentManager(), tablayout, viewPager);
-        tabLayoutFunction.setTitleTabLayout(title);
-        tabLayoutFunction.setViewPagerTabLayout(fragments);
-        viewPager = tabLayoutFunction.getViewPager();
+        setTabPageLayer(R.id.tabHome, R.id.viewPager, fragments);
 
     }
 
-    @Override
-    public void onSetPage(int page) {
-        viewPager.setCurrentItem(page);
-    }
 }
