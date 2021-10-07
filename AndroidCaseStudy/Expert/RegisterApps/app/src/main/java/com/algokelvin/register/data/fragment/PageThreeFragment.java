@@ -46,6 +46,7 @@ public class PageThreeFragment extends RegisterController {
             setFavoritePlace(getEditTexts(2).getText().toString());
             Intent intentDetails = new Intent(getActivity(), DataRegisterActivity.class);
             startActivity(intentDetails);
+            requireActivity().finish();
         });
 
     }
