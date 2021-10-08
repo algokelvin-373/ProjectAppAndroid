@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,13 +44,17 @@ public class PageOneFragment extends RegisterController {
 
         View v = View.inflate(getActivity(), R.layout.include_item_data_register, null);
         TextView txt1 = v.findViewById(R.id.title_input_data);
+        EditText edt1 = v.findViewById(R.id.input_data);
         txt1.setText("Full Name");
+        edt1.setHint("Input Full Name");
         clRegister1.addView(v);
 
         View v2 = View.inflate(getActivity(), R.layout.include_item_data_register, null);
         v2.setLayoutParams(params);
         TextView txt2 = v2.findViewById(R.id.title_input_data);
+        EditText edt2 = v2.findViewById(R.id.input_data);
         txt2.setText("Nick Name");
+        edt2.setHint("Input Nick Name");
         clRegister1.addView(v2);
 
         /*int[] idLayout = {R.id.layout_data_1, R.id.layout_data_2, R.id.layout_data_3};
