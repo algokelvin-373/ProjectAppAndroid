@@ -1,4 +1,4 @@
-package com.algokelvin.spinnerlist;
+package com.algokelvin.spinnerlist.utils.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,20 +9,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.algokelvin.spinnerlist.R;
+import com.algokelvin.spinnerlist.SampleData;
+
 import java.util.ArrayList;
 
 public class SpinnerAdapter extends BaseAdapter {
     private LayoutInflater inflter;
-    private ArrayList<DataSpinner> dataSpinners;
+    private ArrayList<SampleData> sampleData;
 
-    public SpinnerAdapter(Context applicationContext, ArrayList<DataSpinner> dataSpinners) {
+    public SpinnerAdapter(Context applicationContext, ArrayList<SampleData> sampleData) {
         this.inflter = (LayoutInflater.from(applicationContext));
-        this.dataSpinners = dataSpinners;
+        this.sampleData = sampleData;
     }
 
     @Override
     public int getCount() {
-        return dataSpinners.size();
+        return sampleData.size();
     }
 
     @Override
@@ -42,8 +45,8 @@ public class SpinnerAdapter extends BaseAdapter {
 
         ImageView icon = (ImageView) convertView.findViewById(R.id.img_spinner);
         TextView names = (TextView) convertView.findViewById(R.id.txt_spinner_item);
-        icon.setImageResource(dataSpinners.get(position).getImage());
-        names.setText(dataSpinners.get(position).getName());
+        icon.setImageResource(sampleData.get(position).getImage());
+        names.setText(sampleData.get(position).getName());
 
         return convertView;
     }
