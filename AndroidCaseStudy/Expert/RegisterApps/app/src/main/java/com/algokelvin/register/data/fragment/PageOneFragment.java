@@ -18,6 +18,8 @@ import com.algokelvin.register.data.utils.RegisterController;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.algokelvin.register.data.model.DataRegister.*;
+
 public class PageOneFragment extends RegisterController {
 
     @Override
@@ -34,31 +36,21 @@ public class PageOneFragment extends RegisterController {
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(0, setDp(10), 0, 0);
-
         LinearLayout clRegister1 = view.findViewById(R.id.cl_register_1);
 
-        View v = View.inflate(getActivity(), R.layout.include_item_data_register, null);
-        TextView txt1 = v.findViewById(R.id.title_input_data);
-        EditText edt1 = v.findViewById(R.id.input_data);
-        txt1.setText("Full Name");
-        edt1.setHint("Input Full Name");
-        clRegister1.addView(v);
-
-        View v2 = View.inflate(getActivity(), R.layout.include_item_data_register, null);
-        v2.setLayoutParams(params);
-        TextView txt2 = v2.findViewById(R.id.title_input_data);
-        EditText edt2 = v2.findViewById(R.id.input_data);
-        txt2.setText("Nick Name");
-        edt2.setHint("Input Nick Name");
-        clRegister1.addView(v2);
-
-        View v3 = View.inflate(getActivity(), R.layout.include_item_data_register, null);
-        v3.setLayoutParams(params);
-        TextView txt3 = v3.findViewById(R.id.title_input_data);
-        EditText edt3 = v3.findViewById(R.id.input_data);
-        txt3.setText("Place Birth");
-        edt3.setHint("Input Place Birth");
-        clRegister1.addView(v3);
+        TextView[] txt = new TextView[3];
+        EditText[] edt = new EditText[3];
+        String[] text = {"Nama Lengkap", "Nama Panggilan", "Tempat Lahir"};
+        String[] edtHint = {getFullName(), getNickName(), getPlaceBirth()};
+        for (int x = 0; x < txt.length; x++) {
+            View v = View.inflate(getActivity(), R.layout.include_item_data_register, null);
+            v.setLayoutParams(params);
+            txt[x] = v.findViewById(R.id.title_input_data);
+            edt[x] = v.findViewById(R.id.input_data);
+            txt[x].setText(text[x]);
+            edt[x].setHint(edtHint[x]);
+            clRegister1.addView(v);
+        }
 
         /*int[] idLayout = {R.id.layout_data_1, R.id.layout_data_2, R.id.layout_data_3};
         String[] text = {"Nama Lengkap", "Nama Panggilan", "Tempat Lahir"};
