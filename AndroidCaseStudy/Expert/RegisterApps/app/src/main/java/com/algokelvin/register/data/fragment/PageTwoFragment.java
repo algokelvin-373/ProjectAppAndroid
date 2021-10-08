@@ -27,11 +27,10 @@ public class PageTwoFragment extends RegisterController {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        int[] idLayout = {R.id.layout_data_1, R.id.layout_data_2, R.id.layout_data_3};
         String[] text = {"Alamat Rumah", "Kota", "No. HP"};
         String[] edtHint = {getAddress(), getCity(), getNoHP()};
-        setSizes(idLayout.length);
-        setUIRegister(view, idLayout, text, edtHint);
+        setSizes(text.length);
+        setUIRegister(view, text, edtHint);
 
         Button btnNext = view.findViewById(R.id.btn_next);
         Button btnBefore = view.findViewById(R.id.btn_back);

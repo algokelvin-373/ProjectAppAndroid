@@ -41,34 +41,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/layout_data_1"
-            layout="@layout/include_item_data_register"
+        <LinearLayout
+            android:id="@+id/cl_register_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_fragment_two" />
-
-        <include
-            android:id="@+id/layout_data_2"
-            layout="@layout/include_item_data_register"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/layout_data_1"
-            app:layout_constraintStart_toStartOf="@+id/layout_data_1"
-            app:layout_constraintTop_toBottomOf="@+id/layout_data_1" />
-
-        <include
-            android:id="@+id/layout_data_3"
-            layout="@layout/include_item_data_register"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/layout_data_1"
-            app:layout_constraintStart_toStartOf="@+id/layout_data_1"
-            app:layout_constraintTop_toBottomOf="@+id/layout_data_2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
