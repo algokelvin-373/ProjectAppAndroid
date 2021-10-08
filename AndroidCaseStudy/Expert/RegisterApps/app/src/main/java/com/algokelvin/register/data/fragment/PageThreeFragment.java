@@ -29,11 +29,10 @@ public class PageThreeFragment extends RegisterController {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        int[] idLayout = {R.id.layout_data_1, R.id.layout_data_2, R.id.layout_data_3};
         String[] text = {"Pekerjaan", "Hobby", "Tempat Favorit Anda"};
         String[] edtHint = {getJob(), getHobby(), getFavoritePlace()};
-        setSizes(idLayout.length);
-        setUIRegister(view, idLayout, text, edtHint);
+        setSizes(text.length);
+        setUIRegister(view, text, edtHint);
 
         Button btnBefore = view.findViewById(R.id.btn_back);
         Button btnDone = view.findViewById(R.id.btn_done);

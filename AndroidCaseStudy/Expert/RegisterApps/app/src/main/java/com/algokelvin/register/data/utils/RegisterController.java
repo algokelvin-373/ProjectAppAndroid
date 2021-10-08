@@ -1,8 +1,11 @@
 package com.algokelvin.register.data.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,14 +35,21 @@ public class RegisterController extends Fragment {
         editTexts = new EditText[sizes];
     }
 
-    public void setUIRegister(View viewLayout, int[] layoutId, String[] txt, String[] edtHint) {
-        for (int x = 0; x < sizes; x++) {
-            view[x] = viewLayout.findViewById(layoutId[x]);
-            textViews[x] = view[x].findViewById(R.id.title_input_data);
-            editTexts[x] = view[x].findViewById(R.id.input_data);
+    public void setUIRegister(View viewLayout, String[] txt, String[] edtHint) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(0, setDp(10), 0, 0);
+        LinearLayout clRegister = viewLayout.findViewById(R.id.cl_register_1);
 
+        for (int x = 0; x < txt.length; x++) {
+            View v = View.inflate(getActivity(), R.layout.include_item_data_register, null);
+            textViews[x] = v.findViewById(R.id.title_input_data);
+            editTexts[x] = v.findViewById(R.id.input_data);
             textViews[x].setText(txt[x]);
             editTexts[x].setHint(edtHint[x]);
+            clRegister.addView(v);
         }
     }
 
@@ -49,5 +59,10 @@ public class RegisterController extends Fragment {
 
     public OnViewPager getOnViewPager() {
         return onViewPager;
+    }
+
+    private int setDp(int x) {
+        Resources r = getContext().getResources();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, x, r.getDisplayMetrics());
     }
 }
