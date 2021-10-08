@@ -1,27 +1,22 @@
 package com.algokelvin.register.data.fragment;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.algokelvin.register.data.R;
 import com.algokelvin.register.data.utils.RegisterController;
 
 import org.jetbrains.annotations.NotNull;
-
-import static com.algokelvin.register.data.model.DataRegister.*;
 
 public class PageOneFragment extends RegisterController {
 
@@ -56,6 +51,14 @@ public class PageOneFragment extends RegisterController {
         txt2.setText("Nick Name");
         edt2.setHint("Input Nick Name");
         clRegister1.addView(v2);
+
+        View v3 = View.inflate(getActivity(), R.layout.include_item_data_register, null);
+        v3.setLayoutParams(params);
+        TextView txt3 = v3.findViewById(R.id.title_input_data);
+        EditText edt3 = v3.findViewById(R.id.input_data);
+        txt3.setText("Place Birth");
+        edt3.setHint("Input Place Birth");
+        clRegister1.addView(v3);
 
         /*int[] idLayout = {R.id.layout_data_1, R.id.layout_data_2, R.id.layout_data_3};
         String[] text = {"Nama Lengkap", "Nama Panggilan", "Tempat Lahir"};
