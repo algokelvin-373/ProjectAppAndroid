@@ -1,5 +1,6 @@
 package com.algokelvin.register.data.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.algokelvin.register.data.R;
+import com.algokelvin.register.data.model.OnDataPass;
 import com.algokelvin.register.data.utils.RegisterController;
 
 import org.jetbrains.annotations.NotNull;
@@ -16,10 +18,17 @@ import org.jetbrains.annotations.NotNull;
 import static com.algokelvin.register.data.model.DataRegister.*;
 
 public class PageTwoFragment extends RegisterController {
+    private OnDataPass onDataPass;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_page_two, container, false);
+    }
+
+    @Override
+    public void onAttach(@NonNull @NotNull Context context) {
+        super.onAttach(context);
+        onDataPass = (OnDataPass) context;
     }
 
     @Override
@@ -34,6 +43,7 @@ public class PageTwoFragment extends RegisterController {
         setBtnBefore(R.id.btn_back);
 
         getBtnNext().setOnClickListener(v -> {
+            onDataPass.btnSendData("This is my data from fragment two"); // Using interface to send fragment three
             setAddress(getEditTexts(0).getText().toString());
             setCity(getEditTexts(1).getText().toString());
             setNoHP(getEditTexts(2).getText().toString());
