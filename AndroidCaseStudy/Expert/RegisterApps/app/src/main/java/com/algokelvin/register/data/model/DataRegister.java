@@ -1,85 +1,132 @@
 package com.algokelvin.register.data.model;
 
-public class DataRegister {
-    private static String fullName = "Masukkan Nama Lengkap";
-    private static String nickName = "Masukkan Nama Panggilan";
-    private static String placeBirth = "Masukkan Tempat Lahir";
-    private static String address = "Masukkan Alamat Rumah";
-    private static String city = "Masukkan Nama Kota";
-    private static String noHP = "Masukkan No. HP";
-    private static String job = "Masukkan Pekerjaan";
-    private static String hobby = "Masukkan Hobby Anda";
-    private static String favoritePlace = "Masukkan Tempat Favorit Anda";
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public static String getFullName() {
+public class DataRegister implements Parcelable {
+    private  String fullName = "Masukkan Nama Lengkap";
+    private  String nickName = "Masukkan Nama Panggilan";
+    private  String placeBirth = "Masukkan Tempat Lahir";
+    private  String address = "Masukkan Alamat Rumah";
+    private  String city = "Masukkan Nama Kota";
+    private  String noHP = "Masukkan No. HP";
+    private  String job = "Masukkan Pekerjaan";
+    private  String hobby = "Masukkan Hobby Anda";
+    private  String favoritePlace = "Masukkan Tempat Favorit Anda";
+
+    public DataRegister(Parcel in) {
+        fullName = in.readString();
+        nickName = in.readString();
+        placeBirth = in.readString();
+        address = in.readString();
+        city = in.readString();
+        noHP = in.readString();
+        job = in.readString();
+        hobby = in.readString();
+        favoritePlace = in.readString();
+    }
+
+    public DataRegister() {}
+
+    public static final Creator<DataRegister> CREATOR = new Creator<DataRegister>() {
+        @Override
+        public DataRegister createFromParcel(Parcel in) {
+            return new DataRegister(in);
+        }
+
+        @Override
+        public DataRegister[] newArray(int size) {
+            return new DataRegister[size];
+        }
+    };
+
+    public  String getFullName() {
         return fullName;
     }
 
-    public static void setFullName(String fullName) {
-        DataRegister.fullName = fullName;
+    public  void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public static String getNickName() {
+    public  String getNickName() {
         return nickName;
     }
 
-    public static void setNickName(String nickName) {
-        DataRegister.nickName = nickName;
+    public  void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public static String getPlaceBirth() {
+    public  String getPlaceBirth() {
         return placeBirth;
     }
 
-    public static void setPlaceBirth(String placeBirth) {
-        DataRegister.placeBirth = placeBirth;
+    public  void setPlaceBirth(String placeBirth) {
+        this.placeBirth = placeBirth;
     }
 
-    public static String getAddress() {
+    public  String getAddress() {
         return address;
     }
 
-    public static void setAddress(String address) {
-        DataRegister.address = address;
+    public  void setAddress(String address) {
+        this.address = address;
     }
 
-    public static String getCity() {
+    public  String getCity() {
         return city;
     }
 
-    public static void setCity(String city) {
-        DataRegister.city = city;
+    public  void setCity(String city) {
+        this.city = city;
     }
 
-    public static String getNoHP() {
+    public  String getNoHP() {
         return noHP;
     }
 
-    public static void setNoHP(String noHP) {
-        DataRegister.noHP = noHP;
+    public  void setNoHP(String noHP) {
+        this.noHP = noHP;
     }
 
-    public static String getJob() {
+    public  String getJob() {
         return job;
     }
 
-    public static void setJob(String job) {
-        DataRegister.job = job;
+    public  void setJob(String job) {
+        this.job = job;
     }
 
-    public static String getHobby() {
+    public  String getHobby() {
         return hobby;
     }
 
-    public static void setHobby(String hobby) {
-        DataRegister.hobby = hobby;
+    public  void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
-    public static String getFavoritePlace() {
+    public  String getFavoritePlace() {
         return favoritePlace;
     }
 
-    public static void setFavoritePlace(String favoritePlace) {
-        DataRegister.favoritePlace = favoritePlace;
+    public  void setFavoritePlace(String favoritePlace) {
+        this.favoritePlace = favoritePlace;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(fullName);
+        dest.writeString(nickName);
+        dest.writeString(placeBirth);
+        dest.writeString(address);
+        dest.writeString(city);
+        dest.writeString(noHP);
+        dest.writeString(job);
+        dest.writeString(hobby);
+        dest.writeString(favoritePlace);
     }
 }

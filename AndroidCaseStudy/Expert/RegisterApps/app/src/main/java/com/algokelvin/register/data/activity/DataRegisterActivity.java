@@ -1,13 +1,12 @@
 package com.algokelvin.register.data.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.algokelvin.register.data.R;
+import androidx.appcompat.app.AppCompatActivity;
 
-import static com.algokelvin.register.data.model.DataRegister.*;
+import com.algokelvin.register.data.R;
+import com.algokelvin.register.data.model.DataRegister;
 
 public class DataRegisterActivity extends AppCompatActivity {
 
@@ -16,17 +15,18 @@ public class DataRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_register);
 
+        DataRegister dataRegister = getIntent().getParcelableExtra("message");
         TextView txtDataRegister = findViewById(R.id.txt_data_register);
         txtDataRegister.setText(
-                getFullName() + "\n" +
-                getNickName() + "\n" +
-                getPlaceBirth() + "\n" +
-                getAddress() + "\n" +
-                getCity() + "\n" +
-                getNoHP() + "\n" +
-                getJob() + "\n" +
-                getHobby() + "\n" +
-                getFavoritePlace()
+                dataRegister.getFullName() + "\n" +
+                        dataRegister.getNickName() + "\n" +
+                        dataRegister.getPlaceBirth() + "\n" +
+                        dataRegister.getAddress() + "\n" +
+                        dataRegister.getCity() + "\n" +
+                        dataRegister.getNoHP() + "\n" +
+                        dataRegister.getJob() + "\n" +
+                        dataRegister.getHobby() + "\n" +
+                        dataRegister.getFavoritePlace()
         );
     }
 }
