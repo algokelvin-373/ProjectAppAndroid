@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,13 +32,13 @@ public class PageThreeFragment extends RegisterController {
         String[] edtHint = {getJob(), getHobby(), getFavoritePlace()};
         setSizes(text.length);
         setUIRegister(view, text, edtHint);
+        setBtnNext(R.id.btn_next);
+        setBtnBefore(R.id.btn_back);
 
-        Button btnBefore = view.findViewById(R.id.btn_back);
-        Button btnDone = view.findViewById(R.id.btn_done);
-        btnBefore.setOnClickListener(v -> {
+        getBtnBefore().setOnClickListener(v -> {
             getOnViewPager().onSetPage(1);
         });
-        btnDone.setOnClickListener(v -> {
+        getBtnNext().setOnClickListener(v -> {
             setJob(getEditTexts(0).getText().toString());
             setHobby(getEditTexts(1).getText().toString());
             setFavoritePlace(getEditTexts(2).getText().toString());

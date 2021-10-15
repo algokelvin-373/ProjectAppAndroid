@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,10 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class RegisterController extends Fragment {
     private OnViewPager onViewPager;
-    private View[] view;
+    private View viewLayout;
     private TextView[] textViews;
     private EditText[] editTexts;
-    private int sizes;
+    private Button btnNext, btnBefore;
 
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
@@ -29,13 +30,40 @@ public class RegisterController extends Fragment {
     }
 
     public void setSizes(int sizes) {
-        this.sizes = sizes;
-        view = new View[sizes];
         textViews = new TextView[sizes];
         editTexts = new EditText[sizes];
     }
 
     public void setUIRegister(View viewLayout, String[] txt, String[] edtHint) {
+        this.viewLayout = viewLayout;
+        setUIInputData(txt, edtHint);
+    }
+
+    public Button getBtnNext() {
+        return btnNext;
+    }
+
+    public void setBtnNext(int btnNext) {
+        this.btnNext = viewLayout.findViewById(btnNext);
+    }
+
+    public Button getBtnBefore() {
+        return btnBefore;
+    }
+
+    public void setBtnBefore(int btnBefore) {
+        this.btnBefore = viewLayout.findViewById(btnBefore);
+    }
+
+    public EditText getEditTexts(int x) {
+        return editTexts[x];
+    }
+
+    public OnViewPager getOnViewPager() {
+        return onViewPager;
+    }
+
+    private void setUIInputData(String[] txt, String[] edtHint) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -51,14 +79,6 @@ public class RegisterController extends Fragment {
             editTexts[x].setHint(edtHint[x]);
             clRegister.addView(v);
         }
-    }
-
-    public EditText getEditTexts(int x) {
-        return editTexts[x];
-    }
-
-    public OnViewPager getOnViewPager() {
-        return onViewPager;
     }
 
     private int setDp(int x) {

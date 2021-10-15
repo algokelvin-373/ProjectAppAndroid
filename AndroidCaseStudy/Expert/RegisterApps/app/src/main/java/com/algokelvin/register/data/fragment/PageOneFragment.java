@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,9 +30,9 @@ public class PageOneFragment extends RegisterController {
         String[] edtHint = {getFullName(), getNickName(), getPlaceBirth()};
         setSizes(text.length);
         setUIRegister(view, text, edtHint);
+        setBtnNext(R.id.btn_next);
 
-        Button btnNext = view.findViewById(R.id.btn_next);
-        btnNext.setOnClickListener(v -> {
+        getBtnNext().setOnClickListener(v -> {
             setFullName(getEditTexts(0).getText().toString());
             setNickName(getEditTexts(1).getText().toString());
             setPlaceBirth(getEditTexts(2).getText().toString());
