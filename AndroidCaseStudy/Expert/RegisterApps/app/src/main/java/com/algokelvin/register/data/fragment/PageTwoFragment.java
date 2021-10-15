@@ -15,8 +15,6 @@ import com.algokelvin.register.data.utils.RegisterController;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.algokelvin.register.data.model.DataRegister.*;
-
 public class PageTwoFragment extends RegisterController {
     private OnDataPass onDataPass;
 
@@ -36,17 +34,18 @@ public class PageTwoFragment extends RegisterController {
         super.onViewCreated(view, savedInstanceState);
 
         String[] text = {"Alamat Rumah", "Kota", "No. HP"};
-        String[] edtHint = {getAddress(), getCity(), getNoHP()};
+        String[] edtHint = {"Alamat Rumah", "Kota", "No. HP"};
         setSizes(text.length);
         setUIRegister(view, text, edtHint);
         setBtnNext(R.id.btn_next);
         setBtnBefore(R.id.btn_back);
 
         getBtnNext().setOnClickListener(v -> {
-            onDataPass.btnSendData("This is my data from fragment two"); // Using interface to send fragment three
-            setAddress(getEditTexts(0).getText().toString());
-            setCity(getEditTexts(1).getText().toString());
-            setNoHP(getEditTexts(2).getText().toString());
+            onDataPass.btnSendData(
+                    getEditTexts(0).getText().toString(),
+                    getEditTexts(1).getText().toString(),
+                    getEditTexts(2).getText().toString()
+            );
             getOnViewPager().onSetPage(2);
         });
         getBtnBefore().setOnClickListener(v -> {

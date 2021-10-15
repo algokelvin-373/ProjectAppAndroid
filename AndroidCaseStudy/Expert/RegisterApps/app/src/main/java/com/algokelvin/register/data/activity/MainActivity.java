@@ -10,10 +10,12 @@ import com.algokelvin.register.data.R;
 import com.algokelvin.register.data.fragment.PageOneFragment;
 import com.algokelvin.register.data.fragment.PageThreeFragment;
 import com.algokelvin.register.data.fragment.PageTwoFragment;
+import com.algokelvin.register.data.model.DataRegister;
 import com.algokelvin.register.data.model.OnDataPass;
 import com.algokelvin.register.data.utils.TabPageLayer;
 
 public class MainActivity extends TabPageLayer implements OnDataPass {
+    private final DataRegister dataRegister = new DataRegister();
     private int pages = 1;
 
     @Override
@@ -34,11 +36,26 @@ public class MainActivity extends TabPageLayer implements OnDataPass {
     }
 
     @Override
-    public void btnSendData(String data) {
-        Log.i("message_factivity " + pages, data);
-        if (pages == 3) {
+    public void btnSendData(String ...data) {
+        Log.i("datalog", "" + pages);
+        if (pages == 1) {
+            dataRegister.setFullName(data[0]);
+            dataRegister.setNickName(data[1]);
+            dataRegister.setPlaceBirth(data[2]);
+            pages++;
+        } else if (pages == 2) {
+            dataRegister.setAddress(data[0]);
+            dataRegister.setCity(data[1]);
+            dataRegister.setNoHP(data[2]);
+            pages++;
+        } else if (pages == 3) {
+            dataRegister.setJob(data[0]);
+            dataRegister.setHobby(data[1]);
+            dataRegister.setFavoritePlace(data[2]);
+            pages++;
+
             Intent intentDetails = new Intent(this, DataRegisterActivity.class);
-            intentDetails.putExtra("message", data);
+            intentDetails.putExtra("message", dataRegister);
             startActivity(intentDetails);
             finish();
         } else
