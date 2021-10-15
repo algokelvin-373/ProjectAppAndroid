@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,16 +30,16 @@ public class PageTwoFragment extends RegisterController {
         String[] edtHint = {getAddress(), getCity(), getNoHP()};
         setSizes(text.length);
         setUIRegister(view, text, edtHint);
+        setBtnNext(R.id.btn_next);
+        setBtnBefore(R.id.btn_back);
 
-        Button btnNext = view.findViewById(R.id.btn_next);
-        Button btnBefore = view.findViewById(R.id.btn_back);
-        btnNext.setOnClickListener(v -> {
+        getBtnNext().setOnClickListener(v -> {
             setAddress(getEditTexts(0).getText().toString());
             setCity(getEditTexts(1).getText().toString());
             setNoHP(getEditTexts(2).getText().toString());
             getOnViewPager().onSetPage(2);
         });
-        btnBefore.setOnClickListener(v -> {
+        getBtnBefore().setOnClickListener(v -> {
             getOnViewPager().onSetPage(0);
         });
 
