@@ -1,6 +1,5 @@
 package com.algokelvin.register.data.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.algokelvin.register.data.R;
-import com.algokelvin.register.data.model.OnDataPass;
 import com.algokelvin.register.data.utils.RegisterController;
 
 import org.jetbrains.annotations.NotNull;
 
 public class PageOneFragment extends RegisterController {
-    private OnDataPass onDataPass;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_page_one, container, false);
-    }
-
-    @Override
-    public void onAttach(@NonNull @NotNull Context context) {
-        super.onAttach(context);
-        onDataPass = (OnDataPass) context;
     }
 
     @Override
@@ -40,7 +31,7 @@ public class PageOneFragment extends RegisterController {
         setBtnNext(R.id.btn_next);
 
         getBtnNext().setOnClickListener(v -> {
-            onDataPass.btnSendData(
+            getOnDataPass().btnSendData(
                     getEditTexts(0).getText().toString(),
                     getEditTexts(1).getText().toString(),
                     getEditTexts(2).getText().toString()
