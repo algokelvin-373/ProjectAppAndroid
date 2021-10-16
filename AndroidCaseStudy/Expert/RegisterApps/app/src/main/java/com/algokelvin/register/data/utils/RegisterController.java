@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RegisterController extends Fragment {
     private OnViewPager onViewPager;
+    private OnDataPass onDataPass;
     private View viewLayout;
     private TextView[] textViews;
     private EditText[] editTexts;
@@ -27,6 +28,7 @@ public class RegisterController extends Fragment {
     public void onAttach(@NonNull @NotNull Context context) {
         super.onAttach(context);
         onViewPager = (OnViewPager) context;
+        onDataPass = (OnDataPass) context;
     }
 
     public void setSizes(int sizes) {
@@ -61,6 +63,10 @@ public class RegisterController extends Fragment {
 
     public OnViewPager getOnViewPager() {
         return onViewPager;
+    }
+
+    public OnDataPass getOnDataPass() {
+        return onDataPass;
     }
 
     private void setUIInputData(String[] txt, String[] edtHint) {
