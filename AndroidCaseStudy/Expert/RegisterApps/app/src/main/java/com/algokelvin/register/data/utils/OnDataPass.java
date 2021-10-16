@@ -1,4 +1,4 @@
-package com.algokelvin.register.data.model;
+package com.algokelvin.register.data.utils;
 
 public interface OnDataPass {
     void btnSendData(String ...data);

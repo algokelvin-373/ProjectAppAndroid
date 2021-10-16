@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.algokelvin.register.data.model.OnDataPass;
 import com.google.android.material.tabs.TabLayout;
 
 public class TabPageLayer extends AppCompatActivity implements OnViewPager, OnDataPass {

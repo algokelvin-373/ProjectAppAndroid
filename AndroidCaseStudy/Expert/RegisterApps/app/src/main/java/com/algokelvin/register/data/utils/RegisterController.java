@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.algokelvin.register.data.R;
-import com.algokelvin.register.data.model.OnDataPass;
 
 import org.jetbrains.annotations.NotNull;
 
