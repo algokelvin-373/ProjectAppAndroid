@@ -16,7 +16,8 @@ import com.algokelvin.register.data.utils.TabPageLayer;
 
 public class MainActivity extends TabPageLayer implements OnDataPass {
     private final DataRegister dataRegister = new DataRegister();
-    private int pages = 1;
+    private int pages = 1, count = 0;
+    private String[] dataObj = new String[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,24 +39,12 @@ public class MainActivity extends TabPageLayer implements OnDataPass {
     @Override
     public void btnSendData(String ...data) {
         Log.i("datalog", "" + pages);
-        if (pages == 1) {
-            dataRegister.setFullName(data[0]);
-            dataRegister.setNickName(data[1]);
-            dataRegister.setPlaceBirth(data[2]);
-            pages++;
-        } else if (pages == 2) {
-            dataRegister.setAddress(data[0]);
-            dataRegister.setCity(data[1]);
-            dataRegister.setNoHP(data[2]);
-            pages++;
-        } else if (pages == 3) {
-            dataRegister.setJob(data[0]);
-            dataRegister.setHobby(data[1]);
-            dataRegister.setFavoritePlace(data[2]);
-            pages++;
-
+        for (String datum : data) {
+            dataObj[count++] = datum;
+        }
+        if (pages == 3) {
             Intent intentDetails = new Intent(this, DataRegisterActivity.class);
-            intentDetails.putExtra("message", dataRegister);
+            intentDetails.putExtra("message", dataObj);
             startActivity(intentDetails);
             finish();
         } else
