@@ -1,18 +1,29 @@
 package com.algokelvin.register.data.utils;
 
+import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.algokelvin.register.data.model.OnDataPass;
 import com.google.android.material.tabs.TabLayout;
 
-public class TabPageLayer extends AppCompatActivity implements OnViewPager {
+public class TabPageLayer extends AppCompatActivity implements OnViewPager, OnDataPass {
+    private int pages = 1, count = 0;
+    private Class classDetailPage;
+    private String[] dataObj;
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
-    public void setTabPageLayer(int idTabLayout, int idViewPager, Fragment[] fragments) {
+    public void setTabPageLayer(int countData, int idTabLayout, int idViewPager, Fragment[] fragments) {
+        dataObj = new String[countData];
         setUI(idTabLayout, idViewPager);
         setTabPageFragment(fragments);
+    }
+
+    public void setPageDetailData(Class classDetailPage) {
+        this.classDetailPage = classDetailPage;
     }
 
     private void setUI(int idTabLayout, int idViewPager) {
@@ -29,5 +40,19 @@ public class TabPageLayer extends AppCompatActivity implements OnViewPager {
     @Override
     public void onSetPage(int page) {
         viewPager.setCurrentItem(page);
+    }
+
+    @Override
+    public void btnSendData(String... data) {
+        for (String datum : data) {
+            dataObj[count++] = datum;
+        }
+        if (pages == 3) {
+            Intent intentDetails = new Intent(this, classDetailPage);
+            intentDetails.putExtra("message", dataObj);
+            startActivity(intentDetails);
+            finish();
+        } else
+            pages++;
     }
 }

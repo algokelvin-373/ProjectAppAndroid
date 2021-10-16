@@ -2,7 +2,6 @@ package com.algokelvin.register.data.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +20,6 @@ public class PageOneFragment extends RegisterController {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Bundle bundle = getArguments();
-        String message = bundle.getString("message");
-        Log.i("message_factivity", message);
         return inflater.inflate(R.layout.fragment_page_one, container, false);
     }
 
