@@ -20,6 +20,7 @@ public class MainActivity extends TabPageLayer {
         Fragment[] fragments = {new PageOneFragment(), new PageTwoFragment(), new PageThreeFragment()};
         setTabPageLayer(9, R.id.tabHome, R.id.viewPager, fragments);
         setPageDetailData(DataRegisterActivity.class);
+        setPageEnds(fragments.length);
 
     }
 }

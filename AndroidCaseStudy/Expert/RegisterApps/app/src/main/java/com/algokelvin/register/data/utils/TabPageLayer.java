@@ -10,7 +10,7 @@ import com.algokelvin.register.data.model.OnDataPass;
 import com.google.android.material.tabs.TabLayout;
 
 public class TabPageLayer extends AppCompatActivity implements OnViewPager, OnDataPass {
-    private int pages = 1, count = 0;
+    private int pages = 1, count = 0, pageEnds;
     private Class classDetailPage;
     private String[] dataObj;
     private ViewPager viewPager;
@@ -24,6 +24,10 @@ public class TabPageLayer extends AppCompatActivity implements OnViewPager, OnDa
 
     public void setPageDetailData(Class classDetailPage) {
         this.classDetailPage = classDetailPage;
+    }
+
+    public void setPageEnds(int pageEnds) {
+        this.pageEnds = pageEnds;
     }
 
     private void setUI(int idTabLayout, int idViewPager) {
@@ -47,12 +51,18 @@ public class TabPageLayer extends AppCompatActivity implements OnViewPager, OnDa
         for (String datum : data) {
             dataObj[count++] = datum;
         }
-        if (pages == 3) {
+        if (pages == pageEnds) {
             Intent intentDetails = new Intent(this, classDetailPage);
             intentDetails.putExtra("message", dataObj);
             startActivity(intentDetails);
             finish();
         } else
             pages++;
+    }
+
+    @Override
+    public void minusCountData(int count) {
+        this.count -= count;
+        pages--;
     }
 }

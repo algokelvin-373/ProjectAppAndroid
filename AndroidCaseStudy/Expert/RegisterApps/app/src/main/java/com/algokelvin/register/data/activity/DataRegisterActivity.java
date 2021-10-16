@@ -6,7 +6,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.algokelvin.register.data.R;
-import com.algokelvin.register.data.model.DataRegister;
 
 public class DataRegisterActivity extends AppCompatActivity {
 

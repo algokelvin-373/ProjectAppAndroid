@@ -49,6 +49,7 @@ public class PageTwoFragment extends RegisterController {
             getOnViewPager().onSetPage(2);
         });
         getBtnBefore().setOnClickListener(v -> {
+            onDataPass.minusCountData(3);
             getOnViewPager().onSetPage(0);
         });
 

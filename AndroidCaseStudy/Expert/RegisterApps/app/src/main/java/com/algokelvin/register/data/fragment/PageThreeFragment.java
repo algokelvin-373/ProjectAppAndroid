@@ -41,6 +41,7 @@ public class PageThreeFragment extends RegisterController {
         setBtnBefore(R.id.btn_back);
 
         getBtnBefore().setOnClickListener(v -> {
+            onDataPass.minusCountData(3);
             getOnViewPager().onSetPage(1);
         });
         getBtnNext().setOnClickListener(v -> {
