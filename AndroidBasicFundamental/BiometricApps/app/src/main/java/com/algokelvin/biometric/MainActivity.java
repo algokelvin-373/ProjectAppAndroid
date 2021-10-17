@@ -1,28 +1,34 @@
 package com.algokelvin.biometric;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.biometric.BiometricPrompt;
-import androidx.core.content.ContextCompat;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.concurrent.Executor;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+
+import com.algokelvin.biometric.utils.BiometricFunction;
 
 public class MainActivity extends AppCompatActivity {
-    private Executor executor;
+    private final BiometricFunction biometricFunction = new BiometricFunction(this);
     private BiometricPrompt biometricPrompt;
-    private BiometricPrompt.PromptInfo promptInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        executor = ContextCompat.getMainExecutor(this);
-        biometricPrompt = new BiometricPrompt(MainActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
+        Button biometricLoginButton = findViewById(R.id.biometric_login);
+        setBiometricPrompt();
+        biometricLoginButton.setOnClickListener(view -> {
+            biometricPrompt.authenticate(biometricFunction.getPromptInfo());
+        });
+
+    }
+
+    private void setBiometricPrompt() {
+        biometricPrompt = new BiometricPrompt(this, biometricFunction.getExecutor(), new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
@@ -41,20 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Authentication failed", Toast.LENGTH_SHORT).show();
             }
         });
-
-        promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Biometric login for my app")
-                .setSubtitle("Log in using your biometric credential")
-                .setNegativeButtonText("Use account password")
-                .build();
-
-        // Prompt appears when user clicks "Log in".
-        // Consider integrating with the keystore to unlock cryptographic operations,
-        // if needed by your app.
-        Button biometricLoginButton = findViewById(R.id.biometric_login);
-        biometricLoginButton.setOnClickListener(view -> {
-            biometricPrompt.authenticate(promptInfo);
-        });
-
     }
+
 }
