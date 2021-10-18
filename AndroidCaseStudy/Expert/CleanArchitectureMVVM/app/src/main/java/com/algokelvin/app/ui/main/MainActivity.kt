@@ -1,4 +1,4 @@
-package com.algokelvin.app.ui
+package com.algokelvin.app.ui.main
 
 import android.os.Bundle
 import com.algokelvin.app.R
