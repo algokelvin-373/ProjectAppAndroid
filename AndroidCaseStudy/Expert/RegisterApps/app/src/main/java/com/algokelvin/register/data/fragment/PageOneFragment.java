@@ -13,8 +13,6 @@ import com.algokelvin.register.data.utils.RegisterController;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.algokelvin.register.data.model.DataRegister.*;
-
 public class PageOneFragment extends RegisterController {
 
     @Override
@@ -27,15 +25,17 @@ public class PageOneFragment extends RegisterController {
         super.onViewCreated(view, savedInstanceState);
 
         String[] text = {"Nama Lengkap", "Nama Panggilan", "Tempat Lahir"};
-        String[] edtHint = {getFullName(), getNickName(), getPlaceBirth()};
+        String[] edtHint = {"Nama Lengkap", "Nama Panggilan", "Tempat Lahir"};
         setSizes(text.length);
         setUIRegister(view, text, edtHint);
         setBtnNext(R.id.btn_next);
 
         getBtnNext().setOnClickListener(v -> {
-            setFullName(getEditTexts(0).getText().toString());
-            setNickName(getEditTexts(1).getText().toString());
-            setPlaceBirth(getEditTexts(2).getText().toString());
+            getOnDataPass().btnSendData(
+                    getEditTexts(0).getText().toString(),
+                    getEditTexts(1).getText().toString(),
+                    getEditTexts(2).getText().toString()
+            );
             getOnViewPager().onSetPage(1);
         });
 
