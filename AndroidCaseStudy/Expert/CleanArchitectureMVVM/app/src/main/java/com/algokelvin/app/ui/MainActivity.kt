@@ -1,9 +1,10 @@
-package com.algokelvin.app
+package com.algokelvin.app.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.algokelvin.app.R
+import com.algokelvin.app.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
