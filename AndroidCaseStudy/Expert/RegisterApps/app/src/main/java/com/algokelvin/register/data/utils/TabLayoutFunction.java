@@ -27,8 +27,8 @@ public class TabLayoutFunction {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
 
-    public void setViewPagerTabLayout(Fragment ...fragments) {
-        TabPageAdapter tabPageAdapter = new TabPageAdapter(fragmentManager, tabLayout.getTabCount(), fragments);
+    public void setViewPagerTabLayout(int countTabs, Fragment ...fragments) {
+        TabPageAdapter tabPageAdapter = new TabPageAdapter(fragmentManager, countTabs, fragments);
         viewPager.setAdapter(tabPageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
