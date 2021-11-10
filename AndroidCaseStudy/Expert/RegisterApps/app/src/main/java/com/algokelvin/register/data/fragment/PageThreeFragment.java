@@ -31,15 +31,15 @@ public class PageThreeFragment extends RegisterController {
         setBtnNext(R.id.btn_done);
         setBtnBefore(R.id.btn_back);
 
-        getBtnBefore().setOnClickListener(v -> {
-            getOnDataPass().minusCountData(3);
-            getOnViewPager().onSetPage(1);
+        btnBefore.setOnClickListener(v -> {
+            onDataPass.minusCountData(3);
+            onViewPager.onSetPage(1);
         });
-        getBtnNext().setOnClickListener(v -> {
-            getOnDataPass().btnSendData(
-                    getEditTexts(0).getText().toString(),
-                    getEditTexts(1).getText().toString(),
-                    getEditTexts(2).getText().toString()
+        btnNext.setOnClickListener(v -> {
+            onDataPass.btnSendData(
+                    editTexts[0].getText().toString(),
+                    editTexts[1].getText().toString(),
+                    editTexts[2].getText().toString()
             );
         });
 

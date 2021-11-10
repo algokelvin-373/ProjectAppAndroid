@@ -31,17 +31,17 @@ public class PageTwoFragment extends RegisterController {
         setBtnNext(R.id.btn_next);
         setBtnBefore(R.id.btn_back);
 
-        getBtnNext().setOnClickListener(v -> {
-            getOnDataPass().btnSendData(
-                    getEditTexts(0).getText().toString(),
-                    getEditTexts(1).getText().toString(),
-                    getEditTexts(2).getText().toString()
+        btnNext.setOnClickListener(v -> {
+            onDataPass.btnSendData(
+                    editTexts[0].getText().toString(),
+                    editTexts[1].getText().toString(),
+                    editTexts[2].getText().toString()
             );
-            getOnViewPager().onSetPage(2);
+            onViewPager.onSetPage(2);
         });
-        getBtnBefore().setOnClickListener(v -> {
-            getOnDataPass().minusCountData(3);
-            getOnViewPager().onSetPage(0);
+        btnBefore.setOnClickListener(v -> {
+            onDataPass.minusCountData(3);
+            onViewPager.onSetPage(0);
         });
 
     }

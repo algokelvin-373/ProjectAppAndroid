@@ -30,13 +30,13 @@ public class PageOneFragment extends RegisterController {
         setUIRegister(view, text, edtHint);
         setBtnNext(R.id.btn_next);
 
-        getBtnNext().setOnClickListener(v -> {
-            getOnDataPass().btnSendData(
-                    getEditTexts(0).getText().toString(),
-                    getEditTexts(1).getText().toString(),
-                    getEditTexts(2).getText().toString()
+        btnNext.setOnClickListener(v -> {
+            onDataPass.btnSendData(
+                    editTexts[0].getText().toString(),
+                    editTexts[1].getText().toString(),
+                    editTexts[2].getText().toString()
             );
-            getOnViewPager().onSetPage(1);
+            onViewPager.onSetPage(1);
         });
 
     }

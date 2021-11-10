@@ -17,12 +17,12 @@ import com.algokelvin.register.data.R;
 import org.jetbrains.annotations.NotNull;
 
 public class RegisterController extends Fragment {
-    private OnViewPager onViewPager;
-    private OnDataPass onDataPass;
+    protected OnViewPager onViewPager;
+    protected OnDataPass onDataPass;
+    protected Button btnNext, btnBefore;
+    protected EditText[] editTexts;
     private View viewLayout;
     private TextView[] textViews;
-    private EditText[] editTexts;
-    private Button btnNext, btnBefore;
 
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
@@ -41,32 +41,12 @@ public class RegisterController extends Fragment {
         setUIInputData(txt, edtHint);
     }
 
-    public Button getBtnNext() {
-        return btnNext;
-    }
-
     public void setBtnNext(int btnNext) {
         this.btnNext = viewLayout.findViewById(btnNext);
     }
 
-    public Button getBtnBefore() {
-        return btnBefore;
-    }
-
     public void setBtnBefore(int btnBefore) {
         this.btnBefore = viewLayout.findViewById(btnBefore);
-    }
-
-    public EditText getEditTexts(int x) {
-        return editTexts[x];
-    }
-
-    public OnViewPager getOnViewPager() {
-        return onViewPager;
-    }
-
-    public OnDataPass getOnDataPass() {
-        return onDataPass;
     }
 
     private void setUIInputData(String[] txt, String[] edtHint) {
