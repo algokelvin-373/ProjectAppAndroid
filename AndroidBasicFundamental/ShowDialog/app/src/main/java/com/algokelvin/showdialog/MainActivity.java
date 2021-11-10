@@ -1,12 +1,12 @@
 package com.algokelvin.showdialog;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.algokelvin.showdialog.utils.DialogBottomController;
+import com.algokelvin.showdialog.utils.DialogController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,23 +15,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DialogBottomController dialogBottomController = new DialogBottomController(this, R.layout.dialog_bottom_layout);
+        DialogController dialogController = new DialogController(this, R.layout.dialog_layout);
         TextView btnDialogBottom = findViewById(R.id.btn_dialog_bottom);
         TextView btnDialog = findViewById(R.id.btn_dialog_general);
 
-        btnDialogBottom.setOnClickListener(v -> setDialogBottom());
-        btnDialog.setOnClickListener(v -> setDialog());
-    }
-
-    private void setDialogBottom() {
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-        bottomSheetDialog.setContentView(R.layout.dialog_bottom_layout);
-        bottomSheetDialog.show();
-    }
-
-    private void setDialog() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_layout);
-        dialog.show();
+        btnDialogBottom.setOnClickListener(v -> dialogBottomController.setShowDialogBottom());
+        btnDialog.setOnClickListener(v -> dialogController.setShowDialog());
     }
 
 }
