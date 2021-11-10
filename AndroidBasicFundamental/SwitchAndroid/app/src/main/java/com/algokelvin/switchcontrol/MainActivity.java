@@ -1,11 +1,10 @@
 package com.algokelvin.switchcontrol;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.widget.Switch;
-import android.widget.TextView;
+import com.algokelvin.switchcontrol.utils.SwitchController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,18 +13,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        @SuppressLint("UseSwitchCompatOrMaterialCode")
-        Switch switchAndroid = findViewById(R.id.switch_android);
-        TextView txtCondition = findViewById(R.id.txt_condition);
+        SwitchController switchController = new SwitchController(this, R.id.switch_android, R.id.txt_condition);
+        switchController.setTextOnOff("Switch is ON", "Switch is OFF");
+        switchController.setColorOnOff(R.color.green, R.color.red);
+        switchController.setActionSwitchAndroid();
 
-        switchAndroid.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                txtCondition.setText("Switch is ON");
-                txtCondition.setTextColor(getResources().getColor(R.color.green));
-            } else {
-                txtCondition.setText("Switch is OFF");
-                txtCondition.setTextColor(getResources().getColor(R.color.red));
-            }
-        });
     }
 }

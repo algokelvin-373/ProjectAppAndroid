@@ -1,13 +1,11 @@
 package com.algokelvin.register.data.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.algokelvin.register.data.R;
+import androidx.appcompat.app.AppCompatActivity;
 
-import static com.algokelvin.register.data.model.DataRegister.*;
+import com.algokelvin.register.data.R;
 
 public class DataRegisterActivity extends AppCompatActivity {
 
@@ -16,17 +14,18 @@ public class DataRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_register);
 
+        String[] dataRegister = getIntent().getStringArrayExtra("message");
         TextView txtDataRegister = findViewById(R.id.txt_data_register);
         txtDataRegister.setText(
-                getFullName() + "\n" +
-                getNickName() + "\n" +
-                getPlaceBirth() + "\n" +
-                getAddress() + "\n" +
-                getCity() + "\n" +
-                getNoHP() + "\n" +
-                getJob() + "\n" +
-                getHobby() + "\n" +
-                getFavoritePlace()
+                dataRegister[0] + "\n" +
+                        dataRegister[1] + "\n" +
+                        dataRegister[2] + "\n" +
+                        dataRegister[3] + "\n" +
+                        dataRegister[4] + "\n" +
+                        dataRegister[5] + "\n" +
+                        dataRegister[6] + "\n" +
+                        dataRegister[7] + "\n" +
+                        dataRegister[8]
         );
     }
 }
