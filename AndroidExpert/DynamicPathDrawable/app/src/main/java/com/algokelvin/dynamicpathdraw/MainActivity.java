@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
+import android.annotation.SuppressLint;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,20 +20,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imgPath1 = findViewById(R.id.img_path_1);
-        ImageView imgPath2 = findViewById(R.id.img_path_2);
-        ImageView imgPath3 = findViewById(R.id.img_path_3);
+        /*int[] attrs = {R.attr.fill_color_path, R.attr.string_text};
+        TypedArray typedArray = obtainStyledAttributes(R.style.DefaultScene1, attrs);*/
 
-        wrapper = new ContextThemeWrapper(this, R.style.DefaultScene1);
-        drawable = VectorDrawableCompat.create(getResources(), R.drawable.ic_rounded, wrapper.getTheme());
-        imgPath1.setImageDrawable(drawable);
+        int[] style = {R.style.DefaultScene1, R.style.DefaultScene2, R.style.DefaultScene3};
 
-        wrapper = new ContextThemeWrapper(this, R.style.DefaultScene2);
-        drawable = VectorDrawableCompat.create(getResources(), R.drawable.ic_rounded, wrapper.getTheme());
-        imgPath2.setImageDrawable(drawable);
+        @SuppressLint("CutPasteId")
+        ImageView[] imgPath = {findViewById(R.id.img_path_1), findViewById(R.id.img_path_2), findViewById(R.id.img_path_3)};
 
-        wrapper = new ContextThemeWrapper(this, R.style.DefaultScene3);
-        drawable = VectorDrawableCompat.create(getResources(), R.drawable.ic_rounded, wrapper.getTheme());
-        imgPath3.setImageDrawable(drawable);
+        for (int x = 0; x < style.length; x++) {
+            drawable = pathDrawableController(R.drawable.ic_rounded, style[x]);
+            imgPath[x].setImageDrawable(drawable);
+        }
+
+    }
+
+    private Drawable pathDrawableController(int pathDraw, int style) {
+        wrapper = new ContextThemeWrapper(this, style);
+        return VectorDrawableCompat.create(getResources(), pathDraw, wrapper.getTheme());
     }
 }

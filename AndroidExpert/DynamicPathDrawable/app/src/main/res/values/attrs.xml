@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="DynamicPath">
         <attr name="fill_color_path" format="color" />
+        <attr name="string_text" format="string"/>
     </declare-styleable>
 
 </resources>
