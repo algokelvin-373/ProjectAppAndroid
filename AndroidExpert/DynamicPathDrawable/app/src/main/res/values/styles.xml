@@ -3,4 +3,10 @@
     <style name="DefaultScene1">
         <item name="fill_color_path">@color/sample_color_1</item>
     </style>
+    <style name="DefaultScene2">
+        <item name="fill_color_path">@color/sample_color_2</item>
+    </style>
+    <style name="DefaultScene3">
+        <item name="fill_color_path">@color/sample_color_3</item>
+    </style>
 </resources>
