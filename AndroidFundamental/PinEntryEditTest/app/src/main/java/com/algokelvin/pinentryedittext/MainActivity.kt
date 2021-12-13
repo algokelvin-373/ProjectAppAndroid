@@ -13,6 +13,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        edt_pin_1.transformationMethod = AsteriskPasswordTransformationMethod()
+        edt_pin_2.transformationMethod = AsteriskPasswordTransformationMethod()
+        edt_pin_3.transformationMethod = AsteriskPasswordTransformationMethod()
+        edt_pin_4.transformationMethod = AsteriskPasswordTransformationMethod()
+        edt_pin_5.transformationMethod = AsteriskPasswordTransformationMethod()
+        edt_pin_6.transformationMethod = AsteriskPasswordTransformationMethod()
+
         edt_pin_1.addTextChangedListener(inputPinController(edt_pin_1))
         edt_pin_2.addTextChangedListener(inputPinController(edt_pin_2))
         edt_pin_3.addTextChangedListener(inputPinController(edt_pin_3))
