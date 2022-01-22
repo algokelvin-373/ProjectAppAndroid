@@ -1,4 +1,4 @@
-package com.algokelvin.animationandroid.translation;
+package algokelvin.app.animatorfeaturing;
 
 import android.animation.ObjectAnimator;
 import android.widget.TextView;
