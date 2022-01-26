@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+
 public class MainActivity extends AppCompatActivity {
 
     private NfcAdapter nfcAdapter;
@@ -65,7 +68,10 @@ public class MainActivity extends AppCompatActivity {
         if (nfcTag || nfcTeach || nfcNdef) {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             assert tag != null;
-            byte[] payload = detectTagData(tag).getBytes();
+            String payload = detectTagData(tag);
+            String payload2 = detectTagData2(tag);
+            Log.v("nfc_data", payload);
+            Log.v("nfc_data", payload2);
         }
 
     }
@@ -141,6 +147,59 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.v("test",sb.toString());
         return sb.toString();
+    }
+
+    private String detectTagData2(Tag tag) {
+        StringBuilder sb = new StringBuilder();
+        byte[] id = tag.getId();
+        sb.append("NFC ID (dec): ").append(toDec(id)).append('\n');
+        for (String tech : tag.getTechList()) {
+            if (tech.equals(MifareUltralight.class.getName())) {
+                MifareUltralight mifareUlTag = MifareUltralight.get(tag);
+                readTag(mifareUlTag);
+                writeTag(mifareUlTag);
+            }
+        }
+        Log.v("test",sb.toString());
+        return sb.toString();
+    }
+
+    public void writeTag(MifareUltralight mifareUlTag) {
+        try {
+            mifareUlTag.connect();
+            mifareUlTag.writePage(4, "get ".getBytes(Charset.forName("US-ASCII")));
+            mifareUlTag.writePage(5, "fast".getBytes(Charset.forName("US-ASCII")));
+            mifareUlTag.writePage(6, " NFC".getBytes(Charset.forName("US-ASCII")));
+            mifareUlTag.writePage(7, " now".getBytes(Charset.forName("US-ASCII")));
+        } catch (IOException e) {
+            Log.e(TAG, "IOException while writing MifareUltralight...", e);
+        } finally {
+            try {
+                mifareUlTag.close();
+            } catch (IOException e) {
+                Log.e(TAG, "IOException while closing MifareUltralight...", e);
+            }
+        }
+    }
+
+    public String readTag(MifareUltralight mifareUlTag) {
+        try {
+            mifareUlTag.connect();
+            byte[] payload = mifareUlTag.readPages(4);
+            return new String(payload, Charset.forName("US-ASCII"));
+        } catch (IOException e) {
+            Log.e(TAG, "IOException while reading MifareUltralight message...", e);
+        } finally {
+            if (mifareUlTag != null) {
+                try {
+                    mifareUlTag.close();
+                }
+                catch (IOException e) {
+                    Log.e(TAG, "Error closing tag...", e);
+                }
+            }
+        }
+        return null;
     }
 
     private String toHex(byte[] bytes) {
