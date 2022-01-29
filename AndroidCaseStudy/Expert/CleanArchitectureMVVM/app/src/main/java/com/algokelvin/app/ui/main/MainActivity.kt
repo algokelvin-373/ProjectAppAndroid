@@ -7,6 +7,7 @@ import com.algokelvin.app.databinding.ActivityMainBinding
 import com.algokelvin.app.model.Resource
 import com.algokelvin.app.model.uimodel.ProductUIModel
 import com.algokelvin.app.ui.adapter.ProductAdapter
+import com.algokelvin.app.ui.detail.ProductDetailBottomSheet
 
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,6 +25,7 @@ class MainActivity : BaseActivity() {
 
         initView()
         getAllProducts()
+        getDetailProductById()
     }
 
     private fun initView() {
@@ -38,6 +40,20 @@ class MainActivity : BaseActivity() {
                 Resource.Status.ERROR -> {}
             }
         })
+    }
+
+    private fun getDetailProductById() {
+        mainViewModel.productById.observe(this, {
+            when(it.status) {
+                Resource.Status.SUCCESS ->  it.data?.let { product -> showProductDetailSheet(product) }
+                Resource.Status.LOADING -> toast("Getting the product detail info")
+                Resource.Status.ERROR -> {}
+            }
+        })
+    }
+
+    private fun showProductDetailSheet(product: ProductUIModel) {
+        ProductDetailBottomSheet.show(fm = supportFragmentManager, product = product)
     }
 
     private fun onItemProductClicked(product: ProductUIModel) {

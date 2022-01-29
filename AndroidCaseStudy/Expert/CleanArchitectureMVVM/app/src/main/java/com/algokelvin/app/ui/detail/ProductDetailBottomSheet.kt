@@ -10,21 +10,11 @@ import com.algokelvin.app.model.uimodel.ProductUIModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ProductDetailBottomSheet : BottomSheetDialogFragment() {
-
     private var _binding: DialogProductDetailBinding? = null
     private val binding: DialogProductDetailBinding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = DialogProductDetailBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = DialogProductDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
