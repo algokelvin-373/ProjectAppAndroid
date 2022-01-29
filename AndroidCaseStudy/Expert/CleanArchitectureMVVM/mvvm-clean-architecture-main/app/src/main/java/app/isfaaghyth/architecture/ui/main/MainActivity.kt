@@ -1,6 +1,7 @@
 package app.isfaaghyth.architecture.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import app.isfaaghyth.architecture.base.BaseActivity
 import app.isfaaghyth.architecture.data.Resource

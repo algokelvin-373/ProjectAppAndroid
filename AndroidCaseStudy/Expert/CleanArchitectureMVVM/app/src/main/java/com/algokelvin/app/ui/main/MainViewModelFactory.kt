@@ -9,7 +9,7 @@ import java.lang.IllegalArgumentException
 class MainViewModelFactory(private val context: Context): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return DependencyFactory.buildMainViewModel(context) as T
+            DependencyFactory.buildMainViewModel(context) as T
         } else {
             throw IllegalArgumentException("ViewModel not found")
         }

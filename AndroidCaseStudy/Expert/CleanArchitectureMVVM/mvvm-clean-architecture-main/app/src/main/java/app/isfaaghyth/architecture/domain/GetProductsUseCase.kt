@@ -1,5 +1,6 @@
 package app.isfaaghyth.architecture.domain
 
+import android.util.Log
 import app.isfaaghyth.architecture.base.UseCase
 import app.isfaaghyth.architecture.data.Resource
 import app.isfaaghyth.architecture.data.mapper.mapToUiModel
@@ -17,6 +18,7 @@ class GetProductsUseCase constructor(
 
     override fun execute(param: Unit): Flow<Resource<ProductsUIModel>> {
         return repository.products().map {
+            Log.i("rsp-uc", it.toString())
             when(it.status) {
                 Resource.Status.SUCCESS -> {
                     Resource.success(it.data.mapToUiModel())

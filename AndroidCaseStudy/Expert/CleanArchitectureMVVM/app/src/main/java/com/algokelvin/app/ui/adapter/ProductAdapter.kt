@@ -28,22 +28,33 @@ class ProductAdapter(
         notifyDataSetChanged()
     }
 
-    class ProductViewHolder(
+    class ProductViewHolder constructor(
         private val binding: ItemProductBinding,
         private val onItemClicked: (ProductUIModel) -> Unit
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(model: ProductUIModel) {
             binding.txtName.text = model.name
+
             itemView.setOnClickListener {
                 onItemClicked(model)
             }
         }
 
         companion object {
-            fun create(container: ViewGroup, onItemClicked: (ProductUIModel) -> Unit): ProductViewHolder {
+            fun create(
+                container: ViewGroup,
+                onItemClicked: (ProductUIModel) -> Unit
+            ): ProductViewHolder {
                 val inflate = LayoutInflater.from(container.context)
-                return ProductViewHolder(ItemProductBinding.inflate(inflate, container, true), onItemClicked)
+                return ProductViewHolder(
+                    ItemProductBinding.inflate(
+                        inflate,
+                        container,
+                        false
+                    ),
+                    onItemClicked
+                )
             }
         }
 
