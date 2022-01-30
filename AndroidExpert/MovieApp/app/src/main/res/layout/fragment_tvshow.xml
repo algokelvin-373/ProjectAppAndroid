@@ -5,7 +5,7 @@
              android:layout_height="match_parent"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:background="@color/background02"
-             tools:context=".ui.fragment.TVShowFragment">
+             tools:context=".ui.fragment.tvshow.TVShowFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"

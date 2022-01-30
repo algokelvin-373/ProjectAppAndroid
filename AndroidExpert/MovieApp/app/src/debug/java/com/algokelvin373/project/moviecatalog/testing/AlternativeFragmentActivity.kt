@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.algovin373.project.moviecatalog.R
+import com.algokelvin.moviecatalog.R
 
 class AlternativeFragmentActivity : AppCompatActivity() {
 
