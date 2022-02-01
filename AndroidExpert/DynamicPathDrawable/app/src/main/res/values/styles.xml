@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultScene1">
+        <item name="fill_color_path">@color/sample_color_1</item>
+        <item name="string_text">This is string from DefaultScene1</item>
+    </style>
+    <style name="DefaultScene2">
+        <item name="fill_color_path">@color/sample_color_2</item>
+    </style>
+    <style name="DefaultScene3">
+        <item name="fill_color_path">@color/sample_color_3</item>
+    </style>
+</resources>

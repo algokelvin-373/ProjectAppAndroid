@@ -1,0 +1,2 @@
+rootProject.name = "DynamicPathDraw"
+include ':app'

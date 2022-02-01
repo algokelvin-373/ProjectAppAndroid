@@ -1,7 +1,21 @@
 package com.algokelvin.app.ui.main
 
-import android.content.Context
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.algokelvin.app.domain.*
 
-class MainViewModel(val context: Context): ViewModel() {
+class MainViewModel(
+    private val getProductById: GetProductByIdUseCase,
+    getProducts: GetProductsUseCase
+): ViewModel() {
+
+    private val _productId = MutableLiveData<Int>()
+    val products = getProducts(Unit).asLiveData()
+    val productById = _productId.switchMap { id ->
+        getProductById(id).asLiveData()
+    }
+
+    fun productId(id: Int) {
+        _productId.value = id
+    }
+
 }
