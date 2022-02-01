@@ -15,8 +15,11 @@ import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseKeywordM
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
 import io.reactivex.disposables.CompositeDisposable
 
-class DetailMovieViewModel(private val movieRepository: MovieRepository,
-                           private val compositeDisposable: CompositeDisposable) : ViewModel() {
+class DetailMovieViewModel(
+    private val movieRepository: MovieRepository,
+    private val compositeDisposable: CompositeDisposable
+) : ViewModel() {
+
     private val myDetailMovie = MutableLiveData<DetailMovie>()
     private val myKeywordMovie = MutableLiveData<ArrayList<Keyword>>()
     private val myCastMovie = MutableLiveData<List<DataCast>>()

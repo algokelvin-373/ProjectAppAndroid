@@ -47,6 +47,8 @@
                             android:id="@+id/rv_movie_now_playing"
                             android:layout_margin="@dimen/_8sdp"
                             android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
                     </androidx.recyclerview.widget.RecyclerView>
@@ -83,6 +85,8 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_movie"
                     android:layout_gravity="center"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
             </androidx.recyclerview.widget.RecyclerView>

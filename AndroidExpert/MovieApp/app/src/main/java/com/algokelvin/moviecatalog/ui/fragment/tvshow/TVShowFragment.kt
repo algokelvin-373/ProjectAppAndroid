@@ -7,55 +7,54 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
-import com.algokelvin.moviecatalog.ui.adapter.tvshow.BannerTVShowAdapter
-import com.algokelvin.moviecatalog.ui.adapter.tvshow.TVShowAdapter
-import com.algokelvin.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algokelvin.moviecatalog.databinding.FragmentTvshowBinding
+import com.algokelvin.moviecatalog.model.DataTVShow
 import com.algokelvin.moviecatalog.repository.TVShowRepository
 import com.algokelvin.moviecatalog.ui.activity.detailtv.DetailTVShowActivity
+import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
+import com.algokelvin.moviecatalog.ui.adapter.tvshow.BannerTVShowAdapter
 import com.algokelvin.moviecatalog.util.statusGone
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_tvshow.*
+import kotlinx.android.synthetic.main.item_tvshow_catalog.view.*
 import org.jetbrains.anko.startActivity
 import java.util.*
 
 class TVShowFragment : Fragment() {
+    private lateinit var binding: FragmentTvshowBinding
+
+    private val tvShowViewModelFactory by lazy {
+        TVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable())
+    }
+
     private val tvShowViewModel by lazy {
-        ViewModelProviders.of(this,
-            TVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable())
-        )
-            .get(TVShowViewModel::class.java)
+        ViewModelProviders.of(this, tvShowViewModelFactory).get(TVShowViewModel::class.java)
     }
 
-    private val catalogClickListener = object : CatalogClickListener {
-        override fun itemCatalogClick(id: Int?) {
-            requireContext().startActivity<DetailTVShowActivity>("ID" to id)
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_tvshow, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentTvshowBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowViewModel.getDataTVShowAiringToday().observe(this, Observer {
-            viewpager_tvshow_banner.adapter = BannerTVShowAdapter(requireContext(), it)
-            worm_dots_indicator_tvshow.setViewPager(viewpager_tvshow_banner)
-        })
-
+        setTVShowAiringToday()
         setTVShow(getString(R.string.tvShow_airing_today).toLowerCase(Locale.getDefault()))
-        tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_airing_today))
-        tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_on_the_air))
-        tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_popular))
-        tab_layout_tvShow.addTab(tab_layout_tvShow.newTab().setText(R.string.tvShow_top_related))
-        tabTVShowCatalogOnClick(tab_layout_tvShow)
+        tabTVShowCatalogOnClick(binding.tabLayoutTvShow)
     }
 
     private fun tabTVShowCatalogOnClick(tabLayout: TabLayout) {
+        binding.apply {
+            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_airing_today))
+            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_on_the_air))
+            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_popular))
+            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_top_related))
+        }
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -65,19 +64,38 @@ class TVShowFragment : Fragment() {
         })
     }
 
-    private fun setTVShow(type: String) {
-        tvShowViewModel.getDataTVShow(type).observe(this, Observer {
-            progress_content_tvShow.visibility = statusGone
-            rv_tvShow.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-                adapter = TVShowAdapter(
-                    it,
-                    requireActivity(),
-                    catalogClickListener
-                )
-                adapter?.notifyDataSetChanged()
+    private fun setTVShowAiringToday() {
+        tvShowViewModel.rqsTVShowAiringToday()
+        tvShowViewModel.rspTVShowAiringToday.observe(this, Observer {
+            binding.apply {
+                viewpagerTvshowBanner.adapter = BannerTVShowAdapter(requireContext(), it)
+                wormDotsIndicatorTvshow.setViewPager(viewpagerTvshowBanner)
             }
         })
     }
+
+    private fun setTVShow(type: String) {
+        tvShowViewModel.rqsTVShow(type)
+        tvShowViewModel.rspTVShow.observe(this, Observer { data ->
+            binding.apply {
+                progressContentTvShow.visibility = statusGone
+                rvTvShow.setHasFixedSize(true)
+                rvTvShow.adapter = DataAdapter(data.size, R.layout.item_tvshow_catalog) { v, i ->
+                    setItemTvShow(v, data[i])
+                }
+                rvTvShow.adapter?.notifyDataSetChanged()
+            }
+        })
+    }
+
+    private fun setItemTvShow(view: View, data: DataTVShow) {
+        val imageURL = "${BuildConfig.URL_POSTER}${data.backgroundTVShow}"
+        Glide.with(this@TVShowFragment).load(imageURL).into(view.image_tvshow_catalog)
+        view.title_tvshow_catalog.text = data.titleTVShow
+        view.date_tvshow_catalog.text = data.firstDateTVShow
+        view.setOnClickListener {
+            requireContext().startActivity<DetailTVShowActivity>("ID" to data.idTVShow)
+        }
+    }
+
 }

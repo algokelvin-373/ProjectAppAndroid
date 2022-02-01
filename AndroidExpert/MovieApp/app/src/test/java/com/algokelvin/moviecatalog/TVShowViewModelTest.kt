@@ -46,7 +46,7 @@ class TVShowViewModelTest {
 
     @Test
     fun getDataTVShowAiringToday() {
-        tvShowViewModel.getDataTVShowAiringToday()
+        tvShowViewModel.rqsTVShowAiringToday()
 
         // For Dummy Data using ApiService
         apiService.getDataTVShowAiringToday()
@@ -57,7 +57,7 @@ class TVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getTVShowAiringToday(compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }
-                    tvShowViewModel.getDataTVShowAiringToday().observeForever(observer)
+                    tvShowViewModel.rqsTVShowAiringToday().observeForever(observer)
                     verify(observer).onChanged(it)
                 },
                 {
@@ -68,7 +68,7 @@ class TVShowViewModelTest {
 
     @Test // For TVShow : Airing Today
     fun getDataTVShow01() {
-        tvShowViewModel.getDataTVShow(tvShowAiringToday)
+        tvShowViewModel.rqsTVShow(tvShowAiringToday)
 
         apiService.getDataTVShowAiringToday()
             .map { it.dataTVShow }
@@ -78,7 +78,7 @@ class TVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getDataTVShow(tvShowAiringToday, compositeDisposable, capture())
                         firstValue.onSuccess(dummyData!!) // --> "it" is Dummy Data
                     }
-                    tvShowViewModel.getDataTVShow(tvShowAiringToday).observeForever(observer)
+                    tvShowViewModel.rqsTVShow(tvShowAiringToday).observeForever(observer)
                     verify(observer).onChanged(dummyData)
                 },
                 {
@@ -89,7 +89,7 @@ class TVShowViewModelTest {
 
     @Test // For TVShow : On The Air
     fun getDataTVShow02() {
-        tvShowViewModel.getDataTVShow(tvShowOnTheAir)
+        tvShowViewModel.rqsTVShow(tvShowOnTheAir)
 
         apiService.getDataTVShowOnTheAirToday()
             .map { it.dataTVShow }
@@ -99,7 +99,7 @@ class TVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getDataTVShow(tvShowOnTheAir, compositeDisposable, capture())
                         firstValue.onSuccess(dummyData!!) // --> "it" is Dummy Data
                     }
-                    tvShowViewModel.getDataTVShow(tvShowOnTheAir).observeForever(observer)
+                    tvShowViewModel.rqsTVShow(tvShowOnTheAir).observeForever(observer)
                     verify(observer).onChanged(dummyData)
                 },
                 {
@@ -110,7 +110,7 @@ class TVShowViewModelTest {
 
     @Test // For TVShow : Popular
     fun getDataTVShow03() {
-        tvShowViewModel.getDataTVShow(tvShowPopular)
+        tvShowViewModel.rqsTVShow(tvShowPopular)
 
         apiService.getDataTVShowPopularToday()
             .map { it.dataTVShow }
@@ -120,7 +120,7 @@ class TVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getDataTVShow(tvShowPopular, compositeDisposable, capture())
                         firstValue.onSuccess(dummyData!!) // --> "it" is Dummy Data
                     }
-                    tvShowViewModel.getDataTVShow(tvShowPopular).observeForever(observer)
+                    tvShowViewModel.rqsTVShow(tvShowPopular).observeForever(observer)
                     verify(observer).onChanged(dummyData)
                 },
                 {
@@ -131,7 +131,7 @@ class TVShowViewModelTest {
 
     @Test // For TVShow : Top Related
     fun getDataTVShow04() {
-        tvShowViewModel.getDataTVShow(tvShowTopRelated)
+        tvShowViewModel.rqsTVShow(tvShowTopRelated)
 
         apiService.getDataTVShowTopRatedToday()
             .map { it.dataTVShow }
@@ -141,7 +141,7 @@ class TVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getDataTVShow(tvShowTopRelated, compositeDisposable, capture())
                         firstValue.onSuccess(dummyData!!) // --> "it" is Dummy Data
                     }
-                    tvShowViewModel.getDataTVShow(tvShowTopRelated).observeForever(observer)
+                    tvShowViewModel.rqsTVShow(tvShowTopRelated).observeForever(observer)
                     verify(observer).onChanged(dummyData)
                 },
                 {

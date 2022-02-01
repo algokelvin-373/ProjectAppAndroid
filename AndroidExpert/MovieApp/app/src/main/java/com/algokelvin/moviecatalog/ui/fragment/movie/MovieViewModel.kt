@@ -2,16 +2,17 @@ package com.algokelvin.moviecatalog.ui.fragment.movie
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.algokelvin.moviecatalog.model.DataMovie
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
+import com.algokelvin.moviecatalog.util.BaseViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class MovieViewModel(
     private val movieRepository: MovieRepository,
     private val compositeDisposable: CompositeDisposable
-) : ViewModel() {
+) : BaseViewModel(compositeDisposable) {
+
     val rspMovie = MutableLiveData<List<DataMovie>>()
     val rspMovieNowPlaying = MutableLiveData<List<DataMovie>>()
 
@@ -33,8 +34,4 @@ class MovieViewModel(
         })
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.dispose()
-    }
 }
