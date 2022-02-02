@@ -4,22 +4,22 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
-import com.algokelvin.moviecatalog.ui.adapter.cast.CastAdapter
-import com.algokelvin.moviecatalog.ui.adapter.movie.OtherAdapterMovie
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataMovie
-import com.algokelvin.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algokelvin.moviecatalog.databinding.ActivityDetailMovieBinding
 import com.algokelvin.moviecatalog.repository.MovieRepository
+import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
+import com.algokelvin.moviecatalog.util.ConstMethod.glideImg
 import com.bumptech.glide.Glide
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_detail_movie.*
+import kotlinx.android.synthetic.main.item_cast.view.*
+import kotlinx.android.synthetic.main.item_catalog_other.view.*
 import org.jetbrains.anko.startActivity
 
 class DetailMovieActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDetailMovieBinding
+
     private val detailMovieViewModelFactory by lazy {
         DetailMovieViewModelFactory(movieRepository = MovieRepository(), compositeDisposable = CompositeDisposable())
     }
@@ -28,73 +28,103 @@ class DetailMovieActivity : AppCompatActivity() {
         ViewModelProviders.of(this, detailMovieViewModelFactory).get(DetailMovieViewModel::class.java)
     }
 
-    private val catalogClickListener = object : CatalogClickListener {
-        override fun itemCatalogClick(id: Int?) {
-            startActivity<DetailMovieActivity>("ID" to id)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_movie)
+        binding = ActivityDetailMovieBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val id = intent.getIntExtra("ID", 0)
 
-        detailMovieViewModel.setDetailMovie(id).observe(this, Observer {
-            Glide.with(this).load("${BuildConfig.URL_POSTER}${it.backgroundMovie}").into(image_poster_catalog_movie)
-            Glide.with(this).load("${BuildConfig.URL_IMAGE}${it.posterMovie}").into(image_movie_catalog)
-            title_catalog_movie.text = it.titleMovie
-            date_release_catalog_movie.text = it.releaseDateMovie
-            status_release_catalog_movie.text = it.statusMovie
-            runtime_release_catalog_movie.text = it.runtimeMovie.toString()
-            vote_average_release_catalog_movie.text = it.voteAverageMovie.toString()
-            vote_count_release_catalog_movie.text = it.voteCountMovie.toString()
-            overview_catalog_movie.text = it.overviewMovie
-        })
+        setDetail(id)
+        setKeywordMovie(id)
+        setCast(id)
+        setSimilarMovie(id)
+        setRecommendation(id)
 
-        detailMovieViewModel.setKeywordMovie(id).observe(this, Observer {
+        btn_back_to_menu.setOnClickListener { finish() }
+    }
+
+    private fun setDetail(id: Int) {
+        detailMovieViewModel.rqsDetailMovie(id)
+        detailMovieViewModel.rspDetailMovie.observe(this, Observer {
+            binding.apply {
+                glideImg("${BuildConfig.URL_POSTER}${it.backgroundMovie}", imagePosterCatalogMovie)
+                glideImg("${BuildConfig.URL_IMAGE}${it.posterMovie}", imageMovieCatalog)
+                titleCatalogMovie.text = it.titleMovie
+                dateReleaseCatalogMovie.text = it.releaseDateMovie
+                statusReleaseCatalogMovie.text = it.statusMovie
+                runtimeReleaseCatalogMovie.text = it.runtimeMovie.toString()
+                voteAverageReleaseCatalogMovie.text = it.voteAverageMovie.toString()
+                voteCountReleaseCatalogMovie.text = it.voteCountMovie.toString()
+                overviewCatalogMovie.text = it.overviewMovie
+            }
+        })
+    }
+
+    private fun setKeywordMovie(id: Int) {
+        detailMovieViewModel.rqsKeywordMovie(id)
+        detailMovieViewModel.rspKeywordMovie.observe(this, Observer {
             var keyword = ""
             for (i in 0 until it.size) {
                 keyword += if (i == it.size-1) "${it[i].keyword}" else "${it[i].keyword}, "
             }
             keyword_catalog_movie.text = keyword
         })
-
-        detailMovieViewModel.setCastMovie(id).observe(this, Observer {
-            setMovieRecyclerView(rv_cast_movie, 1, it, emptyList())
-        })
-
-        detailMovieViewModel.setSimilarMovie(id).observe(this, Observer {
-            setMovieRecyclerView(rv_similar_movie, 2, emptyList(), it)
-        })
-
-        detailMovieViewModel.setRecommendationMovie(id).observe(this, Observer {
-            setMovieRecyclerView(rv_recommendation_movie, 2, emptyList(), it)
-        })
-
-        btn_back_to_menu.setOnClickListener {
-            super.onBackPressed()
-        }
     }
 
-    private fun setMovieRecyclerView(rv: RecyclerView, type: Int, listCast: List<DataCast>, listMovie: List<DataMovie>) {
-        rv.apply {
-            setHasFixedSize(true)
-            when(type) {
-                1 -> {
-                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = CastAdapter(listCast, context)
-                }
-                2 -> {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = OtherAdapterMovie(
-                        listMovie,
-                        context,
-                        catalogClickListener
-                    )
+    private fun setCast(id: Int) {
+        detailMovieViewModel.rqsCastMovie(id)
+        detailMovieViewModel.rspCastMovie.observe(this, Observer {
+            binding.rvCastMovie.apply {
+                setHasFixedSize(true)
+                adapter = DataAdapter(it.size, R.layout.item_cast) { v, i ->
+                    val urlImage = "${BuildConfig.URL_IMAGE}${it[i].posterCast}"
+                    glideImg(urlImage, v.image_cast)
+                    v.name_cast.text = it[i].nameCast
+                    v.character_cast.text = it[i].characterCast
                 }
             }
-            adapter?.notifyDataSetChanged()
-        }
+        })
     }
+
+    private fun setSimilarMovie(id: Int) {
+        detailMovieViewModel.rqsSimilarMovie(id)
+        detailMovieViewModel.rspSimilarMovie.observe(this, Observer { data ->
+            binding.rvSimilarMovie.apply {
+                setHasFixedSize(true)
+                adapter = DataAdapter(data.size, R.layout.item_catalog_other) { v, i ->
+                    val urlImage = "${BuildConfig.URL_POSTER}${data[i].backgroundDateMovie}"
+                    Glide.with(context).load(urlImage).into(v.image_other_movie)
+                    v.title.text = data[i].titleMovie
+                    v.date_release.text = data[i].releaseDateMovie
+                    v.setOnClickListener {
+                        startActivity<DetailMovieActivity>("ID" to data[i].idMovie)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setRecommendation(id: Int) {
+        detailMovieViewModel.rqsRecommendationMovie(id)
+        detailMovieViewModel.rspRecommendationMovie.observe(this, Observer { data ->
+            binding.rvRecommendationMovie.apply {
+                setHasFixedSize(true)
+                adapter = DataAdapter(data.size, R.layout.item_catalog_other) { v, i ->
+                    val urlImage = "${BuildConfig.URL_POSTER}${data[i].backgroundDateMovie}"
+                    Glide.with(context).load(urlImage).into(v.image_other_movie)
+                    v.title.text = data[i].titleMovie
+                    v.date_release.text = data[i].releaseDateMovie
+                    v.setOnClickListener {
+                        startActivity<DetailMovieActivity>("ID" to data[i].idMovie)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setItemCast() {
+
+    }
+
 }

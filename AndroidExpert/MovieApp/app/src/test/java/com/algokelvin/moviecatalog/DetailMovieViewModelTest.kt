@@ -59,7 +59,7 @@ class DetailMovieViewModelTest {
 
     @Test
     fun setDetailMovie() {
-        detailMovieViewModel.setDetailMovie(sampleIdMovie)
+        detailMovieViewModel.rqsDetailMovie(sampleIdMovie)
 
         // For Dummy Data using ApiService
         apiService.getDetailMovie(sampleIdMovie.toString())
@@ -69,7 +69,7 @@ class DetailMovieViewModelTest {
                         Mockito.verify(movieRepository).getDetailMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }
-                    detailMovieViewModel.setDetailMovie(sampleIdMovie).observeForever(observerDetailMovie)
+                    detailMovieViewModel.rqsDetailMovie(sampleIdMovie).observeForever(observerDetailMovie)
                     verify(observerDetailMovie).onChanged(it)
                 },
                 {
@@ -80,7 +80,7 @@ class DetailMovieViewModelTest {
 
     @Test
     fun setKeywordMovie() {
-        detailMovieViewModel.setKeywordMovie(sampleIdMovie)
+        detailMovieViewModel.rqsKeywordMovie(sampleIdMovie)
 
         // For Dummy Data using ApiService
         apiService.getKeywordMovie(sampleIdMovie.toString())
@@ -91,7 +91,7 @@ class DetailMovieViewModelTest {
                         Mockito.verify(movieRepository).getKeywordMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailMovieViewModel.setKeywordMovie(sampleIdMovie).observeForever(observerKeywordMovie)
+                    detailMovieViewModel.rqsKeywordMovie(sampleIdMovie).observeForever(observerKeywordMovie)
                     verify(observerKeywordMovie).onChanged(it)
                 },
                 {
@@ -102,7 +102,7 @@ class DetailMovieViewModelTest {
 
     @Test
     fun setCastMovie() {
-        detailMovieViewModel.setCastMovie(sampleIdMovie)
+        detailMovieViewModel.rqsCastMovie(sampleIdMovie)
 
         // For Dummy Data using ApiService
         apiService.getCastMovie(sampleIdMovie.toString())
@@ -113,7 +113,7 @@ class DetailMovieViewModelTest {
                         Mockito.verify(movieRepository).getCastMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailMovieViewModel.setCastMovie(sampleIdMovie).observeForever(observerCastMovie)
+                    detailMovieViewModel.rqsCastMovie(sampleIdMovie).observeForever(observerCastMovie)
                     verify(observerCastMovie).onChanged(it)
                 },
                 {
@@ -124,7 +124,7 @@ class DetailMovieViewModelTest {
 
     @Test
     fun setSimilarMovie() {
-        detailMovieViewModel.setSimilarMovie(sampleIdMovie)
+        detailMovieViewModel.rqsSimilarMovie(sampleIdMovie)
 
         // For Dummy Data using ApiService
         apiService.getSimilarMovie(sampleIdMovie.toString())
@@ -135,7 +135,7 @@ class DetailMovieViewModelTest {
                         Mockito.verify(movieRepository).getSimilarMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailMovieViewModel.setSimilarMovie(sampleIdMovie).observeForever(observer)
+                    detailMovieViewModel.rqsSimilarMovie(sampleIdMovie).observeForever(observer)
                     verify(observer).onChanged(it)
                 },
                 {
@@ -146,7 +146,7 @@ class DetailMovieViewModelTest {
 
     @Test
     fun setRecommendationMovie() {
-        detailMovieViewModel.setRecommendationMovie(sampleIdMovie)
+        detailMovieViewModel.rqsRecommendationMovie(sampleIdMovie)
 
         // For Dummy Data using ApiService
         apiService.getRecommendtionMovie(sampleIdMovie.toString())
@@ -157,7 +157,7 @@ class DetailMovieViewModelTest {
                         Mockito.verify(movieRepository).getRecommendationMovie(sampleIdMovie, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailMovieViewModel.setRecommendationMovie(sampleIdMovie).observeForever(observer)
+                    detailMovieViewModel.rqsRecommendationMovie(sampleIdMovie).observeForever(observer)
                     verify(observer).onChanged(it)
                 },
                 {

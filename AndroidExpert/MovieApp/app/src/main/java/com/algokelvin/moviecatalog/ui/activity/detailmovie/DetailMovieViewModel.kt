@@ -1,9 +1,7 @@
 package com.algokelvin.moviecatalog.ui.activity.detailmovie
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.algokelvin.moviecatalog.model.DataCast
 import com.algokelvin.moviecatalog.model.DataMovie
 import com.algokelvin.moviecatalog.model.DetailMovie
@@ -13,67 +11,62 @@ import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
+import com.algokelvin.moviecatalog.util.BaseViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class DetailMovieViewModel(
     private val movieRepository: MovieRepository,
     private val compositeDisposable: CompositeDisposable
-) : ViewModel() {
+) : BaseViewModel(compositeDisposable) {
 
-    private val myDetailMovie = MutableLiveData<DetailMovie>()
-    private val myKeywordMovie = MutableLiveData<ArrayList<Keyword>>()
-    private val myCastMovie = MutableLiveData<List<DataCast>>()
-    private val mySimilarMovie = MutableLiveData<List<DataMovie>>()
-    private val myRecommendationMovie = MutableLiveData<List<DataMovie>>()
+    val rspDetailMovie = MutableLiveData<DetailMovie>()
+    val rspKeywordMovie = MutableLiveData<ArrayList<Keyword>>()
+    val rspCastMovie = MutableLiveData<List<DataCast>>()
+    val rspSimilarMovie = MutableLiveData<List<DataMovie>>()
+    val rspRecommendationMovie = MutableLiveData<List<DataMovie>>()
 
-    fun setDetailMovie(id: Int?) : LiveData<DetailMovie> {
+    fun rqsDetailMovie(id: Int?) {
         movieRepository.getDetailMovie(id, compositeDisposable, object : StatusResponseDetailMovie {
-            override fun onSuccess(data: DetailMovie) = myDetailMovie.postValue(data)
+            override fun onSuccess(data: DetailMovie) = rspDetailMovie.postValue(data)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myDetailMovie
     }
 
-    fun setKeywordMovie(id: Int?) : LiveData<ArrayList<Keyword>> {
+    fun rqsKeywordMovie(id: Int?) {
         movieRepository.getKeywordMovie(id, compositeDisposable, object : StatusResponseKeywordMovie {
-            override fun onSuccess(dataKeyword: ArrayList<Keyword>) = myKeywordMovie.postValue(dataKeyword)
+            override fun onSuccess(dataKeyword: ArrayList<Keyword>) = rspKeywordMovie.postValue(dataKeyword)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myKeywordMovie
     }
 
-    fun setCastMovie(id: Int?) : LiveData<List<DataCast>> {
-        movieRepository.getCastMovie(id, compositeDisposable, object :
-            StatusResponseDataCast {
-            override fun onSuccess(data: List<DataCast>) = myCastMovie.postValue(data)
+    fun rqsCastMovie(id: Int?) {
+        movieRepository.getCastMovie(id, compositeDisposable, object : StatusResponseDataCast {
+            override fun onSuccess(data: List<DataCast>) = rspCastMovie.postValue(data)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myCastMovie
     }
 
-    fun setSimilarMovie(id: Int?) : LiveData<List<DataMovie>> {
+    fun rqsSimilarMovie(id: Int?) {
         movieRepository.getSimilarMovie(id, compositeDisposable, object : StatusResponseMovie {
-            override fun onSuccess(list: List<DataMovie>) = mySimilarMovie.postValue(list)
+            override fun onSuccess(list: List<DataMovie>) = rspSimilarMovie.postValue(list)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return mySimilarMovie
     }
 
-    fun setRecommendationMovie(id: Int?) : LiveData<List<DataMovie>> {
+    fun rqsRecommendationMovie(id: Int?) {
         movieRepository.getRecommendationMovie(id, compositeDisposable, object :StatusResponseMovie {
-            override fun onSuccess(list: List<DataMovie>) = myRecommendationMovie.postValue(list)
+            override fun onSuccess(list: List<DataMovie>) = rspRecommendationMovie.postValue(list)
             override fun onFailed() {
                 Log.i("TES", "Failed")
             }
         })
-        return myRecommendationMovie
     }
 }
