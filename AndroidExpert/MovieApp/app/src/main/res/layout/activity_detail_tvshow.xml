@@ -254,6 +254,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_cast_tv_show"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                 </androidx.recyclerview.widget.RecyclerView>
@@ -270,6 +272,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_similar_tv_show"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                 </androidx.recyclerview.widget.RecyclerView>

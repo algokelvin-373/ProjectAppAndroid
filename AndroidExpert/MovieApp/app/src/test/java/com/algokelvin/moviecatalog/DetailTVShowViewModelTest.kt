@@ -54,7 +54,7 @@ class DetailTVShowViewModelTest {
 
     @Test
     fun setDetailTVShow() {
-        detailTVShowViewModel.setDetailTVShow(sampleIdTVShow)
+        detailTVShowViewModel.rqsDetailTVShow(sampleIdTVShow)
 
         // For Dummy Data using ApiService
         apiService.getDetailTVShow(sampleIdTVShow.toString())
@@ -64,7 +64,7 @@ class DetailTVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getDetailTVShow(sampleIdTVShow, compositeDisposable, capture())
                         firstValue.onSuccess(it!!) // --> "it" is Dummy Data
                     }
-                    detailTVShowViewModel.setDetailTVShow(sampleIdTVShow).observeForever(observerDetailTVShow)
+                    detailTVShowViewModel.rqsDetailTVShow(sampleIdTVShow).observeForever(observerDetailTVShow)
                     verify(observerDetailTVShow).onChanged(it)
                 },
                 {
@@ -75,7 +75,7 @@ class DetailTVShowViewModelTest {
 
     @Test
     fun setCastTVShow() {
-        detailTVShowViewModel.setCastTVShow(sampleIdTVShow)
+        detailTVShowViewModel.rqsCastTVShow(sampleIdTVShow)
 
         // For Dummy Data using ApiService
         apiService.getCastTVShow(sampleIdTVShow.toString())
@@ -86,7 +86,7 @@ class DetailTVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getCastTVShow(sampleIdTVShow, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailTVShowViewModel.setCastTVShow(sampleIdTVShow).observeForever(observerCastTVShow)
+                    detailTVShowViewModel.rqsCastTVShow(sampleIdTVShow).observeForever(observerCastTVShow)
                     verify(observerCastTVShow).onChanged(it)
                 },
                 {
@@ -97,7 +97,7 @@ class DetailTVShowViewModelTest {
 
     @Test
     fun setSimilarTVShow() {
-        detailTVShowViewModel.setSimilarTVShow(sampleIdTVShow)
+        detailTVShowViewModel.rqsSimilarTVShow(sampleIdTVShow)
 
         // For Dummy Data using ApiService
         apiService.getSimilarTVShow(sampleIdTVShow.toString())
@@ -108,7 +108,7 @@ class DetailTVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getSimilarTVShow(sampleIdTVShow, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailTVShowViewModel.setSimilarTVShow(sampleIdTVShow).observeForever(observer)
+                    detailTVShowViewModel.rqsSimilarTVShow(sampleIdTVShow).observeForever(observer)
                     verify(observer).onChanged(it)
                 },
                 {
@@ -119,7 +119,7 @@ class DetailTVShowViewModelTest {
 
     @Test
     fun setRecommendationTVShow() {
-        detailTVShowViewModel.setRecommendationTVShow(sampleIdTVShow)
+        detailTVShowViewModel.rqsRecommendationTVShow(sampleIdTVShow)
 
         // For Dummy Data using ApiService
         apiService.getRecommendtionTVShow(sampleIdTVShow.toString())
@@ -130,7 +130,7 @@ class DetailTVShowViewModelTest {
                         Mockito.verify(tvShowRepository).getRecommendationTVShow(sampleIdTVShow, compositeDisposable, capture())
                         firstValue.onSuccess(it!!)
                     }
-                    detailTVShowViewModel.setRecommendationTVShow(sampleIdTVShow).observeForever(observer)
+                    detailTVShowViewModel.rqsRecommendationTVShow(sampleIdTVShow).observeForever(observer)
                     verify(observer).onChanged(it)
                 },
                 {

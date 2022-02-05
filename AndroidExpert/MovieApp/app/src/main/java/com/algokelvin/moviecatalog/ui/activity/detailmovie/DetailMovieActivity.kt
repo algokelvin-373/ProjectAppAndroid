@@ -123,8 +123,4 @@ class DetailMovieActivity : AppCompatActivity() {
         })
     }
 
-    private fun setItemCast() {
-
-    }
-
 }

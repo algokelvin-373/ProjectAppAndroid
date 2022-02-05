@@ -1,91 +1,117 @@
 package com.algokelvin.moviecatalog.ui.activity.detailtv
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
-import com.algokelvin.moviecatalog.ui.adapter.cast.CastAdapter
-import com.algokelvin.moviecatalog.ui.adapter.tvshow.OtherAdapterTVShow
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataTVShow
-import com.algokelvin.moviecatalog.onclicklisterner.CatalogClickListener
+import com.algokelvin.moviecatalog.databinding.ActivityDetailTvshowBinding
 import com.algokelvin.moviecatalog.repository.TVShowRepository
+import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
+import com.algokelvin.moviecatalog.util.ConstMethod.glideImg
 import com.bumptech.glide.Glide
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_detail_tvshow.*
-import org.jetbrains.anko.startActivity
+import kotlinx.android.synthetic.main.item_cast.view.*
+import kotlinx.android.synthetic.main.item_catalog_other.view.*
 
 class DetailTVShowActivity : AppCompatActivity() {
-    private val detailTVShowViewModel by lazy {
-        ViewModelProviders.of(this,
-            DetailTVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable())
-        )
-            .get(DetailTVShowViewModel::class.java)
+    private lateinit var binding: ActivityDetailTvshowBinding
+
+    private val detailTVShowViewModelFactory by lazy {
+        DetailTVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable())
     }
 
-    private val catalogClickListener = object : CatalogClickListener {
-        override fun itemCatalogClick(id: Int?) {
-            startActivity<DetailTVShowActivity>("ID" to id)
-        }
+    private val detailTVShowViewModel by lazy {
+        ViewModelProviders.of(this, detailTVShowViewModelFactory).get(DetailTVShowViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_tvshow)
+        binding = ActivityDetailTvshowBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val id = intent.getIntExtra("ID", 0)
 
-        detailTVShowViewModel.setDetailTVShow(id).observe(this, Observer {
-            Glide.with(this).load("${BuildConfig.URL_POSTER}${it.backgroundTVShow}").into(image_poster_catalog_tv_show)
-            Glide.with(this).load("${BuildConfig.URL_IMAGE}${it.posterTVShow}").into(image_tv_show_catalog)
-            title_catalog_tv_show.text = it.titleTVShow
-            date_release_catalog_tv_show.text = it.firstDateTVShow
-            seasons_catalog_tv_show.text = it.seasonsTVShow
-            episodes_release_catalog_tv_show.text = it.episodesTVShow
-            vote_average_release_catalog_tv_show.text = it.voteAverageTVShow.toString()
-            vote_count_release_catalog_tv_show.text = it.voteCountTVShow.toString()
-            overview_catalog_tv_show.text = it.descriptionTVShow
-        })
+        setDetail(id)
+        setCast(id)
+        setSimilar(id)
+        setRecommended(id)
 
-        detailTVShowViewModel.setCastTVShow(id).observe(this, Observer {
-            setTVShowRecyclerView(rv_cast_tv_show, 1, it, emptyList())
-        })
-
-        detailTVShowViewModel.setSimilarTVShow(id).observe(this, Observer {
-            setTVShowRecyclerView(rv_similar_tv_show, 2, emptyList(), it)
-        })
-
-        detailTVShowViewModel.setRecommendationTVShow(id).observe(this, Observer {
-            setTVShowRecyclerView(rv_recommendation_tv_show, 2, emptyList(), it)
-        })
-
-        btn_back_to_menu.setOnClickListener {
-            super.onBackPressed()
-        }
+        btn_back_to_menu.setOnClickListener { finish() }
     }
 
-    private fun setTVShowRecyclerView(rv: RecyclerView, type: Int, listCast: List<DataCast>, listTVShow: List<DataTVShow>) {
-        rv.apply {
-            setHasFixedSize(true)
-            when(type) {
-                1 -> {
-                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter = CastAdapter(listCast, context)
-                }
-                2 -> {
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = OtherAdapterTVShow(
-                        listTVShow,
-                        context,
-                        catalogClickListener
-                    )
+    private fun setDetail(id: Int) {
+        detailTVShowViewModel.rqsDetailTVShow(id).observe(this, Observer {
+            binding.apply {
+                glideImg("${BuildConfig.URL_POSTER}${it.backgroundTVShow}", imagePosterCatalogTvShow)
+                glideImg("${BuildConfig.URL_IMAGE}${it.posterTVShow}", imageTvShowCatalog)
+                titleCatalogTvShow.text = it.titleTVShow
+                dateReleaseCatalogTvShow.text = it.firstDateTVShow
+                seasonsCatalogTvShow.text = it.seasonsTVShow
+                episodesReleaseCatalogTvShow.text = it.episodesTVShow
+                voteAverageReleaseCatalogTvShow.text = it.voteAverageTVShow.toString()
+                voteCountReleaseCatalogTvShow.text = it.voteCountTVShow.toString()
+                overviewCatalogTvShow.text = it.descriptionTVShow
+            }
+        })
+    }
+
+    private fun setCast(id: Int) {
+        detailTVShowViewModel.rqsCastTVShow(id)
+        detailTVShowViewModel.rspCastTVShow.observe(this, Observer {
+            binding.rvCastTvShow.apply {
+                setHasFixedSize(true)
+                adapter = DataAdapter(it.size, R.layout.item_cast) { v, i ->
+                    val urlImage = "${BuildConfig.URL_IMAGE}${it[i].posterCast}"
+                    glideImg(urlImage, v.image_cast)
+                    v.name_cast.text = it[i].nameCast
+                    v.character_cast.text = it[i].characterCast
                 }
             }
-            adapter?.notifyDataSetChanged()
-        }
+        })
     }
+
+    private fun setSimilar(id: Int) {
+        detailTVShowViewModel.rqsSimilarTVShow(id)
+        detailTVShowViewModel.rspSimilarTVShow.observe(this, Observer { data ->
+            binding.rvSimilarTvShow.apply {
+                setHasFixedSize(true)
+                adapter = DataAdapter(data.size, R.layout.item_catalog_other) { v, i ->
+                    val urlImage = "${BuildConfig.URL_POSTER}${data[i].backgroundTVShow}"
+                    Glide.with(context).load(urlImage).into(v.image_other_movie)
+                    v.title.text = data[i].titleTVShow
+                    v.date_release.text = data[i].firstDateTVShow
+                    v.setOnClickListener {
+                        val intentDetail = Intent(this@DetailTVShowActivity, DetailTVShowActivity::class.java)
+                        intentDetail.putExtra("ID", data[i].idTVShow)
+                        startActivity(intentDetail)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setRecommended(id: Int) {
+        detailTVShowViewModel.rqsRecommendationTVShow(id)
+        detailTVShowViewModel.rspRecommendationTVShow.observe(this, Observer { data ->
+            binding.rvRecommendationTvShow.apply {
+                setHasFixedSize(true)
+                adapter = DataAdapter(data.size, R.layout.item_catalog_other) { v, i ->
+                    val urlImage = "${BuildConfig.URL_POSTER}${data[i].backgroundTVShow}"
+                    Glide.with(context).load(urlImage).into(v.image_other_movie)
+                    v.title.text = data[i].titleTVShow
+                    v.date_release.text = data[i].firstDateTVShow
+                    v.setOnClickListener {
+                        val intentDetail = Intent(this@DetailTVShowActivity, DetailTVShowActivity::class.java)
+                        intentDetail.putExtra("ID", data[i].idTVShow)
+                        startActivity(intentDetail)
+                    }
+                }
+            }
+        })
+    }
+
 }
