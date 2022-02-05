@@ -2,6 +2,7 @@ package com.algokelvin.showdialog.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.widget.TextView;
 
 public class DialogController {
     private Dialog dialog;
@@ -17,6 +18,11 @@ public class DialogController {
     private void setDialog() {
         dialog = new Dialog(context);
         dialog.setContentView(layoutDialog);
+    }
+
+    public void setTextMsg(String txt, int idTxt) {
+        TextView textView = dialog.findViewById(idTxt);
+        textView.setText(txt);
     }
 
     public void setShowDialog() {
