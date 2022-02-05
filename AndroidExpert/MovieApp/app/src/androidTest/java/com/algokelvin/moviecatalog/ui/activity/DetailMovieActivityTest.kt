@@ -9,7 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.idleresource.EspressoIdlingResource
-import com.algokelvin.moviecatalog.ui.activity.detailmovie.DetailMovieActivity
+import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieActivity
 import com.algokelvin.moviecatalog.utils.dataMovie
 import org.junit.After
 import org.junit.Before

@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.ui.activity.detailtv
+package com.algokelvin.moviecatalog.ui.activity.detail.tv
 
 import android.content.Intent
 import android.os.Bundle

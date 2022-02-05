@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.ui.activity.detailtv
+package com.algokelvin.moviecatalog.ui.activity.detail.tv
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

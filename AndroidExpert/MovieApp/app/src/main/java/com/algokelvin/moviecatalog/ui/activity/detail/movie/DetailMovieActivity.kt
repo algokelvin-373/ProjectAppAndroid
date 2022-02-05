@@ -1,5 +1,6 @@
-package com.algokelvin.moviecatalog.ui.activity.detailmovie
+package com.algokelvin.moviecatalog.ui.activity.detail.movie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -15,7 +16,6 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_detail_movie.*
 import kotlinx.android.synthetic.main.item_cast.view.*
 import kotlinx.android.synthetic.main.item_catalog_other.view.*
-import org.jetbrains.anko.startActivity
 
 class DetailMovieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailMovieBinding
@@ -98,7 +98,9 @@ class DetailMovieActivity : AppCompatActivity() {
                     v.title.text = data[i].titleMovie
                     v.date_release.text = data[i].releaseDateMovie
                     v.setOnClickListener {
-                        startActivity<DetailMovieActivity>("ID" to data[i].idMovie)
+                        val intentDetail = Intent(this@DetailMovieActivity, DetailMovieActivity::class.java)
+                        intentDetail.putExtra("ID", data[i].idMovie)
+                        startActivity(intentDetail)
                     }
                 }
             }
@@ -116,7 +118,9 @@ class DetailMovieActivity : AppCompatActivity() {
                     v.title.text = data[i].titleMovie
                     v.date_release.text = data[i].releaseDateMovie
                     v.setOnClickListener {
-                        startActivity<DetailMovieActivity>("ID" to data[i].idMovie)
+                        val intentDetail = Intent(this@DetailMovieActivity, DetailMovieActivity::class.java)
+                        intentDetail.putExtra("ID", data[i].idMovie)
+                        startActivity(intentDetail)
                     }
                 }
             }

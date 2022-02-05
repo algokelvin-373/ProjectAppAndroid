@@ -1,5 +1,6 @@
 package com.algokelvin.moviecatalog.ui.fragment.movie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +15,14 @@ import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.databinding.FragmentMovieBinding
 import com.algokelvin.moviecatalog.model.DataMovie
 import com.algokelvin.moviecatalog.repository.MovieRepository
-import com.algokelvin.moviecatalog.ui.activity.detailmovie.DetailMovieActivity
+import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieActivity
 import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
+import com.algokelvin.moviecatalog.util.ConstMethod.glideImg
 import com.algokelvin.moviecatalog.util.statusGone
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.item_movie_banner.view.*
 import kotlinx.android.synthetic.main.item_movie_catalog.view.*
-import org.jetbrains.anko.startActivity
 import java.util.*
 
 class MovieFragment : Fragment() {
@@ -97,19 +97,19 @@ class MovieFragment : Fragment() {
     private fun setItemView(type: Int, view: View, data: DataMovie) {
         when (type) {
             R.layout.item_movie_catalog -> {
-                Glide.with(this).load("${BuildConfig.URL_IMAGE}${data.posterMovie}")
-                    .into(view.image_movie_catalog)
+                glideImg("${BuildConfig.URL_IMAGE}${data.posterMovie}", view.image_movie_catalog)
                 view.title_movie_catalog.text = data.titleMovie
                 view.date_movie_catalog.text = data.releaseDateMovie
             }
             R.layout.item_movie_banner -> {
-                Glide.with(this).load("${BuildConfig.URL_IMAGE}${data.posterMovie}")
-                    .into(view.poster_movie_now_playing)
+                glideImg("${BuildConfig.URL_IMAGE}${data.posterMovie}", view.poster_movie_now_playing)
                 view.title_movie_now_playing.text = data.titleMovie
             }
         }
         view.setOnClickListener {
-            requireContext().startActivity<DetailMovieActivity>("ID" to data.idMovie)
+            val intentDetail = Intent(requireContext(), DetailMovieActivity::class.java)
+            intentDetail.putExtra("ID", data.idMovie)
+            startActivity(intentDetail)
         }
     }
 

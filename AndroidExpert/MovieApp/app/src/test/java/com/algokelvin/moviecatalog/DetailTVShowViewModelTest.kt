@@ -10,7 +10,7 @@ import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.tvshow.StatusResponseDetailTVShow
 import com.algokelvin.moviecatalog.repository.inter.tvshow.StatusResponseTVShow
 import com.algokelvin.moviecatalog.retrofit.MyRetrofit
-import com.algokelvin.moviecatalog.ui.activity.detailtv.DetailTVShowViewModel
+import com.algokelvin.moviecatalog.ui.activity.detail.tv.DetailTVShowViewModel
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.disposables.CompositeDisposable

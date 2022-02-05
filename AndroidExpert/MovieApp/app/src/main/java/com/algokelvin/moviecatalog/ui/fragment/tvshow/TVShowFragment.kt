@@ -1,5 +1,6 @@
 package com.algokelvin.moviecatalog.ui.fragment.tvshow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,16 +13,15 @@ import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.databinding.FragmentTvshowBinding
 import com.algokelvin.moviecatalog.model.DataTVShow
 import com.algokelvin.moviecatalog.repository.TVShowRepository
-import com.algokelvin.moviecatalog.ui.activity.detailtv.DetailTVShowActivity
+import com.algokelvin.moviecatalog.ui.activity.detail.tv.DetailTVShowActivity
+import com.algokelvin.moviecatalog.ui.adapter.BannerAdapter
 import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
-import com.algokelvin.moviecatalog.ui.adapter.tvshow.BannerTVShowAdapter
+import com.algokelvin.moviecatalog.util.ConstMethod.glideImg
 import com.algokelvin.moviecatalog.util.statusGone
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_tvshow.*
+import kotlinx.android.synthetic.main.item_tvshow_banner.view.*
 import kotlinx.android.synthetic.main.item_tvshow_catalog.view.*
-import org.jetbrains.anko.startActivity
 import java.util.*
 
 class TVShowFragment : Fragment() {
@@ -66,11 +66,15 @@ class TVShowFragment : Fragment() {
 
     private fun setTVShowAiringToday() {
         tvShowViewModel.rqsTVShowAiringToday()
-        tvShowViewModel.rspTVShowAiringToday.observe(this, Observer {
-            binding.apply {
-                viewpagerTvshowBanner.adapter = BannerTVShowAdapter(requireContext(), it)
-                wormDotsIndicatorTvshow.setViewPager(viewpagerTvshowBanner)
+        tvShowViewModel.rspTVShowAiringToday.observe(this, Observer { data ->
+            binding.viewpagerTvshowBanner.apply {
+                adapter = BannerAdapter(data.size, R.layout.item_tvshow_banner) { v, i ->
+                    val imageURL = "${BuildConfig.URL_POSTER}${data[i].backgroundTVShow}"
+                    glideImg(imageURL, v.image_tvshow_banner)
+                    v.title_tvshow_banner.text = data[i].titleTVShow
+                }
             }
+            binding.wormDotsIndicatorTvshow.setViewPager(binding.viewpagerTvshowBanner)
         })
     }
 
@@ -90,11 +94,13 @@ class TVShowFragment : Fragment() {
 
     private fun setItemTvShow(view: View, data: DataTVShow) {
         val imageURL = "${BuildConfig.URL_POSTER}${data.backgroundTVShow}"
-        Glide.with(this@TVShowFragment).load(imageURL).into(view.image_tvshow_catalog)
+        glideImg(imageURL, view.image_tvshow_catalog)
         view.title_tvshow_catalog.text = data.titleTVShow
         view.date_tvshow_catalog.text = data.firstDateTVShow
         view.setOnClickListener {
-            requireContext().startActivity<DetailTVShowActivity>("ID" to data.idTVShow)
+            val intentDetail = Intent(requireContext(), DetailTVShowActivity::class.java)
+            intentDetail.putExtra("ID", data.idTVShow)
+            startActivity(intentDetail)
         }
     }
 

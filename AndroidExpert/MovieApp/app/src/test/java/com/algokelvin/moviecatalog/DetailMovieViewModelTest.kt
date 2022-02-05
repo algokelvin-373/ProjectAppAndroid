@@ -12,7 +12,7 @@ import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseDetailMo
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algokelvin.moviecatalog.retrofit.MyRetrofit
-import com.algokelvin.moviecatalog.ui.activity.detailmovie.DetailMovieViewModel
+import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieViewModel
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.disposables.CompositeDisposable

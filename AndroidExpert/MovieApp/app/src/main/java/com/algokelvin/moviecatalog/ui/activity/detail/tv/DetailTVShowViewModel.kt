@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.ui.activity.detailtv
+package com.algokelvin.moviecatalog.ui.activity.detail.tv
 
 import android.util.Log
 import androidx.lifecycle.LiveData
