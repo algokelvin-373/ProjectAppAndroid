@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.databinding.FragmentMovieBinding
-import com.algokelvin.moviecatalog.model.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DataMovie
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieActivity
 import com.algokelvin.moviecatalog.ui.adapter.DataAdapter

@@ -3,9 +3,9 @@ package com.algokelvin.moviecatalog.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algokelvin.moviecatalog.idleresource.EspressoIdlingResource
-import com.algokelvin.moviecatalog.model.*
+import com.algokelvin.moviecatalog.model.entity.*
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
-import com.algokelvin.moviecatalog.repository.inter.movie.MovieInter
+import com.algokelvin.moviecatalog.repository.inter.movie.MovieImpl
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
@@ -15,11 +15,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class MovieRepository : MovieInter {
+class MovieRepository : MovieImpl {
     private val apiService = MyRetrofit.iniRetrofitMovie()
 
-    override fun getMovieNowPlaying(compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie)
-            : LiveData<List<DataMovie>> {
+    override fun getMovieNowPlaying(
+        compositeDisposable: CompositeDisposable,
+        statusResponseMovie: StatusResponseMovie
+    ): LiveData<List<DataMovie>> {
         EspressoIdlingResource.increment()
         val myDataMovieNowPlaying = MutableLiveData<List<DataMovie>>()
         compositeDisposable.add(
@@ -40,7 +42,12 @@ class MovieRepository : MovieInter {
         return myDataMovieNowPlaying
     }
 
-    override fun getDataMovie(type: String, compositeDisposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie) : LiveData<List<DataMovie>> {
+    override fun getDataMovie(
+        type: String,
+        compositeDisposable: CompositeDisposable,
+        statusResponseMovie: StatusResponseMovie
+    ) : LiveData<List<DataMovie>> {
+
         EspressoIdlingResource.increment()
         val myDataMovie : MutableLiveData<List<DataMovie>> = MutableLiveData()
         var observable : Observable<Movie> = apiService.getDataMovieNowPlaying()
@@ -67,7 +74,12 @@ class MovieRepository : MovieInter {
         return myDataMovie
     }
 
-    override fun getDetailMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDetailMovie: StatusResponseDetailMovie): LiveData<DetailMovie> {
+    override fun getDetailMovie(
+        idMovie: Int?,
+        disposable: CompositeDisposable,
+        statusResponseDetailMovie: StatusResponseDetailMovie
+    ): LiveData<DetailMovie> {
+
         EspressoIdlingResource.increment()
         val myDetailMovie: MutableLiveData<DetailMovie> = MutableLiveData()
         disposable.add(apiService.getDetailMovie(idMovie.toString())
@@ -86,7 +98,12 @@ class MovieRepository : MovieInter {
         return myDetailMovie
     }
 
-    override fun getKeywordMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseKeywordMovie: StatusResponseKeywordMovie): LiveData<ArrayList<Keyword>> {
+    override fun getKeywordMovie(
+        idMovie: Int?,
+        disposable: CompositeDisposable,
+        statusResponseKeywordMovie: StatusResponseKeywordMovie
+    ): LiveData<ArrayList<Keyword>> {
+
         EspressoIdlingResource.increment()
         val myKeywordMovie: MutableLiveData<ArrayList<Keyword>> = MutableLiveData()
         disposable.add(apiService.getKeywordMovie(idMovie.toString())
@@ -107,7 +124,12 @@ class MovieRepository : MovieInter {
         return myKeywordMovie
     }
 
-    override fun getCastMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseDataCast: StatusResponseDataCast): LiveData<List<DataCast>> {
+    override fun getCastMovie(
+        idMovie: Int?,
+        disposable: CompositeDisposable,
+        statusResponseDataCast: StatusResponseDataCast
+    ): LiveData<List<DataCast>> {
+
         EspressoIdlingResource.increment()
         val myCastMovie: MutableLiveData<List<DataCast>> = MutableLiveData()
         disposable.add(apiService.getCastMovie(idMovie.toString())
@@ -128,7 +150,12 @@ class MovieRepository : MovieInter {
         return myCastMovie
     }
 
-    override fun getSimilarMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
+    override fun getSimilarMovie(
+        idMovie: Int?,
+        disposable: CompositeDisposable,
+        statusResponseMovie: StatusResponseMovie
+    ): LiveData<List<DataMovie>> {
+
         EspressoIdlingResource.increment()
         val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
         disposable.add(apiService.getSimilarMovie(idMovie.toString())
@@ -149,7 +176,12 @@ class MovieRepository : MovieInter {
         return mySimilarMovie
     }
 
-    override fun getRecommendationMovie(idMovie: Int?, disposable: CompositeDisposable, statusResponseMovie: StatusResponseMovie): LiveData<List<DataMovie>> {
+    override fun getRecommendationMovie(
+        idMovie: Int?,
+        disposable: CompositeDisposable,
+        statusResponseMovie: StatusResponseMovie
+    ): LiveData<List<DataMovie>> {
+
         EspressoIdlingResource.increment()
         val mySimilarMovie: MutableLiveData<List<DataMovie>> = MutableLiveData()
         disposable.add(apiService.getRecommendtionMovie(idMovie.toString())

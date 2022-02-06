@@ -1,14 +1,14 @@
 package com.algokelvin.moviecatalog.repository.inter.movie
 
 import androidx.lifecycle.LiveData
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataMovie
-import com.algokelvin.moviecatalog.model.DetailMovie
-import com.algokelvin.moviecatalog.model.Keyword
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DetailMovie
+import com.algokelvin.moviecatalog.model.entity.Keyword
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import io.reactivex.disposables.CompositeDisposable
 
-interface MovieInter {
+interface MovieImpl {
     fun getMovieNowPlaying(
         compositeDisposable: CompositeDisposable,
         statusResponseMovie: StatusResponseMovie

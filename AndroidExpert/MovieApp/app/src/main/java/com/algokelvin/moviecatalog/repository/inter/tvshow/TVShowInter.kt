@@ -1,9 +1,9 @@
 package com.algokelvin.moviecatalog.repository.inter.tvshow
 
 import androidx.lifecycle.LiveData
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataTVShow
-import com.algokelvin.moviecatalog.model.DetailTVShow
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DetailTVShow
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import io.reactivex.disposables.CompositeDisposable
 

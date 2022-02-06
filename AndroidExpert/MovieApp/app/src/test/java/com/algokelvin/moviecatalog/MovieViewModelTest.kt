@@ -2,7 +2,7 @@ package com.algokelvin.moviecatalog
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.algokelvin.moviecatalog.model.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DataMovie
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algokelvin.moviecatalog.retrofit.MyRetrofit

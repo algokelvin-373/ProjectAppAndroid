@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.model
+package com.algokelvin.moviecatalog.model.entity
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

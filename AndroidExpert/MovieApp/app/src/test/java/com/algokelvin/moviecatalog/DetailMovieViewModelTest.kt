@@ -2,10 +2,10 @@ package com.algokelvin.moviecatalog
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataMovie
-import com.algokelvin.moviecatalog.model.DetailMovie
-import com.algokelvin.moviecatalog.model.Keyword
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DetailMovie
+import com.algokelvin.moviecatalog.model.entity.Keyword
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseDetailMovie

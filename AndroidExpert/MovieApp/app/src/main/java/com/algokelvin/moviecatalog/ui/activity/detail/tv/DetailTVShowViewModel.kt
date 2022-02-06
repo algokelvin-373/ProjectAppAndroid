@@ -3,9 +3,9 @@ package com.algokelvin.moviecatalog.ui.activity.detail.tv
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataTVShow
-import com.algokelvin.moviecatalog.model.DetailTVShow
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DetailTVShow
 import com.algokelvin.moviecatalog.repository.TVShowRepository
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.tvshow.StatusResponseDetailTVShow

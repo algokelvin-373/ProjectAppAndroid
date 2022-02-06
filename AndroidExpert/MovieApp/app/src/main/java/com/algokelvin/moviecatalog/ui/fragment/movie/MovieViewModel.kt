@@ -2,7 +2,7 @@ package com.algokelvin.moviecatalog.ui.fragment.movie
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.algokelvin.moviecatalog.model.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DataMovie
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algokelvin.moviecatalog.util.BaseViewModel

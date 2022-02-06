@@ -3,10 +3,10 @@ package com.algokelvin.moviecatalog.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.algokelvin.moviecatalog.idleresource.EspressoIdlingResource
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataTVShow
-import com.algokelvin.moviecatalog.model.DetailTVShow
-import com.algokelvin.moviecatalog.model.TVShow
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DetailTVShow
+import com.algokelvin.moviecatalog.model.entity.TVShow
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.tvshow.StatusResponseDetailTVShow
 import com.algokelvin.moviecatalog.repository.inter.tvshow.StatusResponseTVShow

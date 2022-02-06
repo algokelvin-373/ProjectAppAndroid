@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.databinding.FragmentTvshowBinding
-import com.algokelvin.moviecatalog.model.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
 import com.algokelvin.moviecatalog.repository.TVShowRepository
 import com.algokelvin.moviecatalog.ui.activity.detail.tv.DetailTVShowActivity
 import com.algokelvin.moviecatalog.ui.adapter.BannerAdapter

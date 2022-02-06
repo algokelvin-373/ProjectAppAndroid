@@ -5,9 +5,9 @@ import android.content.Intent
 import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.databinding.ActivityDetailTvshowBinding
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataTVShow
-import com.algokelvin.moviecatalog.model.DetailTVShow
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DetailTVShow
 import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieActivity
 import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
 import com.algokelvin.moviecatalog.util.ConstMethodUI.glideImg

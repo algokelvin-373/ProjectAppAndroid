@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.model
+package com.algokelvin.moviecatalog.model.entity
 
 abstract class DataGen {
     abstract val id: Int?
