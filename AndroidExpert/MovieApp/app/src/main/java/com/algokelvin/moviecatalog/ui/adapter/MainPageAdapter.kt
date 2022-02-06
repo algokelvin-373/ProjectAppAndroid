@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.ui.adapter.mainpage
+package com.algokelvin.moviecatalog.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

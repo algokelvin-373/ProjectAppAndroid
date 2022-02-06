@@ -1,5 +1,6 @@
 package com.algokelvin.moviecatalog.ui.fragment.tvshow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,25 +11,26 @@ import androidx.lifecycle.ViewModelProviders
 import com.algokelvin.moviecatalog.BuildConfig
 import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.databinding.FragmentTvshowBinding
-import com.algokelvin.moviecatalog.model.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
 import com.algokelvin.moviecatalog.repository.TVShowRepository
-import com.algokelvin.moviecatalog.ui.activity.detailtv.DetailTVShowActivity
+import com.algokelvin.moviecatalog.ui.activity.detail.tv.DetailTVShowActivity
+import com.algokelvin.moviecatalog.ui.adapter.BannerAdapter
 import com.algokelvin.moviecatalog.ui.adapter.DataAdapter
-import com.algokelvin.moviecatalog.ui.adapter.tvshow.BannerTVShowAdapter
-import com.algokelvin.moviecatalog.util.statusGone
-import com.bumptech.glide.Glide
+import com.algokelvin.moviecatalog.util.ConstMethodUI.glideImg
+import com.algokelvin.moviecatalog.util.ConstMethodUI.tabSelected
+import com.algokelvin.moviecatalog.util.ConstMethodUI.titleTab
+import com.algokelvin.moviecatalog.util.ConstantVal
 import com.google.android.material.tabs.TabLayout
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_tvshow.*
+import kotlinx.android.synthetic.main.item_tvshow_banner.view.*
 import kotlinx.android.synthetic.main.item_tvshow_catalog.view.*
-import org.jetbrains.anko.startActivity
 import java.util.*
 
 class TVShowFragment : Fragment() {
     private lateinit var binding: FragmentTvshowBinding
 
     private val tvShowViewModelFactory by lazy {
-        TVShowViewModelFactory(tvShowRepository = TVShowRepository(), compositeDisposable = CompositeDisposable())
+        TVShowViewModelFactory(TVShowRepository(), CompositeDisposable())
     }
 
     private val tvShowViewModel by lazy {
@@ -49,28 +51,21 @@ class TVShowFragment : Fragment() {
     }
 
     private fun tabTVShowCatalogOnClick(tabLayout: TabLayout) {
-        binding.apply {
-            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_airing_today))
-            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_on_the_air))
-            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_popular))
-            tabLayoutTvShow.addTab(tabLayoutTvShow.newTab().setText(R.string.tvShow_top_related))
-        }
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(p0: TabLayout.Tab?) {}
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                setTVShow(tab?.text.toString().toLowerCase(Locale.getDefault()))
-            }
-        })
+        binding.tabLayoutTvShow.apply { titleTab(ConstantVal.tabLayoutTv) }
+        tabLayout.tabSelected { tab -> setTVShow(tab) }
     }
 
     private fun setTVShowAiringToday() {
         tvShowViewModel.rqsTVShowAiringToday()
-        tvShowViewModel.rspTVShowAiringToday.observe(this, Observer {
-            binding.apply {
-                viewpagerTvshowBanner.adapter = BannerTVShowAdapter(requireContext(), it)
-                wormDotsIndicatorTvshow.setViewPager(viewpagerTvshowBanner)
+        tvShowViewModel.rspTVShowAiringToday.observe(this, Observer { data ->
+            binding.viewpagerTvshowBanner.apply {
+                adapter = BannerAdapter(data.size, R.layout.item_tvshow_banner) { v, i ->
+                    val imageURL = "${BuildConfig.URL_POSTER}${data[i].background}"
+                    glideImg(imageURL, v.image_tvshow_banner)
+                    v.title_tvshow_banner.text = data[i].title
+                }
             }
+            binding.wormDotsIndicatorTvshow.setViewPager(binding.viewpagerTvshowBanner)
         })
     }
 
@@ -78,7 +73,7 @@ class TVShowFragment : Fragment() {
         tvShowViewModel.rqsTVShow(type)
         tvShowViewModel.rspTVShow.observe(this, Observer { data ->
             binding.apply {
-                progressContentTvShow.visibility = statusGone
+                progressContentTvShow.visibility = ConstantVal.statusGone
                 rvTvShow.setHasFixedSize(true)
                 rvTvShow.adapter = DataAdapter(data.size, R.layout.item_tvshow_catalog) { v, i ->
                     setItemTvShow(v, data[i])
@@ -89,12 +84,14 @@ class TVShowFragment : Fragment() {
     }
 
     private fun setItemTvShow(view: View, data: DataTVShow) {
-        val imageURL = "${BuildConfig.URL_POSTER}${data.backgroundTVShow}"
-        Glide.with(this@TVShowFragment).load(imageURL).into(view.image_tvshow_catalog)
-        view.title_tvshow_catalog.text = data.titleTVShow
+        val imageURL = "${BuildConfig.URL_POSTER}${data.background}"
+        glideImg(imageURL, view.image_tvshow_catalog)
+        view.title_tvshow_catalog.text = data.title
         view.date_tvshow_catalog.text = data.firstDateTVShow
         view.setOnClickListener {
-            requireContext().startActivity<DetailTVShowActivity>("ID" to data.idTVShow)
+            val intentDetail = Intent(requireContext(), DetailTVShowActivity::class.java)
+            intentDetail.putExtra("ID", data.id)
+            startActivity(intentDetail)
         }
     }
 

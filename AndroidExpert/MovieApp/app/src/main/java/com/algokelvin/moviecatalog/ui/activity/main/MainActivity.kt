@@ -3,7 +3,7 @@ package com.algokelvin.moviecatalog.ui.activity.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.algokelvin.moviecatalog.R
-import com.algokelvin.moviecatalog.ui.adapter.mainpage.MainPageAdapter
+import com.algokelvin.moviecatalog.ui.adapter.MainPageAdapter
 import com.algokelvin.moviecatalog.ui.fragment.movie.MovieFragment
 import com.algokelvin.moviecatalog.ui.fragment.tvshow.TVShowFragment
 import kotlinx.android.synthetic.main.activity_main.*

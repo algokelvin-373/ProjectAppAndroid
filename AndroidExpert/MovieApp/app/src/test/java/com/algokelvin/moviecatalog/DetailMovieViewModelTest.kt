@@ -2,17 +2,17 @@ package com.algokelvin.moviecatalog
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataMovie
-import com.algokelvin.moviecatalog.model.DetailMovie
-import com.algokelvin.moviecatalog.model.Keyword
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DetailMovie
+import com.algokelvin.moviecatalog.model.entity.Keyword
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseDetailMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseKeywordMovie
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseMovie
 import com.algokelvin.moviecatalog.retrofit.MyRetrofit
-import com.algokelvin.moviecatalog.ui.activity.detailmovie.DetailMovieViewModel
+import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieViewModel
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.disposables.CompositeDisposable
@@ -128,7 +128,7 @@ class DetailMovieViewModelTest {
 
         // For Dummy Data using ApiService
         apiService.getSimilarMovie(sampleIdMovie.toString())
-            .map { it.dataMovie?.take(8) }
+            .map { it.data?.take(8) }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {
@@ -150,7 +150,7 @@ class DetailMovieViewModelTest {
 
         // For Dummy Data using ApiService
         apiService.getRecommendtionMovie(sampleIdMovie.toString())
-            .map { it.dataMovie?.take(8) }
+            .map { it.data?.take(8) }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {

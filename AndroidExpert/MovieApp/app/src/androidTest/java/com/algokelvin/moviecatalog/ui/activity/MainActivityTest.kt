@@ -64,7 +64,7 @@ class MainActivityTest {
         // Testing 2 & 3
         /** Data Movie Now Playing in Banner Poster Movie **/
         apiService.getDataMovieNowPlaying()
-            .map { it.dataMovie?.take(7) }
+            .map { it.data?.take(7) }
             .subscribe(
                 {
                     for(i in 0 until it!!.size) {
@@ -78,11 +78,11 @@ class MainActivityTest {
         /** 01 Data Movie Now Playing **/
         onView(allOf(withText(R.string.movie_now_playing), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(click())
         apiService.getDataMovieNowPlaying()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     for(i in 0 until it!!.size) {
-                        onView(withId(R.id.image_movie_catalog)).check(matches(withText(it[i].posterMovie)))
+                        onView(withId(R.id.image_catalog)).check(matches(withText(it[i].posterMovie)))
                         onView(withId(R.id.title_movie_catalog)).check(matches(withText(it[i].titleMovie)))
                         onView(withId(R.id.date_movie_catalog)).check(matches(withText(it[i].releaseDateMovie)))
                     }
@@ -94,11 +94,11 @@ class MainActivityTest {
         /** 02 Data Movie Popular **/
         onView(allOf(withText(R.string.movie_popular), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(click())
         apiService.getDataMoviePopular()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     for(i in 0 until it!!.size) {
-                        onView(withId(R.id.image_movie_catalog)).check(matches(withText(it[i].posterMovie)))
+                        onView(withId(R.id.image_catalog)).check(matches(withText(it[i].posterMovie)))
                         onView(withId(R.id.title_movie_catalog)).check(matches(withText(it[i].titleMovie)))
                         onView(withId(R.id.date_movie_catalog)).check(matches(withText(it[i].releaseDateMovie)))
                     }
@@ -110,11 +110,11 @@ class MainActivityTest {
         /** 03 Data Movie Top Related **/
         onView(allOf(withText(R.string.movie_top_related), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(click())
         apiService.getDataMovieTopRated()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     for(i in 0 until it!!.size) {
-                        onView(withId(R.id.image_movie_catalog)).check(matches(withText(it[i].posterMovie)))
+                        onView(withId(R.id.image_catalog)).check(matches(withText(it[i].posterMovie)))
                         onView(withId(R.id.title_movie_catalog)).check(matches(withText(it[i].titleMovie)))
                         onView(withId(R.id.date_movie_catalog)).check(matches(withText(it[i].releaseDateMovie)))
                     }
@@ -126,11 +126,11 @@ class MainActivityTest {
         /** 04 Data Movie Up Coming **/
         onView(allOf(withText(R.string.movie_upcoming), isDescendantOfA(withId(R.id.tab_layout_movie)))).perform(click())
         apiService.getDataMovieUpComing()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     for(i in 0 until it!!.size) {
-                        onView(withId(R.id.image_movie_catalog)).check(matches(withText(it[i].posterMovie)))
+                        onView(withId(R.id.image_catalog)).check(matches(withText(it[i].posterMovie)))
                         onView(withId(R.id.title_movie_catalog)).check(matches(withText(it[i].titleMovie)))
                         onView(withId(R.id.date_movie_catalog)).check(matches(withText(it[i].releaseDateMovie)))
                     }

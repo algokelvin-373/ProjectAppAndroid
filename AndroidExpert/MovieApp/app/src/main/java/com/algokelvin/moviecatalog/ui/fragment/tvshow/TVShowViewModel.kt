@@ -2,7 +2,7 @@ package com.algokelvin.moviecatalog.ui.fragment.tvshow
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.algokelvin.moviecatalog.model.DataTVShow
+import com.algokelvin.moviecatalog.model.entity.DataTVShow
 import com.algokelvin.moviecatalog.repository.TVShowRepository
 import com.algokelvin.moviecatalog.repository.inter.tvshow.StatusResponseTVShow
 import com.algokelvin.moviecatalog.util.BaseViewModel

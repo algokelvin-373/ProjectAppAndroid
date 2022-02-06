@@ -1,10 +1,10 @@
 package com.algokelvin.moviecatalog.retrofit.movie
 
 import com.algokelvin.moviecatalog.BuildConfig
-import com.algokelvin.moviecatalog.model.Cast
-import com.algokelvin.moviecatalog.model.DetailMovie
-import com.algokelvin.moviecatalog.model.KeywordMovie
-import com.algokelvin.moviecatalog.model.Movie
+import com.algokelvin.moviecatalog.model.entity.Cast
+import com.algokelvin.moviecatalog.model.entity.DetailMovie
+import com.algokelvin.moviecatalog.model.entity.KeywordMovie
+import com.algokelvin.moviecatalog.model.entity.Movie
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -11,8 +11,8 @@
             android:roundIcon="@drawable/calvin_logo"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name="com.algokelvin.moviecatalog.ui.activity.detailtv.DetailTVShowActivity"/>
-        <activity android:name="com.algokelvin.moviecatalog.ui.activity.detailmovie.DetailMovieActivity"/>
+        <activity android:name="com.algokelvin.moviecatalog.ui.activity.detail.tv.DetailTVShowActivity"/>
+        <activity android:name="com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieActivity"/>
         <activity android:name="com.algokelvin.moviecatalog.ui.activity.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,11 +1,11 @@
-package com.algokelvin.moviecatalog.ui.activity.detailmovie
+package com.algokelvin.moviecatalog.ui.activity.detail.movie
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.algokelvin.moviecatalog.model.DataCast
-import com.algokelvin.moviecatalog.model.DataMovie
-import com.algokelvin.moviecatalog.model.DetailMovie
-import com.algokelvin.moviecatalog.model.Keyword
+import com.algokelvin.moviecatalog.model.entity.DataCast
+import com.algokelvin.moviecatalog.model.entity.DataMovie
+import com.algokelvin.moviecatalog.model.entity.DetailMovie
+import com.algokelvin.moviecatalog.model.entity.Keyword
 import com.algokelvin.moviecatalog.repository.MovieRepository
 import com.algokelvin.moviecatalog.repository.inter.StatusResponseDataCast
 import com.algokelvin.moviecatalog.repository.inter.movie.StatusResponseDetailMovie

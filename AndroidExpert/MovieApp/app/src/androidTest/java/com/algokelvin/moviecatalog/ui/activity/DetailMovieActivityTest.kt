@@ -9,7 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.algokelvin.moviecatalog.R
 import com.algokelvin.moviecatalog.idleresource.EspressoIdlingResource
-import com.algokelvin.moviecatalog.ui.activity.detailmovie.DetailMovieActivity
+import com.algokelvin.moviecatalog.ui.activity.detail.movie.DetailMovieActivity
 import com.algokelvin.moviecatalog.utils.dataMovie
 import org.junit.After
 import org.junit.Before
@@ -44,31 +44,31 @@ class DetailMovieActivityTest {
     fun loadDetailMovie() {
         Thread.sleep(2000)
         /** Title Movie **/
-        onView(withId(R.id.title_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.title_catalog_movie)).check(matches(withText(dummyData.titleMovie)))
+        onView(withId(R.id.title_catalog)).check(matches(isDisplayed()))
+        onView(withId(R.id.title_catalog)).check(matches(withText(dummyData.titleMovie)))
 
         /** Date Release Movie **/
-        onView(withId(R.id.date_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.date_release_catalog_movie)).check(matches(withText(dummyData.dateReleaseMovie)))
+        onView(withId(R.id.date_release_catalog)).check(matches(isDisplayed()))
+        onView(withId(R.id.date_release_catalog)).check(matches(withText(dummyData.dateReleaseMovie)))
 
         /** Status Release Movie **/
-        onView(withId(R.id.status_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.status_release_catalog_movie)).check(matches(withText(dummyData.statusMovie)))
+        onView(withId(R.id.status_release_catalog)).check(matches(isDisplayed()))
+        onView(withId(R.id.status_release_catalog)).check(matches(withText(dummyData.statusMovie)))
 
         /** Run Time Release Movie **/
-        onView(withId(R.id.runtime_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.runtime_release_catalog_movie)).check(matches(withText(dummyData.runtimeMovie)))
+        onView(withId(R.id.runtime_release_catalog)).check(matches(isDisplayed()))
+        onView(withId(R.id.runtime_release_catalog)).check(matches(withText(dummyData.runtimeMovie)))
 
         /** Vote Average Movie **/
-        onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.vote_average_release_catalog_movie)).check(matches(withText(dummyData.voteAverageMovie)))
+        onView(withId(R.id.vote_average_release_catalog)).check(matches(isDisplayed()))
+        onView(withId(R.id.vote_average_release_catalog)).check(matches(withText(dummyData.voteAverageMovie)))
 
         /** Overview Movie **/
-        onView(withId(R.id.overview_catalog_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.overview_catalog_movie)).check(matches(withText(dummyData.overviewMovie)))
+        onView(withId(R.id.overview_catalog)).check(matches(isDisplayed()))
+        onView(withId(R.id.overview_catalog)).check(matches(withText(dummyData.overviewMovie)))
 
         /** All Data RecyclerView Cast, Similar, and Recommendation Movie **/
-        onView(withId(R.id.rv_cast_movie)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_cast)).check(matches(isDisplayed()))
 //        onView(withId(R.id.rv_similar_movie)).check(matches(isDisplayed()))
 //        onView(withId(R.id.rv_recommendation_movie)).check(matches(isDisplayed()))
 

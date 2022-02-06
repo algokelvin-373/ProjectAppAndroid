@@ -1,9 +1,9 @@
 package com.algokelvin.moviecatalog.retrofit.tvshow
 
 import com.algokelvin.moviecatalog.BuildConfig
-import com.algokelvin.moviecatalog.model.Cast
-import com.algokelvin.moviecatalog.model.DetailTVShow
-import com.algokelvin.moviecatalog.model.TVShow
+import com.algokelvin.moviecatalog.model.entity.Cast
+import com.algokelvin.moviecatalog.model.entity.DetailTVShow
+import com.algokelvin.moviecatalog.model.entity.TVShow
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

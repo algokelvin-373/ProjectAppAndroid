@@ -1,4 +1,4 @@
-package com.algokelvin.moviecatalog.model
+package com.algokelvin.moviecatalog.model.entity
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -9,25 +9,28 @@ data class TVShow(
 )
 
 data class DataTVShow(
-    @field:SerializedName("backdrop_path") val backgroundTVShow: String? = null,
-    @field:SerializedName("name") val titleTVShow: String? = null,
-    @field:SerializedName("first_air_date") val firstDateTVShow: String? = null,
-    @field:SerializedName("id") val idTVShow: Int? = null
-)
+    @field:SerializedName("id") override val id: Int?,
+    @field:SerializedName("name") override val title: String?,
+    @field:SerializedName("backdrop_path") override val background: String?,
+    override val poster: String?,
+    override val release: String?,
+    @field:SerializedName("first_air_date") val firstDateTVShow: String? = null
+): DataGen()
 
 data class DetailTVShow(
-    @field:SerializedName("backdrop_path") val backgroundTVShow: String? = null,
-    @field:SerializedName("name") val titleTVShow: String? = null,
+    @field:SerializedName("id") override val id: Int?,
+    @field:SerializedName("name") override val title: String?,
+    @field:SerializedName("poster_path") override val poster: String?,
+    @field:SerializedName("backdrop_path") override val background: String?,
     @field:SerializedName("first_air_date") val firstDateTVShow: String? = null,
-    @field:SerializedName("id") val idTVShow: String? = null,
     @field:SerializedName("number_of_episodes") val episodesTVShow: String? = null,
     @field:SerializedName("number_of_seasons") val seasonsTVShow: String? = null,
     @field:SerializedName("overview") val descriptionTVShow: String? = null,
     @field:SerializedName("popularity") val popularTVShow: String? = null,
-    @field:SerializedName("poster_path") val posterTVShow: String? = null,
     @field:SerializedName("vote_average") val voteAverageTVShow: String? = null,
-    @field:SerializedName("vote_count") val voteCountTVShow: String? = null
-)
+    @field:SerializedName("vote_count") val voteCountTVShow: String? = null,
+    override val release: String?
+): DataGen()
 
 @Parcelize
 data class SampleDataTVShow(
