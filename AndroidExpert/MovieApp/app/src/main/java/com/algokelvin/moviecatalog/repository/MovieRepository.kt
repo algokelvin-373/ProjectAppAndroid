@@ -26,7 +26,7 @@ class MovieRepository : MovieInter {
             apiService.getDataMovieNowPlaying()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie?.take(7) }
+            .map { it.data?.take(7) }
             .subscribe(
                 {
                     statusResponseMovie.onSuccess(it!!)
@@ -52,7 +52,7 @@ class MovieRepository : MovieInter {
         }
         compositeDisposable.add(observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     statusResponseMovie.onSuccess(it!!)
@@ -134,7 +134,7 @@ class MovieRepository : MovieInter {
         disposable.add(apiService.getSimilarMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie?.take(8) }
+            .map { it.data?.take(8) }
             .subscribe(
                 {
                     statusResponseMovie.onSuccess(it!!)
@@ -155,7 +155,7 @@ class MovieRepository : MovieInter {
         disposable.add(apiService.getRecommendtionMovie(idMovie.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .map { it.dataMovie?.take(8) }
+            .map { it.data?.take(8) }
             .subscribe(
                 {
                     statusResponseMovie.onSuccess(it!!)

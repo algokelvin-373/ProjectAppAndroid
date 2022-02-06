@@ -128,7 +128,7 @@ class DetailMovieViewModelTest {
 
         // For Dummy Data using ApiService
         apiService.getSimilarMovie(sampleIdMovie.toString())
-            .map { it.dataMovie?.take(8) }
+            .map { it.data?.take(8) }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {
@@ -150,7 +150,7 @@ class DetailMovieViewModelTest {
 
         // For Dummy Data using ApiService
         apiService.getRecommendtionMovie(sampleIdMovie.toString())
-            .map { it.dataMovie?.take(8) }
+            .map { it.data?.take(8) }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {

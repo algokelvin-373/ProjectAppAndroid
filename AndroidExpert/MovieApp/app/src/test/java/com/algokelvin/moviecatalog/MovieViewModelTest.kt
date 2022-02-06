@@ -49,7 +49,7 @@ class MovieViewModelTest {
 
         // For Dummy Data using ApiService
         apiService.getDataMovieNowPlaying()
-            .map { it.dataMovie?.take(7) }
+            .map { it.data?.take(7) }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {
@@ -70,7 +70,7 @@ class MovieViewModelTest {
         movieViewModel.rqsMovie(movieNowPlaying)
 
         apiService.getDataMovieNowPlaying()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 { dummyData ->
                     argumentCaptor<StatusResponseMovie>().apply {
@@ -91,7 +91,7 @@ class MovieViewModelTest {
         movieViewModel.rqsMovie(moviePopular)
 
         apiService.getDataMoviePopular()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {
@@ -112,7 +112,7 @@ class MovieViewModelTest {
         movieViewModel.rqsMovie(movieTopRelated)
 
         apiService.getDataMovieTopRated()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {
@@ -133,7 +133,7 @@ class MovieViewModelTest {
         movieViewModel.rqsMovie(movieUpcoming)
 
         apiService.getDataMovieUpComing()
-            .map { it.dataMovie }
+            .map { it.data }
             .subscribe(
                 {
                     argumentCaptor<StatusResponseMovie>().apply {
