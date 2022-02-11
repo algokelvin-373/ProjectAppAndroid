@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UseCompoundDrawables,UselessParent">
+
+        <ImageView
+                android:src="@drawable/movie_poster_a_start_is_born"
+                android:id="@+id/poster_movie_now_playing"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_150sdp"
+                tools:ignore="ContentDescription"/>
+
+        <TextView
+                android:id="@+id/title_movie_now_playing"
+                android:text="@string/title"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:background="@color/background03"
+              android:layout_marginStart="@dimen/_8sdp"
+              android:layout_marginEnd="@dimen/_8sdp"
+              android:layout_marginTop="@dimen/_4sdp"
+              android:layout_marginBottom="@dimen/_4sdp"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/_100sdp">
+
+    <ImageView
+            android:id="@+id/image_catalog"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_8sdp"
+            tools:ignore="ContentDescription"/>
+
+    <LinearLayout
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/title_movie_catalog"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/averia_libre"/>
+
+        <TextView
+                android:id="@+id/date_movie_catalog"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/averia_libre"/>
+
+    </LinearLayout>
+
+</LinearLayout>

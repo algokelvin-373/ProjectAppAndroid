@@ -16,7 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DialogBottomController dialogBottomController = new DialogBottomController(this, R.layout.dialog_bottom_layout);
+
         DialogController dialogController = new DialogController(this, R.layout.dialog_layout);
+        dialogController.setTextMsg("Hello, AlgoKelvin", R.id.txt_msg_dlg);
+
         TextView btnDialogBottom = findViewById(R.id.btn_dialog_bottom);
         TextView btnDialog = findViewById(R.id.btn_dialog_general);
 
