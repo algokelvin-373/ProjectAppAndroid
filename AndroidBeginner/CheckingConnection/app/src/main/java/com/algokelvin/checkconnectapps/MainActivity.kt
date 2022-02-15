@@ -1,6 +1,8 @@
 package com.algokelvin.checkconnectapps
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -17,6 +19,11 @@ class MainActivity: ConnectionImpl() {
         binding.apply {
             initView()
         }
+    }
+
+    private fun isNetworkConnected(ctx: Context): Boolean {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
     }
 
     private fun ActivityMainBinding.initView() {
