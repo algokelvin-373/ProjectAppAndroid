@@ -23,7 +23,8 @@ class MainActivity: ConnectionImpl() {
 
     private fun isNetworkConnected(ctx: Context): Boolean {
         val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+        val activeNetworkInfo = cm.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }
 
     private fun ActivityMainBinding.initView() {
