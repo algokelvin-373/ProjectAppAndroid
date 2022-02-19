@@ -19,14 +19,16 @@ class MainActivity : ConnectionController() {
 
     private fun setConnection() {
         if (!isConnected) {
-            binding.txtMsgConnection.text = ("Connection is Off")
-            binding.btnSetNetwork.text = ("Setting Network")
-            binding.btnSetNetwork.setOnClickListener {
-                val intentToSetNetwork = Intent(Settings.ACTION_WIRELESS_SETTINGS)
-                startActivity(intentToSetNetwork)
+            binding.layoutConnection.apply {
+                txtMsgConnection.text = ("Connection is Off")
+                btnSetNetwork.text = ("Setting Network")
+                btnSetNetwork.setOnClickListener {
+                    val intentToSetNetwork = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                    startActivity(intentToSetNetwork)
+                }
             }
         } else {
-            binding.layoutStatusConnect.visibility = View.GONE
+            binding.layoutConnection.layoutStatusConnect.visibility = View.GONE
         }
     }
 

@@ -1,4 +1,4 @@
 include ':app'
 rootProject.name = "CheckConnectApps"
-//include ':network-connect-2'
+include ':network-connect-2'
 include ':network-connect-3'
