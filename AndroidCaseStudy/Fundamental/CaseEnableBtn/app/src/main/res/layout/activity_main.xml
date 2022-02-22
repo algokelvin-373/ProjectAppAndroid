@@ -13,6 +13,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:inputType="number"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

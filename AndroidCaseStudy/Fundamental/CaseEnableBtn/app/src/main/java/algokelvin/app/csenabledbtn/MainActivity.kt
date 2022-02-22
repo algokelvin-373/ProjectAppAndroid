@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var txtData = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +37,33 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 Log.i("edt-text", "after this")
                 val data = p0.toString()
-                binding.edtTxt.isFocusable = false
-                binding.btnAction.isFocusable = data.isNotEmpty()
-                binding.btnBack.isFocusable = data.isNotEmpty()
-                binding.edtTxt.isFocusable = true
+                if (data.isNotEmpty()) {
+                    binding.btnAction.isFocusable = true
+                    binding.btnBack.isFocusable = true
+                } else {
+                    binding.btnAction.isFocusable = false
+                    binding.btnBack.isFocusable = true
+                }
             }
         })
 
     }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        Log.i("edt-text-down", keyCode.toString())
+        when(keyCode) {
+            7,8,9,10,11,12,13,14,15,16 -> {
+                txtData += (keyCode - 7).toString()
+                binding.edtTxt.setText(txtData)
+            }
+            67 -> {
+                txtData = txtData.substring(0, txtData.length - 1)
+                binding.edtTxt.setText(txtData)
+            }
+            4 -> finish()
+        }
+        Log.i("edt-text-now", txtData)
+        return super.onKeyDown(keyCode, event)
+    }
+
 }
