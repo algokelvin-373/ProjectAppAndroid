@@ -1,15 +1,20 @@
-package algokelvin.app.csenabledbtn
+package algokelvin.app.csenabledbtn.edttxt
 
 import algokelvin.app.csenabledbtn.databinding.ActivityMainBinding
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 
-class MainActivity : AppCompatActivity() {
+class EdtTextActivity : AppCompatActivity() {
+    private val edtTxtViewModel by lazy {
+        ViewModelProvider(this)[EdtTxtViewModel::class.java]
+    }
+
     private lateinit var binding: ActivityMainBinding
     private var txtData = ""
 
@@ -19,8 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnAction.setOnClickListener {
-            val txt = binding.edtTxt.text.toString()
-            Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
+            rspEdtTxt()
         }
         binding.btnBack.setOnClickListener {
             val txt = binding.edtTxt.text.toString()
@@ -47,6 +51,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun rspEdtTxt() {
+        val txt = binding.edtTxt.text.toString()
+        edtTxtViewModel.rqsStatus(txt)
+        edtTxtViewModel.getStatus().observe(this, {
+            Log.i("rsp-data", "Response data $it")
+            if (it) {
+                Toast.makeText(this, "Input is true", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
