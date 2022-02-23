@@ -1,6 +1,7 @@
 package algokelvin.app.csenabledbtn.edttxt
 
 import algokelvin.app.csenabledbtn.databinding.ActivityMainBinding
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -55,17 +56,14 @@ class EdtTextActivity : AppCompatActivity() {
 
     private fun rspEdtTxt() {
         val txt = binding.edtTxt.text.toString()
-        edtTxtViewModel.rqsStatus(txt)
-        edtTxtViewModel.getStatus().observe(this, {
-            Log.i("rsp-data", "Response data $it")
-            if (it) {
-                Toast.makeText(this, "Input is true", Toast.LENGTH_SHORT).show()
-            }
+        edtTxtViewModel.rqsStatus(txt).observe(this, {
+            if (it) startActivity(Intent(this, EdtTxtTrueActivity::class.java))
+            else Toast.makeText(this, "PIN is False", Toast.LENGTH_SHORT).show()
+            edtTxtViewModel.rqsStatus(txt).removeObservers(this)
         })
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        Log.i("edt-text-down", keyCode.toString())
         when(keyCode) {
             7,8,9,10,11,12,13,14,15,16 -> {
                 txtData += (keyCode - 7).toString()
