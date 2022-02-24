@@ -1,15 +1,21 @@
-package algokelvin.app.csenabledbtn
+package algokelvin.app.csenabledbtn.edttxt
 
 import algokelvin.app.csenabledbtn.databinding.ActivityMainBinding
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 
-class MainActivity : AppCompatActivity() {
+class EdtTextActivity : AppCompatActivity() {
+    private val edtTxtViewModel by lazy {
+        ViewModelProvider(this)[EdtTxtViewModel::class.java]
+    }
+
     private lateinit var binding: ActivityMainBinding
     private var txtData = ""
 
@@ -19,8 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnAction.setOnClickListener {
-            val txt = binding.edtTxt.text.toString()
-            Toast.makeText(this, txt, Toast.LENGTH_SHORT).show()
+            rspEdtTxt()
         }
         binding.btnBack.setOnClickListener {
             val txt = binding.edtTxt.text.toString()
@@ -49,8 +54,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun rspEdtTxt() {
+        val txt = binding.edtTxt.text.toString()
+        edtTxtViewModel.rqsStatus(txt).observe(this, {
+            if (it) startActivity(Intent(this, EdtTxtTrueActivity::class.java))
+            else Toast.makeText(this, "PIN is False", Toast.LENGTH_SHORT).show()
+            edtTxtViewModel.rqsStatus(txt).removeObservers(this)
+        })
+    }
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        Log.i("edt-text-down", keyCode.toString())
         when(keyCode) {
             7,8,9,10,11,12,13,14,15,16 -> {
                 txtData += (keyCode - 7).toString()
