@@ -3,10 +3,10 @@ package com.algokelvin.checkconnectapps
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.view.KeyEvent
+import android.view.View
 import com.algokelvin.checkconnectapps.databinding.ActivityMainBinding
 
-class MainActivity : ConnectionActivity() {
+class MainActivity: ConnectionImpl() {
     private lateinit var binding: ActivityMainBinding
     private var isConnection = false
 
@@ -14,21 +14,21 @@ class MainActivity : ConnectionActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        checkConnection()
-
+        binding.apply {
+            initView()
+        }
     }
 
-    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-        when(keyCode) {
-            66 -> setConnection()
-        }
-        return super.onKeyUp(keyCode, event)
+    private fun ActivityMainBinding.initView() {
+        checkConnection()
+        btnSetNetwork.setOnClickListener { setConnection() }
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
         isConnection = isConnected
-        showNetworkMessage(isConnected)
+        binding.apply {
+            showNetworkMessage(isConnected)
+        }
     }
 
     private fun setConnection() {
@@ -36,17 +36,19 @@ class MainActivity : ConnectionActivity() {
             val intentToSetNetwork = Intent(Settings.ACTION_WIRELESS_SETTINGS)
             startActivity(intentToSetNetwork)
         } else {
-            finish()
+            binding.layoutStatusConnect.visibility = View.GONE
         }
     }
 
-    private fun showNetworkMessage(isConnected: Boolean) {
+    private fun ActivityMainBinding.showNetworkMessage(isConnected: Boolean) {
         if (!isConnected) {
-            binding.txtResultError.text = ("Network is OFF")
-            binding.btnBackMenuError.text = ("Setting Network")
+            layoutStatusConnect.visibility = View.VISIBLE
+            txtResultError.text = ("Network is OFF")
+            btnSetNetwork.text = ("Setting Network")
         } else {
-            binding.txtResultError.text = ("Network is ON")
-            binding.btnBackMenuError.text = ("Kembali")
+            txtResultError.text = ("Network is ON")
+            btnSetNetwork.text = ("Back")
         }
     }
+
 }
