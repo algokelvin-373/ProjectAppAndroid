@@ -24,6 +24,8 @@ class EdtTextActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnBack.isFocusable = true
+        binding.edtTxt.isFocusable = true
         binding.btnAction.setOnClickListener {
             rspEdtTxt()
         }
@@ -34,7 +36,8 @@ class EdtTextActivity : AppCompatActivity() {
 
         binding.edtTxt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.i("edt-text", "before this")
+                binding.edtTxt.isFocusable = false
+                binding.btnBack.isFocusable = false
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.i("edt-text", "now this")
@@ -42,13 +45,9 @@ class EdtTextActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 Log.i("edt-text", "after this")
                 val data = p0.toString()
-                if (data.isNotEmpty()) {
-                    binding.btnAction.isFocusable = true
-                    binding.btnBack.isFocusable = true
-                } else {
-                    binding.btnAction.isFocusable = false
-                    binding.btnBack.isFocusable = true
-                }
+                binding.btnAction.isFocusable = data.isNotEmpty()
+                binding.edtTxt.isFocusable = true
+                binding.btnBack.isFocusable = true
             }
         })
 
