@@ -6,8 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -19,7 +17,6 @@ class EdtTextActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
-    private var txtData = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,22 +56,6 @@ class EdtTextActivity : AppCompatActivity() {
             else Toast.makeText(this, "PIN is False", Toast.LENGTH_SHORT).show()
             edtTxtViewModel.rqsStatus(txt).removeObservers(this)
         })
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        when(keyCode) {
-            7,8,9,10,11,12,13,14,15,16 -> {
-                txtData += (keyCode - 7).toString()
-                binding.edtTxt.setText(txtData)
-            }
-            67 -> {
-                txtData = txtData.substring(0, txtData.length - 1)
-                binding.edtTxt.setText(txtData)
-            }
-            4 -> finish()
-        }
-        Log.i("edt-text-now", txtData)
-        return super.onKeyDown(keyCode, event)
     }
 
 }
