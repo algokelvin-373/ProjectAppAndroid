@@ -1,5 +1,6 @@
 package algokelvin.app.csenabledbtn.edttxt
 
+import algokelvin.app.csenabledbtn.R
 import algokelvin.app.csenabledbtn.databinding.ActivityMainBinding
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 
 class EdtTextActivity : AppCompatActivity() {
@@ -24,8 +26,6 @@ class EdtTextActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnBack.isFocusable = true
-        binding.edtTxt.isFocusable = true
         binding.btnAction.setOnClickListener {
             rspEdtTxt()
         }
@@ -35,19 +35,18 @@ class EdtTextActivity : AppCompatActivity() {
         }
 
         binding.edtTxt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                binding.edtTxt.isFocusable = false
-                binding.btnBack.isFocusable = false
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Log.i("edt-text", "now this")
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
             override fun afterTextChanged(p0: Editable?) {
-                Log.i("edt-text", "after this")
                 val data = p0.toString()
-                binding.btnAction.isFocusable = data.isNotEmpty()
-                binding.edtTxt.isFocusable = true
-                binding.btnBack.isFocusable = true
+                if (data.isNotEmpty()) {
+                    binding.btnAction.background = ContextCompat.getDrawable(this@EdtTextActivity, R.drawable.bg_btn_action_active)
+                    binding.btnAction.setTextColor(ContextCompat.getColor(this@EdtTextActivity, R.color.white))
+                }
+                else {
+                    binding.btnAction.background = ContextCompat.getDrawable(this@EdtTextActivity, R.drawable.bg_btn_action_deactive)
+                    binding.btnAction.setTextColor(ContextCompat.getColor(this@EdtTextActivity, R.color.grey))
+                }
             }
         })
 
