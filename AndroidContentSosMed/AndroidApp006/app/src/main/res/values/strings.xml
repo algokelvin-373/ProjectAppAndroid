@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Android06IntentSendData</string>
+    <string name="input_data">Input Data</string>
+    <string name="input_here">Input Here</string>
+    <string name="ok">Ok</string>
+</resources>
