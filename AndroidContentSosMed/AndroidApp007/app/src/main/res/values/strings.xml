@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android07IntentParcelable</string>
+    <string name="your_data">Your Data</string>
 </resources>
