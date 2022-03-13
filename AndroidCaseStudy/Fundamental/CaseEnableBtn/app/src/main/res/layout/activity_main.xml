@@ -52,7 +52,6 @@
         android:paddingEnd="20dp"
         android:paddingBottom="7dp"
         android:paddingTop="7dp"
-        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
