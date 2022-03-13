@@ -14,16 +14,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         EditText edtData = findViewById(R.id.edt_data);
         Button btnOk = findViewById(R.id.btn_ok);
-
         btnOk.setOnClickListener(v -> {
             String data = edtData.getText().toString();
             Intent toPage = new Intent(this, PageIntentActivity.class);
             toPage.putExtra(DATA_SEND, data);
             startActivity(toPage);
         });
-
     }
 }

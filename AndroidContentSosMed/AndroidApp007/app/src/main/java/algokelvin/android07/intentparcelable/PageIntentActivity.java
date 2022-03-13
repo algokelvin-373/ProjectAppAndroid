@@ -18,7 +18,6 @@ public class PageIntentActivity extends AppCompatActivity {
         TextView txtName = findViewById(R.id.txt_name);
         TextView txtAddress = findViewById(R.id.txt_address);
         TextView txtJob = findViewById(R.id.txt_job);
-
         txtName.setText("Name     : " + person.name);
         txtAddress.setText("Address  : " + person.address);
         txtJob.setText("Job      : " + person.job);
