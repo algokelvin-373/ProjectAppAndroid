@@ -1,4 +1,4 @@
-package algokelvin.android09.intentcamera;
+package algokelvin.android09.intentserialphone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
