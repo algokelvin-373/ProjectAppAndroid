@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel: ViewModel() {
 
-    fun createData(dt: String): LiveData<String> {
-        val data = MutableLiveData<String>()
+    private val data = MutableLiveData<String>()
+
+    fun getData(dt: String): LiveData<String> {
         data.postValue(dt)
         return data
     }

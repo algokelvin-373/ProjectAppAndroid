@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        mainViewModel.createData("AlgoKelvin").observe(this, {
+        mainViewModel.getData("AlgoKelvin").observe(this, {
             binding.txtData.text = it
         })
 
