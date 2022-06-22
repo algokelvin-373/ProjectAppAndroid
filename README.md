@@ -6,7 +6,7 @@
   <a href="https://www.youtube.com/c/AlgoKelvin373/"><img alt="Youtube" src="https://img.shields.io/youtube/channel/views/UCpSHZFRx64xWwXYbWbyXxfw?style=social"></a>
   <a href="https://www.youtube.com/c/AlgoKelvin373/"><img alt="Youtube" src="https://img.shields.io/youtube/channel/subscribers/UCpSHZFRx64xWwXYbWbyXxfw?style=social"></a>
   <br>
-  <img src="https://github.com/algokelvin-373/ProjectAppAndroid/blob/feature/readme-data/Bg_Android.png"/>
+  <img src="https://github.com/algokelvin-373/ProjectAppAndroid/blob/master/Bg_Android.png"/>
 </p>
 
 # Version 1.2.2
