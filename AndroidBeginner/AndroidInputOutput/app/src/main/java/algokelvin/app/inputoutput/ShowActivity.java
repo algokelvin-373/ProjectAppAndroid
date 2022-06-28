@@ -15,5 +15,12 @@ public class ShowActivity extends AppCompatActivity {
         binding = ActivityShowBinding.inflate(getLayoutInflater());
         super.onCreate(savedInstanceState);
         setContentView(binding.getRoot());
+        setAction();
     }
+
+    private void setAction() {
+        String name = getIntent().getStringExtra("data_name");
+        binding.txtName.setText(name);
+    }
+
 }
