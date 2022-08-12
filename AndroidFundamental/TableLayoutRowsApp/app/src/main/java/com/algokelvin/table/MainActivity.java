@@ -19,23 +19,19 @@ public class MainActivity extends AppCompatActivity {
         data[1][0] = "Name : "; data[1][1] = "Kelvin Herwanda Tandrio";
         data[2][0] = "Instagram : "; data[2][1] = "kelvin_373";
 
-        // TableLayout Version 1
-        TableLayout tl = findViewById(R.id.tb_details);
-
+        // Set row and column from data 2 array
         int row = data.length;
         int column = data[0].length;
 
+        // TableLayout Version 1
+        TableLayout tl = findViewById(R.id.tb_details);
         RowColumns rowColumns = new RowColumns(this, row, column);
         rowColumns.setTableLayout(tl);
         rowColumns.setTableData(data);
 
         // TableLayout Version 2
         TableLayout tl2 = findViewById(R.id.tb_details_2);
-
-        int row2 = data.length;
-        int column2 = data[0].length;
-
-        RowColumns rowColumns2 = new RowColumns(this, row2, column2, 8, 14);
+        RowColumns rowColumns2 = new RowColumns(this, row, column, 8, 14);
         rowColumns2.setBgTextView(R.color.green, R.color.green);
         rowColumns2.setGravityTextView(0, Gravity.END);
         rowColumns2.setTextColors(R.color.red, R.color.blue);
