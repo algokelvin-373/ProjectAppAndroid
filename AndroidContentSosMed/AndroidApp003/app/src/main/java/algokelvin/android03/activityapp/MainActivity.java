@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
         txtMsg.setText("Hello, AlgoKelvin"); // given text
 
-        txtClick.setOnClickListener(view -> txtMsg.setText("Welcome"));
+        txtClick.setOnClickListener(view ->
+                txtMsg.setText("Welcome")
+        );
 
     }
 }

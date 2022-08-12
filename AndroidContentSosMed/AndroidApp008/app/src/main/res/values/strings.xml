@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Android08IntentImplisit</string>
+    <string name="label_msg_set_network">Click This to Setting Network</string>
+    <string name="click_here">Click Here</string>
+</resources>
