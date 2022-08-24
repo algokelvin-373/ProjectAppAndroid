@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">AppSampleLocalization</string>
+    <string name="cat">Cat</string>
+    <string name="dog">Dog</string>
+    <string name="goat">Goat</string>
+    <string name="cow">Cow</string>
+    <string name="elephant">Elephant</string>
+    <string name="lion">Lion</string>
+    <string name="tiger">Tiger</string>
+    <string name="buffalo">Buffalo</string>
+    <string name="horse">Horse</string>
+    <string name="mouse">Mouse</string>
+    <string name="animals">Animals</string>
+</resources>

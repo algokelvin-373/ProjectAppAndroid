@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">training-android-kotlin-develop</string>
+    <string name="fruits">Buah</string>
+    <string name="orange">Jeruk</string>
+    <string name="strawberry">Stroberi</string>
+    <string name="grapes">Anggur</string>
+    <string name="watermelon">Semangka</string>
+    <string name="guava">Jambu</string>
+    <string name="dragon_fruit">Buah Naga</string>
+    <string name="jackfruit">Nangka</string>
+    <string name="apple">Apel</string>
+    <string name="pineapple">Nanas</string>
+    <string name="banana">Pisang</string>
+    <string name="indonesian">Indonesia</string>
+    <string name="english">Inggris</string>
+    <string name="japanese">Jepang</string>
+    <string name="changeLanguage">Berubah ke %s</string>
+    <string name="cat">Kucing</string>
+    <string name="dog">Anjing</string>
+    <string name="goat">Kambing</string>
+    <string name="cow">Sapi</string>
+    <string name="elephant">Gajah</string>
+    <string name="lion">Singa</string>
+    <string name="tiger">Harimau</string>
+    <string name="buffalo">Kerbau</string>
+    <string name="horse">Kuda</string>
+    <string name="mouse">Tikus</string>
+    <string name="animals">Binatang</string>
+    <string name="go_to_page_animals">KE HALAMAN HEWAN</string>
+    <string name="go_to_page_plants">KE HALAMAN TUMBUHAN</string>
+</resources>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">app-localization-04</string>
+    <string name="fruits">Fruits</string>
+    <string name="orange">Orange</string>
+    <string name="strawberry">Strawberry</string>
+    <string name="grapes">Grapes</string>
+    <string name="watermelon">Watermelon</string>
+    <string name="guava">Guava</string>
+    <string name="dragon_fruit">Dragon Fruit</string>
+    <string name="jackfruit">Jackfruit</string>
+    <string name="apple">Apple</string>
+    <string name="pineapple">Pineapple</string>
+    <string name="banana">Banana</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="english">english</string>
+    <string name="japanese">japanese</string>
+    <string name="changeLanguage">Change to %s</string>
+    <string name="cat">Cat</string>
+    <string name="dog">Dog</string>
+    <string name="goat">Goat</string>
+    <string name="cow">Cow</string>
+    <string name="elephant">Elephant</string>
+    <string name="lion">Lion</string>
+    <string name="tiger">Tiger</string>
+    <string name="buffalo">Buffalo</string>
+    <string name="horse">Horse</string>
+    <string name="mouse">Mouse</string>
+    <string name="animals">Animals</string>
+    <string name="go_to_page_animals">GO TO PAGE ANIMALS</string>
+    <string name="go_to_page_plants">GO TO PAGE PLANTS</string>
+</resources>

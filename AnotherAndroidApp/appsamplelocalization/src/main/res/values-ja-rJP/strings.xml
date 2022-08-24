@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cat">猫</string>
+    <string name="dog">犬</string>
+    <string name="goat">ヤギ</string>
+    <string name="cow">牛</string>
+    <string name="elephant">象</string>
+    <string name="lion">ライオン</string>
+    <string name="tiger">虎</string>
+    <string name="buffalo">バッファロー</string>
+    <string name="horse">馬</string>
+    <string name="mouse">ネズミ</string>
+    <string name="animals">動物</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fruits">果物</string>
+    <string name="orange">オレンジ色</string>
+    <string name="strawberry">いちご</string>
+    <string name="grapes">ぶどう</string>
+    <string name="watermelon">すいか</string>
+    <string name="guava">グアバ</string>
+    <string name="dragon_fruit">ドラゴンフルーツ</string>
+    <string name="jackfruit">ジャックフルーツ</string>
+    <string name="apple">りんご</string>
+    <string name="pineapple">パイナップル</string>
+    <string name="banana">バナナ</string>
+    <string name="indonesian">インドネシア</string>
+    <string name="english">英語</string>
+    <string name="japanese">日本</string>
+    <string name="changeLanguage">%sに変更</string>
+</resources>

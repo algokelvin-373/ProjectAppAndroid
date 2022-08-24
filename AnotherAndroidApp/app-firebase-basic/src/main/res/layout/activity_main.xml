@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="16dp"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_subscribe"
+        android:text="@string/subscribe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/text_subscribe"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
+        android:lines="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/subscribe"/>
+
+    <Button
+        android:id="@+id/btn_token"
+        android:text="@string/token"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/text_token"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
+        android:lines="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/token"/>
+
+</LinearLayout>

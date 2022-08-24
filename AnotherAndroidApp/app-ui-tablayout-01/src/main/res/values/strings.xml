@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">app-ui-tablayout-01</string>
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="promo">Promo</string>
+    <string name="profile">Profile</string>
+    <string name="fragment_4">Fragment 4</string>
+    <string name="fragment_1">Fragment 1</string>
+    <string name="fragment_3">Fragment 3</string>
+    <string name="fragment_2">Fragment 2</string>
+    <string name="to_fragment_two">To Fragment Two</string>
+</resources>

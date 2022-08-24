@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">app-firebase-basic</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name">News</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="token">Token</string>
+    <string name="data_token">Token : %s</string>
+</resources>

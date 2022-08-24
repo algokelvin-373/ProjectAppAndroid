@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">app-localization-02</string>
+    <string name="fruits">Fruits</string>
+    <string name="orange">Orange</string>
+    <string name="strawberry">Strawberry</string>
+    <string name="grapes">Grapes</string>
+    <string name="watermelon">Watermelon</string>
+    <string name="guava">Guava</string>
+    <string name="dragon_fruit">Dragon Fruit</string>
+    <string name="jackfruit">Jackfruit</string>
+    <string name="apple">Apple</string>
+    <string name="pineapple">Pineapple</string>
+    <string name="banana">Banana</string>
+    <string name="change_language">Change Language</string>
+</resources>

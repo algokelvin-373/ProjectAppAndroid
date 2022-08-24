@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/fruits"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/orange" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/strawberry" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/grapes" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/watermelon" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/banana" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/pineapple" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/apple" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/jackfruit" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/dragon_fruit" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/guava" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_indonesian"
+            style="@style/ButtonLanguage"
+            android:background="@android:drawable/button_onoff_indicator_off"
+            android:text="@string/indonesian" />
+
+        <Button
+            android:id="@+id/btn_english"
+            style="@style/ButtonLanguage"
+            android:background="@android:drawable/button_onoff_indicator_off"
+            android:text="@string/english" />
+
+        <Button
+            android:id="@+id/btn_japanese"
+            style="@style/ButtonLanguage"
+            android:background="@android:drawable/button_onoff_indicator_off"
+            android:text="@string/japanese" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_page_animal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_page_animals"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">app-projects-practice-movie-01</string>
+    <string name="movie">MOVIE</string>
+    <string name="tv_show">TV SHOW</string>
+</resources>

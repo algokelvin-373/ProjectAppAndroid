@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".localization.simple_case.LocalizationOtherActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/animals"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/cat" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/dog" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/goat" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/cow" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/elephant" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/lion" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/tiger" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/buffalo" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/horse" />
+
+        <TextView
+            style="@style/ItemStyle"
+            android:text="@string/mouse" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_indonesian"
+            android:background="@android:drawable/button_onoff_indicator_off"
+            android:text="@string/indonesian"
+            style="@style/ButtonLanguage"/>
+
+        <Button
+            android:id="@+id/btn_english"
+            android:text="@string/english"
+            android:background="@android:drawable/button_onoff_indicator_off"
+            style="@style/ButtonLanguage"/>
+
+        <Button
+            android:id="@+id/btn_japanese"
+            android:text="@string/japanese"
+            android:background="@android:drawable/button_onoff_indicator_off"
+            style="@style/ButtonLanguage"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_page_plants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_page_plants"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

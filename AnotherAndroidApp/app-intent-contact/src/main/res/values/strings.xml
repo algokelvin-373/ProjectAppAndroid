@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">app-intent-contact</string>
+    <string name="contact">Contact</string>
+    <string name="phone">Phone</string>
+</resources>

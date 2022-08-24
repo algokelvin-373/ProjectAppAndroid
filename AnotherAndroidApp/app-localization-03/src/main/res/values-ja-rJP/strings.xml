@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">training-android-kotlin-develop</string>
+    <string name="fruits">果物</string>
+    <string name="orange">オレンジ色</string>
+    <string name="strawberry">いちご</string>
+    <string name="grapes">ぶどう</string>
+    <string name="watermelon">すいか</string>
+    <string name="guava">グアバ</string>
+    <string name="dragon_fruit">ドラゴンフルーツ</string>
+    <string name="jackfruit">ジャックフルーツ</string>
+    <string name="apple">りんご</string>
+    <string name="pineapple">パイナップル</string>
+    <string name="banana">バナナ</string>
+    <string name="indonesian">インドネシア</string>
+    <string name="english">英語</string>
+    <string name="japanese">日本</string>
+    <string name="changeLanguage">%sに変更</string>
+    <string name="cat">猫</string>
+    <string name="dog">犬</string>
+    <string name="goat">ヤギ</string>
+    <string name="cow">牛</string>
+    <string name="elephant">象</string>
+    <string name="lion">ライオン</string>
+    <string name="tiger">虎</string>
+    <string name="buffalo">バッファロー</string>
+    <string name="horse">馬</string>
+    <string name="mouse">ネズミ</string>
+    <string name="animals">動物</string>
+    <string name="go_to_page_animals">動物園へ</string>
+    <string name="go_to_page_plants">プラントヤードへ</string>
+</resources>

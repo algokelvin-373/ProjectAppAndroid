@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">app-dark-mode</string>
+    <string name="width">Width</string>
+    <string name="height">Height</string>
+    <string name="area">Area: %s</string>
+    <string name="calculate">Calculate</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppSampleLocalization</string>
+    <string name="cat">Kucing</string>
+    <string name="dog">Anjing</string>
+    <string name="goat">Kambing</string>
+    <string name="cow">Sapi</string>
+    <string name="elephant">Gajah</string>
+    <string name="lion">Singa</string>
+    <string name="tiger">Harimau</string>
+    <string name="buffalo">Kerbau</string>
+    <string name="horse">Kuda</string>
+    <string name="mouse">Tikus</string>
+    <string name="animals">Binatang</string>
+</resources>
