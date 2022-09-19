@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="mainController"
+            type="com.algokelvin.simplebinding.MainController" />
+    </data>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/name_text"
         android:layout_width="match_parent"
@@ -33,6 +39,7 @@
             android:hint="@string/insert_you_name_here"
             android:inputType="textPersonName"
             android:textSize="30sp"
+            android:text="@{mainController.name}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/submit"
             android:textSize="30sp"
+            android:onClick="@{()->mainController.setGreetings()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
