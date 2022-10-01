@@ -6,20 +6,12 @@ import androidx.databinding.DataBindingUtil
 import com.algokelvin.simplebinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        binding.submitButton.setOnClickListener {
-            displayGreeting()
-        }
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main)
+        binding.mainController = MainController(binding)
     }
 
-    private fun displayGreeting() {
-        binding.apply {
-            greetingTextView.text = ("Hello! "+ nameEditText.text)
-        }
-    }
 }
