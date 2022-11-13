@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fruits">Buah</string>
+    <string name="orange">Jeruk</string>
+    <string name="strawberry">Stroberi</string>
+    <string name="grapes">Anggur</string>
+    <string name="watermelon">Semangka</string>
+    <string name="guava">Jambu</string>
+    <string name="dragon_fruit">Buah Naga</string>
+    <string name="jackfruit">Nangka</string>
+    <string name="apple">Apel</string>
+    <string name="pineapple">Nanas</string>
+    <string name="banana">Pisang</string>
+    <string name="indonesian">Indonesia</string>
+    <string name="english">Inggris</string>
+    <string name="japanese">Jepang</string>
+    <string name="changeLanguage">Berubah ke %s</string>
+</resources>

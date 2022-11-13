@@ -1,2 +1,0 @@
-include ':app'
-rootProject.name='MLKit Custom Model'

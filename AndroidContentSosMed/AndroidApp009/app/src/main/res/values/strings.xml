@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Android09IntentSerialPhone</string>
-    <string name="input_phone_number">Input Phone Number</string>
-    <string name="input_no_phone">Input No Phone</string>
-    <string name="go_to_serial_phone">Go To Serial Phone</string>
-</resources>
