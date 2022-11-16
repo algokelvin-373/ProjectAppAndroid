@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CoroutineApp</string>
+    <string name="coroutine_app">Coroutine App</string>
+    <string name="no_coroutine">No Coroutine</string>
+    <string name="coroutine_basic">Coroutine Basic</string>
+    <string name="download_user_data">Download User Data</string>
+    <string name="data_count">Count: 0</string>
+    <string name="count">Count</string>
+</resources>
