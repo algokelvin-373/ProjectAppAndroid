@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Subscriber(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Table.ID)
-    val id: Int,
+    val id: Int? = null,
 
     @ColumnInfo(name = Table.NAME) val name: String,
     @ColumnInfo(name = Table.EMAIL) val email: String

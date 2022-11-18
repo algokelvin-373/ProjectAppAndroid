@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Subscriber::class], version = 1)
 abstract class SubscriberDB: RoomDatabase() {
-    abstract val subscriberDao: SubscriberDao
+    abstract fun subscriberDao(): SubscriberDao
 
     companion object {
         private var INSTANCE: SubscriberDB? = null
