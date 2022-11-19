@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
             val albums = retrofitService.getAlbumById(3)
             emit(albums)
         }
+        val responseUpload: LiveData<Response<AlbumsItem>> = liveData {
+            val albumsItem = AlbumsItem(100, "My Title: Calvin", 3)
+            val upload = retrofitService.addAlbum(albumsItem)
+            emit(upload)
+        }
 
         responseAlbum.observe(this) {
             val albums = it.body()?.title
@@ -49,6 +54,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             binding.txtName.text = data
+        }
+
+        responseUpload.observe(this) {
+            val albums = it.body()
+            binding.txtName.text = "${albums?.id}. ${albums?.title}\nId User: ${albums?.userId}"
+            Toast.makeText(this, "Success Upload", Toast.LENGTH_LONG).show()
         }
 
     }
