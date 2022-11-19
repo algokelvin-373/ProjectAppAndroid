@@ -4,8 +4,10 @@ import algokelvin.app.retrofitcoroutine.api.AlbumsService
 import algokelvin.app.retrofitcoroutine.api.RetrofitInstance
 import algokelvin.app.retrofitcoroutine.databinding.ActivityMainBinding
 import algokelvin.app.retrofitcoroutine.model.Albums
+import algokelvin.app.retrofitcoroutine.model.AlbumsItem
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import retrofit2.Response
@@ -24,8 +26,17 @@ class MainActivity : AppCompatActivity() {
 
         // LiveData using Coroutines
         val response: LiveData<Response<Albums>> = liveData {
-            val albums = retrofitService.getAlbums()
+            val albums = retrofitService.getAlbumsByUserId(3)
             emit(albums)
+        }
+        val responseAlbum: LiveData<Response<AlbumsItem>> = liveData {
+            val albums = retrofitService.getAlbumById(3)
+            emit(albums)
+        }
+
+        responseAlbum.observe(this) {
+            val albums = it.body()?.title
+            Toast.makeText(this, "Album $albums", Toast.LENGTH_LONG).show()
         }
 
         response.observe(this) {
