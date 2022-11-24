@@ -13,7 +13,7 @@ class UploadWorker(
 
     override fun doWork(): Result {
         return try {
-            for (i in 0..600) {
+            for (i in 0..500000) {
                 Log.i("AlgoKelvin", "Uploading $i")
             }
             Result.success()

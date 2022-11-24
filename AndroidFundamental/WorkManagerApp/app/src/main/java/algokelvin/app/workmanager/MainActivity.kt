@@ -21,9 +21,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setOneTimeWorkRequest() {
+        val workManager = WorkManager.getInstance(applicationContext)
         val uploadRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java).build()
-        WorkManager.getInstance(applicationContext)
-            .enqueue(uploadRequest)
+        workManager.enqueue(uploadRequest)
+        workManager.getWorkInfoByIdLiveData(uploadRequest.id).observe(this) {
+            binding.txtData.text = it.state.name
+        }
     }
 
 }
