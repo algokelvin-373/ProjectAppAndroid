@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">TextViewUI</string>
-    <string name="textview_xml">TextView Xml</string>
-    <string name="textview_with_border_xml_1">TextView with Border XML 1</string>
-</resources>

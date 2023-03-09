@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">Android04SaveInstance</string>
-    <string name="input_here">Input Here</string>
-    <string name="click">Click</string>
-    <string name="text_data">You Input Data -> %s</string>
-</resources>

@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">OttoApp</string>
-    <string name="none">None</string>
-    <string name="next_activity">Next Activity</string>
-    <string name="name">name</string>
-    <string name="post">POST</string>
-</resources>

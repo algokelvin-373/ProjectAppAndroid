@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">app-fragment-01</string>
+    <string name="fragment_one">Fragment One</string>
+    <string name="fragment_two">Fragment Two</string>
+    <string name="you_are_in_activity_two">You are in Activity Two</string>
+    <string name="activity_two">Activity Two</string>
+</resources>
