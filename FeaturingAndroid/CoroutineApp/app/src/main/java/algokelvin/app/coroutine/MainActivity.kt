@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnCoroutineBasic.setOnClickListener {
             startActivity(Intent(this, CoroutineBasicActivity::class.java))
         }
+        binding.btnDispatchersMain.setOnClickListener {
+            startActivity(Intent(this, DispatcherMainActivity::class.java))
+        }
 
     }
 }
