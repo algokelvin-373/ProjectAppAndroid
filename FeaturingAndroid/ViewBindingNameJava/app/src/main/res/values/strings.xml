@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ViewBindingNameJava</string>
+    <string name="view_binding_name">View Binding Name</string>
+    <string name="action">Action</string>
+    <string name="input_name">Input Name</string>
+    <string name="data_name">Hello, %s</string>
+</resources>

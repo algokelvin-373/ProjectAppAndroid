@@ -1,0 +1,2 @@
+rootProject.name = "RectangleApp"
+include ':app'
