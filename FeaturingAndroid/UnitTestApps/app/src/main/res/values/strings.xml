@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UnitTests</string>
+    <string name="unit_testing">Unit Testing</string>
+    <string name="unit_test_setup">Unit Test: SetUp</string>
+</resources>
