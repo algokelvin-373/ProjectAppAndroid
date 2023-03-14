@@ -20,13 +20,20 @@ class SetUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.calculateButton.setOnClickListener {
-
+            val radius = binding.radiusEditText.text.toString().toDouble()
+            calculate(radius)
         }
 
     }
 
-    private fun calculate() {
-
+    private fun calculate(radius: Double) {
+        calculationViewModel.calculateCircle(radius)
+        calculationViewModel.circumferenceValue.observe(this) {
+            binding.circumferenceTextView.text = it
+        }
+        calculationViewModel.areaValue.observe(this) {
+            binding.areaTextView.text = it
+        }
     }
 
 }

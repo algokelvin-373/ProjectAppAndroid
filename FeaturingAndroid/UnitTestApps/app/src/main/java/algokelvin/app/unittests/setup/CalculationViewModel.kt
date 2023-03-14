@@ -19,6 +19,15 @@ class CalculationViewModel(
     val circumferenceValue: LiveData<String>
         get() = circumference
 
+    fun calculateCircle(radius: Double) {
+        try {
+            calculateArea(radius)
+            calculateCircumference(radius)
+        } catch (e: Exception) {
+            Log.i("Message", "Error: ${e.message.toString()}")
+        }
+    }
+
     fun calculate() {
         try {
             val radiusValue = radius.value?.toDouble()
