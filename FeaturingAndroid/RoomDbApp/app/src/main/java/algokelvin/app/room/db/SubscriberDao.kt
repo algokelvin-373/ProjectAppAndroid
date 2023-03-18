@@ -1,5 +1,6 @@
 package algokelvin.app.room.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -13,6 +14,9 @@ interface SubscriberDao {
 
     @Query("SELECT * FROM subscriber_table")
     fun getAll(): List<Subscriber>
+
+    @Query("SELECT * FROM subscriber_table")
+    fun getAllData(): LiveData<List<Subscriber>>
 
     @Update
     fun update(subscriber: Subscriber)
