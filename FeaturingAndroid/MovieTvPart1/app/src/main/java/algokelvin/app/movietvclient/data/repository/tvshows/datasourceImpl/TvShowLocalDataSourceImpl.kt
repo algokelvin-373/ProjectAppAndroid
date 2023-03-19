@@ -1,24 +1,26 @@
-package algokelvin.app.movietvclient.data.repository.movies.datasourceImpl
+package algokelvin.app.movietvclient.data.repository.tvshows.datasourceImpl
 
 import algokelvin.app.movietvclient.data.db.MovieDao
+import algokelvin.app.movietvclient.data.db.TvShowDao
 import algokelvin.app.movietvclient.data.model.movies.Movie
+import algokelvin.app.movietvclient.data.model.tvshows.TvShow
 import algokelvin.app.movietvclient.data.repository.tvshows.datasource.TvShowLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TvShowLocalDataSourceImpl(private val movieTvDao: MovieDao): TvShowLocalDataSource {
-    override suspend fun getMoviesFromDB(): List<Movie> = movieTvDao.getMovies()
+class TvShowLocalDataSourceImpl(private val tvShowDao: TvShowDao): TvShowLocalDataSource {
+    override suspend fun getTvShowsFromDB(): List<TvShow> = tvShowDao.getTvShows()
 
-    override suspend fun saveMoviesFromDB(movies: List<Movie>) {
+    override suspend fun saveTvShowsFromDB(tvShows: List<TvShow>) {
         CoroutineScope(Dispatchers.IO).launch {
-            movieTvDao.saveMovies(movies)
+            tvShowDao.saveTvShows(tvShows)
         }
     }
 
     override suspend fun clearAll() {
         CoroutineScope(Dispatchers.IO).launch {
-            movieTvDao.deleteAllMovies()
+            tvShowDao.deleteTvShows()
         }
     }
 }

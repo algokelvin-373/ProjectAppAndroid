@@ -11,11 +11,11 @@ data class Artist(
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("known_for")
+    /*@SerializedName("known_for")
     val knownFor: List<KnownFor>?,
 
     @SerializedName("known_for_department")
-    val knownForDepartment: String?,
+    val knownForDepartment: String?,*/
 
     @SerializedName("name")
     val name: String?,

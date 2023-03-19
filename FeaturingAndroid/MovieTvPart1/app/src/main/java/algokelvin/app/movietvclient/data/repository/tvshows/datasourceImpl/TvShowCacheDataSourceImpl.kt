@@ -1,17 +1,17 @@
-package algokelvin.app.movietvclient.data.repository.movies.datasourceImpl
+package algokelvin.app.movietvclient.data.repository.tvshows.datasourceImpl
 
-import algokelvin.app.movietvclient.data.model.movies.Movie
-import algokelvin.app.movietvclient.data.repository.tvshows.datasource.MovieCacheDataSource
+import algokelvin.app.movietvclient.data.model.tvshows.TvShow
+import algokelvin.app.movietvclient.data.repository.tvshows.datasource.TvShowCacheDataSource
 
-class TvShowCacheDataSourceImpl: MovieCacheDataSource {
-    private var movieList = ArrayList<Movie>()
+class TvShowCacheDataSourceImpl: TvShowCacheDataSource {
+    private var tvShowsList = ArrayList<TvShow>()
 
-    override suspend fun getMoviesFromCache(): List<Movie> {
-        return movieList
+    override suspend fun getTvShowsFromCache(): List<TvShow> {
+        return tvShowsList
     }
 
-    override suspend fun saveMoviesFromCache(movies: List<Movie>) {
-        movieList.clear()
-        movieList = ArrayList(movies)
+    override suspend fun saveTvShowsFromCache(tvShows: List<TvShow>) {
+        tvShowsList.clear()
+        tvShowsList = ArrayList(tvShows)
     }
 }

@@ -1,4 +1,4 @@
-package algokelvin.app.movietvclient.data.repository.movies.datasourceImpl
+package algokelvin.app.movietvclient.data.repository.tvshows.datasourceImpl
 
 import algokelvin.app.movietvclient.data.model.tvshows.TvShow
 import algokelvin.app.movietvclient.data.repository.tvshows.datasource.TvShowCacheDataSource
@@ -12,11 +12,11 @@ class TvShowRepositoryImpl(
     private val tvShowLocalDataSource: TvShowLocalDataSource,
     private val tvShowCacheDataSource: TvShowCacheDataSource
 ): TvShowRepository {
-    override suspend fun getTvShows(): List<TvShow>? {
-        TODO("Not yet implemented")
+    override suspend fun getTvShows(): List<TvShow> {
+        return getTvShowsFromCache()
     }
 
-    override suspend fun updateTvShows(): List<TvShow>? {
+    override suspend fun updateTvShows(): List<TvShow> {
         val newListOfTvShows = getTvShowFromAPI()
         tvShowLocalDataSource.clearAll()
         tvShowLocalDataSource.saveTvShowsFromDB(newListOfTvShows)
@@ -24,7 +24,7 @@ class TvShowRepositoryImpl(
         return newListOfTvShows
     }
 
-    suspend fun getTvShowFromAPI(): List<TvShow> {
+    private suspend fun getTvShowFromAPI(): List<TvShow> {
         lateinit var tvShowsList: List<TvShow>
         try {
             val response = tvShowRemoteDataSource.getTvShows()
@@ -38,7 +38,7 @@ class TvShowRepositoryImpl(
         return tvShowsList
     }
 
-    suspend fun getTvShowsFromDB(): List<TvShow> {
+    private suspend fun getTvShowsFromDB(): List<TvShow> {
         lateinit var tvShowList: List<TvShow>
         try {
             tvShowList = tvShowLocalDataSource.getTvShowsFromDB()
@@ -54,7 +54,7 @@ class TvShowRepositoryImpl(
         return tvShowList
     }
 
-    suspend fun getTvShowsFromCache(): List<TvShow> {
+    private suspend fun getTvShowsFromCache(): List<TvShow> {
         lateinit var tvShowsList: List<TvShow>
         try {
             tvShowsList = tvShowCacheDataSource.getTvShowsFromCache()
