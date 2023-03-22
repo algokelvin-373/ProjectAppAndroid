@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 class DataAdapter(
     private val clickListener: (Subscriber) -> Unit
 ): RecyclerView.Adapter<DataAdapter.DataHolder>() {
-    private lateinit var data: ArrayList<Subscriber>
+    private var data = ArrayList<Subscriber>()
 
     fun setList(subscriber: List<Subscriber>) {
         data.clear()
