@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="@string/input_name"
+        android:text="@={mainTwoViewModel.inputName}"
         android:textSize="14sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/txt_title_name"
@@ -76,6 +77,7 @@
         android:autofillHints=""
         android:hint="@string/input_email"
         android:inputType="textEmailAddress"
+        android:text="@={mainTwoViewModel.inputEmail}"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/txt_title_name"
@@ -87,7 +89,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@={mainTwoViewModel.btnSaveOrUpdate}"
-        android:onClick="@={()-> mainTwoViewModel.saveOrUpdate()}"
+        android:onClick="@{()-> mainTwoViewModel.saveOrUpdate()}"
         app:layout_constraintEnd_toEndOf="@+id/edt_email"
         app:layout_constraintStart_toStartOf="@+id/edt_email"
         app:layout_constraintTop_toBottomOf="@+id/edt_email" />
@@ -97,7 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@={mainTwoViewModel.btnDeleteOrClearAll}"
-        android:onClick="@={()-> mainTwoViewModel.deleteOrClearAll()}"
+        android:onClick="@{()-> mainTwoViewModel.deleteOrClearAll()}"
         app:layout_constraintEnd_toEndOf="@+id/edt_email"
         app:layout_constraintStart_toStartOf="@+id/edt_email"
         app:layout_constraintTop_toBottomOf="@+id/btn_add" />

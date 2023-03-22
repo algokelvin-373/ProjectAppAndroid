@@ -7,8 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class DataAdapter(
-    private val data: ArrayList<Subscriber>,
+    private val clickListener: (Subscriber) -> Unit
 ): RecyclerView.Adapter<DataAdapter.DataHolder>() {
+    private lateinit var data: ArrayList<Subscriber>
+
+    fun setList(subscriber: List<Subscriber>) {
+        data.clear()
+        data.addAll(subscriber)
+    }
 
     inner class DataHolder(val binding: ItemSubscriberBinding):
         RecyclerView.ViewHolder(binding.root)
@@ -27,6 +33,9 @@ class DataAdapter(
             with(data[position]) {
                 binding.txtName.text = this.name
                 binding.txtEmail.text = this.email
+                binding.layoutItem.setOnClickListener {
+                    clickListener(this)
+                }
             }
         }
     }
