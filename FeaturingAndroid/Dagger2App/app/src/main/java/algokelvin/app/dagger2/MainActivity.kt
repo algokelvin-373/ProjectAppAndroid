@@ -1,6 +1,7 @@
 package algokelvin.app.dagger2
 
 import algokelvin.app.dagger2.components.DaggerSmartPhoneComponent
+import algokelvin.app.dagger2.components.MemoryCardModule
 import algokelvin.app.dagger2.components.SmartPhone
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,10 +15,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Using Dagger - Inject with this activity
-        DaggerSmartPhoneComponent.create()
+        // Using Dagger - Inject with module which has parameter
+        DaggerSmartPhoneComponent.builder()
+            .memoryCardModule(MemoryCardModule(1000))
+            .build()
             .inject(this)
-        smartPhone.makeACallWithRecording()
+
+        // Using Dagger - Inject with this activity
+        /*DaggerSmartPhoneComponent.create()
+            .inject(this)
+        smartPhone.makeACallWithRecording()*/
 
         // Using Dagger - Inject function program
         /*DaggerSmartPhoneComponent.create()
