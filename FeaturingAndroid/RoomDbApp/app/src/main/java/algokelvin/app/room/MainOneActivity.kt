@@ -33,10 +33,12 @@ class MainOneActivity : AppCompatActivity() {
     }
 
     private fun showSubscriber() {
-        val data = database.getAll()
+        /*val data = database.getAll()
         binding.rvSubscriber.apply {
             layoutManager = LinearLayoutManager(this@MainOneActivity)
-            adapter = DataAdapter(data as ArrayList<Subscriber>)
-        }
+            adapter = DataAdapter { subscriber ->
+                
+            }
+        }*/
     }
 }

@@ -10,6 +10,6 @@ data class Subscriber(
     @ColumnInfo(name = Table.ID)
     val id: Int? = null,
 
-    @ColumnInfo(name = Table.NAME) val name: String,
-    @ColumnInfo(name = Table.EMAIL) val email: String
+    @ColumnInfo(name = Table.NAME) var name: String,
+    @ColumnInfo(name = Table.EMAIL) var email: String
 )

@@ -12,16 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomDbApp"
         tools:targetApi="31">
-        <activity android:name=".maintwo.MainTwoActivity"/>
         <activity
-            android:name=".MainOneActivity"
+            android:name=".maintwo.MainTwoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".MainOneActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

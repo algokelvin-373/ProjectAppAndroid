@@ -10,7 +10,7 @@ import androidx.room.Update
 @Dao
 interface SubscriberDao {
     @Insert
-    fun insert(subscriber: Subscriber)
+    fun insert(subscriber: Subscriber): Long
 
     @Query("SELECT * FROM subscriber_table")
     fun getAll(): List<Subscriber>
