@@ -13,6 +13,7 @@ import algokelvin.app.jetpackcompose.ui.theme.JetpackComposeTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,7 +52,17 @@ fun DefaultPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            Greeting("Android Jetpack")
+            Column(
+                modifier = Modifier
+                    .background(color = Color.LightGray)
+                    .fillMaxSize()
+                    .wrapContentSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Greeting("Android Jetpack")
+                Greeting("Let's Try")
+                Greeting("Column Layout")
+            }
         }
     }
 }
