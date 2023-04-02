@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 
-class MainActivity : AppCompatActivity() {
+class MainOneActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val db by lazy { SubscriberDB.getDb(this) }
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun showSubscriber() {
         val data = database.getAll()
         binding.rvSubscriber.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@MainOneActivity)
             adapter = DataAdapter(data as ArrayList<Subscriber>)
         }
     }
