@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">JetpackCompose</string>
     <string name="title_activity_row_layout">RowLayoutActivity</string>
+    <string name="title_activity_box_layout">BoxLayoutActivity</string>
 </resources>
