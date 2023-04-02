@@ -13,6 +13,20 @@
         android:theme="@style/Theme.JetpackCompose"
         tools:targetApi="31">
         <activity
+            android:name=".ButtonViewActivity"
+            android:exported="true"
+            android:label="@string/title_activity_button_view"
+            android:theme="@style/Theme.JetpackCompose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".BoxLayoutActivity"
             android:exported="false"
             android:label="@string/title_activity_box_layout"
@@ -31,15 +45,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ColumnLayoutActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.JetpackCompose">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
