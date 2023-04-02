@@ -1,67 +1,70 @@
 package algokelvin.app.jetpackcompose
 
+import algokelvin.app.jetpackcompose.ui.theme.JetpackComposeTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import algokelvin.app.jetpackcompose.ui.theme.JetpackComposeTheme
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class MainActivity : ComponentActivity() {
+class RowLayoutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DefaultPreview()
+            RowLayoutPreview()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
+fun TextViewTwo(name: String) {
     Text(
-        text = "Hello $name!",
+        text = "$name!",
         textAlign = TextAlign.Center,
-        fontSize = 24.sp,
+        fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.White,
+        color = Color.Black,
         modifier = Modifier
-            .background(color = Color.Black)
-            .border(4.dp, color = Color.Red)
-            .padding(8.dp)
+            .padding(4.dp)
+            .border(2.dp, color = Color.Blue)
+            .padding(4.dp)
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun RowLayoutPreview() {
     JetpackComposeTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            Column(
+            Row(
                 modifier = Modifier
                     .background(color = Color.LightGray)
                     .fillMaxSize()
                     .wrapContentSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Greeting("Android Jetpack")
-                Greeting("Let's Try")
-                Greeting("Column Layout")
+                TextViewTwo("Android")
+                TextViewTwo("Jetpack")
+                TextViewTwo("Compose")
             }
         }
     }
