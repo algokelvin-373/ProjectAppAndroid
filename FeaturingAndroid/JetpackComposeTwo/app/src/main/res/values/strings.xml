@@ -3,4 +3,5 @@
     <string name="title_activity_row_layout">RowLayoutActivity</string>
     <string name="title_activity_box_layout">BoxLayoutActivity</string>
     <string name="title_activity_button_view">ButtonViewActivity</string>
+    <string name="title_activity_snackbar_view">SnackbarViewActivity</string>
 </resources>
