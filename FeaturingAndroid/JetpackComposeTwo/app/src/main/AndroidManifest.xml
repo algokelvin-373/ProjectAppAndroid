@@ -13,7 +13,21 @@
         android:theme="@style/Theme.JetpackCompose"
         tools:targetApi="31">
         <activity
-            android:name=".SnackbarViewActivity"
+            android:name=".RecyclerViewActivity"
+            android:exported="true"
+            android:label="@string/title_activity_recycler_view"
+            android:theme="@style/Theme.JetpackCompose">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SnackBarViewActivity"
             android:exported="false"
             android:label="@string/title_activity_snackbar_view"
             android:theme="@style/Theme.JetpackCompose">
@@ -26,11 +40,6 @@
             android:exported="true"
             android:label="@string/title_activity_button_view"
             android:theme="@style/Theme.JetpackCompose">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
