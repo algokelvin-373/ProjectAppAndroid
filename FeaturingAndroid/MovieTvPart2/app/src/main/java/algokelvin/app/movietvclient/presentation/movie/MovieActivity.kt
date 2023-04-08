@@ -1,17 +1,8 @@
 package algokelvin.app.movietvclient.presentation.movie
 
-import algokelvin.app.movietvclient.BuildConfig
 import algokelvin.app.movietvclient.R
-import algokelvin.app.movietvclient.data.api.MovieTvServices
-import algokelvin.app.movietvclient.data.api.RetrofitInstance
-import algokelvin.app.movietvclient.data.db.MovieTvDatabase
-import algokelvin.app.movietvclient.data.repository.movies.datasourceImpl.MovieCacheDataSourceImpl
-import algokelvin.app.movietvclient.data.repository.movies.datasourceImpl.MovieLocalDataSourceImpl
-import algokelvin.app.movietvclient.data.repository.movies.datasourceImpl.MovieRemoteDataSourceImpl
-import algokelvin.app.movietvclient.data.repository.movies.datasourceImpl.MovieRepositoryImpl
 import algokelvin.app.movietvclient.databinding.ActivityMovieBinding
-import algokelvin.app.movietvclient.domain.usecase.movie.GetMoviesUseCase
-import algokelvin.app.movietvclient.domain.usecase.movie.UpdateMoviesUseCase
+import algokelvin.app.movietvclient.presentation.di.Injector
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -23,36 +14,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import javax.inject.Inject
 
 class MovieActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var factory: MovieViewModelFactory
+
     private lateinit var binding: ActivityMovieBinding
     private lateinit var movieViewModel: MovieViewModel
-
-    private val movieService by lazy {
-        RetrofitInstance.getRetrofitInstance().create(MovieTvServices::class.java)
-    }
-
-    private val movieRemoteDataSource = MovieRemoteDataSourceImpl(movieService, BuildConfig.API_KEY)
-    private val movieCacheDataSource = MovieCacheDataSourceImpl()
-
     private lateinit var adapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie)
+        (application as Injector).createMovieSubComponent()
+            .inject(this)
 
-        // Injection not using Dagger
-        val movieDao = MovieTvDatabase.getInstance(applicationContext).movieDao()
-        val movieLocalDataSource = MovieLocalDataSourceImpl(movieDao)
-        val movieRepository = MovieRepositoryImpl(
-            movieRemoteDataSource,
-            movieLocalDataSource,
-            movieCacheDataSource
-        )
-        val factory = MovieViewModelFactory(
-            GetMoviesUseCase(movieRepository),
-            UpdateMoviesUseCase(movieRepository)
-        )
         movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         movieViewModel.getMovies().observe(this) {
