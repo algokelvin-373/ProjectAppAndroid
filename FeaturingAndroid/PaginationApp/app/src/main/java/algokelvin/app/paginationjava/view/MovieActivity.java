@@ -1,14 +1,16 @@
 package algokelvin.app.paginationjava.view;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.databinding.DataBindingUtil;
 
-import com.androidtutz.anushka.tmdbclient.R;
-import com.androidtutz.anushka.tmdbclient.databinding.ActivityMovieBinding;
-import com.androidtutz.anushka.tmdbclient.model.Movie;
+import java.util.Objects;
+
+import algokelvin.app.paginationjava.R;
+import algokelvin.app.paginationjava.databinding.ActivityMovieBinding;
+import algokelvin.app.paginationjava.model.Movie;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -22,22 +24,17 @@ public class MovieActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         activityMovieBinding= DataBindingUtil.setContentView(this,R.layout.activity_movie);
 
         Intent intent = getIntent();
 
         if (intent.hasExtra("movie")) {
-
             movie = getIntent().getParcelableExtra("movie");
             activityMovieBinding.setMovie(movie);
             getSupportActionBar().setTitle(movie.getTitle());
-
-
         }
 
     }
-
-
 }

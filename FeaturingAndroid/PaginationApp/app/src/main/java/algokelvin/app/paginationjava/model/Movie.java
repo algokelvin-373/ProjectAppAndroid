@@ -1,54 +1,53 @@
 package algokelvin.app.paginationjava.model;
 
-/**
- * Created by K. A. ANUSHKA MADUSANKA on 7/9/2018.
- */
+import java.util.ArrayList;
+import java.util.List;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageView;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
 
-import com.androidtutz.anushka.tmdbclient.BR;
-import com.androidtutz.anushka.tmdbclient.R;
 import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import algokelvin.app.paginationjava.BR;
 import algokelvin.app.paginationjava.R;
 
-public class Movie extends BaseObservable implements Parcelable
-{
+public class Movie extends BaseObservable implements Parcelable {
 
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
+
     @SerializedName("id")
     @Expose
     private Integer id;
+
     @SerializedName("video")
     @Expose
     private Boolean video;
+
     @SerializedName("vote_average")
     @Expose
     private Double voteAverage;
+
     @SerializedName("title")
     @Expose
     private String title;
+
     @SerializedName("popularity")
     @Expose
     private Double popularity;
+
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
+
     @BindingAdapter({"posterPath"})
     public static void loadImage(ImageView imageView,String imageURL){
         Glide.with(imageView.getContext())
@@ -56,41 +55,42 @@ public class Movie extends BaseObservable implements Parcelable
                 .placeholder(R.drawable.loading)
                 .into(imageView);
     }
+
     @SerializedName("original_language")
     @Expose
     private String originalLanguage;
+
     @SerializedName("original_title")
     @Expose
     private String originalTitle;
+
     @SerializedName("genre_ids")
     @Expose
     private List<Integer> genreIds = new ArrayList<Integer>();
+
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
+
     @SerializedName("adult")
     @Expose
     private Boolean adult;
+
     @SerializedName("overview")
     @Expose
     private String overview;
+
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
-    public final static Creator<Movie> CREATOR = new Creator<Movie>() {
 
-
-        @SuppressWarnings({
-                "unchecked"
-        })
+    public final static Parcelable.Creator<Movie> CREATOR = new Creator<Movie>() {
         public Movie createFromParcel(Parcel in) {
             return new Movie(in);
         }
-
         public Movie[] newArray(int size) {
             return (new Movie[size]);
         }
-
     }
             ;
 

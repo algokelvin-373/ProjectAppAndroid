@@ -15,18 +15,17 @@ import retrofit2.Response;
 
 public class MovieRepository {
     private ArrayList<Movie> movies=new ArrayList<>();
-    private MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
-    private Application application;
+    private final MutableLiveData<List<Movie>> mutableLiveData = new MutableLiveData<>();
+    private final Application application;
 
     public MovieRepository(Application application) {
         this.application = application;
     }
 
     public MutableLiveData<List<Movie>> getMutableLiveData() {
-
         MovieDataService movieDataService = RetrofitInstance.getService();
-        Call<MovieDBResponse> call = movieDataService.getPopularMovies(application.getApplicationContext().getString(R.string.api_key));
-
+        Call<MovieDBResponse> call = movieDataService
+                .getPopularMovies(application.getApplicationContext().getString(R.string.api_key));
         call.enqueue(new Callback<MovieDBResponse>() {
             @Override
             public void onResponse(Call<MovieDBResponse> call, Response<MovieDBResponse> response) {
@@ -42,8 +41,6 @@ public class MovieRepository {
 
             }
         });
-
-
         return mutableLiveData;
     }
 }

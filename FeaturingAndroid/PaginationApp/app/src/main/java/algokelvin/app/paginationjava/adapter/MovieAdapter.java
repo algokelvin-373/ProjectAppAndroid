@@ -18,8 +18,8 @@ import algokelvin.app.paginationjava.view.MovieActivity;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
 
-    private Context context;
-    private ArrayList<Movie> movieArrayList;
+    private final Context context;
+    private final ArrayList<Movie> movieArrayList;
 
     public MovieAdapter(Context context, ArrayList<Movie> movieArrayList) {
         this.context = context;
@@ -29,11 +29,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-         MovieListItemBinding movieListItemBinding= DataBindingUtil.inflate(
-                 LayoutInflater.from(parent.getContext()),
-                 R.layout.movie_list_item,parent,
-                 false
-         );
+        MovieListItemBinding movieListItemBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.movie_list_item,
+                parent,
+                false
+        );
         return new MovieViewHolder(movieListItemBinding);
     }
 
@@ -67,7 +68,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                     context.startActivity(intent);
                 }
             });
-
         }
     }
 }

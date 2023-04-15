@@ -2,14 +2,11 @@ package algokelvin.app.paginationjava.view;
 
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -41,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("TMDB Popular Movies Today");
 
-        activityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mainActivityViewModel= ViewModelProviders.of((LifecycleObserver) getApplicationContext())
+                .get(MainActivityViewModel.class);
 
         getPopularMovies();
 
