@@ -17,7 +17,11 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 
 @Composable
-fun ConversionMenu(list: List<Conversion>, modifier: Modifier = Modifier) {
+fun ConversionMenu(
+    list: List<Conversion>,
+    modifier: Modifier = Modifier,
+    convert: (Conversion) -> Unit
+) {
 
     var displayText by remember {
         mutableStateOf("Select the conversion type")
@@ -70,6 +74,7 @@ fun ConversionMenu(list: List<Conversion>, modifier: Modifier = Modifier) {
             DropdownMenuItem(onClick = {
                 displayText = conversion.description
                 expanded = false
+                convert(conversion)
             }) {
                 Text(
                     text = conversion.description,
