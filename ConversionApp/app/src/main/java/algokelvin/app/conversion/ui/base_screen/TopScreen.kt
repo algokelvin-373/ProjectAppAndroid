@@ -25,6 +25,7 @@ fun TopScreen(list: List<Conversion>) {
     selectedConversion.value?.let {
         InputBlock(conversion = it, inputText = inputText) { input ->
             Log.i("ALGOKELVIN", "User type $input")
+            typedValue.value = input
         }
     }
 

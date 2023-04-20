@@ -51,24 +51,24 @@ fun InputBlock(
                     .padding(10.dp, 30.dp, 0.dp, 0.dp)
                     .fillMaxWidth(0.35f)
             )
-            Spacer(modifier = modifier.height(20.dp))
-            OutlinedButton(
-                onClick = {
-                    if (inputText.value != "") {
-                        calculate(inputText.value)
-                    } else {
-                        Toast.makeText(context, "Please enter this value", Toast.LENGTH_LONG).show()
-                    }
-                },
-                modifier = modifier.fillMaxWidth(1f)
-            ) {
-                Text(
-                    text = "Convert",
-                    fontSize = 36.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Blue
-                )
-            }
+        }
+        Spacer(modifier = modifier.height(20.dp))
+        OutlinedButton(
+            onClick = {
+                if (inputText.value != "") {
+                    calculate(inputText.value)
+                } else {
+                    Toast.makeText(context, "Please enter this value", Toast.LENGTH_LONG).show()
+                }
+            },
+            modifier = modifier.fillMaxWidth(1f)
+        ) {
+            Text(
+                text = "Convert",
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Blue
+            )
         }
     }
 }
