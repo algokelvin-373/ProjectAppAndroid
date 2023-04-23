@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -26,7 +27,7 @@ fun ConversionMenu(
     convert: (Conversion) -> Unit
 ) {
 
-    var displayText by remember { mutableStateOf("Select the conversion type") }
+    var displayText by rememberSaveable { mutableStateOf("Select the conversion type") }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
     var expanded by remember { mutableStateOf(false) }
 

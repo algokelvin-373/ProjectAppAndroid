@@ -1,22 +1,26 @@
 package algokelvin.app.conversion.compose.base
 
-import algokelvin.app.conversion.model.Conversion
 import algokelvin.app.conversion.compose.base.top.ConversionMenu
 import algokelvin.app.conversion.compose.base.top.InputBlock
+import algokelvin.app.conversion.model.Conversion
 import algokelvin.app.conversion.ui.base_screen.top_screen.ResultBlock
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
 
 @Composable
-fun TopScreen(list: List<Conversion>, save: (String, String) -> Unit) {
-    val selectedConversion: MutableState<Conversion?> = remember { mutableStateOf(null) }
-    val inputText: MutableState<String> = remember { mutableStateOf("") }
-    val typedValue = remember { mutableStateOf("0.0") }
+fun TopScreen(
+    list: List<Conversion>,
+    selectedConversion: MutableState<Conversion?>,
+    inputText: MutableState<String>,
+    typedValue: MutableState<String>,
+    save: (String, String) -> Unit
+) {
+
+    var toSave by remember {
+        mutableStateOf(false)
+    }
 
     ConversionMenu(list = list) {
         selectedConversion.value = it
@@ -27,6 +31,7 @@ fun TopScreen(list: List<Conversion>, save: (String, String) -> Unit) {
         InputBlock(conversion = it, inputText = inputText) { input ->
             Log.i("ALGOKELVIN", "User type $input")
             typedValue.value = input
+            toSave = true
         }
     }
 
@@ -41,7 +46,10 @@ fun TopScreen(list: List<Conversion>, save: (String, String) -> Unit) {
 
         val msg1 = "${typedValue.value} ${selectedConversion.value?.convertFrom} is equal to"
         val msg2 = "$roundedResult ${selectedConversion.value?.convertTo}"
-        save(msg1, msg2)
+        if (toSave) {
+            save(msg1, msg2)
+            toSave = false
+        }
         ResultBlock(msg1 = msg1, msg2 = msg2)
     }
 

@@ -3,12 +3,19 @@ package algokelvin.app.conversion.ui.converter
 import algokelvin.app.conversion.model.Conversion
 import algokelvin.app.conversion.model.ConversionResult
 import algokelvin.app.conversion.repository.ConverterDatabaseRepository
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ConversionViewModel(private val repository: ConverterDatabaseRepository): ViewModel() {
+
+    val selectedConversion: MutableState<Conversion?> = mutableStateOf(null)
+    val inputText: MutableState<String> = mutableStateOf("")
+    val typedValue = mutableStateOf("0.0")
 
     fun getConversions() = listOf(
         Conversion(1, "Pounds to Kilograms", "lbs", "kg", 0.453592),
