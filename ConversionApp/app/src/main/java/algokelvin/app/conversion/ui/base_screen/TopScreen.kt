@@ -13,13 +13,14 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 
 @Composable
-fun TopScreen(list: List<Conversion>) {
+fun TopScreen(list: List<Conversion>, save: (String, String) -> Unit) {
     val selectedConversion: MutableState<Conversion?> = remember { mutableStateOf(null) }
     val inputText: MutableState<String> = remember { mutableStateOf("") }
     val typedValue = remember { mutableStateOf("0.0") }
 
     ConversionMenu(list = list) {
         selectedConversion.value = it
+        typedValue.value = "0.0"
     }
 
     selectedConversion.value?.let {
@@ -40,6 +41,7 @@ fun TopScreen(list: List<Conversion>) {
 
         val msg1 = "${typedValue.value} ${selectedConversion.value?.convertFrom} is equal to"
         val msg2 = "$roundedResult ${selectedConversion.value?.convertTo}"
+        save(msg1, msg2)
         ResultBlock(msg1 = msg1, msg2 = msg2)
     }
 
