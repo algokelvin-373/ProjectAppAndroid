@@ -1,16 +1,15 @@
 package algokelvin.app.conversion.db
 
 import algokelvin.app.conversion.model.ConversionResult
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [ConversionResult::class], version = 1)
 abstract class ConverterDatabase: RoomDatabase() {
     abstract val converterDao: ConverterDao
 
-    companion object {
+    // Using Dagger Hilt. So, this is not use again
+    /*companion object {
         @Volatile
         private var INSTANCE: ConverterDatabase? = null
 
@@ -27,6 +26,6 @@ abstract class ConverterDatabase: RoomDatabase() {
                 return instance
             }
         }
-    }
+    }*/
 
 }

@@ -1,4 +1,4 @@
-package algokelvin.app.conversion.ui.base_screen.top_screen
+package algokelvin.app.conversion.compose.base.top
 
 import algokelvin.app.conversion.model.Conversion
 import android.content.Context

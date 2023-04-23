@@ -1,4 +1,4 @@
-package algokelvin.app.conversion
+package algokelvin.app.conversion.ui.converter
 
 import algokelvin.app.conversion.model.Conversion
 import algokelvin.app.conversion.model.ConversionResult

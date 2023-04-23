@@ -1,7 +1,7 @@
-package algokelvin.app.conversion.ui.base_screen
+package algokelvin.app.conversion.compose.base
 
-import algokelvin.app.conversion.ConversionViewModel
-import algokelvin.app.conversion.ConversionViewModelFactory
+import algokelvin.app.conversion.ui.converter.ConversionViewModel
+import algokelvin.app.conversion.ui.converter.ConversionViewModelFactory
 import algokelvin.app.conversion.compose.history.HistoryScreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

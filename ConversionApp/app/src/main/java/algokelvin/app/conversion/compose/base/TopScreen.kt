@@ -1,8 +1,8 @@
-package algokelvin.app.conversion.ui.base_screen
+package algokelvin.app.conversion.compose.base
 
 import algokelvin.app.conversion.model.Conversion
-import algokelvin.app.conversion.ui.base_screen.top_screen.ConversionMenu
-import algokelvin.app.conversion.ui.base_screen.top_screen.InputBlock
+import algokelvin.app.conversion.compose.base.top.ConversionMenu
+import algokelvin.app.conversion.compose.base.top.InputBlock
 import algokelvin.app.conversion.ui.base_screen.top_screen.ResultBlock
 import android.util.Log
 import androidx.compose.runtime.Composable
