@@ -18,6 +18,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.anushka.effectsdemo1.ui.theme.EffectsDemo1Theme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ fun MainScreen(
     var input by remember { mutableStateOf("") }
 
     val scaffoldState: ScaffoldState = rememberScaffoldState()
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
     
     Scaffold(scaffoldState = scaffoldState) {
 
@@ -94,6 +97,15 @@ fun MainScreen(
                 modifier = modifier.fillMaxWidth(),
                 onClick = {
                     total += input.toDouble()
+
+                    // Coroutine Scope
+                    coroutineScope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            message = "Count Updated",
+                            duration = SnackbarDuration.Short
+                        )
+                    }
+
                     if (total > 300) {
                         total = 0.0
                         input = ""
