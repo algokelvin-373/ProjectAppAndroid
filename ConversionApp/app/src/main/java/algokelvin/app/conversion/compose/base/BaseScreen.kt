@@ -3,13 +3,11 @@ package algokelvin.app.conversion.compose.base
 import algokelvin.app.conversion.ui.converter.ConversionViewModel
 import algokelvin.app.conversion.ui.converter.ConversionViewModelFactory
 import algokelvin.app.conversion.compose.history.HistoryScreen
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -22,20 +20,52 @@ fun BaseScreen(
     val list = conversionViewModel.getConversions()
     val historyList = conversionViewModel.resultList.collectAsState(initial = emptyList())
 
-    Column(modifier = modifier.padding(30.dp)) {
-        TopScreen(
-            list,
-            conversionViewModel.selectedConversion,
-            conversionViewModel.inputText,
-            conversionViewModel.typedValue
-        ) { message1, message2 ->
-            conversionViewModel.addResult(message1, message2)
+    val configuration = LocalConfiguration.current
+    var isLandscape by remember { mutableStateOf(false) }
+    when(configuration.orientation) {
+        Configuration.ORIENTATION_LANDSCAPE -> {
+            isLandscape = true
+            Row(
+                modifier = modifier
+                    .padding(30.dp)
+                    .fillMaxSize(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                TopScreen(
+                    list,
+                    conversionViewModel.selectedConversion,
+                    conversionViewModel.inputText,
+                    conversionViewModel.typedValue,
+                    isLandscape
+                ) { message1, message2 ->
+                    conversionViewModel.addResult(message1, message2)
+                }
+                Spacer(modifier = Modifier.height(10.dp))
+                HistoryScreen(historyList, { item ->
+                    conversionViewModel.removeResult(item)
+                }, {
+                    conversionViewModel.clearAll()
+                })
+            }
+        } else -> {
+            isLandscape = false
+            Column(modifier = modifier.padding(30.dp)) {
+                TopScreen(
+                    list,
+                    conversionViewModel.selectedConversion,
+                    conversionViewModel.inputText,
+                    conversionViewModel.typedValue,
+                    isLandscape
+                ) { message1, message2 ->
+                    conversionViewModel.addResult(message1, message2)
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                HistoryScreen(historyList, { item ->
+                    conversionViewModel.removeResult(item)
+                }, {
+                    conversionViewModel.clearAll()
+                })
+            }
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        HistoryScreen(historyList, { item ->
-            conversionViewModel.removeResult(item)
-        }, {
-            conversionViewModel.clearAll()
-        })
     }
 }
