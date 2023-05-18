@@ -23,9 +23,12 @@ class CoroutineBasicActivity : AppCompatActivity() {
         }
 
         binding.btnDownloadUserData.setOnClickListener {
+            val start = System.currentTimeMillis()
             CoroutineScope(Dispatchers.IO).launch {
                 downloadData()
             }
+            val finish = System.currentTimeMillis()
+            Log.i("ALGOKELVIN", "Times = ${finish - start}")
         }
 
     }

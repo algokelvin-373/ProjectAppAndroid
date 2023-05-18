@@ -6,4 +6,6 @@
     <string name="download_user_data">Download User Data</string>
     <string name="data_count">Count: %s</string>
     <string name="count">Count</string>
+    <string name="scopes_dispatchers_and_builders">Scopes, Dispatchers, and Builders</string>
+    <string name="dispatchers_main">Dispatchers Main</string>
 </resources>

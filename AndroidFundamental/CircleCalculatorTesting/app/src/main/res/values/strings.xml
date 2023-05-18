@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">CircleCalculator</string>
-    <string name="calculate">Calculate</string>
-    <string name="radius_of_the_circle">Radius of the circle</string>
-    <string name="area">Area :</string>
-    <string name="circumference">Circumference :</string>
-</resources>

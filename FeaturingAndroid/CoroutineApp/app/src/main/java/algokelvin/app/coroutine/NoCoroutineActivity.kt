@@ -20,7 +20,10 @@ class NoCoroutineActivity : AppCompatActivity() {
         }
 
         binding.btnDownloadUserData.setOnClickListener {
+            val start = System.currentTimeMillis()
             downloadData()
+            val finish = System.currentTimeMillis()
+            Log.i("ALGOKELVIN", "Times = ${finish - start}")
         }
 
     }
