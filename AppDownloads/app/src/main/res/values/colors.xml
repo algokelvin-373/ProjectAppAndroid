@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#D93F43</color>
+    <color name="colorPrimaryDark">#D93F43</color>
+    <color name="colorAccent">#D93F43</color>
+
+    <color name="normalText">#66FFFFFF</color>
+
+    <color name="shimmer">#99D5D5D5</color>
+    <color name="bgTrans">#40FFFFFF</color>
+
+    <color name="navBarColor">#999999</color>
+
+    <color name="color_coming_soon">#BFDF6E22</color>
+
+    <color name="gamesAccent">#092388</color>
+    <color name="appsAccent">#388E3C</color>
+    <color name="movieAccent">#671B65</color>
+    <color name="musicAccent">#0FA791</color>
+    <color name="comicAccent">#ae2b26</color>
+    <color name="downloadAccent">#DA048C</color>
+
+    <color name="vgameAccent">#ED6216</color>
+    <color name="vgameTab">#9B9B9B</color>
+    <color name="channelFavAccent">#3C3737</color>
+    <color name="checkout">#D9D9D9</color>
+    <color name="successAccent">#686868</color>
+    <color name="errorPage">#fdeeee</color>
+    <color name="errorColor">#843d3d</color>
+    <color name="colorBtnTry">#009588</color>
+</resources>
