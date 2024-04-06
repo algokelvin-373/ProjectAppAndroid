@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TransactionApps</string>
+    <string name="ready">Ready</string>
+    <string name="transaction_page">Transaction Page</string>
+    <string name="checkout_page">Checkout Page</string>
+    <string name="success_page">Success Page</string>
+</resources>

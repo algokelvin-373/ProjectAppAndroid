@@ -1,0 +1,54 @@
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:weightSum="3.0"
+        tools:context=".presentation.HomeActivity"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/movie_button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn_rounded"
+            android:padding="15dp"
+            android:text="Movies"
+            android:textSize="50sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tv_button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn_rounded"
+            android:padding="15dp"
+            android:text="Tv Shows"
+            android:textSize="50sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/artists_button"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:layout_marginBottom="40dp"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn_rounded"
+            android:padding="15dp"
+            android:text="Artists"
+            android:textSize="50sp" />
+    </LinearLayout>
+</layout>
