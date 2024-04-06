@@ -13,16 +13,61 @@
         android:theme="@style/Theme.JetpackCompose"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".RecyclerViewActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_recycler_view"
             android:theme="@style/Theme.JetpackCompose">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SnackBarViewActivity"
+            android:exported="false"
+            android:label="@string/title_activity_snackbar_view"
+            android:theme="@style/Theme.JetpackCompose">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ButtonViewActivity"
+            android:exported="true"
+            android:label="@string/title_activity_button_view"
+            android:theme="@style/Theme.JetpackCompose">
 
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".BoxLayoutActivity"
+            android:exported="false"
+            android:label="@string/title_activity_box_layout"
+            android:theme="@style/Theme.JetpackCompose">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".RowLayoutActivity"
+            android:exported="false"
+            android:label="@string/title_activity_row_layout"
+            android:theme="@style/Theme.JetpackCompose">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ColumnLayoutActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.JetpackCompose">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
