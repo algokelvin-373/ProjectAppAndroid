@@ -1,4 +1,4 @@
-package com.anushka.effectsdemo1.ui.theme
+package algokelvin.app.countnumbercompose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

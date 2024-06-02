@@ -15,9 +15,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.anushka.effectsdemo1.ui.theme.EffectsDemo1Theme
+import algokelvin.app.countnumbercompose.ui.theme.EffectsDemo1Theme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -37,12 +38,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
     context: Context = LocalContext.current
 ) {
-
     var round by remember { mutableStateOf(1) }
     var total by remember { mutableStateOf(0.0) }
     var input by remember { mutableStateOf("") }
@@ -51,15 +52,11 @@ fun MainScreen(
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
     
     Scaffold(scaffoldState = scaffoldState) {
-
         // LaunchedEffect
-        LaunchedEffect(key1 = round, ) {
-            // Using Toast
-            Toast.makeText(context, "Please, start count round $round", Toast.LENGTH_LONG).show()
-
-            // Using scaffoldState
-            scaffoldState.snackbarHostState.showSnackbar(
-                message = "Please, start count round $round",
+        LaunchedEffect(key1 = round) {
+            Toast.makeText(context, context.getString(R.string.start_your_app), Toast.LENGTH_LONG).show() // Using Toast
+            scaffoldState.snackbarHostState.showSnackbar( // Using scaffoldState
+                message = context.getString(R.string.enjoy_this),
                 duration = SnackbarDuration.Short
             )
         }
@@ -67,19 +64,17 @@ fun MainScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(50.dp),
-            verticalArrangement = Arrangement.SpaceEvenly
+                .padding(40.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                modifier = modifier.fillMaxWidth(),
-                text = "Total is $total",
+                text = context.getString(R.string.total_count, total.toString()),
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
                 color = Color.DarkGray
             )
             OutlinedTextField(
-                modifier = modifier.fillMaxWidth(),
-                placeholder = { Text("Enter value here") },
+                placeholder = { Text(context.getString(R.string.enter_value)) },
                 value = input,
                 onValueChange = {
                     input = it
@@ -89,23 +84,23 @@ fun MainScreen(
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 ),
-                label = { Text(text = "New count") },
+                label = {
+                    Text(
+                        text = context.getString(R.string.new_count),
+                        fontSize = 30.sp
+                    )},
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
             Button(
-                modifier = modifier.fillMaxWidth(),
                 onClick = {
                     total += input.toDouble()
-
-                    // Coroutine Scope
                     coroutineScope.launch {
                         scaffoldState.snackbarHostState.showSnackbar(
-                            message = "Count Updated",
+                            message = context.getString(R.string.count_updated),
                             duration = SnackbarDuration.Short
                         )
                     }
-
                     if (total > 300) {
                         total = 0.0
                         input = ""
@@ -114,13 +109,12 @@ fun MainScreen(
                 }
             ) {
                 Text(
-                    text = "Count",
+                    text = context.getString(R.string.count),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
         }
-
     }
 }
 
