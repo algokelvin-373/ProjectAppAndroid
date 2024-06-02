@@ -68,7 +68,7 @@ fun MainScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = "Total is $total",
+                text = context.getString(R.string.total_count, total.toString()),
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp,
                 color = Color.DarkGray
