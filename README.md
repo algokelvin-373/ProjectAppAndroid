@@ -1,5 +1,5 @@
 <h1 align="center">Project App Android</h1>
-<h3 align="center">Project App Android</h3>
+<h4 align="center">Version 1.0.0</h3>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -9,6 +9,7 @@
   <img src="https://github.com/algokelvin-373/ProjectAppAndroid/blob/master/Bg_Android.png"/>
 </p>
 
+<!--
 # Version 1.2.3
 - ## A
 1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/AnimationApp">Animation App</a>
@@ -33,6 +34,8 @@
 1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/ShareAndRare">Share and Rare</a>
 2. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/ShowDialog">Show Dialog</a>
 3. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/SwitchAndroid">Switch Android</a>
+-->
+
 
 ## Contributors
 Thanks all contributors for build this repository
