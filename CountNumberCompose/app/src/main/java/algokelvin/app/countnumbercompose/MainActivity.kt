@@ -18,7 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.anushka.effectsdemo1.ui.theme.EffectsDemo1Theme
+import algokelvin.app.countnumbercompose.ui.theme.EffectsDemo1Theme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -54,9 +54,9 @@ fun MainScreen(
     Scaffold(scaffoldState = scaffoldState) {
         // LaunchedEffect
         LaunchedEffect(key1 = round) {
-            Toast.makeText(context, "Start Your App", Toast.LENGTH_LONG).show() // Using Toast
+            Toast.makeText(context, context.getString(R.string.start_your_app), Toast.LENGTH_LONG).show() // Using Toast
             scaffoldState.snackbarHostState.showSnackbar( // Using scaffoldState
-                message = "Enjoy This",
+                message = context.getString(R.string.enjoy_this),
                 duration = SnackbarDuration.Short
             )
         }
@@ -65,7 +65,7 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(40.dp),
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
                 text = "Total is $total",
@@ -74,7 +74,7 @@ fun MainScreen(
                 color = Color.DarkGray
             )
             OutlinedTextField(
-                placeholder = { Text("Enter value here") },
+                placeholder = { Text(context.getString(R.string.enter_value)) },
                 value = input,
                 onValueChange = {
                     input = it
@@ -86,7 +86,7 @@ fun MainScreen(
                 ),
                 label = {
                     Text(
-                        text = "New count",
+                        text = context.getString(R.string.new_count),
                         fontSize = 30.sp
                     )},
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -97,7 +97,7 @@ fun MainScreen(
                     total += input.toDouble()
                     coroutineScope.launch {
                         scaffoldState.snackbarHostState.showSnackbar(
-                            message = "Count Updated",
+                            message = context.getString(R.string.count_updated),
                             duration = SnackbarDuration.Short
                         )
                     }
@@ -109,7 +109,7 @@ fun MainScreen(
                 }
             ) {
                 Text(
-                    text = "Count",
+                    text = context.getString(R.string.count),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
                 )
