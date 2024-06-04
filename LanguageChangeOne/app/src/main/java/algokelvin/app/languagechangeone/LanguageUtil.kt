@@ -22,9 +22,7 @@ object LANG {
 fun Context.setLanguage(lang: String) {
     val dm = resources.displayMetrics
     var conf = resources.configuration
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        conf.setLocale(Locale(lang))
-    }
+    conf.setLocale(Locale(lang))
     LanguageUtil.savePref(this, lang)
     resources.updateConfiguration(conf, dm)
 }
