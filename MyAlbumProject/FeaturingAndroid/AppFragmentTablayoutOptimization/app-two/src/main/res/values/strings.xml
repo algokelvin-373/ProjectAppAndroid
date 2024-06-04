@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">app-two</string>
+    <string name="hello_blank_fragment">%s</string>
+</resources>
