@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 public class DialogController {
     private Dialog dialog;
-    private Context context;
-    private int layoutDialog;
+    private final Context context;
+    private final int layoutDialog;
 
     public DialogController(Context context, int layoutDialog) {
         this.context = context;
