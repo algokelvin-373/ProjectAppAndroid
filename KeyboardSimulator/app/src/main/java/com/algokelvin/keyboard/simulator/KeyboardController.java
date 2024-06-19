@@ -1,5 +1,6 @@
 package com.algokelvin.keyboard.simulator;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,6 +106,7 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
         keyBtnBack.setOnClickListener(this);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
