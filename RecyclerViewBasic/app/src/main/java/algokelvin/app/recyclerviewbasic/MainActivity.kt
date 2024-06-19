@@ -1,17 +1,19 @@
 package algokelvin.app.recyclerviewbasic
 
-import androidx.appcompat.app.AppCompatActivity
+import algokelvin.app.recyclerviewbasic.databinding.ActivityMainBinding
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val rvMenu = findViewById<RecyclerView>(R.id.rv_menu)
-        rvMenu.apply {
+        binding.rvMenu.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = MainAdapter(menu())
         }

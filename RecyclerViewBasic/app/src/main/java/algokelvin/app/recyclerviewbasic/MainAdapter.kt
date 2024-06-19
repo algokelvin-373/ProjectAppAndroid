@@ -1,9 +1,8 @@
 package algokelvin.app.recyclerviewbasic
 
+import algokelvin.app.recyclerviewbasic.databinding.ItemDataBinding
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MainAdapter(
@@ -11,9 +10,7 @@ class MainAdapter(
 ): RecyclerView.Adapter<MainAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_data, parent, false)
-        return MainHolder(view)
+        return MainHolder(ItemDataBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
@@ -22,15 +19,11 @@ class MainAdapter(
 
     override fun getItemCount(): Int = data.size
 
-    inner class MainHolder(view: View): RecyclerView.ViewHolder(view) {
+    inner class MainHolder(private val binding: ItemDataBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Menus) {
-            val txtId = itemView.findViewById<TextView>(R.id.txt_id)
-            val txtName = itemView.findViewById<TextView>(R.id.txt_menu)
-            val txtDescription = itemView.findViewById<TextView>(R.id.txt_dec_menu)
-
-            txtId.text = data.code
-            txtName.text = data.name
-            txtDescription.text = data.description
+            binding.txtId.text = data.code
+            binding.txtMenu.text = data.name
+            binding.txtDecMenu.text = data.description
         }
     }
 }
