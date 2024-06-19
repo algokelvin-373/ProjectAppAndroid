@@ -26,7 +26,6 @@ class MainActivity : KeyboardController() {
                 R.id.first_name,
                 R.id.cross_first_name
             )
-//            setTextBefore(txtOne)
         }
         cl_second_name.setOnClickListener {
             txtOne = txtInputData.text.toString()
@@ -37,7 +36,6 @@ class MainActivity : KeyboardController() {
                 R.id.second_name,
                 R.id.cross_second_name
             )
-//            setTextBefore(txtTwo)
         }
 
     }
