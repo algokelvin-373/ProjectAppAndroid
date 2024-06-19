@@ -9,32 +9,18 @@
   <img src="https://github.com/algokelvin-373/ProjectAppAndroid/blob/master/Bg_Android.png"/>
 </p>
 
-<!--
-# Version 1.2.3
-- ## A
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/AnimationApp">Animation App</a>
+<h3 align="center">The Material of Case Study Android Developer</h3>
 
-- ## D
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/DesignUIToast">Design UI Toast</a>
-
-- ## F
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/FragmentApp">Fragment App</a>
-
-- ## I
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/InputOutputApp">Input Output App</a>
-
-- ## L
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/LanguageChangeOne">Language Change One</a>
-2. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/LayoutVisibleGone">Layout Visible Gone</a>
-
-- ## O
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/OkHttpApp">OkHttp App</a>
-
-- ## S
-1. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/ShareAndRare">Share and Rare</a>
-2. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/ShowDialog">Show Dialog</a>
-3. <a href="https://github.com/algokelvin-373/ProjectAppAndroid/tree/master/SwitchAndroid">Switch Android</a>
--->
+1.  Animation Application
+2.  Camera Rotation
+3.  Count Number Compose
+4.  Design UI Toast
+5.  Enable Disable Button
+6.  Keyboard Simulator
+7.  Language Change One
+8.  Recyclerview Basic
+9.  Share and Rare
+10. Show Dialog
 
 
 ## Contributors
