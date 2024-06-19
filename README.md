@@ -11,34 +11,34 @@
 
 <h3 align="center">The Material of Case Study Android Developer</h3>
 
-<b>1.  Animation Application</b>
+<b>1.  Animation Application</b> <br>
 <i>Animasi geser ke kiri dan ke kanan pada TextView.</i>
 
-<b>2.  Camera Application</b>
+<b>2.  Camera Application</b> <br>
 <i>Membuat Layar Kamera yang dimana menggunakan Surface bukan memakai Intent Implicit.</i>
 
-<b>3.  Count Number Compose</b>
+<b>3.  Count Number Compose</b> <br>
 <i>Memasukkan angka yang diinput kemudian dijumlahkan dengan hasil perjumlahan sebelumnya. Untuk kasus ini menggunakan Jetpack Compose Android.</i>
 
-<b>4.  Design UI Toast</b>
+<b>4.  Design UI Toast</b> <br>
 <i>Menampilkan Notif memakai Toast dan Bottom Navigation.</i>
 
-<b>5.  Enable Disable Button</b>
+<b>5.  Enable Disable Button</b> <br>
 <i>Membuat Button Menjadi Enabled dan Disable.</i>
 
-<b>6.  Keyboard Simulator</b>
+<b>6.  Keyboard Simulator</b> <br>
 <i>Membuat Keyboard Simulator (Bukan Bawaan Device) untuk input 3 data secara bergantian. Tiap data terdapat icon cross untuk clear data.</i>
 
-<b>7.  Language Change One</b>
+<b>7.  Language Change One</b> <br>
 <i>Mengubah ke dalam 3 bahasa (Indonesia, Inggris, Jepang)</i>
 
-<b>8.  Recyclerview Basic</b>
+<b>8.  Recyclerview Basic</b> <br>
 <i>Membuat List Menu Makanan dengan RecyclerView.</i>
 
-<b>9.  Share and Rare</b>
+<b>9.  Share and Rare</b> <br>
 <i>Membuat 2 Button yaitu Share and Rare. 'Share' untuk copy link dan 'Rare' untuk langsung ke link yang dituju.</i>
 
-<b>10. Show Dialog</b>
+<b>10. Show Dialog</b> <br>
 <i>Menampilkan 2 tipe dialog: Dialog posisi bawah dan Dialog posisi center.</i>
 
 <table>
