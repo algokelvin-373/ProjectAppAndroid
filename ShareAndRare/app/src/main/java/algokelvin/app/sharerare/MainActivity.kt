@@ -23,29 +23,36 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnRareApps.setOnClickListener {
-            if (isAppInstalled(this, linkedInApp)) {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlSharing))
-                intent.setPackage(linkedInApp) // Directly open LinkedIn app if installed
-                try {
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Toast.makeText(this, "Unable to open LinkedIn app.", Toast.LENGTH_LONG).show()
-                    e.printStackTrace()
-                }
-            } else {
-                redirectToPlayStore()
-            }
+            rareAction()
         }
 
         binding.btnShareApps.setOnClickListener {
-            val intent = Intent()
-            intent.action = Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT, urlSharing)
-            intent.type = "text/plain"
-
-            startActivity(Intent.createChooser(intent, "Share to :"))
+            shareAction()
         }
 
+    }
+
+    private fun rareAction() {
+        if (isAppInstalled(this, linkedInApp)) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlSharing))
+            intent.setPackage(linkedInApp) // Directly open LinkedIn app if installed
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Unable to open LinkedIn app.", Toast.LENGTH_LONG).show()
+                e.printStackTrace()
+            }
+        } else {
+            redirectToPlayStore()
+        }
+    }
+
+    private fun shareAction() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+        intent.putExtra(Intent.EXTRA_TEXT, urlSharing)
+        intent.type = "text/plain"
+        startActivity(Intent.createChooser(intent, "Share to :"))
     }
 
     private fun redirectToPlayStore() {
