@@ -1,0 +1,36 @@
+<b>1.  Animation Application</b>
+<i>Animasi geser ke kiri dan ke kanan pada TextView.</i>
+
+<b>2.  Camera Application</b>
+<i>Membuat Layar Kamera yang dimana menggunakan Surface bukan memakai Intent Implicit.</i>
+
+<b>3.  Count Number Compose</b>
+<i>Memasukkan angka yang diinput kemudian dijumlahkan dengan hasil perjumlahan sebelumnya. Untuk kasus ini menggunakan Jetpack Compose Android.</i>
+
+<b>4.  Design UI Toast</b>
+<i>Menampilkan Notif memakai Toast dan Bottom Navigation.</i>
+
+<b>5.  Enable Disable Button</b>
+<i>Membuat Button Menjadi Enabled dan Disable.</i>
+
+<b>6.  Keyboard Simulator</b>
+<i>Membuat Keyboard Simulator (Bukan Bawaan Device) untuk input 3 data secara bergantian. Tiap data terdapat icon cross untuk clear data.</i>
+
+<b>7.  Language Change One</b>
+<i>Mengubah ke dalam 3 bahasa (Indonesia, Inggris, Jepang)</i>
+
+<b>8.  Recyclerview Basic</b>
+<i>Membuat List Menu Makanan dengan RecyclerView.</i>
+
+<b>9.  Share and Rare</b>
+<i>Membuat 2 Button yaitu Share and Rare. 'Share' untuk copy link dan 'Rare' untuk langsung ke link yang dituju.</i>
+
+<b>10. Show Dialog</b>
+<i>Menampilkan 2 tipe dialog: Dialog posisi bawah dan Dialog posisi center.</i>
+
+ChangeLog
+
+Version 1.0.0:
+- Initial 10 Project Case Study Android Developer.
+
+

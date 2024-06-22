@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RoomDbApp</string>
+    <string name="room_app">Room App</string>
+    <string name="input_name">Input Name</string>
+    <string name="input_email">Input Email</string>
+    <string name="add_data">Add Data</string>
+</resources>

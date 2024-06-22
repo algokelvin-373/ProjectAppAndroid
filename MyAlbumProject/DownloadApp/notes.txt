@@ -1,0 +1,309 @@
+{
+    "info": {
+        "status": "OK",
+        "time": {
+            "seconds": 0.01091909408569336,
+            "human": "11 milliseconds"
+        }
+    },
+    "datalist": {
+        "total": 1000,
+        "count": 5,
+        "offset": 0,
+        "limit": 5,
+        "next": 5,
+        "hidden": 0,
+        "loaded": true,
+        "list": [
+            {
+                "id": 53089106,
+                "name": "Code Scaner",
+                "package": "tamer.android.qrcode",
+                "uname": "code-scaner",
+                "size": 2527627,
+                "icon": "https://pool.img.aptoide.com/catappult/66859c59a617d2b65255c631614c78df_icon.png",
+                "graphic": "https://pool.img.aptoide.com/catappult/e9c0a07c5e85325649c0306912cff9b1_feature_graphic.png",
+                "added": "2020-08-27 04:25:44",
+                "modified": "2022-06-29 11:19:55",
+                "updated": "2020-08-27 04:25:44",
+                "uptype": "webservice",
+                "store": {
+                    "id": 1966380,
+                    "name": "catappult",
+                    "avatar": "https://pool.img.aptoide.com/catappult/8eda7e3bb9a41b8c6f6ed040f8060b6b_ravatar.png",
+                    "appearance": {
+                        "theme": "deep-purple",
+                        "description": "Unleash your apps.\r\nReach millions."
+                    },
+                    "stats": {
+                        "apps": 103551,
+                        "subscribers": 138555,
+                        "downloads": 312722157
+                    }
+                },
+                "file": {
+                    "vername": "1.1",
+                    "vercode": 2,
+                    "md5sum": "2c8908ee6f1fd8375d63e50c45bfba1c",
+                    "filesize": 2527627,
+                    "path": "https://pool.apk.aptoide.com/catappult/tamer-android-qrcode-2-53089106-2c8908ee6f1fd8375d63e50c45bfba1c.apk",
+                    "path_alt": "https://pool.apk.aptoide.com/catappult/alt/dGFtZXItYW5kcm9pZC1xcmNvZGUtMi01MzA4OTEwNi0yYzg5MDhlZTZmMWZkODM3NWQ2M2U1MGM0NWJmYmExYw.apk",
+                    "tags": [],
+                    "malware": {
+                        "rank": "TRUSTED"
+                    }
+                },
+                "stats": {
+                    "downloads": 10143,
+                    "pdownloads": 10255,
+                    "rating": {
+                        "avg": 0,
+                        "total": 0
+                    },
+                    "prating": {
+                        "avg": 0,
+                        "total": 0
+                    }
+                },
+                "has_versions": false,
+                "obb": null,
+                "appcoins": {
+                    "advertising": false,
+                    "billing": false
+                },
+                "urls": {}
+            },
+            {
+                "id": 50834580,
+                "name": "Matrix Code",
+                "package": "SimosoftProjects.MatrixCode",
+                "uname": "matrix-code",
+                "size": 970348,
+                "icon": "https://pool.img.aptoide.com/catappult/cd6470dbd1e22ac2e8ae33c2a0766137_icon.png",
+                "graphic": "https://pool.img.aptoide.com/catappult/038726cbf96b4f6f0fee4365e244b8e4_feature_graphic.png",
+                "added": "2020-03-18 19:33:10",
+                "modified": "2022-01-01 04:24:55",
+                "updated": "2020-03-18 19:33:11",
+                "uptype": "webservice",
+                "store": {
+                    "id": 1966380,
+                    "name": "catappult",
+                    "avatar": "https://pool.img.aptoide.com/catappult/8eda7e3bb9a41b8c6f6ed040f8060b6b_ravatar.png",
+                    "appearance": {
+                        "theme": "deep-purple",
+                        "description": "Unleash your apps.\r\nReach millions."
+                    },
+                    "stats": {
+                        "apps": 103551,
+                        "subscribers": 138555,
+                        "downloads": 312722157
+                    }
+                },
+                "file": {
+                    "vername": "1.9.4",
+                    "vercode": 194,
+                    "md5sum": "bdae82a549773e4e1957d7e3f59d0b69",
+                    "filesize": 970348,
+                    "path": "https://pool.apk.aptoide.com/catappult/simosoftprojects-matrixcode-194-50834580-bdae82a549773e4e1957d7e3f59d0b69.apk",
+                    "path_alt": "https://pool.apk.aptoide.com/catappult/alt/c2ltb3NvZnRwcm9qZWN0cy1tYXRyaXhjb2RlLTE5NC01MDgzNDU4MC1iZGFlODJhNTQ5NzczZTRlMTk1N2Q3ZTNmNTlkMGI2OQ.apk",
+                    "tags": [],
+                    "malware": {
+                        "rank": "TRUSTED"
+                    }
+                },
+                "stats": {
+                    "downloads": 642,
+                    "pdownloads": 991,
+                    "rating": {
+                        "avg": 0,
+                        "total": 0
+                    },
+                    "prating": {
+                        "avg": 0,
+                        "total": 0
+                    }
+                },
+                "has_versions": false,
+                "obb": null,
+                "appcoins": {
+                    "advertising": false,
+                    "billing": false
+                },
+                "urls": {}
+            },
+            {
+                "id": 55463000,
+                "name": "GTUC Radio",
+                "package": "com.gtuc.esa.gtucradio",
+                "uname": "gtuc-radio",
+                "size": 7241545,
+                "icon": "https://pool.img.aptoide.com/catappult/a2e99df46e3e292c72e2813a2ac87e72_icon.png",
+                "graphic": "https://pool.img.aptoide.com/catappult/5a647dbab3800f61eab52d4991b772fb_feature_graphic.png",
+                "added": "2019-12-19 13:34:52",
+                "modified": "2023-04-12 03:54:49",
+                "updated": "2023-03-16 05:02:37",
+                "uptype": "webservice",
+                "store": {
+                    "id": 1966380,
+                    "name": "catappult",
+                    "avatar": "https://pool.img.aptoide.com/catappult/8eda7e3bb9a41b8c6f6ed040f8060b6b_ravatar.png",
+                    "appearance": {
+                        "theme": "deep-purple",
+                        "description": "Unleash your apps.\r\nReach millions."
+                    },
+                    "stats": {
+                        "apps": 103551,
+                        "subscribers": 138555,
+                        "downloads": 312722157
+                    }
+                },
+                "file": {
+                    "vername": "1.5.0",
+                    "vercode": 5,
+                    "md5sum": "abb70f7b9b23ad65967890c4dc07f5a7",
+                    "filesize": 7241545,
+                    "path": "https://pool.apk.aptoide.com/catappult/com-gtuc-esa-gtucradio-5-55463000-abb70f7b9b23ad65967890c4dc07f5a7.apk",
+                    "path_alt": "https://pool.apk.aptoide.com/catappult/alt/Y29tLWd0dWMtZXNhLWd0dWNyYWRpby01LTU1NDYzMDAwLWFiYjcwZjdiOWIyM2FkNjU5Njc4OTBjNGRjMDdmNWE3.apk",
+                    "tags": [],
+                    "malware": {
+                        "rank": "TRUSTED"
+                    }
+                },
+                "stats": {
+                    "downloads": 119,
+                    "pdownloads": 130,
+                    "rating": {
+                        "avg": 0,
+                        "total": 0
+                    },
+                    "prating": {
+                        "avg": 0,
+                        "total": 0
+                    }
+                },
+                "has_versions": true,
+                "obb": null,
+                "appcoins": {
+                    "advertising": false,
+                    "billing": false
+                },
+                "urls": {}
+            },
+            {
+                "id": 51172574,
+                "name": "Clean Master (Speed Booster)",
+                "package": "com.cleanmaster.mguard",
+                "uname": "clean-master",
+                "size": 54284567,
+                "icon": "https://pool.img.aptoide.com/catappult/809439774ede666cb977cb08f58fb097_icon.png",
+                "graphic": "https://pool.img.aptoide.com/catappult/117c2ebe0d5b27feeacd0e48afe258d7_feature_graphic.png",
+                "added": "2019-01-17 12:26:41",
+                "modified": "2023-04-11 04:07:55",
+                "updated": "2020-04-09 09:20:33",
+                "uptype": "webservice",
+                "store": {
+                    "id": 1966380,
+                    "name": "catappult",
+                    "avatar": "https://pool.img.aptoide.com/catappult/8eda7e3bb9a41b8c6f6ed040f8060b6b_ravatar.png",
+                    "appearance": {
+                        "theme": "deep-purple",
+                        "description": "Unleash your apps.\r\nReach millions."
+                    },
+                    "stats": {
+                        "apps": 103551,
+                        "subscribers": 138555,
+                        "downloads": 312722157
+                    }
+                },
+                "file": {
+                    "vername": "7.4.9",
+                    "vercode": 70494393,
+                    "md5sum": "395b50b40b9ec57d2282a9e6650a227a",
+                    "filesize": 54284567,
+                    "path": "https://premium.apk.aptoide.com/catappult/com-cleanmaster-mguard-70494393-51172574-395b50b40b9ec57d2282a9e6650a227a.apk",
+                    "path_alt": "https://premium.apk.aptoide.com/catappult/alt/Y29tLWNsZWFubWFzdGVyLW1ndWFyZC03MDQ5NDM5My01MTE3MjU3NC0zOTViNTBiNDBiOWVjNTdkMjI4MmE5ZTY2NTBhMjI3YQ.apk",
+                    "malware": {
+                        "rank": "TRUSTED"
+                    }
+                },
+                "stats": {
+                    "downloads": 1390828,
+                    "pdownloads": 16327123,
+                    "rating": {
+                        "avg": 4.25,
+                        "total": 283
+                    },
+                    "prating": {
+                        "avg": 4.35,
+                        "total": 1925
+                    }
+                },
+                "urls": {},
+                "has_versions": false,
+                "obb": null,
+                "appcoins": {
+                    "advertising": true,
+                    "billing": true
+                }
+            },
+            {
+                "id": 64464246,
+                "name": "THE ALCHEMIST CODE",
+                "package": "sg.gumi.alchemistww",
+                "uname": "alchemist-gumi-inc",
+                "size": 59740599,
+                "icon": "https://pool.img.aptoide.com/appupdater/0dd30536c4f4f38cec8e5628a02a473f_icon.png",
+                "graphic": "https://pool.img.aptoide.com/appupdater/d7a7edc1e33ba1a2c7adbe33f814a423_fgraphic.jpg",
+                "added": "2021-03-28 01:41:52",
+                "modified": "2023-02-28 19:33:40",
+                "updated": "2023-02-28 19:33:41",
+                "uptype": "webservice",
+                "store": {
+                    "id": 2899481,
+                    "name": "appupdater",
+                    "avatar": "https://pool.img.aptoide.com/appupdater/64332bc9651ad8662141e9f5f5a2c034_ravatar.png",
+                    "appearance": {
+                        "theme": "default",
+                        "description": "Update Apps"
+                    },
+                    "stats": {
+                        "apps": 408075,
+                        "subscribers": 30070,
+                        "downloads": 141178085
+                    }
+                },
+                "file": {
+                    "vername": "10.8.1.0.199",
+                    "vercode": 210080100,
+                    "md5sum": "b8cd2d3213c980aa84b180f581eb764f",
+                    "filesize": 59740599,
+                    "path": "https://pool.apk.aptoide.com/appupdater/sg-gumi-alchemistww-210080100-64464246-b8cd2d3213c980aa84b180f581eb764f.apk",
+                    "path_alt": "https://pool.apk.aptoide.com/appupdater/alt/c2ctZ3VtaS1hbGNoZW1pc3R3dy0yMTAwODAxMDAtNjQ0NjQyNDYtYjhjZDJkMzIxM2M5ODBhYTg0YjE4MGY1ODFlYjc2NGY.apk",
+                    "tags": [],
+                    "malware": {
+                        "rank": "TRUSTED"
+                    }
+                },
+                "stats": {
+                    "downloads": 252,
+                    "pdownloads": 22804,
+                    "rating": {
+                        "avg": 5,
+                        "total": 1
+                    },
+                    "prating": {
+                        "avg": 4.48,
+                        "total": 21
+                    }
+                },
+                "has_versions": true,
+                "obb": null,
+                "appcoins": {
+                    "advertising": false,
+                    "billing": false
+                },
+                "urls": {}
+            }
+        ]
+    }
+}
