@@ -14,6 +14,10 @@ class TranslationOne : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_translation_one)
 
+        /*
+        Make TextView translate X to coordinate 200 with duration 2 seconds.
+        This method use the module 'animator-featuring'
+         */
         animatorController.animatorTextView(txt_hello, TRANSLATE_X, 200f, 2000)
     }
 }
