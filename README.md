@@ -12,7 +12,7 @@
 <h3 align="center">The Material of Case Study Android Developer</h3>
 
 <b>1.  Animation Application</b> <br>
-<i>Animasi geser ke kiri dan ke kanan pada TextView.</i>
+<i>Animasi geser ke kiri dan ke kanan pada TextView. Proses kontrol pada animasi TextView dibuat ke dalam modul 'animator-featuring'. Ini adalah contoh menggunakan modularization yang sangat sederhana.</i>
 
 <b>2.  Camera Application</b> <br>
 <i>Membuat Layar Kamera yang dimana menggunakan Surface bukan memakai Intent Implicit.</i>
@@ -24,7 +24,7 @@
 <i>Menampilkan Notif memakai Toast dan Bottom Navigation.</i>
 
 <b>5.  Enable Disable Button</b> <br>
-<i>Membuat Button Menjadi Enabled dan Disable.</i>
+<i>Membuat Button Menjadi Enabled dan Disable. Contoh app ini menggunakan <b>ViewModel</b> sebagai logic untuk menentukan apakah data yang dimasukan itu sudah sesuai atau belum.</i>
 
 <b>6.  Keyboard Simulator</b> <br>
 <i>Membuat Keyboard Simulator (Bukan Bawaan Device) untuk input 3 data secara bergantian. Tiap data terdapat icon cross untuk clear data.</i>
