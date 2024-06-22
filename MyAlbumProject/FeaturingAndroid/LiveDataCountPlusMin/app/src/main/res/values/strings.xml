@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">CountPlusMinLiveData</string>
-    <string name="result">Result: %s</string>
-    <string name="the_result">Result: 0</string>
-    <string name="operator_min">-</string>
-    <string name="operator_plus">+</string>
-    <string name="count_plus_min">Count Plus Min</string>
-    <string name="input_number">Input Number</string>
-</resources>

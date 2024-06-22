@@ -1,4 +1,0 @@
-rootProject.name = "App-Fragment-Tablayout-Optimization"
-include ':lib-tablayout'
-include ':app-two'
-include ':app'
