@@ -3,12 +3,10 @@ package algokelvin.app.languagechangeone
 import algokelvin.app.languagechangeone.databinding.ActivityMainBinding
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,12 +23,7 @@ class MainActivity : AppCompatActivity() {
             LANG.EN -> buttonOnNow = binding.btnEnglish
             LANG.JA -> buttonOnNow = binding.btnJapanese
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            buttonOnNow.setBackgroundDrawable(ContextCompat.getDrawable(this, android.R.drawable.button_onoff_indicator_on))
-        }
-        else {
-            buttonOnNow.setBackgroundDrawable(ContextCompat.getDrawable(this, android.R.drawable.button_onoff_indicator_on))
-        }
+        buttonOnNow.setBackgroundResource(android.R.drawable.button_onoff_indicator_on);
 
         binding.btnIndonesian.setOnClickListener { changeLanguage(LANG.IN, getString(R.string.indonesian)) }
         binding.btnEnglish.setOnClickListener { changeLanguage(LANG.EN, getString(R.string.english)) }

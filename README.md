@@ -1,5 +1,5 @@
 <h1 align="center">Project App Android</h1>
-<h3 align="center">Project App Android</h3>
+<h4 align="center">Version 1.0.0</h3>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -9,30 +9,54 @@
   <img src="https://github.com/algokelvin-373/ProjectAppAndroid/blob/master/Bg_Android.png"/>
 </p>
 
-# Version 1.2.3
-- ## A
-1. <a href="">Animation App</a>
+<h3 align="center">The Material of Case Study Android Developer</h3>
 
-- ## D
-1. <a href="">Design UI Toast</a>
+<b>1.  Animation Application</b> <br>
+<i>Animasi geser ke kiri dan ke kanan pada TextView. Proses kontrol pada animasi TextView dibuat ke dalam modul 'animator-featuring'. Ini adalah contoh menggunakan modularization yang sangat sederhana.</i>
 
-- ## F
-1. <a href="">Fragment App</a>
+<b>2.  Camera Application</b> <br>
+<i>Membuat Layar Kamera yang dimana menggunakan Surface bukan memakai Intent Implicit.</i>
 
-- ## I
-1. <a href="">Input Output App</a>
+<b>3.  Count Number Compose</b> <br>
+<i>Memasukkan angka yang diinput kemudian dijumlahkan dengan hasil perjumlahan sebelumnya. Untuk kasus ini menggunakan Jetpack Compose Android.</i>
 
-- ## L
-1. <a href="">Language Change One</a>
-2. <a href="">Layout Visible Gone</a>
+<b>4.  Design UI Toast</b> <br>
+<i>Menampilkan Notif memakai Toast dan Bottom Navigation.</i>
 
-- ## O
-1. <a href="">OkHttp App</a>
+<b>5.  Enable Disable Button</b> <br>
+<i>Membuat Button Menjadi Enabled dan Disable. Contoh app ini menggunakan <b>ViewModel</b> sebagai logic untuk menentukan apakah data yang dimasukan itu sudah sesuai atau belum.</i>
 
-- ## S
-1. <a href="">Share and Rare</a>
-2. <a href="">Show Dialog</a>
-3. <a href="">Switch Android</a>
+<b>6.  Keyboard Simulator</b> <br>
+<i>Membuat Keyboard Simulator (Bukan Bawaan Device) untuk input 3 data secara bergantian. Tiap data terdapat icon cross untuk clear data.</i>
+
+<b>7.  Language Change One</b> <br>
+<i>Mengubah ke dalam 3 bahasa (Indonesia, Inggris, Jepang)</i>
+
+<b>8.  Recyclerview Basic</b> <br>
+<i>Membuat List Menu Makanan dengan RecyclerView.</i>
+
+<b>9.  Share and Rare</b> <br>
+<i>Membuat 2 Button yaitu Share and Rare. 'Share' untuk copy link dan 'Rare' untuk langsung ke link yang dituju.</i>
+
+<b>10. Show Dialog</b> <br>
+<i>Menampilkan 2 tipe dialog: Dialog posisi bawah dan Dialog posisi center.</i>
+
+<table>
+    <thead>
+        <tr>
+            <th>Version</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1.0.0</td>
+            <td>
+                - Initial 10 Project Case Study Android Developer.
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 ## Contributors
 Thanks all contributors for build this repository
