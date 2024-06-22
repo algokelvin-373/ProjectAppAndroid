@@ -1,33 +1,25 @@
 package com.algokelvin.camera.rotation;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import java.io.IOException;
+import com.algokelvin.camera.rotation.utils.CameraSurfaceHolder;
 
-public class MainActivity extends Activity implements SurfaceHolder.Callback {
+public class MainActivity extends CameraSurfaceHolder {
     private final String[] permissions = {
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
-    Camera camera;
     SurfaceView surfaceView;
     TextView txtDegree;
-    SurfaceHolder surfaceHolder;
-    boolean previewing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +29,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
 
         txtDegree = findViewById(R.id.txt_degree);
         surfaceView = findViewById(R.id.camerapreview);
-        surfaceHolder = surfaceView.getHolder();
-        surfaceHolder.addCallback(this);
+        setCameraSurface(txtDegree, surfaceView);
 
         if (hasNoPermissions()) {
             requestPermission();
@@ -50,7 +41,6 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("PERMISSION", "Has Been Permission");
 
         if (!hasNoPermissions()) {
             initCamera();
@@ -68,88 +58,12 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
                     break;
                 }
             }
-            if (allGranted) {
-                // Initialize the camera if all permissions are granted
+            if (allGranted) { // Initialize the camera if all permissions are granted
                 initCamera();
-            } else {
-                // Handle the case where some permissions are not granted
-                Log.e("PERMISSION", "Not all permissions granted");
+            } else { // Handle the case where some permissions are not granted
+                Toast.makeText(this, "Some permissions are not granted", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void initCamera() {
-        if (surfaceHolder.getSurface() == null) {
-            // Surface is not created yet
-            return;
-        }
-
-        if (camera == null) {
-            camera = Camera.open();
-            camera.setDisplayOrientation(90);
-
-            try {
-                camera.setPreviewDisplay(surfaceHolder);
-                camera.startPreview();
-                previewing = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private boolean hasNoPermissions() {
-        return ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestPermission(){
-        ActivityCompat.requestPermissions(this, permissions,0);
-    }
-
-    @Override
-    public void surfaceCreated(@NonNull SurfaceHolder holder) {
-        float r = surfaceView.getRotation();
-        txtDegree.setText(String.valueOf(r));
-
-        if (!hasNoPermissions()) {
-            initCamera();
-        }
-
-//        camera = Camera.open();
-//        camera.setDisplayOrientation(90);
-    }
-
-    @Override
-    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-        if(previewing){
-            camera.stopPreview();
-            previewing = false;
-        }
-
-        if (camera != null){
-            try {
-                camera.setPreviewDisplay(surfaceHolder);
-                camera.startPreview();
-                previewing = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Override
-    public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-        camera.stopPreview();
-        camera.release();
-        camera = null;
-        previewing = false;
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
