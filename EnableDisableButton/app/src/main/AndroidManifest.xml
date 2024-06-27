@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CsEnabledBtn">
         <activity android:name=".PinEntryActivity"/>
-        <activity android:name=".edttxt.EdtTxtTrueActivity"/>
+        <activity android:name=".EdtTxtTrueActivity"/>
         <activity
-            android:name=".edttxt.EdtTextActivity"
+            android:name=".EdtTextActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
