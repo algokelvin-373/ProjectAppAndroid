@@ -12,10 +12,10 @@ public class SwitchController {
     private String txtOn, txtOff;
     private int colorOn, colorOff;
 
-    public SwitchController(AppCompatActivity appCtx, int switchAndroid, int switchTxt) {
+    public SwitchController(AppCompatActivity appCtx, Switch switchAndroid, TextView switchTxt) {
         this.appCtx = appCtx;
-        this.switchAndroid = appCtx.findViewById(switchAndroid);
-        this.switchTxt = appCtx.findViewById(switchTxt);
+        this.switchAndroid = switchAndroid;
+        this.switchTxt = switchTxt;
     }
 
     public void setTextOnOff(String txtSwitchOn, String txtSwitchOff) {
