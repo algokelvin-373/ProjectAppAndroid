@@ -1,8 +1,8 @@
 package algokelvin.app.conversion.compose.base
 
+import algokelvin.app.conversion.compose.history.HistoryScreen
 import algokelvin.app.conversion.ui.converter.ConversionViewModel
 import algokelvin.app.conversion.ui.converter.ConversionViewModelFactory
-import algokelvin.app.conversion.compose.history.HistoryScreen
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
