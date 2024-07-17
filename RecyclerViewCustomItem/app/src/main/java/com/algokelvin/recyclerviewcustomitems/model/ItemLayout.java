@@ -1,17 +1,17 @@
 package com.algokelvin.recyclerviewcustomitems.model;
 
 public class ItemLayout {
-    private String isType;
+    private int isType;
 
-    public ItemLayout(String isType) {
+    public ItemLayout(int isType) {
         this.isType = isType;
     }
 
-    public String getIsType() {
+    public int getIsType() {
         return isType;
     }
 
-    public void setIsType(String isType) {
+    public void setIsType(int isType) {
         this.isType = isType;
     }
 }

@@ -1,5 +1,6 @@
 package com.algokelvin.recyclerviewcustomitems.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -24,6 +25,7 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_THREE = 3;
     private static final int TYPE_FOUR = 4;
     private final ArrayList<ItemLayout> itemLayouts;
+    private int currentPosition = 1;
 
     public CustomItemAdapter(ArrayList<ItemLayout> itemLayouts) {
         this.itemLayouts = itemLayouts;
@@ -31,16 +33,7 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        switch (itemLayouts.get(position).getIsType()) {
-            case "1":
-                return TYPE_ONE;
-            case "2":
-                return TYPE_TWO;
-            case "3":
-                return TYPE_THREE;
-            default:
-                return TYPE_FOUR;
-        }
+        return itemLayouts.get(position).getIsType();
     }
 
     @NonNull
@@ -79,6 +72,20 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return itemLayouts.size();
+        return currentPosition;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void nextItem() {
+        if (currentPosition < itemLayouts.size() - 1) {
+            currentPosition++;
+            notifyDataSetChanged();
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void resetPosition() {
+        currentPosition = 0;
+        notifyDataSetChanged();
     }
 }
