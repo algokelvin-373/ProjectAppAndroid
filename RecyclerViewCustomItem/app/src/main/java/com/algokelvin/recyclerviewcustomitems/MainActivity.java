@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         binding.btnReset.setOnClickListener(v -> {
             adapter.resetPosition();
         });
+
+        binding.btnGoToLast.setOnClickListener(v -> {
+            adapter.goToLast();
+        });
     }
 
 }

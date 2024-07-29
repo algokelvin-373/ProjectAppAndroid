@@ -88,4 +88,10 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         currentPosition = 0;
         notifyDataSetChanged();
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void goToLast() {
+        currentPosition = itemLayouts.size() - 1;
+        notifyDataSetChanged();
+    }
 }
