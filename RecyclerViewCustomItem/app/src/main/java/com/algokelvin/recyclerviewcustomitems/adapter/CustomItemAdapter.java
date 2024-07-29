@@ -7,19 +7,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout1ViewHolder;
 import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout2ViewHolder;
 import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout3ViewHolder;
 import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout4ViewHolder;
-import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType1Binding;
+import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayoutTextViewHolder;
+import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextShortBinding;
 import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType2Binding;
 import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType3Binding;
 import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType4Binding;
 import com.algokelvin.recyclerviewcustomitems.model.ItemLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private ArrayList<Objects> bindingLayout = new ArrayList<Objects>();
+
     private static final int TYPE_ONE = 1;
     private static final int TYPE_TWO = 2;
     private static final int TYPE_THREE = 3;
@@ -40,8 +43,8 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_ONE) {
-            ItemLayoutType1Binding binding = ItemLayoutType1Binding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-            return new ItemLayout1ViewHolder(binding);
+            ItemLayoutTextShortBinding binding = ItemLayoutTextShortBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new ItemLayoutTextViewHolder(binding);
         } else if (viewType == TYPE_TWO){
             ItemLayoutType2Binding binding = ItemLayoutType2Binding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
             return new ItemLayout2ViewHolder(binding);
@@ -59,8 +62,8 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ItemLayout item = itemLayouts.get(position);
-        if (holder instanceof ItemLayout1ViewHolder) {
-            ((ItemLayout1ViewHolder) holder).bind(item);
+        if (holder instanceof ItemLayoutTextViewHolder) {
+            ((ItemLayoutTextViewHolder) holder).bind(item);
         } else if (holder instanceof ItemLayout2ViewHolder) {
             ((ItemLayout2ViewHolder) holder).bind(item);
         } else if (holder instanceof ItemLayout3ViewHolder) {
