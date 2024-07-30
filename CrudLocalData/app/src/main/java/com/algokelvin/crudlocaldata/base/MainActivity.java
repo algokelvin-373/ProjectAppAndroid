@@ -1,5 +1,6 @@
-package com.algokelvin.crudlocaldata;
+package com.algokelvin.crudlocaldata.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,5 +15,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.btnGoToSqlite.setOnClickListener(v -> {
+            Intent intentToSqlite = new Intent(this, SqliteDbActivity.class);
+            startActivity(intentToSqlite);
+        });
+
+        binding.btnGoToRoom.setOnClickListener(v -> {
+            Intent intentToRoom = new Intent(this, RoomDbActivity.class);
+            startActivity(intentToRoom);
+        });
     }
 }
