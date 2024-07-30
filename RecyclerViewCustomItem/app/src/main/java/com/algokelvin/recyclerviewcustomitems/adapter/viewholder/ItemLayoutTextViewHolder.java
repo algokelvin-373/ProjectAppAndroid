@@ -14,7 +14,7 @@ public class ItemLayoutTextViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(ItemLayout itemLayout) {
-        binding.question.setText("1. Question for Text Short");
+    public void bind(ItemLayout itemLayout, int position) {
+        binding.question.setText((position + 1)+ ". Question for Text Short");
     }
 }

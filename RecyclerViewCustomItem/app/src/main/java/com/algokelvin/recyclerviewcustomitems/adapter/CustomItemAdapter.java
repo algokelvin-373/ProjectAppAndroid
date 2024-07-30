@@ -7,13 +7,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout2ViewHolder;
-import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout3ViewHolder;
 import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayout4ViewHolder;
+import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayoutTextLongViewHolder;
+import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayoutTextNumberHolder;
 import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayoutTextViewHolder;
+import com.algokelvin.recyclerviewcustomitems.adapter.viewholder.ItemLayoutTextWithButtonViewHolder;
+import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextLongBinding;
+import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextNumberBinding;
 import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextShortBinding;
-import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType2Binding;
-import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType3Binding;
+import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextWithButtonBinding;
 import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutType4Binding;
 import com.algokelvin.recyclerviewcustomitems.model.ItemLayout;
 
@@ -46,14 +48,14 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ItemLayoutTextShortBinding binding = ItemLayoutTextShortBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
             return new ItemLayoutTextViewHolder(binding);
         } else if (viewType == TYPE_TWO){
-            ItemLayoutType2Binding binding = ItemLayoutType2Binding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-            return new ItemLayout2ViewHolder(binding);
+            ItemLayoutTextLongBinding binding = ItemLayoutTextLongBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new ItemLayoutTextLongViewHolder(binding);
         } else if (viewType == TYPE_THREE){
-            ItemLayoutType3Binding binding = ItemLayoutType3Binding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-            return new ItemLayout3ViewHolder(binding);
+            ItemLayoutTextWithButtonBinding binding = ItemLayoutTextWithButtonBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new ItemLayoutTextWithButtonViewHolder(binding);
         } else if (viewType == TYPE_FOUR){
-            ItemLayoutType4Binding binding = ItemLayoutType4Binding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-            return new ItemLayout4ViewHolder(binding);
+            ItemLayoutTextNumberBinding binding = ItemLayoutTextNumberBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            return new ItemLayoutTextNumberHolder(binding);
         } else {
             return null;
         }
@@ -63,13 +65,13 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ItemLayout item = itemLayouts.get(position);
         if (holder instanceof ItemLayoutTextViewHolder) {
-            ((ItemLayoutTextViewHolder) holder).bind(item);
-        } else if (holder instanceof ItemLayout2ViewHolder) {
-            ((ItemLayout2ViewHolder) holder).bind(item);
-        } else if (holder instanceof ItemLayout3ViewHolder) {
-            ((ItemLayout3ViewHolder) holder).bind(item);
-        } else if (holder instanceof ItemLayout4ViewHolder) {
-            ((ItemLayout4ViewHolder) holder).bind(item);
+            ((ItemLayoutTextViewHolder) holder).bind(item, position);
+        } else if (holder instanceof ItemLayoutTextLongViewHolder) {
+            ((ItemLayoutTextLongViewHolder) holder).bind(item, position);
+        } else if (holder instanceof ItemLayoutTextWithButtonViewHolder) {
+            ((ItemLayoutTextWithButtonViewHolder) holder).bind(item, position);
+        } else if (holder instanceof ItemLayoutTextNumberHolder) {
+            ((ItemLayoutTextNumberHolder) holder).bind(item, position);
         }
     }
 
