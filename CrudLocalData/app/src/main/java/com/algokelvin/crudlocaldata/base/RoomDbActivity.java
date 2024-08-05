@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.algokelvin.crudlocaldata.adapter.DbDataAdapter;
 import com.algokelvin.crudlocaldata.base.function.RoomDbFunction;
 import com.algokelvin.crudlocaldata.databinding.ActivityRoomDbBinding;
 import com.algokelvin.crudlocaldata.db.task.UserTask;
@@ -31,6 +33,13 @@ public class RoomDbActivity extends AppCompatActivity {
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
             });
         });
+
+        function.getAllData(data -> {
+            DbDataAdapter adapter = new DbDataAdapter(data);
+            binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
+            binding.rvItemDb.setAdapter(adapter);
+        });
+
     }
 
 }
