@@ -1,23 +1,36 @@
 package com.algokelvin.crudlocaldata.base;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.algokelvin.crudlocaldata.R;
+import com.algokelvin.crudlocaldata.base.function.RoomDbFunction;
 import com.algokelvin.crudlocaldata.databinding.ActivityRoomDbBinding;
+import com.algokelvin.crudlocaldata.db.task.UserTask;
 
 public class RoomDbActivity extends AppCompatActivity {
-    private ActivityRoomDbBinding binding;
+    private RoomDbFunction function;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRoomDbBinding.inflate(getLayoutInflater());
+        ActivityRoomDbBinding binding = ActivityRoomDbBinding.inflate(getLayoutInflater());
+        UserTask task = new UserTask(this);
+        activity = this;
+        function = new RoomDbFunction(task);
         setContentView(binding.getRoot());
+        initialize(binding);
     }
+
+    private void initialize(ActivityRoomDbBinding binding) {
+        binding.btnInsertRoom.setOnClickListener(v -> {
+            function.insertToRoom(message -> {
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+            });
+        });
+    }
+
 }

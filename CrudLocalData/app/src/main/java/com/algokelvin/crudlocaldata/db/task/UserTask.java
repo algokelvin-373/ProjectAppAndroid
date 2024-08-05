@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.algokelvin.crudlocaldata.db.AppDb;
 import com.algokelvin.crudlocaldata.db.dao.UserDao;
 import com.algokelvin.crudlocaldata.db.entity.User;
+import com.algokelvin.crudlocaldata.db.task.inter.InsertUserTask;
 import com.algokelvin.crudlocaldata.db.task.inter.SelectUserTask;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class UserTask {
         this.dao = db.userDao();
     }
 
-    public void insert(List<User> listUser) {
-        new InsertAsyncTask(dao, listUser).execute();
+    public void insert(List<User> listUser, InsertUserTask task) {
+        new InsertAsyncTask(dao, listUser, task).execute();
     }
 
     public void getAllUsers(SelectUserTask task) {
@@ -29,18 +30,13 @@ public class UserTask {
     private static class InsertAsyncTask extends AsyncTask<Void, Void, Void> {
         private final UserDao userDao;
         private final List<User> listUser;
+        private InsertUserTask task;
 
-        public InsertAsyncTask(UserDao userDao, List<User> listUser) {
+        public InsertAsyncTask(UserDao userDao, List<User> listUser, InsertUserTask task) {
             this.userDao = userDao;
             this.listUser = listUser;
+            this.task = task;
         }
-
-        /*@Override
-        protected Void doInBackground(final User... users) {
-            userDao.insert(users);
-            System.out.println("DB Test: Success Insert");
-            return null;
-        }*/
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -49,6 +45,12 @@ public class UserTask {
             long end = System.currentTimeMillis();
             System.out.println("DB Test: Success Insert - "+ (end - start)+" ms");
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+            task.getSuccessInsert("Success Insert Data");
         }
     }
 
