@@ -34,14 +34,11 @@ public class RoomDbActivity extends AppCompatActivity implements RoomDbAction {
         binding.btnInsertRoom.setOnClickListener(v -> {
             function.insertToRoom(message -> {
                 Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                getAllDataUsers();
             });
         });
 
-        function.getAllData(data -> {
-            DbDataAdapter adapter = new DbDataAdapter(data, this);
-            binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
-            binding.rvItemDb.setAdapter(adapter);
-        });
+        getAllDataUsers();
 
     }
 
@@ -49,11 +46,15 @@ public class RoomDbActivity extends AppCompatActivity implements RoomDbAction {
     public void deleteDataInDb(User user) {
         function.deleteData(user, message -> {
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-            function.getAllData(data -> {
-                DbDataAdapter adapter = new DbDataAdapter(data, this);
-                binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
-                binding.rvItemDb.setAdapter(adapter);
-            });
+            getAllDataUsers();
+        });
+    }
+
+    private void getAllDataUsers() {
+        function.getAllData(data -> {
+            DbDataAdapter adapter = new DbDataAdapter(data, this);
+            binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
+            binding.rvItemDb.setAdapter(adapter);
         });
     }
 }
