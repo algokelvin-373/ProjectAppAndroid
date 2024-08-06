@@ -8,18 +8,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.algokelvin.crudlocaldata.adapter.DbDataAdapter;
+import com.algokelvin.crudlocaldata.base.action.RoomDbAction;
 import com.algokelvin.crudlocaldata.base.function.RoomDbFunction;
 import com.algokelvin.crudlocaldata.databinding.ActivityRoomDbBinding;
+import com.algokelvin.crudlocaldata.db.entity.User;
 import com.algokelvin.crudlocaldata.db.task.UserTask;
 
-public class RoomDbActivity extends AppCompatActivity {
+public class RoomDbActivity extends AppCompatActivity implements RoomDbAction {
+    private ActivityRoomDbBinding binding;
     private RoomDbFunction function;
     private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityRoomDbBinding binding = ActivityRoomDbBinding.inflate(getLayoutInflater());
+        binding = ActivityRoomDbBinding.inflate(getLayoutInflater());
         UserTask task = new UserTask(this);
         activity = this;
         function = new RoomDbFunction(task);
@@ -35,11 +38,22 @@ public class RoomDbActivity extends AppCompatActivity {
         });
 
         function.getAllData(data -> {
-            DbDataAdapter adapter = new DbDataAdapter(data);
+            DbDataAdapter adapter = new DbDataAdapter(data, this);
             binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
             binding.rvItemDb.setAdapter(adapter);
         });
 
     }
 
+    @Override
+    public void deleteDataInDb(User user) {
+        function.deleteData(user, message -> {
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+            function.getAllData(data -> {
+                DbDataAdapter adapter = new DbDataAdapter(data, this);
+                binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
+                binding.rvItemDb.setAdapter(adapter);
+            });
+        });
+    }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.algokelvin.crudlocaldata.base.action.RoomDbAction;
 import com.algokelvin.crudlocaldata.databinding.ItemDbDataLayoutBinding;
 import com.algokelvin.crudlocaldata.db.entity.User;
 
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class DbDataAdapter extends RecyclerView.Adapter<DbDataAdapter.DbDataViewHolder> {
     private final List<User> listUser;
+    private final RoomDbAction action;
 
-    public DbDataAdapter(List<User> listUser) {
+    public DbDataAdapter(List<User> listUser, RoomDbAction action) {
         this.listUser = listUser;
+        this.action = action;
     }
 
     @NonNull
@@ -40,6 +43,9 @@ public class DbDataAdapter extends RecyclerView.Adapter<DbDataAdapter.DbDataView
             holder.binding.userDescription.setText(user.getDescription());
         }
 
+        holder.binding.btnDelete.setOnClickListener(v -> {
+            action.deleteDataInDb(user);
+        });
     }
 
     @Override

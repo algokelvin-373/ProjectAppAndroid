@@ -2,6 +2,7 @@ package com.algokelvin.crudlocaldata.base.function;
 
 import com.algokelvin.crudlocaldata.db.entity.User;
 import com.algokelvin.crudlocaldata.db.task.UserTask;
+import com.algokelvin.crudlocaldata.db.task.inter.DeleteUserTask;
 import com.algokelvin.crudlocaldata.db.task.inter.InsertUserTask;
 import com.algokelvin.crudlocaldata.db.task.inter.SelectUserTask;
 import com.algokelvin.crudlocaldata.dummy.DataUserDummy;
@@ -22,5 +23,9 @@ public class RoomDbFunction {
 
     public void getAllData(SelectUserTask selectUserTask) {
         task.getAllUsers(selectUserTask);
+    }
+
+    public void deleteData(User user, DeleteUserTask deleteUserTask) {
+        task.deleteUser(user, deleteUserTask);
     }
 }

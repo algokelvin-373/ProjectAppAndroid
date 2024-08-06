@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.algokelvin.crudlocaldata.db.AppDb;
 import com.algokelvin.crudlocaldata.db.dao.UserDao;
 import com.algokelvin.crudlocaldata.db.entity.User;
+import com.algokelvin.crudlocaldata.db.task.inter.DeleteUserTask;
 import com.algokelvin.crudlocaldata.db.task.inter.InsertUserTask;
 import com.algokelvin.crudlocaldata.db.task.inter.SelectUserTask;
 
@@ -25,6 +26,10 @@ public class UserTask {
 
     public void getAllUsers(SelectUserTask task) {
         new SelectAsyncTask(dao, task).execute();
+    }
+
+    public void deleteUser(User user, DeleteUserTask task) {
+        new DeleteAsyncTask(dao, user, task).execute();
     }
 
     private static class InsertAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -72,6 +77,30 @@ public class UserTask {
         protected void onPostExecute(List<User> users) {
             super.onPostExecute(users);
             task.getListUser(users);
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<Void, Void, Void> {
+        private final UserDao userDao;
+        private final DeleteUserTask task;
+        private final User user;
+
+        public DeleteAsyncTask(UserDao userDao, User user, DeleteUserTask task) {
+            this.userDao = userDao;
+            this.task = task;
+            this.user = user;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            userDao.deleteUser(user);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+            task.successDelete("Success Delete Data");
         }
     }
 }
