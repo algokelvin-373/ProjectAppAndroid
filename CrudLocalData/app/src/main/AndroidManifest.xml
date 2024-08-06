@@ -13,7 +13,13 @@
         android:theme="@style/Theme.CrudLocalData"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".base.RoomDbActivity"
+            android:exported="false" />
+        <activity
+            android:name=".base.SqliteDbActivity"
+            android:exported="false" />
+        <activity
+            android:name=".base.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
