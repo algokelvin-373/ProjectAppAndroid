@@ -14,5 +14,16 @@ public class SqliteDbActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySqliteDbBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initialize(binding);
+    }
+
+    private void initialize(ActivitySqliteDbBinding binding) {
+        binding.btnInsertSqlite.setOnClickListener(v -> {
+
+        });
+
+        binding.btnDeleteAll.setOnClickListener(v -> {
+
+        });
     }
 }
