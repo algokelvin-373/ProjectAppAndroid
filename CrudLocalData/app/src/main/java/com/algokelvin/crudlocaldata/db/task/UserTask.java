@@ -32,6 +32,10 @@ public class UserTask {
         new DeleteAsyncTask(dao, user, task).execute();
     }
 
+    public void deleteAllUser(DeleteUserTask task) {
+        new DeleteAllAsyncTask(dao, task).execute();
+    }
+
     private static class InsertAsyncTask extends AsyncTask<Void, Void, Void> {
         private final UserDao userDao;
         private final List<User> listUser;
@@ -101,6 +105,28 @@ public class UserTask {
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             task.successDelete("Success Delete Data");
+        }
+    }
+
+    private static class DeleteAllAsyncTask extends AsyncTask<Void, Void, Void> {
+        private final UserDao userDao;
+        private final DeleteUserTask task;
+
+        public DeleteAllAsyncTask(UserDao userDao, DeleteUserTask task) {
+            this.userDao = userDao;
+            this.task = task;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            userDao.deleteAll();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+            task.successDelete("Success Delete All Users");
         }
     }
 }

@@ -28,4 +28,8 @@ public class RoomDbFunction {
     public void deleteData(User user, DeleteUserTask deleteUserTask) {
         task.deleteUser(user, deleteUserTask);
     }
+
+    public void deleteAllData(DeleteUserTask deleteUserTask) {
+        task.deleteAllUser(deleteUserTask);
+    }
 }

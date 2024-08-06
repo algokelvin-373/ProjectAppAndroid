@@ -14,6 +14,9 @@ import com.algokelvin.crudlocaldata.databinding.ActivityRoomDbBinding;
 import com.algokelvin.crudlocaldata.db.entity.User;
 import com.algokelvin.crudlocaldata.db.task.UserTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RoomDbActivity extends AppCompatActivity implements RoomDbAction {
     private ActivityRoomDbBinding binding;
     private RoomDbFunction function;
@@ -38,6 +41,13 @@ public class RoomDbActivity extends AppCompatActivity implements RoomDbAction {
             });
         });
 
+        binding.btnDeleteAll.setOnClickListener(v -> {
+            function.deleteAllData(message -> {
+                Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+                getAllDataUsers();
+            });
+        });
+
         getAllDataUsers();
 
     }
@@ -52,7 +62,10 @@ public class RoomDbActivity extends AppCompatActivity implements RoomDbAction {
 
     private void getAllDataUsers() {
         function.getAllData(data -> {
-            DbDataAdapter adapter = new DbDataAdapter(data, this);
+            List<User> listUsers = new ArrayList<>();
+            listUsers.add(new User());
+            listUsers.addAll(data);
+            DbDataAdapter adapter = new DbDataAdapter(listUsers, this);
             binding.rvItemDb.setLayoutManager(new LinearLayoutManager(this));
             binding.rvItemDb.setAdapter(adapter);
         });

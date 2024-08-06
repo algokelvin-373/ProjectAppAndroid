@@ -2,6 +2,7 @@ package com.algokelvin.crudlocaldata.adapter;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class DbDataAdapter extends RecyclerView.Adapter<DbDataAdapter.DbDataView
             holder.binding.userName.setTypeface(null, Typeface.BOLD);
             holder.binding.userDescription.setText("Description");
             holder.binding.userDescription.setTypeface(null, Typeface.BOLD);
+            holder.binding.btnDelete.setVisibility(View.INVISIBLE);
         } else {
             holder.binding.userName.setText(user.getName());
             holder.binding.userDescription.setText(user.getDescription());

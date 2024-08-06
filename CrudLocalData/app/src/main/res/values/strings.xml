@@ -2,4 +2,5 @@
     <string name="app_name">CrudLocalData</string>
     <string name="title_room">Click for Ready Insert DB Local\nUsing DB Room</string>
     <string name="btn_db_room">Insert With Room</string>
+    <string name="delete_all">Delete All</string>
 </resources>
