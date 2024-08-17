@@ -21,6 +21,9 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:padding="4dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

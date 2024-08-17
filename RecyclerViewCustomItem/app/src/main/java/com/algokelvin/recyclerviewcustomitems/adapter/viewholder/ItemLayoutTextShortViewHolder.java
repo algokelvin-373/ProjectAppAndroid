@@ -10,21 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.algokelvin.recyclerviewcustomitems.adapter.CustomItemAdapter;
-import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextNumberBinding;
+import com.algokelvin.recyclerviewcustomitems.databinding.ItemLayoutTextShortBinding;
 import com.algokelvin.recyclerviewcustomitems.model.ItemLayout;
 
-public class ItemLayoutTextNumberHolder extends RecyclerView.ViewHolder {
-    private final ItemLayoutTextNumberBinding binding;
+public class ItemLayoutTextShortViewHolder extends RecyclerView.ViewHolder {
+    private final ItemLayoutTextShortBinding binding;
     private final Context context;
 
-    public ItemLayoutTextNumberHolder(@NonNull ItemLayoutTextNumberBinding binding, Context context) {
+    public ItemLayoutTextShortViewHolder(@NonNull ItemLayoutTextShortBinding binding, Context context) {
         super(binding.getRoot());
         this.binding = binding;
         this.context = context;
     }
 
     public void bind(ItemLayout itemLayout, int position) {
-        binding.question.setText((position + 1)+ ". Question for Text Number");
+        binding.question.setText((position + 1)+ ". Question for Text Short");
 
         //binding.edtAnswer.requestFocus();
         CustomItemAdapter.editTextViewNow = binding.edtAnswer;
@@ -44,6 +44,7 @@ public class ItemLayoutTextNumberHolder extends RecyclerView.ViewHolder {
                 imm.showSoftInput(binding.edtAnswer, InputMethodManager.SHOW_IMPLICIT);
             }
         });
+
         binding.edtAnswer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

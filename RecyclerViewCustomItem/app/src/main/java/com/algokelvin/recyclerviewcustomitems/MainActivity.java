@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         binding.rvCustomItems.setAdapter(adapter);
 
         binding.btnNext.setOnClickListener(v -> {
-            adapter.nextItem();
+            adapter.nextItem(this);
         });
 
         binding.btnReset.setOnClickListener(v -> {
