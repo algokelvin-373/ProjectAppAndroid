@@ -85,11 +85,12 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     public void nextItem(Context context) {
-        if (currentPosition < itemLayouts.size() - 1) {
+        if (currentPosition < itemLayouts.size()) {
             currentPosition++;
-            notifyDataSetChanged();
-            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(editTextViewNow.getWindowToken(), 0);
+            //notifyDataSetChanged();
+            notifyItemInserted(currentPosition - 1);
+//            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(editTextViewNow.getWindowToken(), 0);
         }
     }
 

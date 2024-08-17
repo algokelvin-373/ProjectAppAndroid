@@ -28,7 +28,7 @@ public class ItemLayoutTextLongViewHolder extends RecyclerView.ViewHolder {
 
         binding.edtAnswer.setLines(2);
         //binding.edtAnswer.requestFocus();
-        CustomItemAdapter.editTextViewNow = binding.edtAnswer;
+        /*CustomItemAdapter.editTextViewNow = binding.edtAnswer;
         binding.edtAnswer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -44,7 +44,7 @@ public class ItemLayoutTextLongViewHolder extends RecyclerView.ViewHolder {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(binding.edtAnswer, InputMethodManager.SHOW_IMPLICIT);
             }
-        });
+        });*/
         binding.edtAnswer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

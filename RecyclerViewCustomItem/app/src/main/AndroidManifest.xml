@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecyclerViewCustomItems"
-        android:windowSoftInputMode="stateHidden"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"

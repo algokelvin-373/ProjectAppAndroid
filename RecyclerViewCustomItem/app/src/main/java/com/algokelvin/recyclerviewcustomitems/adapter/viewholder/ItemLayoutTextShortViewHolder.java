@@ -27,7 +27,7 @@ public class ItemLayoutTextShortViewHolder extends RecyclerView.ViewHolder {
         binding.question.setText((position + 1)+ ". Question for Text Short");
 
         //binding.edtAnswer.requestFocus();
-        CustomItemAdapter.editTextViewNow = binding.edtAnswer;
+        /*CustomItemAdapter.editTextViewNow = binding.edtAnswer;
         binding.edtAnswer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -43,7 +43,7 @@ public class ItemLayoutTextShortViewHolder extends RecyclerView.ViewHolder {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(binding.edtAnswer, InputMethodManager.SHOW_IMPLICIT);
             }
-        });
+        });*/
 
         binding.edtAnswer.addTextChangedListener(new TextWatcher() {
             @Override
