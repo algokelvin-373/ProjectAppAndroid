@@ -24,7 +24,18 @@ public class MainActivity extends AppCompatActivity {
     private void initialize(ActivityMainBinding binding) {
         ArrayList<ItemLayout> itemLayouts = new ArrayList<>();
         itemLayouts.add(new ItemLayout(1));
-        itemLayouts.add(new ItemLayout(2));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+        itemLayouts.add(new ItemLayout(1));
+
+
+        /*itemLayouts.add(new ItemLayout(2));
         itemLayouts.add(new ItemLayout(3));
         itemLayouts.add(new ItemLayout(4));
         itemLayouts.add(new ItemLayout(2));
@@ -32,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         itemLayouts.add(new ItemLayout(3));
         itemLayouts.add(new ItemLayout(1));
         itemLayouts.add(new ItemLayout(2));
-        itemLayouts.add(new ItemLayout(4));
+        itemLayouts.add(new ItemLayout(4));*/
 
         CustomItemAdapter adapter = new CustomItemAdapter(itemLayouts);
         binding.rvCustomItems.setLayoutManager(new LinearLayoutManager(this));

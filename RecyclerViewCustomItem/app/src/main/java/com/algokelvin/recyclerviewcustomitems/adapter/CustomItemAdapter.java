@@ -96,8 +96,12 @@ public class CustomItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @SuppressLint("NotifyDataSetChanged")
     public void resetPosition() {
+        int previousPosition = currentPosition;
         currentPosition = 0;
-        notifyDataSetChanged();
+        if (previousPosition > 0) {
+            notifyItemRangeRemoved(0, previousPosition);
+        }
+        notifyItemRangeInserted(0, previousPosition);
     }
 
     @SuppressLint("NotifyDataSetChanged")
