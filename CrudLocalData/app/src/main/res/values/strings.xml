@@ -5,4 +5,7 @@
     <string name="btn_db_room">Insert With Room</string>
     <string name="btn_db_sqlite">Insert With SQLite</string>
     <string name="delete_all">Delete All</string>
+    <string name="db_using_room">DB using Room</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
 </resources>

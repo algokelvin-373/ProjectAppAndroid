@@ -1,5 +1,6 @@
 package com.algokelvin.crudlocaldata.adapter;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.algokelvin.crudlocaldata.R;
 import com.algokelvin.crudlocaldata.base.action.RoomDbAction;
 import com.algokelvin.crudlocaldata.databinding.ItemDbDataLayoutBinding;
 import com.algokelvin.crudlocaldata.db.entity.User;
@@ -33,11 +35,12 @@ public class DbDataAdapter extends RecyclerView.Adapter<DbDataAdapter.DbDataView
     @Override
     public void onBindViewHolder(@NonNull DbDataViewHolder holder, int position) {
         User user = listUser.get(position);
+        Context context = holder.itemView.getContext();
 
         if (position == 0) {
-            holder.binding.userName.setText("Name");
+            holder.binding.userName.setText(context.getString(R.string.name));
             holder.binding.userName.setTypeface(null, Typeface.BOLD);
-            holder.binding.userDescription.setText("Description");
+            holder.binding.userDescription.setText(context.getString(R.string.description));
             holder.binding.userDescription.setTypeface(null, Typeface.BOLD);
             holder.binding.btnDelete.setVisibility(View.INVISIBLE);
         } else {
