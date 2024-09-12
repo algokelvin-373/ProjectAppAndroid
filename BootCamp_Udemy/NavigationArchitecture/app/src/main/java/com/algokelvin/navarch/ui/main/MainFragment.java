@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.algokelvin.navarch.R;
 
@@ -41,8 +42,10 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btnToSecondFragment = view.findViewById(R.id.btn_action);
+        EditText edtYourWord = view.findViewById(R.id.input_word);
+
         btnToSecondFragment.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(MainFragmentDirections.mainToSecond());
+            Navigation.findNavController(v).navigate(MainFragmentDirections.mainToSecond(edtYourWord.getText().toString().trim()));
         });
     }
 }
