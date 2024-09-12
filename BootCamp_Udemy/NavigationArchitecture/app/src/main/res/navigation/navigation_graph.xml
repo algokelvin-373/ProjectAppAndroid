@@ -22,5 +22,18 @@
         <argument
             android:name="your_word"
             app:argType="string" />
+        <action
+            android:id="@+id/second_to_third"
+            app:destination="@id/thirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.algokelvin.navarch.ui.main.ThirdFragment"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_third" >
+        <argument
+            android:name="your_number"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

@@ -5,10 +5,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.algokelvin.navarch.R;
@@ -31,5 +34,13 @@ public class SecondFragment extends Fragment {
 
         TextView txtYourWord = view.findViewById(R.id.data_word);
         txtYourWord.setText(yourWord);
+
+        EditText edtYourNumber = view.findViewById(R.id.data_number);
+
+        Button btnAction = view.findViewById(R.id.btn_action);
+        btnAction.setOnClickListener(v -> {
+            int number = Integer.parseInt(edtYourNumber.getText().toString());
+            Navigation.findNavController(v).navigate(SecondFragmentDirections.secondToThird().setYourNumber(number));
+        });
     }
 }
