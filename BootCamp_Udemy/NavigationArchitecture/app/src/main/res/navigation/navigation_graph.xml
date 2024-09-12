@@ -9,7 +9,11 @@
         android:id="@+id/mainFragment"
         android:name="com.algokelvin.navarch.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/main_to_second"
+            app:destination="@id/secondFragment" />
+    </fragment>
     <fragment
         android:id="@+id/secondFragment"
         android:name="com.algokelvin.navarch.ui.main.SecondFragment"
