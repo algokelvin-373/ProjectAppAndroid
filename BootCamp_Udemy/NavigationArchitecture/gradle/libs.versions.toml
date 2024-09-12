@@ -21,4 +21,5 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+navigation-safeargs = { id = "androidx.navigation.safeargs", version = "2.8.0" }
 
