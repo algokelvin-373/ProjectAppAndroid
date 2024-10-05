@@ -1,5 +1,5 @@
-<h1 align="center">Project App Android</h1>
-<h4 align="center">Version 1.0.0</h3>
+<h1 align="center">Project Application Android</h1>
+<h4 align="center">Version 1.0.1</h3>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -53,6 +53,13 @@
             <td>1.0.0</td>
             <td>
                 - Initial 10 Project Case Study Android Developer.
+            </td>
+        </tr>
+        <tr>
+            <td>1.0.1</td>
+            <td>
+                - Init Project Switch Android.
+                - Handle Package.
             </td>
         </tr>
     </tbody>
