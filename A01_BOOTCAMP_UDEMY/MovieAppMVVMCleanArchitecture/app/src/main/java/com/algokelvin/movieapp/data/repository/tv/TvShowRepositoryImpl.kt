@@ -2,15 +2,15 @@ package com.algokelvin.movieapp.data.repository.tv
 
 import android.util.Log
 import com.algokelvin.movieapp.data.model.tv.TvShow
-import com.algokelvin.movieapp.data.repository.tv.datasourceImpl.TvShowCacheDataSourceImpl
-import com.algokelvin.movieapp.data.repository.tv.datasourceImpl.TvShowLocalDataSourceImpl
-import com.algokelvin.movieapp.data.repository.tv.datasourceImpl.TvShowRemoteDataSourceImpl
+import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowCacheDataSource
+import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
+import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
 
 class TvShowRepositoryImpl(
-    private val remote: TvShowRemoteDataSourceImpl,
-    private val local: TvShowLocalDataSourceImpl,
-    private val cache: TvShowCacheDataSourceImpl,
+    private val remote: TvShowRemoteDataSource,
+    private val local: TvShowLocalDataSource,
+    private val cache: TvShowCacheDataSource,
 ): TvShowRepository {
     override suspend fun getTvShows(): List<TvShow> = getTvShowFromCache()
 

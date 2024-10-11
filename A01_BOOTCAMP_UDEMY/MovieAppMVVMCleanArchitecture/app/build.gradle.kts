@@ -16,6 +16,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"19978af3bb16e019522fd5077f3018f2\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
     }
 
     buildTypes {
@@ -69,7 +72,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     implementation("com.google.dagger:dagger:2.52")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.52")
+    kapt("com.google.dagger:dagger-compiler:2.52")
 
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")

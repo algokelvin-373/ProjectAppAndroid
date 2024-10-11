@@ -2,15 +2,15 @@ package com.algokelvin.movieapp.data.repository.movie
 
 import android.util.Log
 import com.algokelvin.movieapp.data.model.movie.Movie
-import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.MovieCacheDataSourceImpl
-import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.MovieLocalDataSourceImpl
-import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.MovieRemoteDataSourceImpl
+import com.algokelvin.movieapp.data.repository.movie.datasource.MovieCacheDataSource
+import com.algokelvin.movieapp.data.repository.movie.datasource.MovieLocalDataSource
+import com.algokelvin.movieapp.data.repository.movie.datasource.MovieRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.MovieRepository
 
 class MovieRepositoryImpl(
-    private val remote: MovieRemoteDataSourceImpl,
-    private val local: MovieLocalDataSourceImpl,
-    private val cache: MovieCacheDataSourceImpl,
+    private val remote: MovieRemoteDataSource,
+    private val local: MovieLocalDataSource,
+    private val cache: MovieCacheDataSource,
 ): MovieRepository {
     override suspend fun getMovies(): List<Movie> = getMoviesFromCache()
 

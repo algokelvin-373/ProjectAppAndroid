@@ -2,15 +2,15 @@ package com.algokelvin.movieapp.data.repository.artist
 
 import android.util.Log
 import com.algokelvin.movieapp.data.model.artist.Artist
-import com.algokelvin.movieapp.data.repository.artist.datasourceImpl.ArtistCacheDataSourceImpl
-import com.algokelvin.movieapp.data.repository.artist.datasourceImpl.ArtistLocalDataSourceImpl
-import com.algokelvin.movieapp.data.repository.artist.datasourceImpl.ArtistRemoteDataSourceImpl
+import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistCacheDataSource
+import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistLocalDataSource
+import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
 
 class ArtistRepositoryImpl(
-    private val remote: ArtistRemoteDataSourceImpl,
-    private val local: ArtistLocalDataSourceImpl,
-    private val cache: ArtistCacheDataSourceImpl
+    private val remote: ArtistRemoteDataSource,
+    private val local: ArtistLocalDataSource,
+    private val cache: ArtistCacheDataSource
 ): ArtistRepository {
     override suspend fun getArtists(): List<Artist> = getMoviesFromCache()
 
