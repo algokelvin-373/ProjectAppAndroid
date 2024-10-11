@@ -1,6 +1,9 @@
 package com.algokelvin.movieapp.presentation.tv
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityTvShowBinding
 import com.algokelvin.movieapp.presentation.di.Injector
-import com.algokelvin.movieapp.presentation.movie.MovieAdapter
 import javax.inject.Inject
 
 class TvShowActivity : AppCompatActivity() {
@@ -31,6 +33,36 @@ class TvShowActivity : AppCompatActivity() {
         tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class]
 
         initRecyclerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.update, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_update -> {
+                updateTvShows()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun updateTvShows() {
+        binding.tvShowProgressBar.visibility = View.VISIBLE
+        val response = tvShowViewModel.updateTvShows()
+        response.observe(this, Observer {
+            if (it != null) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+                binding.tvShowProgressBar.visibility = View.GONE
+            } else {
+                binding.tvShowProgressBar.visibility = View.GONE
+            }
+        })
     }
 
     private fun initRecyclerView(){
