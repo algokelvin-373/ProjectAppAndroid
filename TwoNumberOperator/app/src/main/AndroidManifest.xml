@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TwoNumberOperations"
+        android:theme="@style/Theme.TwoNumberOperator"
         tools:targetApi="31">
         <activity
             android:name=".base.MainActivity"

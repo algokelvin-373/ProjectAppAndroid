@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TwoNumberOperations"
+rootProject.name = "TwoNumberOperator"
 include ':app'
