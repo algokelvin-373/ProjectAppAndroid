@@ -60,7 +60,7 @@ dependencies {
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
     implementation("androidx.room:room-runtime:$room_version")
-    //kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
@@ -76,6 +76,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
