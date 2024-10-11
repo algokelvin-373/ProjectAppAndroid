@@ -1,4 +1,4 @@
-package com.algokelvin.movieapp.data
+package com.algokelvin.movieapp.data.model.tv
 
 
 import com.google.gson.annotations.SerializedName

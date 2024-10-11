@@ -1,13 +1,13 @@
-package com.algokelvin.movieapp.data
+package com.algokelvin.movieapp.data.model.movie
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ArtistList(
+data class MovieList(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val results: List<Artist>,
+    val results: List<Movie>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
