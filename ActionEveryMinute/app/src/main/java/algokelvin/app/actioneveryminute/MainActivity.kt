@@ -19,7 +19,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(), UiThreadInterface {
                     uiThread()
                 }
             }
-        }, 15000, 15000)
+        }, 5000, 5000)
     }
 
     override fun uiThread() {
