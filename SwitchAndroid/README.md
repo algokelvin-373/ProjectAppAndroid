@@ -1,4 +1,4 @@
-#Switch Android
+## Switch Android
 
 | ![Gambar 1](./documentation/SS01_SwitchAndroid.jpg) | ![Gambar 2](./documentation/SS02_SwitchAndroid.jpg) |
 |:---------------------------------------------------:|:---------------------------------------------------:|

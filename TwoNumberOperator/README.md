@@ -1,4 +1,4 @@
-#Two Number Operator
+## Two Number Operator
 
 | ![Gambar 1](./documentation/SS01_TwoNumberOperator.jpg) | ![Gambar 2](./documentation/SS02_TwoNumberOperator.jpg) | ![Gambar 3](./documentation/SS03_TwoNumberOperator.jpg) |
 |:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
