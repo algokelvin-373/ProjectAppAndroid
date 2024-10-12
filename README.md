@@ -44,7 +44,7 @@
 <b>11. Show Dialog</b> <br>
 <i>Menampilkan 2 tipe dialog: Dialog posisi bawah dan Dialog posisi center.</i>
 
-<b>12. Switch Android</b>
+<b>12. Switch Android</b> <br>
 <i>Implementasi Switch pada Android</i>
 
 <table>
@@ -64,7 +64,7 @@
         <tr>
             <td>1.0.1</td>
             <td>
-                - Init Project Switch Android dan Action Every Minute. <br>
+                - Init Project Switch Android, Action Every Minute, and Two Number Operators. <br>
                 - Handle Package. <br>
                 - Update README.md Repository. <br>
             </td>
