@@ -4,10 +4,19 @@
 |:---------------------------------------------------:|:---------------------------------------------------:|
 |              Gambar 1: <br> Switch OFF              |              Gambar 2: <br> Switch ON               |
 
-#Envirountment
-AGP Version \t\t : 4.2.0
-Gradle Version \t : 6.7.1
-Java JDK \t\t : 1.8
+## Environment
+<table>
+    <tr>
+        <td>Android Gradle Plugins Version</td>
+        <td>Gradle Version</td>
+        <td>Java JDK</td>
+    </tr>
+    <tr>
+        <td>4.2.2</td>
+        <td>6.7.1</td>
+        <td>1.8</td>
+    </tr>
+</table>
 
 ## Contributors
 Thanks all contributors for build this repository

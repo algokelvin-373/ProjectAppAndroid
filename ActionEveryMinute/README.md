@@ -5,9 +5,18 @@
 |               Gambar 1: <br> Begin Action               |               Gambar 2: <br> Start Action               |           Gambar 3: <br> Action until 5 Times           |
 
 ## Environment
-AGP Version &nbsp &nbsp : 7.2.2
-Gradle Version &nbsp : 7.3.3
-Java JDK &nbsp &nbsp : 17
+<table>
+    <tr>
+        <td>Android Gradle Plugins Version</td>
+        <td>Gradle Version</td>
+        <td>Java JDK</td>
+    </tr>
+    <tr>
+        <td>7.2.2</td>
+        <td>7.3.3</td>
+        <td>17</td>
+    </tr>
+</table>
 
 ## Contributors
 Thanks all contributors for build this repository
