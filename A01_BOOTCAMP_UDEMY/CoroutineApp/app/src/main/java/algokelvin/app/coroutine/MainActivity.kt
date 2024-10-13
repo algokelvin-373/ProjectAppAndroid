@@ -4,6 +4,10 @@ import algokelvin.app.coroutine.databinding.ActivityMainBinding
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -12,6 +16,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.i("ALGOKELVIN", "Hello from ${Thread.currentThread().name}")
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            Log.i("ALGOKELVIN", "Hello from ${Thread.currentThread().name}")
+        }
 
         binding.btnNoCoroutine.setOnClickListener {
             startActivity(Intent(this, NoCoroutineActivity::class.java))
