@@ -12,6 +12,10 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    companion object {
+        var resultAsyncAwait = ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnDispatchersMain.setOnClickListener {
             startActivity(Intent(this, DispatcherMainActivity::class.java))
+        }
+        binding.btnAsyncAwait.setOnClickListener {
+            startActivity(Intent(this, AsyncAwaitActivity::class.java))
         }
 
     }
