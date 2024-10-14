@@ -1,13 +1,22 @@
-#Switch Android
+## Action Every Minute
 
 | ![Gambar 1](./documentation/SS01_ActionEveryMinute.jpg) | ![Gambar 2](./documentation/SS02_ActionEveryMinute.jpg) | ![Gambar 3](./documentation/SS03_ActionEveryMinute.jpg) |
 |:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
 |               Gambar 1: <br> Begin Action               |               Gambar 2: <br> Start Action               |           Gambar 3: <br> Action until 5 Times           |
 
-#Envirountment
-AGP Version \t\t : 7.2.2
-Gradle Version \t : 7.3.3
-Java JDK \t\t : 17
+## Environment
+<table>
+    <tr>
+        <td>Android Gradle Plugins Version</td>
+        <td>Gradle Version</td>
+        <td>Java JDK</td>
+    </tr>
+    <tr>
+        <td>7.2.2</td>
+        <td>7.3.3</td>
+        <td>17</td>
+    </tr>
+</table>
 
 ## Contributors
 Thanks all contributors for build this repository
