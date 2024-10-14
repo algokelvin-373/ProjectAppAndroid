@@ -47,6 +47,12 @@
 <b>12. Switch Android</b> <br>
 <i>Implementasi Switch pada Android</i>
 
+<b>13. Two Number Operator No DTL</b> <br>
+<i>Create Project Without DTL (Data Tampilan Logic)</i>
+
+<b>14. Two Number Operator With DTL</b> <br>
+<i>Create Project With DTL (Data Tampilan Logic)</i>
+
 <table>
     <thead>
         <tr>
@@ -67,6 +73,7 @@
                 - Init Project Switch Android, Action Every Minute, and Two Number Operators. <br>
                 - Handle Package. <br>
                 - Update README.md Repository. <br>
+                - Create Project Two Number Operator Without DTL and With DTL. <br>
             </td>
         </tr>
     </tbody>

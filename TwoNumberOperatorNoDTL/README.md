@@ -1,10 +1,10 @@
-## Two Number Operator With DTL (Data Tampilan Logic)
+## Two Number Operator No DTL (Data Tampilan Logic)
 
 | ![Gambar 1](./documentation/SS01_TwoNumberOperator.jpg) | ![Gambar 2](./documentation/SS02_TwoNumberOperator.jpg) | ![Gambar 3](./documentation/SS03_TwoNumberOperator.jpg) |
 |:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
 |              Gambar 1: <br> Halaman Utama               |           Gambar 2: <br> Operator Perjumlahan           |           Gambar 3: <br> Operator Pengurangan           |
 
-This is an implementation Two Number Operator's Project with DTL
+This is an implementation Two Number Operator's Project No DTL
 ![Gambar 4](./documentation/SS04_TwoNumberOperator.png)
 
 ## Environment
