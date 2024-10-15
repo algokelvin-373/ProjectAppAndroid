@@ -7,6 +7,7 @@ import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CoroutineBasicActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCoroutineBinding
@@ -33,9 +34,11 @@ class CoroutineBasicActivity : AppCompatActivity() {
 
     }
 
-    private fun downloadData() {
-        for (i in 1 until 1000000) {
-            Log.i("ALGOKELVIN", "Downloading user $i in ${Thread.currentThread().name}")
+    private suspend fun downloadData() {
+        for (i in 1 until 25000) {
+            withContext(Dispatchers.Main) {
+                binding.txtDownloaded.text = "Downloading user $i in ${Thread.currentThread().name}"
+            }
         }
     }
 }

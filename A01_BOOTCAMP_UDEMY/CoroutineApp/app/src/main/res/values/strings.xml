@@ -8,4 +8,6 @@
     <string name="count">Count</string>
     <string name="scopes_dispatchers_and_builders">Scopes, Dispatchers, and Builders</string>
     <string name="dispatchers_main">Dispatchers Main</string>
+    <string name="async_and_await">Async and Await</string>
+    <string name="calculate_with_await">Calculate with Await</string>
 </resources>
