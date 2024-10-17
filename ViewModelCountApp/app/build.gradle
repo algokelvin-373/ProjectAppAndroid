@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "algokelvin.app.countapp"
-        minSdkVersion 21
-        targetSdkVersion 31
+        minSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
 
