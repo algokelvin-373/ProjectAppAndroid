@@ -13,6 +13,19 @@
 - LiveData
 - Data Binding
 
+<table>
+    <tr>
+        <td>Android Gradle Plugins Version</td>
+        <td>Gradle Version</td>
+        <td>Java JDK</td>
+    </tr>
+    <tr>
+        <td>8.5.0</td>
+        <td>8.7</td>
+        <td>17</td>
+    </tr>
+</table>
+
 ## Contributors
 Thanks all contributors for build this repository
 
