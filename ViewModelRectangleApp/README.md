@@ -4,6 +4,10 @@
 |:--------------------------------------------------:|:--------------------------------------------------:|
 |            Gambar 1: <br> Rectangle App            |        Gambar 2: <br> Get Result Calculate         |
 
+## Implementation
+- MVVM Architecture
+- View Binding
+
 ## Environment
 <table>
     <tr>
