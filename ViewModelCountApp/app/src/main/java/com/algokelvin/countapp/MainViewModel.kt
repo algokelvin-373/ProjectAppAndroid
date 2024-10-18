@@ -1,4 +1,4 @@
-package algokelvin.app.countapp
+package com.algokelvin.countapp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
