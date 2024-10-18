@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
             startTime = System.currentTimeMillis()
             handler = Handler()
             handler.post(updateTimeRunnable)
+            handler.post(updateVisualizer())
         } catch (e: IllegalStateException) {
             e.printStackTrace()
             // Tampilkan pesan kesalahan kepada pengguna
@@ -147,6 +148,16 @@ class MainActivity : AppCompatActivity() {
                 val minutes = (elapsedTime / (1000 * 60)) % 60
                 txt_record_time.text = String.format("%02d:%02d", minutes, seconds)
                 handler.postDelayed(this, 1000)
+            }
+        }
+    }
+
+    private fun updateVisualizer() = object : Runnable {
+        override fun run() {
+            if (isRecording) {
+                val maxAmplitude = recorder?.maxAmplitude?.toFloat() ?: 0f
+                visualizer_audio.addAmplitude(maxAmplitude)
+                handler.postDelayed(this, 100)
             }
         }
     }
@@ -181,8 +192,10 @@ class MainActivity : AppCompatActivity() {
         recorder = null
         isRecording = false
         handler.removeCallbacks(updateTimeRunnable)
+        handler.removeCallbacks(updateVisualizer())
         saveRecordingToMediaStore(outputFilePath)
         button_play_recording.text = "Start"
+        Toast.makeText(this, "Success Recording", Toast.LENGTH_SHORT).show()
     }
 
     private fun saveRecordingToMediaStore(filePath: String?) {
