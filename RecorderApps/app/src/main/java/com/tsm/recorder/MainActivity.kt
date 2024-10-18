@@ -10,6 +10,7 @@ import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
@@ -31,6 +32,10 @@ class MainActivity : AppCompatActivity() {
 
     private var recorder: MediaRecorder? = null
     private var outputFilePath: String? = null
+
+    private var isRecording = false
+    private lateinit var handler: Handler
+    private var startTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,6 +123,11 @@ class MainActivity : AppCompatActivity() {
                 start()
             }
             button_play_recording.text = ("Stop")
+
+            isRecording = true
+            startTime = System.currentTimeMillis()
+            handler = Handler()
+            handler.post(updateTimeRunnable)
         } catch (e: IllegalStateException) {
             e.printStackTrace()
             // Tampilkan pesan kesalahan kepada pengguna
@@ -126,6 +136,18 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
             // Tampilkan pesan kesalahan kepada pengguna
             Toast.makeText(this, "Recording failed due to IO error", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val updateTimeRunnable = object : Runnable {
+        override fun run() {
+            if (isRecording) {
+                val elapsedTime = System.currentTimeMillis() - startTime
+                val seconds = (elapsedTime / 1000) % 60
+                val minutes = (elapsedTime / (1000 * 60)) % 60
+                txt_record_time.text = String.format("%02d:%02d", minutes, seconds)
+                handler.postDelayed(this, 1000)
+            }
         }
     }
 
@@ -157,6 +179,8 @@ class MainActivity : AppCompatActivity() {
             release()
         }
         recorder = null
+        isRecording = false
+        handler.removeCallbacks(updateTimeRunnable)
         saveRecordingToMediaStore(outputFilePath)
         button_play_recording.text = "Start"
     }
