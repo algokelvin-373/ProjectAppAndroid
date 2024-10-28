@@ -53,6 +53,8 @@
                 - Update README.md Repository. <br>
                 - Create Project Two Number Operator Without DTL and With DTL. <br>
             </td>
+        </tr>
+        <tr>
             <td>1.0.2</td>
             <td>
                 - Init Project Input Output Application, Recorder Application, View Binding Input Data, View Model Count Application, and View Model Rectangle Application
