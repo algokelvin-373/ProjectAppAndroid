@@ -1,5 +1,5 @@
 <h1 align="center">Project Application Android</h1>
-<h4 align="center">Version 1.0.1</h3>
+<h4 align="center">Version 1.0.2</h3>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -12,46 +12,24 @@
 <h3 align="center">The Material of Case Study Android Developer</h3>
 
 <b>1.  Action Every Minute</b> <br>
-<i>Animasi Setiap Menit</i>
-
 <b>2.  Animation Application</b> <br>
-<i>Animasi geser ke kiri dan ke kanan pada TextView. Proses kontrol pada animasi TextView dibuat ke dalam modul 'animator-featuring'. Ini adalah contoh menggunakan modularization yang sangat sederhana.</i>
-
 <b>3.  Camera Application</b> <br>
-<i>Membuat Layar Kamera yang dimana menggunakan Surface bukan memakai Intent Implicit.</i>
-
 <b>4.  Count Number Compose</b> <br>
-<i>Memasukkan angka yang diinput kemudian dijumlahkan dengan hasil perjumlahan sebelumnya. Untuk kasus ini menggunakan Jetpack Compose Android.</i>
-
 <b>5.  Design UI Toast</b> <br>
-<i>Menampilkan Notif memakai Toast dan Bottom Navigation.</i>
-
 <b>6.  Enable Disable Button</b> <br>
-<i>Membuat Button Menjadi Enabled dan Disable. Contoh app ini menggunakan <b>ViewModel</b> sebagai logic untuk menentukan apakah data yang dimasukan itu sudah sesuai atau belum.</i>
-
-<b>7.  Keyboard Simulator</b> <br>
-<i>Membuat Keyboard Simulator (Bukan Bawaan Device) untuk input 3 data secara bergantian. Tiap data terdapat icon cross untuk clear data.</i>
-
-<b>8.  Language Change One</b> <br>
-<i>Mengubah ke dalam 3 bahasa (Indonesia, Inggris, Jepang)</i>
-
-<b>9.  Recyclerview Basic</b> <br>
-<i>Membuat List Menu Makanan dengan RecyclerView.</i>
-
-<b>10. Share and Rare</b> <br>
-<i>Membuat 2 Button yaitu Share and Rare. 'Share' untuk copy link dan 'Rare' untuk langsung ke link yang dituju.</i>
-
-<b>11. Show Dialog</b> <br>
-<i>Menampilkan 2 tipe dialog: Dialog posisi bawah dan Dialog posisi center.</i>
-
-<b>12. Switch Android</b> <br>
-<i>Implementasi Switch pada Android</i>
-
-<b>13. Two Number Operator No DTL</b> <br>
-<i>Create Project Without DTL (Data Tampilan Logic)</i>
-
-<b>14. Two Number Operator With DTL</b> <br>
-<i>Create Project With DTL (Data Tampilan Logic)</i>
+<b>8.  Input Output Application</b> <br>
+<b>9.  Keyboard Simulator</b> <br>
+<b>10. Language Change One</b> <br>
+<b>11. Recorder Application</b> <br>
+<b>12. Recyclerview Basic</b> <br>
+<b>13. Share and Rare</b> <br>
+<b>14. Show Dialog</b> <br>
+<b>15. Switch Android</b> <br>
+<b>16. Two Number Operator No DTL</b> <br>
+<b>17. Two Number Operator With DTL</b> <br>
+<b>18. View Binding Input Data</b> <br>
+<b>19. View Model Count Application</b> <br>
+<b>20. View Model Rectangle Application</b> <br>
 
 <table>
     <thead>
@@ -74,6 +52,12 @@
                 - Handle Package. <br>
                 - Update README.md Repository. <br>
                 - Create Project Two Number Operator Without DTL and With DTL. <br>
+            </td>
+        </tr>
+        <tr>
+            <td>1.0.2</td>
+            <td>
+                - Init Project Input Output Application, Recorder Application, View Binding Input Data, View Model Count Application, and View Model Rectangle Application
             </td>
         </tr>
     </tbody>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CoroutineApp</string>
+    <string name="coroutine_app">Coroutine App</string>
+    <string name="no_coroutine">No Coroutine</string>
+    <string name="coroutine_basic">Coroutine Basic</string>
+    <string name="download_user_data">Download User Data</string>
+    <string name="data_count">Count: %s</string>
+    <string name="count">Count</string>
+    <string name="scopes_dispatchers_and_builders">Scopes, Dispatchers, and Builders</string>
+    <string name="dispatchers_main">Dispatchers Main</string>
+    <string name="async_and_await">Async and Await</string>
+    <string name="calculate_with_await">Calculate with Await</string>
+</resources>
