@@ -42,12 +42,12 @@ class ArtistAdapter():RecyclerView.Adapter<MyViewHolder>() {
 
 class MyViewHolder(private val binding: ItemProductLayoutBinding): RecyclerView.ViewHolder(binding.root) {
    fun bind(artist: Artist){
-        binding.titleTextView.text = artist.name
+        /*binding.titleProduct.text = artist.name
         //binding.descriptionTextView.text = artist.
         val posterURL = "https://image.tmdb.org/t/p/w500"+artist.profilePath
         Glide.with(binding.imageView.context)
             .load(posterURL)
-            .into(binding.imageView)
+            .into(binding.imageView)*/
 
    }
 }

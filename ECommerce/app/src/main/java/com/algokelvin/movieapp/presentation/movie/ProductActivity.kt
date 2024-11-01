@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityProductBinding
 import com.algokelvin.movieapp.presentation.di.Injector
@@ -66,7 +66,7 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView(){
-        binding.productRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.productRecyclerView.layoutManager = GridLayoutManager(this, 2)
         adapter = ProductAdapter()
         binding.productRecyclerView.adapter = adapter
         displayPopularMovies()

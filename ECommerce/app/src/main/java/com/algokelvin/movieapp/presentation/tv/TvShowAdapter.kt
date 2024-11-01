@@ -42,12 +42,12 @@ class TvShowAdapter():RecyclerView.Adapter<MyViewHolder>() {
 
 class MyViewHolder(private val binding: ItemProductLayoutBinding): RecyclerView.ViewHolder(binding.root) {
    fun bind(tvShow: TvShow){
-        binding.titleTextView.text = tvShow.name
+        /*binding.titleTextView.text = tvShow.name
         binding.descriptionTextView.text = tvShow.overview
         val posterURL = "https://image.tmdb.org/t/p/w500"+tvShow.posterPath
         Glide.with(binding.imageView.context)
             .load(posterURL)
-            .into(binding.imageView)
+            .into(binding.imageView)*/
 
    }
 }

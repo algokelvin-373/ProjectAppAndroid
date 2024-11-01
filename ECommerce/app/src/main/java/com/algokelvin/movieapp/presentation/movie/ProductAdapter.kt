@@ -42,11 +42,11 @@ class ProductAdapter():RecyclerView.Adapter<MyViewHolder>() {
 
 class MyViewHolder(private val binding: ItemProductLayoutBinding): RecyclerView.ViewHolder(binding.root) {
    fun bind(product:Product){
-        binding.titleTextView.text = product.title
-        binding.descriptionTextView.text = product.description
-        Glide.with(binding.imageView.context)
+        binding.titleProduct.text = product.title
+        binding.categoryProduct.text = product.category
+        Glide.with(binding.imageProduct.context)
             .load(product.image)
-            .into(binding.imageView)
+            .into(binding.imageProduct)
 
    }
 }
