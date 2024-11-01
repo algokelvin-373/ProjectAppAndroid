@@ -4,16 +4,16 @@ import com.algokelvin.movieapp.data.repository.artist.ArtistRepositoryImpl
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistCacheDataSource
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistLocalDataSource
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistRemoteDataSource
-import com.algokelvin.movieapp.data.repository.movie.MovieRepositoryImpl
-import com.algokelvin.movieapp.data.repository.movie.datasource.MovieCacheDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasource.MovieLocalDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasource.MovieRemoteDataSource
+import com.algokelvin.movieapp.data.repository.movie.ProductRepositoryImpl
+import com.algokelvin.movieapp.data.repository.movie.datasource.ProductCacheDataSource
+import com.algokelvin.movieapp.data.repository.movie.datasource.ProductLocalDataSource
+import com.algokelvin.movieapp.data.repository.movie.datasource.ProductRemoteDataSource
 import com.algokelvin.movieapp.data.repository.tv.TvShowRepositoryImpl
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowCacheDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
-import com.algokelvin.movieapp.domain.repository.MovieRepository
+import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
 import dagger.Module
 import dagger.Provides
@@ -24,14 +24,14 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideMovieRepository(
-        movieRemoteDataSource: MovieRemoteDataSource,
-        movieLocalDataSource: MovieLocalDataSource,
-        movieCacheDataSource: MovieCacheDataSource,
-    ): MovieRepository {
-        return MovieRepositoryImpl(
-            movieRemoteDataSource,
-            movieLocalDataSource,
-            movieCacheDataSource
+        productRemoteDataSource: ProductRemoteDataSource,
+        productLocalDataSource: ProductLocalDataSource,
+        productCacheDataSource: ProductCacheDataSource,
+    ): ProductRepository {
+        return ProductRepositoryImpl(
+            productRemoteDataSource,
+            productLocalDataSource,
+            productCacheDataSource
         )
     }
 

@@ -1,21 +1,21 @@
-package com.algokelvin.movieapp.presentation.artist
+package com.algokelvin.movieapp.presentation.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.movieapp.R
-import com.algokelvin.movieapp.data.model.artist.Artist
+import com.algokelvin.movieapp.data.model.Product
 import com.algokelvin.movieapp.databinding.ItemProductLayoutBinding
 import com.bumptech.glide.Glide
 
 
-class ArtistAdapter():RecyclerView.Adapter<MyViewHolder>() {
-    private val artistList = ArrayList<Artist>()
+class ProductAdapter():RecyclerView.Adapter<MyViewHolder>() {
+    private val productList = ArrayList<Product>()
 
-    fun setList(artists:List<Artist>){
-         artistList.clear()
-         artistList.addAll(artists)
+    fun setList(products:List<Product>){
+         productList.clear()
+         productList.addAll(products)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -30,23 +30,22 @@ class ArtistAdapter():RecyclerView.Adapter<MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return artistList.size
+        return productList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-       holder.bind(artistList[position])
+       holder.bind(productList[position])
     }
 }
 
 
 
 class MyViewHolder(private val binding: ItemProductLayoutBinding): RecyclerView.ViewHolder(binding.root) {
-   fun bind(artist: Artist){
-        binding.titleTextView.text = artist.name
-        //binding.descriptionTextView.text = artist.
-        val posterURL = "https://image.tmdb.org/t/p/w500"+artist.profilePath
+   fun bind(product:Product){
+        binding.titleTextView.text = product.title
+        binding.descriptionTextView.text = product.description
         Glide.with(binding.imageView.context)
-            .load(posterURL)
+            .load(product.image)
             .into(binding.imageView)
 
    }

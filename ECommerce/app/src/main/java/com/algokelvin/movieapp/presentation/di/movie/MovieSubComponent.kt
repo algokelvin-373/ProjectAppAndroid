@@ -1,12 +1,12 @@
 package com.algokelvin.movieapp.presentation.di.movie
 
-import com.algokelvin.movieapp.presentation.movie.MovieActivity
+import com.algokelvin.movieapp.presentation.movie.ProductActivity
 import dagger.Subcomponent
 
 @MovieScope
 @Subcomponent(modules = [MovieModule::class])
 interface MovieSubComponent {
-    fun inject(movieActivity: MovieActivity)
+    fun inject(productActivity: ProductActivity)
 
     @Subcomponent.Factory
     interface Factory {

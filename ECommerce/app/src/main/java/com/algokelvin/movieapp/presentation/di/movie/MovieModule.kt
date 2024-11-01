@@ -1,8 +1,8 @@
 package com.algokelvin.movieapp.presentation.di.movie
 
-import com.algokelvin.movieapp.domain.usecase.GetMoviesUseCase
+import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateMoviesUseCase
-import com.algokelvin.movieapp.presentation.movie.MovieViewModelFactory
+import com.algokelvin.movieapp.presentation.movie.ProductViewModelFactory
 import dagger.Module
 import dagger.Provides
 
@@ -11,7 +11,7 @@ class MovieModule {
     @MovieScope
     @Provides
     fun provideMovieViewModelFactory(
-        getMoviesUseCase: GetMoviesUseCase,
+        getProductsUseCase: GetProductsUseCase,
         updateMovieUseCase: UpdateMoviesUseCase,
-    ): MovieViewModelFactory = MovieViewModelFactory(getMoviesUseCase, updateMovieUseCase)
+    ): ProductViewModelFactory = ProductViewModelFactory(getProductsUseCase, updateMovieUseCase)
 }

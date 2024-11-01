@@ -1,10 +1,10 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
-import com.algokelvin.movieapp.domain.repository.MovieRepository
+import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
 import com.algokelvin.movieapp.domain.usecase.GetArtistsUseCase
-import com.algokelvin.movieapp.domain.usecase.GetMoviesUseCase
+import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.GetTvShowsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateArtistsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateMoviesUseCase
@@ -15,13 +15,13 @@ import dagger.Provides
 @Module
 class UseCaseModule {
     @Provides
-    fun provideGetMovieUseCase(movieRepository: MovieRepository): GetMoviesUseCase {
-        return GetMoviesUseCase(movieRepository)
+    fun provideGetMovieUseCase(productRepository: ProductRepository): GetProductsUseCase {
+        return GetProductsUseCase(productRepository)
     }
 
     @Provides
-    fun provideUpdateMovieUseCase(movieRepository: MovieRepository): UpdateMoviesUseCase {
-        return UpdateMoviesUseCase(movieRepository)
+    fun provideUpdateMovieUseCase(productRepository: ProductRepository): UpdateMoviesUseCase {
+        return UpdateMoviesUseCase(productRepository)
     }
 
     @Provides

@@ -10,7 +10,7 @@
         tools:context=".presentation.HomeActivity"
         >
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/movie_button"
+            android:id="@+id/product_button"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
@@ -20,7 +20,7 @@
             android:textColor="@color/white"
             android:background="@drawable/bg_btn_rounded"
             android:padding="15dp"
-            android:text="Movies"
+            android:text="Products"
             android:textSize="50sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -34,6 +34,7 @@
             android:textColor="@color/white"
             android:background="@drawable/bg_btn_rounded"
             android:padding="15dp"
+            android:visibility="gone"
             android:text="Tv Shows"
             android:textSize="50sp" />
 
@@ -48,6 +49,7 @@
             android:textColor="@color/white"
             android:background="@drawable/bg_btn_rounded"
             android:padding="15dp"
+            android:visibility="gone"
             android:text="Artists"
             android:textSize="50sp" />
     </LinearLayout>

@@ -3,8 +3,8 @@ package com.algokelvin.movieapp.presentation.di.core
 import android.content.Context
 import androidx.room.Room
 import com.algokelvin.movieapp.data.db.ArtistDao
-import com.algokelvin.movieapp.data.db.MovieDB
-import com.algokelvin.movieapp.data.db.MovieDao
+import com.algokelvin.movieapp.data.db.ProductDB
+import com.algokelvin.movieapp.data.db.ProductDao
 import com.algokelvin.movieapp.data.db.TvShowDao
 import dagger.Module
 import dagger.Provides
@@ -14,26 +14,26 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideMovieDatabase(context: Context): MovieDB {
-        return Room.databaseBuilder(context, MovieDB::class.java, "tmdbmovie")
+    fun provideProductDatabase(context: Context): ProductDB {
+        return Room.databaseBuilder(context, ProductDB::class.java, "fakeproductdb")
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideMovieDao(movieDB: MovieDB): MovieDao {
-        return movieDB.movieDao()
+    fun provideProductDao(productDB: ProductDB): ProductDao {
+        return productDB.productDao()
     }
 
     @Singleton
     @Provides
-    fun provideTvShowDao(movieDB: MovieDB): TvShowDao {
-        return movieDB.tvShowDao()
+    fun provideTvShowDao(productDB: ProductDB): TvShowDao {
+        return productDB.tvShowDao()
     }
 
     @Singleton
     @Provides
-    fun provideArtistDao(movieDB: MovieDB): ArtistDao {
-        return movieDB.artistDao()
+    fun provideArtistDao(productDB: ProductDB): ArtistDao {
+        return productDB.artistDao()
     }
 }

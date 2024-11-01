@@ -2,14 +2,14 @@ package com.algokelvin.movieapp.presentation.movie
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.algokelvin.movieapp.domain.usecase.GetMoviesUseCase
+import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateMoviesUseCase
 
-class MovieViewModelFactory(
-    private val getMoviesUseCase: GetMoviesUseCase,
+class ProductViewModelFactory(
+    private val getProductsUseCase: GetProductsUseCase,
     private val updateMoviesUseCase: UpdateMoviesUseCase
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MovieViewModel(getMoviesUseCase, updateMoviesUseCase) as T
+        return ProductViewModel(getProductsUseCase, updateMoviesUseCase) as T
     }
 }

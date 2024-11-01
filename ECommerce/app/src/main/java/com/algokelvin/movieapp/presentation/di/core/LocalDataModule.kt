@@ -1,12 +1,12 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.data.db.ArtistDao
-import com.algokelvin.movieapp.data.db.MovieDao
+import com.algokelvin.movieapp.data.db.ProductDao
 import com.algokelvin.movieapp.data.db.TvShowDao
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistLocalDataSource
 import com.algokelvin.movieapp.data.repository.artist.datasourceImpl.ArtistLocalDataSourceImpl
-import com.algokelvin.movieapp.data.repository.movie.datasource.MovieLocalDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.MovieLocalDataSourceImpl
+import com.algokelvin.movieapp.data.repository.movie.datasource.ProductLocalDataSource
+import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.ProductLocalDataSourceImpl
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasourceImpl.TvShowLocalDataSourceImpl
 import dagger.Module
@@ -17,8 +17,8 @@ import javax.inject.Singleton
 class LocalDataModule {
     @Singleton
     @Provides
-    fun provideMovieLocalDataModule(movieDao: MovieDao): MovieLocalDataSource {
-        return MovieLocalDataSourceImpl(movieDao)
+    fun provideMovieLocalDataModule(productDao: ProductDao): ProductLocalDataSource {
+        return ProductLocalDataSourceImpl(productDao)
     }
 
     @Singleton

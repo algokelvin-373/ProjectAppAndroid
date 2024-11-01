@@ -18,7 +18,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_KEY", "\"19978af3bb16e019522fd5077f3018f2\"")
-        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+        buildConfigField("String", "BASE_URL", "\"https://fakestoreapi.com/\"")
     }
 
     buildTypes {

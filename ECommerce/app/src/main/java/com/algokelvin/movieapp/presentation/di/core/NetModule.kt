@@ -1,6 +1,6 @@
 package com.algokelvin.movieapp.presentation.di.core
 
-import com.algokelvin.movieapp.data.api.MovieApiService
+import com.algokelvin.movieapp.data.api.ProductApiService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -20,7 +20,7 @@ class NetModule(private val baseUrl: String) {
 
     @Singleton
     @Provides
-    fun provideMovieApiService(retrofit: Retrofit): MovieApiService {
-        return retrofit.create(MovieApiService::class.java)
+    fun provideMovieApiService(retrofit: Retrofit): ProductApiService {
+        return retrofit.create(ProductApiService::class.java)
     }
 }

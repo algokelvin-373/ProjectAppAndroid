@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.tv.TvShow
-import com.algokelvin.movieapp.databinding.ListItemBinding
+import com.algokelvin.movieapp.databinding.ItemProductLayoutBinding
 import com.bumptech.glide.Glide
 
 
@@ -20,9 +20,9 @@ class TvShowAdapter():RecyclerView.Adapter<MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding : ListItemBinding = DataBindingUtil.inflate(
+        val binding : ItemProductLayoutBinding = DataBindingUtil.inflate(
             layoutInflater,
-            R.layout.list_item,
+            R.layout.item_product_layout,
             parent,
             false
         )
@@ -40,7 +40,7 @@ class TvShowAdapter():RecyclerView.Adapter<MyViewHolder>() {
 
 
 
-class MyViewHolder(private val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root) {
+class MyViewHolder(private val binding: ItemProductLayoutBinding): RecyclerView.ViewHolder(binding.root) {
    fun bind(tvShow: TvShow){
         binding.titleTextView.text = tvShow.name
         binding.descriptionTextView.text = tvShow.overview

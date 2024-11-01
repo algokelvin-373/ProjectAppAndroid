@@ -2,17 +2,21 @@ package com.algokelvin.movieapp.presentation.movie
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.algokelvin.movieapp.domain.usecase.GetMoviesUseCase
+import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateMoviesUseCase
 
-class MovieViewModel(
-    private val getMoviesUseCase: GetMoviesUseCase,
+class ProductViewModel(
+    private val getProductsUseCase: GetProductsUseCase,
     private val updateMoviesUseCase: UpdateMoviesUseCase
 ): ViewModel() {
-    fun getMovies() = liveData {
-        val movieList = getMoviesUseCase.execute()
-        emit(movieList)
+    fun getProducts() = liveData {
+        val productList = getProductsUseCase.execute()
+        emit(productList)
     }
+    /*fun getMovies() = liveData {
+        val movieList = getProductsUseCase.execute()
+        emit(movieList)
+    }*/
 
     fun updateMovies() = liveData {
         val updateMoviesList = updateMoviesUseCase.execute()

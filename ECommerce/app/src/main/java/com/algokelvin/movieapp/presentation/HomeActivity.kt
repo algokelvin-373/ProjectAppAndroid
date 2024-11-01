@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityHomeBinding
 import com.algokelvin.movieapp.presentation.artist.ArtistActivity
-import com.algokelvin.movieapp.presentation.movie.MovieActivity
+import com.algokelvin.movieapp.presentation.movie.ProductActivity
 import com.algokelvin.movieapp.presentation.tv.TvShowActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -17,8 +17,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
-        binding.movieButton.setOnClickListener {
-            val intentToMovie = Intent(this, MovieActivity::class.java)
+        binding.productButton.setOnClickListener {
+            val intentToMovie = Intent(this, ProductActivity::class.java)
             startActivity(intentToMovie)
         }
 

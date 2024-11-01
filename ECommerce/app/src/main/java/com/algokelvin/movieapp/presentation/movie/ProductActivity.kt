@@ -1,7 +1,6 @@
 package com.algokelvin.movieapp.presentation.movie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -13,25 +12,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algokelvin.movieapp.R
-import com.algokelvin.movieapp.databinding.ActivityMovieBinding
+import com.algokelvin.movieapp.databinding.ActivityProductBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import javax.inject.Inject
 
-class MovieActivity : AppCompatActivity() {
+class ProductActivity : AppCompatActivity() {
     @Inject
-    lateinit var factory: MovieViewModelFactory
+    lateinit var factory: ProductViewModelFactory
 
-    private lateinit var binding: ActivityMovieBinding
-    private lateinit var movieViewModel: MovieViewModel
-    private lateinit var adapter: MovieAdapter
+    private lateinit var binding: ActivityProductBinding
+    private lateinit var productViewModel: ProductViewModel
+    private lateinit var adapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_product)
 
         (application as Injector).createMovieSubComponent()
             .inject(this)
-        movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class]
+        productViewModel = ViewModelProvider(this, factory)[ProductViewModel::class]
 
         initRecyclerView()
     }
@@ -53,36 +52,36 @@ class MovieActivity : AppCompatActivity() {
     }
 
     private fun updateMovies() {
-        binding.movieProgressBar.visibility = View.VISIBLE
-        val response = movieViewModel.updateMovies()
+        binding.productProgressBar.visibility = View.VISIBLE
+        val response = productViewModel.updateMovies()
         response.observe(this, Observer {
             if (it != null) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
-                binding.movieProgressBar.visibility = View.GONE
+                binding.productProgressBar.visibility = View.GONE
             } else {
-                binding.movieProgressBar.visibility = View.GONE
+                binding.productProgressBar.visibility = View.GONE
             }
         })
     }
 
     private fun initRecyclerView(){
-        binding.movieRecyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MovieAdapter()
-        binding.movieRecyclerView.adapter = adapter
+        binding.productRecyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = ProductAdapter()
+        binding.productRecyclerView.adapter = adapter
         displayPopularMovies()
     }
 
     private fun displayPopularMovies(){
-        binding.movieProgressBar.visibility = View.VISIBLE
-        val responseLiveData = movieViewModel.getMovies()
+        binding.productProgressBar.visibility = View.VISIBLE
+        val responseLiveData = productViewModel.getProducts()
         responseLiveData.observe(this, Observer {
             if(it!=null){
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
-                binding.movieProgressBar.visibility = View.GONE
+                binding.productProgressBar.visibility = View.GONE
             }else{
-                binding.movieProgressBar.visibility = View.GONE
+                binding.productProgressBar.visibility = View.GONE
                 Toast.makeText(applicationContext,"No data available", Toast.LENGTH_LONG).show()
             }
         })
