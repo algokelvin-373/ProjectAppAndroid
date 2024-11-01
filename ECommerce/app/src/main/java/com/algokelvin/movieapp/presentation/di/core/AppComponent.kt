@@ -2,6 +2,7 @@ package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.presentation.di.artist.ArtistSubComponent
 import com.algokelvin.movieapp.presentation.di.movie.MovieSubComponent
+import com.algokelvin.movieapp.presentation.di.movie.ProductDetailSubComponent
 import com.algokelvin.movieapp.presentation.di.tv.TvShowSubComponent
 import dagger.Component
 import javax.inject.Singleton
@@ -21,4 +22,5 @@ interface AppComponent {
     fun movieSubComponent(): MovieSubComponent.Factory
     fun tvShowSubComponent(): TvShowSubComponent.Factory
     fun artistSubComponent(): ArtistSubComponent.Factory
+    fun productDetailSubComponent(): ProductDetailSubComponent.Factory
 }

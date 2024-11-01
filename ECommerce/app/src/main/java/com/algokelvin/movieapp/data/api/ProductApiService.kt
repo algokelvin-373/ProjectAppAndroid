@@ -7,6 +7,7 @@ import com.algokelvin.movieapp.data.model.movie.MovieList
 import com.algokelvin.movieapp.data.model.tv.TvShowList
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ProductApiService {
@@ -21,4 +22,7 @@ interface ProductApiService {
 
     @GET("products")
     suspend fun getProductsList(): Response<ArrayList<Product>>
+
+    @GET("products/{id}")
+    suspend fun getProductDetailList(@Path("id") id: String): Response<Product>
 }

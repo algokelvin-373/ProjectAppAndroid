@@ -1,9 +1,11 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
+import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
 import com.algokelvin.movieapp.domain.usecase.GetArtistsUseCase
+import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.GetTvShowsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateArtistsUseCase
@@ -42,5 +44,10 @@ class UseCaseModule {
     @Provides
     fun provideUpdateArtistUseCase(artistRepository: ArtistRepository): UpdateArtistsUseCase {
         return UpdateArtistsUseCase(artistRepository)
+    }
+
+    @Provides
+    fun provideGetProductDetailUseCase(productDetailRepository: ProductDetailRepository): GetProductDetailUseCase {
+        return GetProductDetailUseCase(productDetailRepository)
     }
 }

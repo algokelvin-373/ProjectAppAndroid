@@ -1,5 +1,6 @@
-package com.algokelvin.movieapp.presentation.movie
+package com.algokelvin.movieapp.presentation.product
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,11 +13,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.algokelvin.movieapp.R
+import com.algokelvin.movieapp.data.model.Product
 import com.algokelvin.movieapp.databinding.ActivityProductBinding
 import com.algokelvin.movieapp.presentation.di.Injector
+import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
+import com.algokelvin.movieapp.presentation.productdetail.ProductDetailActivity
 import javax.inject.Inject
 
-class ProductActivity : AppCompatActivity() {
+class ProductActivity : AppCompatActivity(), OnClickItemProduct {
     @Inject
     lateinit var factory: ProductViewModelFactory
 
@@ -67,7 +71,7 @@ class ProductActivity : AppCompatActivity() {
 
     private fun initRecyclerView(){
         binding.productRecyclerView.layoutManager = GridLayoutManager(this, 2)
-        adapter = ProductAdapter()
+        adapter = ProductAdapter(this)
         binding.productRecyclerView.adapter = adapter
         displayPopularMovies()
     }
@@ -85,5 +89,11 @@ class ProductActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"No data available", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    override fun onClickItemProduct(product: Product) {
+        val toProductDetailPage = Intent(this, ProductDetailActivity::class.java)
+        toProductDetailPage.putExtra("PRODUCT_ID", product.id)
+        startActivity(toProductDetailPage)
     }
 }

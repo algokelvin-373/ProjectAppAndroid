@@ -8,11 +8,14 @@ import com.algokelvin.movieapp.data.repository.movie.ProductRepositoryImpl
 import com.algokelvin.movieapp.data.repository.movie.datasource.ProductCacheDataSource
 import com.algokelvin.movieapp.data.repository.movie.datasource.ProductLocalDataSource
 import com.algokelvin.movieapp.data.repository.movie.datasource.ProductRemoteDataSource
+import com.algokelvin.movieapp.data.repository.productDetail.ProductDetailRepositoryImpl
+import com.algokelvin.movieapp.data.repository.productDetail.datasource.ProductDetailRemoteDataSource
 import com.algokelvin.movieapp.data.repository.tv.TvShowRepositoryImpl
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowCacheDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
+import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
 import dagger.Module
@@ -60,6 +63,16 @@ class RepositoryModule {
             artistRemoteDataSource,
             artistLocalDataSource,
             artistCacheDataSource
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductDetailRepository(
+        productDetailRemoteDataSource: ProductDetailRemoteDataSource
+    ): ProductDetailRepository {
+        return ProductDetailRepositoryImpl(
+            productDetailRemoteDataSource
         )
     }
 }

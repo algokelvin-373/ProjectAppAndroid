@@ -1,4 +1,4 @@
-package com.algokelvin.movieapp.presentation.movie
+package com.algokelvin.movieapp.presentation.product
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.Product
 import com.algokelvin.movieapp.databinding.ItemProductLayoutBinding
+import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
 import com.bumptech.glide.Glide
 
 
-class ProductAdapter():RecyclerView.Adapter<MyViewHolder>() {
+class ProductAdapter(
+    private val onClickItemProduct: OnClickItemProduct
+):RecyclerView.Adapter<MyViewHolder>() {
     private val productList = ArrayList<Product>()
 
     fun setList(products:List<Product>){
@@ -26,7 +29,7 @@ class ProductAdapter():RecyclerView.Adapter<MyViewHolder>() {
             parent,
             false
         )
-        return MyViewHolder(binding)
+        return MyViewHolder(binding, onClickItemProduct)
     }
 
     override fun getItemCount(): Int {
@@ -40,13 +43,19 @@ class ProductAdapter():RecyclerView.Adapter<MyViewHolder>() {
 
 
 
-class MyViewHolder(private val binding: ItemProductLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+class MyViewHolder(
+    private val binding: ItemProductLayoutBinding,
+    private val onClickItemProduct: OnClickItemProduct,
+): RecyclerView.ViewHolder(binding.root) {
+
    fun bind(product:Product){
         binding.titleProduct.text = product.title
         binding.categoryProduct.text = product.category
         Glide.with(binding.imageProduct.context)
             .load(product.image)
             .into(binding.imageProduct)
-
+       binding.cardView.setOnClickListener {
+           onClickItemProduct.onClickItemProduct(product)
+       }
    }
 }

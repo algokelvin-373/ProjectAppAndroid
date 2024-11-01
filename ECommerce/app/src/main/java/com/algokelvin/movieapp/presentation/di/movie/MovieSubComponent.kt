@@ -1,6 +1,6 @@
 package com.algokelvin.movieapp.presentation.di.movie
 
-import com.algokelvin.movieapp.presentation.movie.ProductActivity
+import com.algokelvin.movieapp.presentation.product.ProductActivity
 import dagger.Subcomponent
 
 @MovieScope

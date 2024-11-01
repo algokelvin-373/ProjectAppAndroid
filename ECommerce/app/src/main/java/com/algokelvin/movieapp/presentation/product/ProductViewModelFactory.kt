@@ -1,4 +1,4 @@
-package com.algokelvin.movieapp.presentation.movie
+package com.algokelvin.movieapp.presentation.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
