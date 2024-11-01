@@ -4,6 +4,8 @@ import com.algokelvin.movieapp.data.repository.artist.ArtistRepositoryImpl
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistCacheDataSource
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistLocalDataSource
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistRemoteDataSource
+import com.algokelvin.movieapp.data.repository.login.LoginRepositoryImpl
+import com.algokelvin.movieapp.data.repository.login.datasource.LoginRemoteDataSource
 import com.algokelvin.movieapp.data.repository.movie.ProductRepositoryImpl
 import com.algokelvin.movieapp.data.repository.movie.datasource.ProductCacheDataSource
 import com.algokelvin.movieapp.data.repository.movie.datasource.ProductLocalDataSource
@@ -15,6 +17,7 @@ import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowCacheDataSour
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
+import com.algokelvin.movieapp.domain.repository.LoginRepository
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
@@ -73,6 +76,16 @@ class RepositoryModule {
     ): ProductDetailRepository {
         return ProductDetailRepositoryImpl(
             productDetailRemoteDataSource
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideLoginRepository(
+        loginRemoteDataSource: LoginRemoteDataSource
+    ): LoginRepository {
+        return LoginRepositoryImpl(
+            loginRemoteDataSource
         )
     }
 }

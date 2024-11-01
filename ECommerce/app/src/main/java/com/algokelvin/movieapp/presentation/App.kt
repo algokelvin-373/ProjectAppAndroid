@@ -9,6 +9,7 @@ import com.algokelvin.movieapp.presentation.di.core.AppModule
 import com.algokelvin.movieapp.presentation.di.core.DaggerAppComponent
 import com.algokelvin.movieapp.presentation.di.core.NetModule
 import com.algokelvin.movieapp.presentation.di.core.RemoteDataModule
+import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
 import com.algokelvin.movieapp.presentation.di.movie.MovieSubComponent
 import com.algokelvin.movieapp.presentation.di.movie.ProductDetailSubComponent
 import com.algokelvin.movieapp.presentation.di.tv.TvShowSubComponent
@@ -39,5 +40,9 @@ class App: Application(), Injector {
 
     override fun createProductDetailSubComponent(): ProductDetailSubComponent {
         return appComponent.productDetailSubComponent().create()
+    }
+
+    override fun createLoginSubComponent(): LoginSubComponent {
+        return appComponent.loginSubComponent().create()
     }
 }

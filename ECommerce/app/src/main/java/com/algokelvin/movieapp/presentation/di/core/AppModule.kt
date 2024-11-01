@@ -2,6 +2,7 @@ package com.algokelvin.movieapp.presentation.di.core
 
 import android.content.Context
 import com.algokelvin.movieapp.presentation.di.artist.ArtistSubComponent
+import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
 import com.algokelvin.movieapp.presentation.di.movie.MovieSubComponent
 import com.algokelvin.movieapp.presentation.di.movie.ProductDetailSubComponent
 import com.algokelvin.movieapp.presentation.di.tv.TvShowSubComponent
@@ -14,6 +15,7 @@ import javax.inject.Singleton
     TvShowSubComponent::class,
     ArtistSubComponent::class,
     ProductDetailSubComponent::class,
+    LoginSubComponent::class,
 ])
 class AppModule(private val context: Context) {
     @Singleton

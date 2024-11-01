@@ -24,7 +24,7 @@
             android:textSize="50sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tv_button"
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
@@ -34,8 +34,7 @@
             android:textColor="@color/white"
             android:background="@drawable/bg_btn_rounded"
             android:padding="15dp"
-            android:visibility="gone"
-            android:text="Tv Shows"
+            android:text="Login"
             android:textSize="50sp" />
 
         <androidx.appcompat.widget.AppCompatButton

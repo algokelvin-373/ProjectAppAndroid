@@ -1,6 +1,7 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.domain.repository.ArtistRepository
+import com.algokelvin.movieapp.domain.repository.LoginRepository
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.repository.TvShowRepository
@@ -8,6 +9,7 @@ import com.algokelvin.movieapp.domain.usecase.GetArtistsUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.GetTvShowsUseCase
+import com.algokelvin.movieapp.domain.usecase.LoginUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateArtistsUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateMoviesUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateTvShowsUseCase
@@ -49,5 +51,10 @@ class UseCaseModule {
     @Provides
     fun provideGetProductDetailUseCase(productDetailRepository: ProductDetailRepository): GetProductDetailUseCase {
         return GetProductDetailUseCase(productDetailRepository)
+    }
+
+    @Provides
+    fun provideLoginUseCase(loginRepository: LoginRepository): LoginUseCase {
+        return LoginUseCase(loginRepository)
     }
 }
