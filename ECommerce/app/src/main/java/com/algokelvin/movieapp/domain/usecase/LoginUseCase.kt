@@ -1,7 +1,7 @@
 package com.algokelvin.movieapp.domain.usecase
 
-import com.algokelvin.movieapp.data.model.Login
-import com.algokelvin.movieapp.data.model.Token
+import com.algokelvin.movieapp.data.model.user.Login
+import com.algokelvin.movieapp.data.model.user.Token
 import com.algokelvin.movieapp.domain.repository.LoginRepository
 
 class LoginUseCase(private val loginRepository: LoginRepository) {

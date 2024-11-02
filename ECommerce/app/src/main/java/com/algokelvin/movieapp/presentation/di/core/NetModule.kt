@@ -20,7 +20,7 @@ class NetModule(private val baseUrl: String) {
 
     @Singleton
     @Provides
-    fun provideMovieApiService(retrofit: Retrofit): ProductApiService {
+    fun provideProductApiService(retrofit: Retrofit): ProductApiService {
         return retrofit.create(ProductApiService::class.java)
     }
 }

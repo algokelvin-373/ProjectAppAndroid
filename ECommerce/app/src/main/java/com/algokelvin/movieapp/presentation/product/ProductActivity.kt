@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.algokelvin.movieapp.R
-import com.algokelvin.movieapp.data.model.Product
+import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.databinding.ActivityProductBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
@@ -56,7 +56,7 @@ class ProductActivity : AppCompatActivity(), OnClickItemProduct {
     }
 
     private fun updateMovies() {
-        binding.productProgressBar.visibility = View.VISIBLE
+        /*binding.productProgressBar.visibility = View.VISIBLE
         val response = productViewModel.updateMovies()
         response.observe(this, Observer {
             if (it != null) {
@@ -66,7 +66,7 @@ class ProductActivity : AppCompatActivity(), OnClickItemProduct {
             } else {
                 binding.productProgressBar.visibility = View.GONE
             }
-        })
+        })*/
     }
 
     private fun initRecyclerView(){

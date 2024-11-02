@@ -2,15 +2,12 @@ package com.algokelvin.movieapp.presentation.login
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
-import com.algokelvin.movieapp.data.model.Login
+import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.databinding.ActivityLoginBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import javax.inject.Inject

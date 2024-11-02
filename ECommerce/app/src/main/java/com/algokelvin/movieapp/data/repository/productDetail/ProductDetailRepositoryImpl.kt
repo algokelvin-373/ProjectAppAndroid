@@ -1,7 +1,7 @@
 package com.algokelvin.movieapp.data.repository.productDetail
 
 import android.util.Log
-import com.algokelvin.movieapp.data.model.Product
+import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.productDetail.datasource.ProductDetailRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 

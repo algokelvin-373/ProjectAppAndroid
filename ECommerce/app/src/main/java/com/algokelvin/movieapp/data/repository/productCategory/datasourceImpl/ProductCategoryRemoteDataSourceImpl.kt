@@ -1,7 +1,7 @@
 package com.algokelvin.movieapp.data.repository.productCategory.datasourceImpl
 
 import com.algokelvin.movieapp.data.api.ProductApiService
-import com.algokelvin.movieapp.data.model.Product
+import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.productCategory.datasource.ProductCategoryRemoteDataSource
 import retrofit2.Response
 

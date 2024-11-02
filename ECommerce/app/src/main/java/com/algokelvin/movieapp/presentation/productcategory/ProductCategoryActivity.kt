@@ -10,12 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.algokelvin.movieapp.R
-import com.algokelvin.movieapp.data.model.Product
+import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.databinding.ActivityProductCategoryBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
 import com.algokelvin.movieapp.presentation.product.ProductAdapter
-import com.algokelvin.movieapp.presentation.product.ProductViewModelFactory
 import com.algokelvin.movieapp.presentation.productdetail.ProductDetailActivity
 import javax.inject.Inject
 

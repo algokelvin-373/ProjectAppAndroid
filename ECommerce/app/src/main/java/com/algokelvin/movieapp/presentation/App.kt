@@ -3,17 +3,15 @@ package com.algokelvin.movieapp.presentation
 import android.app.Application
 import com.algokelvin.movieapp.BuildConfig
 import com.algokelvin.movieapp.presentation.di.Injector
-import com.algokelvin.movieapp.presentation.di.artist.ArtistSubComponent
 import com.algokelvin.movieapp.presentation.di.core.AppComponent
 import com.algokelvin.movieapp.presentation.di.core.AppModule
 import com.algokelvin.movieapp.presentation.di.core.DaggerAppComponent
 import com.algokelvin.movieapp.presentation.di.core.NetModule
 import com.algokelvin.movieapp.presentation.di.core.RemoteDataModule
 import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
-import com.algokelvin.movieapp.presentation.di.movie.MovieSubComponent
-import com.algokelvin.movieapp.presentation.di.movie.ProductCategorySubComponent
-import com.algokelvin.movieapp.presentation.di.movie.ProductDetailSubComponent
-import com.algokelvin.movieapp.presentation.di.tv.TvShowSubComponent
+import com.algokelvin.movieapp.presentation.di.product.ProductCategorySubComponent
+import com.algokelvin.movieapp.presentation.di.product.ProductDetailSubComponent
+import com.algokelvin.movieapp.presentation.di.product.ProductSubComponent
 
 class App: Application(), Injector {
     private lateinit var appComponent:AppComponent
@@ -27,16 +25,8 @@ class App: Application(), Injector {
             .build()
     }
 
-    override fun createMovieSubComponent(): MovieSubComponent {
+    override fun createMovieSubComponent(): ProductSubComponent {
         return appComponent.movieSubComponent().create()
-    }
-
-    override fun createTvShowSubComponent(): TvShowSubComponent {
-        return appComponent.tvShowSubComponent().create()
-    }
-
-    override fun createArtistSubComponent(): ArtistSubComponent {
-        return appComponent.artistSubComponent().create()
     }
 
     override fun createProductDetailSubComponent(): ProductDetailSubComponent {
