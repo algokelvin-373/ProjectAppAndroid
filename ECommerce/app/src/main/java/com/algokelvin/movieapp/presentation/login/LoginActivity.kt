@@ -11,7 +11,8 @@ import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.databinding.ActivityLoginBinding
 import com.algokelvin.movieapp.presentation.di.Injector
-import com.algokelvin.movieapp.presentation.product.ProductFragment
+import com.algokelvin.movieapp.presentation.home.HomeActivity
+import com.algokelvin.movieapp.utils.EncryptLocal
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -23,13 +24,25 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        checkStatusLogin()
+    }
 
-        (application as Injector).createLoginSubComponent()
-            .inject(this)
-        loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class]
+    private fun checkStatusLogin() {
+        val getToken = EncryptLocal.getToken(this)
+        if (getToken != null) {
+            Toast.makeText(this, "Anda sudah Login", Toast.LENGTH_SHORT).show()
+            val intentToHome = Intent(this, HomeActivity::class.java)
+            startActivity(intentToHome)
+            finish()
+        } else {
+            binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
-        initLogin()
+            (application as Injector).createLoginSubComponent()
+                .inject(this)
+            loginViewModel = ViewModelProvider(this, factory)[LoginViewModel::class]
+
+            initLogin()
+        }
     }
 
     private fun initLogin() {
@@ -42,11 +55,14 @@ class LoginActivity : AppCompatActivity() {
                 if (token != null) {
                     if (token.errorMessage == null) {
                         Toast.makeText(this, token.data?.token.toString(), Toast.LENGTH_SHORT).show()
+                        val tokenStr = token.data?.token
+                        tokenStr?.let { it1 -> EncryptLocal.saveToken(this, it1) }
                         loginViewModel.getProfile(login).observe(this, Observer {  profile ->
                             Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
-                            val intentToHome = Intent(this, ProductFragment::class.java)
+                            val intentToHome = Intent(this, HomeActivity::class.java)
                             intentToHome.putExtra("PROFILE_ID", profile.data?.id)
                             startActivity(intentToHome)
+                            finish()
                         })
                     } else {
                         Toast.makeText(this, token.errorMessage, Toast.LENGTH_SHORT).show()

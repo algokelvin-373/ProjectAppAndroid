@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityHome2Binding
 import com.algokelvin.movieapp.presentation.di.Injector
-import com.algokelvin.movieapp.presentation.product.ProductFragment
 import com.algokelvin.movieapp.presentation.profile.ProfileBottomSheetFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
