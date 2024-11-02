@@ -37,6 +37,11 @@ class ProductActivity : AppCompatActivity(), OnClickItemProduct {
         productViewModel = ViewModelProvider(this, factory)[ProductViewModel::class]
 
         initRecyclerView()
+
+        binding.imgProfile.setOnClickListener {
+            val bottomSheetFragment = BottomSheetFragment()
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,7 +53,7 @@ class ProductActivity : AppCompatActivity(), OnClickItemProduct {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
-                updateMovies()
+                //updateMovies()
                 true
             }
             else -> super.onOptionsItemSelected(item)
