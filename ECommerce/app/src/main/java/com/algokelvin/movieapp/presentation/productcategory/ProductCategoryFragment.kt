@@ -2,10 +2,13 @@ package com.algokelvin.movieapp.presentation.productcategory
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,7 +21,7 @@ import com.algokelvin.movieapp.presentation.product.ProductAdapter
 import com.algokelvin.movieapp.presentation.productdetail.ProductDetailActivity
 import javax.inject.Inject
 
-class ProductCategoryActivity : AppCompatActivity(), OnClickItemProduct {
+class ProductCategoryFragment : Fragment(), OnClickItemProduct {
     @Inject
     lateinit var factory: ProductCategoryViewModelFactory
 
@@ -26,19 +29,34 @@ class ProductCategoryActivity : AppCompatActivity(), OnClickItemProduct {
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var adapter: ProductAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_product_category)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.activity_product_category, container, false)
 
-        (application as Injector).createProductCategorySubComponent()
+        (activity?.application as Injector).createProductCategorySubComponent()
             .inject(this)
         productCategoryViewModel = ViewModelProvider(this, factory)[ProductCategoryViewModel::class]
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initProductCategory()
     }
 
+    /*override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //binding = DataBindingUtil.setContentView(context, R.layout.activity_product_category)
+
+        *//*(context as Injector).createProductCategorySubComponent()
+            .inject(this)
+        productCategoryViewModel = ViewModelProvider(this, factory)[ProductCategoryViewModel::class]*//*
+
+        //initProductCategory()
+    }*/
+
     private fun initProductCategory() {
-        binding.productRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.productRecyclerView.layoutManager = GridLayoutManager(context, 2)
         adapter = ProductAdapter(this)
         binding.productRecyclerView.adapter = adapter
         displayProductsSortByCategory()
@@ -47,20 +65,20 @@ class ProductCategoryActivity : AppCompatActivity(), OnClickItemProduct {
     private fun displayProductsSortByCategory() {
         binding.productProgressBar.visibility = View.VISIBLE
         val responseLiveData = productCategoryViewModel.getProductsSortByCategory()
-        responseLiveData.observe(this, Observer {
+        responseLiveData.observe(viewLifecycleOwner, Observer {
             if(it!=null){
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
                 binding.productProgressBar.visibility = View.GONE
             }else{
                 binding.productProgressBar.visibility = View.GONE
-                Toast.makeText(applicationContext,"No data available", Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"No data available", Toast.LENGTH_LONG).show()
             }
         })
     }
 
     override fun onClickItemProduct(product: Product) {
-        val toProductDetailPage = Intent(this, ProductDetailActivity::class.java)
+        val toProductDetailPage = Intent(context, ProductDetailActivity::class.java)
         toProductDetailPage.putExtra("PRODUCT_ID", product.id)
         startActivity(toProductDetailPage)
     }

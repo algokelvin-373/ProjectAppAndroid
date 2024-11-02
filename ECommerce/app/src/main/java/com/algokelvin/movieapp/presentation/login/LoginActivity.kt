@@ -11,7 +11,7 @@ import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.databinding.ActivityLoginBinding
 import com.algokelvin.movieapp.presentation.di.Injector
-import com.algokelvin.movieapp.presentation.product.ProductActivity
+import com.algokelvin.movieapp.presentation.product.ProductFragment
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, token.data?.token.toString(), Toast.LENGTH_SHORT).show()
                         loginViewModel.getProfile(login).observe(this, Observer {  profile ->
                             Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
-                            val intentToHome = Intent(this, ProductActivity::class.java)
+                            val intentToHome = Intent(this, ProductFragment::class.java)
                             intentToHome.putExtra("PROFILE_ID", profile.data?.id)
                             startActivity(intentToHome)
                         })

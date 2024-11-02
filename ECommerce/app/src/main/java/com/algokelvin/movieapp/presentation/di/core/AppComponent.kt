@@ -1,5 +1,6 @@
 package com.algokelvin.movieapp.presentation.di.core
 
+import com.algokelvin.movieapp.presentation.di.home.HomeSubComponent
 import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
 import com.algokelvin.movieapp.presentation.di.product.ProductCategorySubComponent
 import com.algokelvin.movieapp.presentation.di.product.ProductDetailSubComponent
@@ -23,4 +24,5 @@ interface AppComponent {
     fun productDetailSubComponent(): ProductDetailSubComponent.Factory
     fun loginSubComponent(): LoginSubComponent.Factory
     fun productCategorySubComponent(): ProductCategorySubComponent.Factory
+    fun homeSubComponent(): HomeSubComponent.Factory
 }

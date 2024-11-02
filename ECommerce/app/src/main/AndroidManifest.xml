@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MovieApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.productcategory.ProductCategoryActivity"
+            android:name=".presentation.productcategory.ProductCategoryFragment"
             android:exported="false" />
         <activity
             android:name=".presentation.login.LoginActivity"
@@ -31,11 +31,12 @@
             android:name=".presentation.productdetail.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.product.ProductActivity"
+            android:name=".presentation.product.ProductFragment"
             android:exported="false" />
         <activity
-            android:name=".presentation.HomeActivity"
+            android:name=".presentation.home.HomeActivity"
             android:exported="false">
+
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

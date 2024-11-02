@@ -1,12 +1,12 @@
 package com.algokelvin.movieapp.presentation.di.product
 
-import com.algokelvin.movieapp.presentation.productcategory.ProductCategoryActivity
+import com.algokelvin.movieapp.presentation.productcategory.ProductCategoryFragment
 import dagger.Subcomponent
 
 @ProductCategoryScope
 @Subcomponent(modules = [ProductCategoryModule::class])
 interface ProductCategorySubComponent {
-    fun inject(productCategoryActivity: ProductCategoryActivity)
+    fun inject(productCategoryFragment: ProductCategoryFragment)
 
     @Subcomponent.Factory
     interface Factory {
