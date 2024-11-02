@@ -5,8 +5,8 @@ import com.algokelvin.movieapp.data.db.ProductDao
 import com.algokelvin.movieapp.data.db.TvShowDao
 import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistLocalDataSource
 import com.algokelvin.movieapp.data.repository.artist.datasourceImpl.ArtistLocalDataSourceImpl
-import com.algokelvin.movieapp.data.repository.movie.datasource.ProductLocalDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.ProductLocalDataSourceImpl
+import com.algokelvin.movieapp.data.repository.product.datasource.ProductLocalDataSource
+import com.algokelvin.movieapp.data.repository.product.datasourceImpl.ProductLocalDataSourceImpl
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasourceImpl.TvShowLocalDataSourceImpl
 import dagger.Module

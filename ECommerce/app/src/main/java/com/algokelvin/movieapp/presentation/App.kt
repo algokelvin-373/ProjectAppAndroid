@@ -11,6 +11,7 @@ import com.algokelvin.movieapp.presentation.di.core.NetModule
 import com.algokelvin.movieapp.presentation.di.core.RemoteDataModule
 import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
 import com.algokelvin.movieapp.presentation.di.movie.MovieSubComponent
+import com.algokelvin.movieapp.presentation.di.movie.ProductCategorySubComponent
 import com.algokelvin.movieapp.presentation.di.movie.ProductDetailSubComponent
 import com.algokelvin.movieapp.presentation.di.tv.TvShowSubComponent
 
@@ -44,5 +45,9 @@ class App: Application(), Injector {
 
     override fun createLoginSubComponent(): LoginSubComponent {
         return appComponent.loginSubComponent().create()
+    }
+
+    override fun createProductCategorySubComponent(): ProductCategorySubComponent {
+        return appComponent.productCategorySubComponent().create()
     }
 }

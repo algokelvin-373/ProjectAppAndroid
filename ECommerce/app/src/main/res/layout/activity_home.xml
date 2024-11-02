@@ -38,7 +38,7 @@
             android:textSize="50sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/artists_button"
+            android:id="@+id/product_category_button"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center"
@@ -48,8 +48,8 @@
             android:textColor="@color/white"
             android:background="@drawable/bg_btn_rounded"
             android:padding="15dp"
-            android:visibility="gone"
-            android:text="Artists"
+            android:visibility="visible"
+            android:text="Product Category"
             android:textSize="50sp" />
     </LinearLayout>
 </layout>

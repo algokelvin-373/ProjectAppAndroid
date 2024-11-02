@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityHomeBinding
-import com.algokelvin.movieapp.presentation.artist.ArtistActivity
 import com.algokelvin.movieapp.presentation.login.LoginActivity
 import com.algokelvin.movieapp.presentation.product.ProductActivity
-import com.algokelvin.movieapp.presentation.tv.TvShowActivity
+import com.algokelvin.movieapp.presentation.productcategory.ProductCategoryActivity
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -28,8 +27,8 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intentToTvShow)
         }
 
-        binding.artistsButton.setOnClickListener {
-            val intentToArtist = Intent(this, ArtistActivity::class.java)
+        binding.productCategoryButton.setOnClickListener {
+            val intentToArtist = Intent(this, ProductCategoryActivity::class.java)
             startActivity(intentToArtist)
         }
     }

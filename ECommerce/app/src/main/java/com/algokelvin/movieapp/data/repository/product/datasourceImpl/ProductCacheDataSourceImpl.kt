@@ -1,7 +1,7 @@
-package com.algokelvin.movieapp.data.repository.movie.datasourceImpl
+package com.algokelvin.movieapp.data.repository.product.datasourceImpl
 
 import com.algokelvin.movieapp.data.model.Product
-import com.algokelvin.movieapp.data.repository.movie.datasource.ProductCacheDataSource
+import com.algokelvin.movieapp.data.repository.product.datasource.ProductCacheDataSource
 
 class ProductCacheDataSourceImpl: ProductCacheDataSource {
     private var productList = ArrayList<Product>()

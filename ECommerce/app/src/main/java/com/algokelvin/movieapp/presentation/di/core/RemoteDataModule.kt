@@ -5,13 +5,14 @@ import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistRemoteDat
 import com.algokelvin.movieapp.data.repository.artist.datasourceImpl.ArtistRemoteDataSourceImpl
 import com.algokelvin.movieapp.data.repository.login.datasource.LoginRemoteDataSource
 import com.algokelvin.movieapp.data.repository.login.datasourceImpl.LoginRemoteDataSourceImpl
-import com.algokelvin.movieapp.data.repository.movie.datasource.ProductRemoteDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasourceImpl.ProductRemoteDataSourceImpl
+import com.algokelvin.movieapp.data.repository.product.datasource.ProductRemoteDataSource
+import com.algokelvin.movieapp.data.repository.product.datasourceImpl.ProductRemoteDataSourceImpl
+import com.algokelvin.movieapp.data.repository.productCategory.datasource.ProductCategoryRemoteDataSource
+import com.algokelvin.movieapp.data.repository.productCategory.datasourceImpl.ProductCategoryRemoteDataSourceImpl
 import com.algokelvin.movieapp.data.repository.productDetail.datasource.ProductDetailRemoteDataSource
 import com.algokelvin.movieapp.data.repository.productDetail.datasourceImpl.ProductDetailRemoteDataSourceImpl
 import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowRemoteDataSource
 import com.algokelvin.movieapp.data.repository.tv.datasourceImpl.TvShowRemoteDataSourceImpl
-import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -46,5 +47,11 @@ class RemoteDataModule(private val apiKey: String) {
     @Provides
     fun provideLoginRemoteDataModule(productApiService: ProductApiService): LoginRemoteDataSource {
         return LoginRemoteDataSourceImpl(productApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductCategoryRemoteDataModule(productApiService: ProductApiService): ProductCategoryRemoteDataSource {
+        return ProductCategoryRemoteDataSourceImpl(productApiService)
     }
 }

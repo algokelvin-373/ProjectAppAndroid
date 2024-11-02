@@ -1,10 +1,10 @@
-package com.algokelvin.movieapp.data.repository.movie
+package com.algokelvin.movieapp.data.repository.product
 
 import android.util.Log
 import com.algokelvin.movieapp.data.model.Product
-import com.algokelvin.movieapp.data.repository.movie.datasource.ProductCacheDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasource.ProductLocalDataSource
-import com.algokelvin.movieapp.data.repository.movie.datasource.ProductRemoteDataSource
+import com.algokelvin.movieapp.data.repository.product.datasource.ProductCacheDataSource
+import com.algokelvin.movieapp.data.repository.product.datasource.ProductLocalDataSource
+import com.algokelvin.movieapp.data.repository.product.datasource.ProductRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 
 class ProductRepositoryImpl(
