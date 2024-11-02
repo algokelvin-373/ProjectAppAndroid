@@ -20,7 +20,13 @@
             android:exported="false" />
         <activity
             android:name=".presentation.login.LoginActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.productdetail.ProductDetailActivity"
             android:exported="false" />
@@ -28,19 +34,13 @@
             android:name=".presentation.product.ProductActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.tv.TvShowActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.artist.ArtistActivity"
-            android:exported="false" />
-        <activity
             android:name=".presentation.HomeActivity"
-            android:exported="true">
-            <intent-filter>
+            android:exported="false">
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
     </application>
 

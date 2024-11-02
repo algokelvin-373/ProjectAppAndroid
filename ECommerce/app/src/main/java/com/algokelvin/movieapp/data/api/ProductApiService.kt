@@ -3,6 +3,7 @@ package com.algokelvin.movieapp.data.api
 import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.data.model.user.Token
+import com.algokelvin.movieapp.data.model.user.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -18,4 +19,7 @@ interface ProductApiService {
 
     @POST("auth/login")
     suspend fun login(@Body login: Login): Response<Token>
+
+    @GET("users")
+    suspend fun getAllUsers(): Response<ArrayList<User>>
 }

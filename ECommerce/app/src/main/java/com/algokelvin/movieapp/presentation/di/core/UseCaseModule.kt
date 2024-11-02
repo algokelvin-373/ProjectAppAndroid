@@ -7,6 +7,7 @@ import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductsCategoryUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
+import com.algokelvin.movieapp.domain.usecase.GetProfileUseCase
 import com.algokelvin.movieapp.domain.usecase.LoginUseCase
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,10 @@ class UseCaseModule {
     @Provides
     fun provideGetProductsCategoryUseCase(productCategoryRepository: ProductCategoryRepository): GetProductsCategoryUseCase {
         return GetProductsCategoryUseCase(productCategoryRepository)
+    }
+
+    @Provides
+    fun provideGetProfileUseCase(loginRepository: LoginRepository): GetProfileUseCase {
+        return GetProfileUseCase(loginRepository)
     }
 }

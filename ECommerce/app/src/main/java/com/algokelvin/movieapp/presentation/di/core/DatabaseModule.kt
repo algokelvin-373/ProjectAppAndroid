@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.algokelvin.movieapp.data.db.ProductDB
 import com.algokelvin.movieapp.data.db.ProductDao
+import com.algokelvin.movieapp.data.db.UserDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,5 +22,11 @@ class DatabaseModule {
     @Provides
     fun provideProductDao(productDB: ProductDB): ProductDao {
         return productDB.productDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserDao(productDB: ProductDB): UserDao {
+        return productDB.userDao()
     }
 }

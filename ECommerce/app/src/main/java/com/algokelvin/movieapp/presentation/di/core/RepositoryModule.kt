@@ -1,6 +1,7 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.data.repository.login.LoginRepositoryImpl
+import com.algokelvin.movieapp.data.repository.login.datasource.LoginLocalDataSource
 import com.algokelvin.movieapp.data.repository.login.datasource.LoginRemoteDataSource
 import com.algokelvin.movieapp.data.repository.product.ProductRepositoryImpl
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductCacheDataSource
@@ -47,10 +48,12 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideLoginRepository(
-        loginRemoteDataSource: LoginRemoteDataSource
+        loginRemoteDataSource: LoginRemoteDataSource,
+        loginLocalDataSource: LoginLocalDataSource,
     ): LoginRepository {
         return LoginRepositoryImpl(
-            loginRemoteDataSource
+            loginRemoteDataSource,
+            loginLocalDataSource
         )
     }
 
