@@ -43,8 +43,9 @@ class LoginActivity : AppCompatActivity() {
                     if (token.errorMessage == null) {
                         Toast.makeText(this, token.data?.token.toString(), Toast.LENGTH_SHORT).show()
                         loginViewModel.getProfile(login).observe(this, Observer {  profile ->
-                            Toast.makeText(this, profile.data?.email, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
                             val intentToHome = Intent(this, ProductActivity::class.java)
+                            intentToHome.putExtra("PROFILE_ID", profile.data?.id)
                             startActivity(intentToHome)
                         })
                     } else {

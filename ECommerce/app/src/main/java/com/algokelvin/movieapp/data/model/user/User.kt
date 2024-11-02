@@ -1,11 +1,14 @@
 package com.algokelvin.movieapp.data.model.user
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class NamePerson(
     @SerializedName("firstname")
     @ColumnInfo("firstname")
@@ -14,9 +17,10 @@ data class NamePerson(
     @SerializedName("lastname")
     @ColumnInfo("lastname")
     val lastName: String,
-)
+): Parcelable
 
 @Entity(tableName = "users_data")
+@Parcelize
 data class User(
     @SerializedName("id")
     @PrimaryKey
@@ -41,4 +45,4 @@ data class User(
     @SerializedName("phone")
     @ColumnInfo("user_phone")
     val phone: String,
-)
+): Parcelable

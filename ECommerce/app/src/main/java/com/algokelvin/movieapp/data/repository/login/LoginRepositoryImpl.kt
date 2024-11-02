@@ -17,6 +17,8 @@ class LoginRepositoryImpl(
 
     override suspend fun getUser(login: Login): ResponseResults<User> = getProfileUser(login)
 
+    override suspend fun getUserFromDB(id: Int): User = getProfileFromDB(id)
+
     private suspend fun loginProcess(login: Login): ResponseResults<Token> {
         val token: Token?
 
@@ -71,6 +73,19 @@ class LoginRepositoryImpl(
         } catch (e: Exception) {
             Log.i("ALGOKELVIN_DEBUG", e.message.toString())
         }
+    }
+
+    private suspend fun getProfileFromDB(id: Int): User {
+        lateinit var user: User
+
+        try {
+            user = local.getUserFromDB(id)
+            Log.i("ALGOKELVIN_DEBUG", "Success Get User")
+        } catch (e: Exception) {
+            Log.i("ALGOKELVIN_DEBUG", e.message.toString())
+        }
+
+        return user
     }
 
 }

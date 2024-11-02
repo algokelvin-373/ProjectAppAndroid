@@ -18,6 +18,7 @@ import com.algokelvin.movieapp.databinding.ActivityProductBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
 import com.algokelvin.movieapp.presentation.productdetail.ProductDetailActivity
+import com.algokelvin.movieapp.presentation.profile.ProfileBottomSheetFragment
 import javax.inject.Inject
 
 class ProductActivity : AppCompatActivity(), OnClickItemProduct {
@@ -39,8 +40,12 @@ class ProductActivity : AppCompatActivity(), OnClickItemProduct {
         initRecyclerView()
 
         binding.imgProfile.setOnClickListener {
-            val bottomSheetFragment = BottomSheetFragment()
-            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            val profileId = intent.getIntExtra("PROFILE_ID", 0)
+            productViewModel.getProfileFromDB(profileId).observe(this, Observer { user ->
+                Toast.makeText(this, "User: "+user.username, Toast.LENGTH_SHORT).show()
+                val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
+                profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
+            })
         }
     }
 
