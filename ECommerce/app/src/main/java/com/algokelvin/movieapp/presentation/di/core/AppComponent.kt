@@ -1,11 +1,9 @@
 package com.algokelvin.movieapp.presentation.di.core
 
-import com.algokelvin.movieapp.presentation.di.artist.ArtistSubComponent
 import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
-import com.algokelvin.movieapp.presentation.di.movie.MovieSubComponent
-import com.algokelvin.movieapp.presentation.di.movie.ProductCategorySubComponent
-import com.algokelvin.movieapp.presentation.di.movie.ProductDetailSubComponent
-import com.algokelvin.movieapp.presentation.di.tv.TvShowSubComponent
+import com.algokelvin.movieapp.presentation.di.product.ProductCategorySubComponent
+import com.algokelvin.movieapp.presentation.di.product.ProductDetailSubComponent
+import com.algokelvin.movieapp.presentation.di.product.ProductSubComponent
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,9 +19,7 @@ import javax.inject.Singleton
     CacheDataModule::class
 ])
 interface AppComponent {
-    fun movieSubComponent(): MovieSubComponent.Factory
-    fun tvShowSubComponent(): TvShowSubComponent.Factory
-    fun artistSubComponent(): ArtistSubComponent.Factory
+    fun movieSubComponent(): ProductSubComponent.Factory
     fun productDetailSubComponent(): ProductDetailSubComponent.Factory
     fun loginSubComponent(): LoginSubComponent.Factory
     fun productCategorySubComponent(): ProductCategorySubComponent.Factory

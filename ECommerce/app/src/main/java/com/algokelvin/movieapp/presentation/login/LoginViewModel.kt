@@ -2,7 +2,7 @@ package com.algokelvin.movieapp.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.algokelvin.movieapp.data.model.Login
+import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.domain.usecase.LoginUseCase
 
 class LoginViewModel(private val loginUseCase: LoginUseCase): ViewModel() {

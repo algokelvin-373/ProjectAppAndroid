@@ -1,8 +1,8 @@
 package com.algokelvin.movieapp.data.repository.login
 
 import android.util.Log
-import com.algokelvin.movieapp.data.model.Login
-import com.algokelvin.movieapp.data.model.Token
+import com.algokelvin.movieapp.data.model.user.Login
+import com.algokelvin.movieapp.data.model.user.Token
 import com.algokelvin.movieapp.data.repository.login.datasource.LoginRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.LoginRepository
 

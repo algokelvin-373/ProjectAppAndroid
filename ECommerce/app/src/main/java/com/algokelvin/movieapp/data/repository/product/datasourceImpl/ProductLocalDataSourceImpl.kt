@@ -1,7 +1,7 @@
 package com.algokelvin.movieapp.data.repository.product.datasourceImpl
 
 import com.algokelvin.movieapp.data.db.ProductDao
-import com.algokelvin.movieapp.data.model.Product
+import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

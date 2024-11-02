@@ -1,9 +1,5 @@
 package com.algokelvin.movieapp.presentation.di.core
 
-import com.algokelvin.movieapp.data.repository.artist.ArtistRepositoryImpl
-import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistCacheDataSource
-import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistLocalDataSource
-import com.algokelvin.movieapp.data.repository.artist.datasource.ArtistRemoteDataSource
 import com.algokelvin.movieapp.data.repository.login.LoginRepositoryImpl
 import com.algokelvin.movieapp.data.repository.login.datasource.LoginRemoteDataSource
 import com.algokelvin.movieapp.data.repository.product.ProductRepositoryImpl
@@ -14,16 +10,10 @@ import com.algokelvin.movieapp.data.repository.productCategory.ProductCategoryRe
 import com.algokelvin.movieapp.data.repository.productCategory.datasource.ProductCategoryRemoteDataSource
 import com.algokelvin.movieapp.data.repository.productDetail.ProductDetailRepositoryImpl
 import com.algokelvin.movieapp.data.repository.productDetail.datasource.ProductDetailRemoteDataSource
-import com.algokelvin.movieapp.data.repository.tv.TvShowRepositoryImpl
-import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowCacheDataSource
-import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowLocalDataSource
-import com.algokelvin.movieapp.data.repository.tv.datasource.TvShowRemoteDataSource
-import com.algokelvin.movieapp.domain.repository.ArtistRepository
 import com.algokelvin.movieapp.domain.repository.LoginRepository
 import com.algokelvin.movieapp.domain.repository.ProductCategoryRepository
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
-import com.algokelvin.movieapp.domain.repository.TvShowRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -41,34 +31,6 @@ class RepositoryModule {
             productRemoteDataSource,
             productLocalDataSource,
             productCacheDataSource
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideTvShowRepository(
-        tvShowRemoteDataSource: TvShowRemoteDataSource,
-        tvShowLocalDataSource: TvShowLocalDataSource,
-        tvShowCacheDataSource: TvShowCacheDataSource,
-    ): TvShowRepository {
-        return TvShowRepositoryImpl(
-            tvShowRemoteDataSource,
-            tvShowLocalDataSource,
-            tvShowCacheDataSource
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideArtistRepository(
-        artistRemoteDataSource: ArtistRemoteDataSource,
-        artistLocalDataSource: ArtistLocalDataSource,
-        artistCacheDataSource: ArtistCacheDataSource,
-    ): ArtistRepository {
-        return ArtistRepositoryImpl(
-            artistRemoteDataSource,
-            artistLocalDataSource,
-            artistCacheDataSource
         )
     }
 

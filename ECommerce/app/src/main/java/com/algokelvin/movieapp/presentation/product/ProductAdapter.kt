@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.movieapp.R
-import com.algokelvin.movieapp.data.model.Product
+import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.databinding.ItemProductLayoutBinding
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
 import com.bumptech.glide.Glide
@@ -48,7 +48,7 @@ class MyViewHolder(
     private val onClickItemProduct: OnClickItemProduct,
 ): RecyclerView.ViewHolder(binding.root) {
 
-   fun bind(product:Product){
+   fun bind(product: Product){
         binding.titleProduct.text = product.title
         binding.categoryProduct.text = product.category
         Glide.with(binding.imageProduct.context)
