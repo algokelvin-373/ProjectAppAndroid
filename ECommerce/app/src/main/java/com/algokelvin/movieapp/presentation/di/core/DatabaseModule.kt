@@ -2,6 +2,7 @@ package com.algokelvin.movieapp.presentation.di.core
 
 import android.content.Context
 import androidx.room.Room
+import com.algokelvin.movieapp.data.db.CartDao
 import com.algokelvin.movieapp.data.db.ProductDB
 import com.algokelvin.movieapp.data.db.ProductDao
 import com.algokelvin.movieapp.data.db.UserDao
@@ -28,5 +29,11 @@ class DatabaseModule {
     @Provides
     fun provideUserDao(productDB: ProductDB): UserDao {
         return productDB.userDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCartDao(productDB: ProductDB): CartDao {
+        return productDB.cartDao()
     }
 }

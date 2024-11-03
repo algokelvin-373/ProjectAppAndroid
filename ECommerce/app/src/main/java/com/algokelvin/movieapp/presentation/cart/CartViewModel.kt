@@ -10,8 +10,8 @@ import com.algokelvin.movieapp.domain.usecase.LoginUseCase
 class CartViewModel(
     private val getCartByUserIdUseCase: GetCartByUserIdUseCase,
 ): ViewModel() {
-    fun getCartByUserId(id: String) = liveData {
-        val listCart = getCartByUserIdUseCase.execute(id)
+    fun getCartByUserId(userId: Int) = liveData {
+        val listCart = getCartByUserIdUseCase.execute(userId)
         emit(listCart)
     }
 }

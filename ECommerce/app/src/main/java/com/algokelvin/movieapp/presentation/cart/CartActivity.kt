@@ -41,10 +41,10 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
         binding.rvCart.layoutManager = LinearLayoutManager(this)
         adapter = CartAdapter(this)
         binding.rvCart.adapter = adapter
-        profileId.toString().let { id ->
+        profileId?.let { id ->
             cartViewModel.getCartByUserId(id).observe(this, Observer { cart ->
                 if(cart != null){
-                    cart.data?.products?.let { listCart ->
+                    cart.data?.let { listCart ->
                         adapter.setList(listCart)
                         adapter.notifyDataSetChanged()
                     }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.movieapp.R
+import com.algokelvin.movieapp.data.model.cart.CartDB
 import com.algokelvin.movieapp.data.model.cart.ProductCountInCart
 import com.algokelvin.movieapp.databinding.ItemCartLayoutBinding
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemCart
@@ -14,9 +15,9 @@ import com.bumptech.glide.Glide
 class CartAdapter(
     private val onClickItemCart: OnClickItemCart
 ):RecyclerView.Adapter<CartViewHolder>() {
-    private val cartList = ArrayList<ProductCountInCart>()
+    private val cartList = ArrayList<CartDB>()
 
-    fun setList(cart:List<ProductCountInCart>){
+    fun setList(cart:List<CartDB>){
          cartList.clear()
          cartList.addAll(cart)
     }
@@ -48,11 +49,18 @@ class CartViewHolder(
     private val onClickItemCart: OnClickItemCart,
 ): RecyclerView.ViewHolder(binding.root) {
 
-   fun bind(productCountInCart: ProductCountInCart){
-       binding.nameCart.text = productCountInCart.title
-       binding.itemCart.text = productCountInCart.count.toString()
+   fun bind(cartDB: CartDB){
+       binding.nameCart.text = cartDB.productTitle
+       binding.itemCart.text = cartDB.count.toString()
        Glide.with(binding.imgCart.context)
-           .load(productCountInCart.image)
+           .load(cartDB.productImage)
            .into(binding.imgCart)
+
+       binding.imgIncrease.setOnClickListener {
+           //onClickItemCart.onClickIncrease(productCountInCart.count)
+       }
+       binding.imgDecrease.setOnClickListener {
+
+       }
    }
 }

@@ -1,5 +1,6 @@
 package com.algokelvin.movieapp.presentation.di.product
 
+import com.algokelvin.movieapp.domain.usecase.AddProductToCartUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
 import com.algokelvin.movieapp.presentation.productdetail.ProductDetailViewModelFactory
 import dagger.Module
@@ -11,5 +12,9 @@ class ProductDetailModule {
     @Provides
     fun provideProductDetailViewModelFactory(
         getProductDetailUseCase: GetProductDetailUseCase,
-    ): ProductDetailViewModelFactory = ProductDetailViewModelFactory(getProductDetailUseCase)
+        addProductToCartUseCase: AddProductToCartUseCase,
+    ): ProductDetailViewModelFactory = ProductDetailViewModelFactory(
+        getProductDetailUseCase,
+        addProductToCartUseCase
+    )
 }

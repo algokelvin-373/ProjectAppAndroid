@@ -1,6 +1,7 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.data.repository.cart.CartRepositoryImpl
+import com.algokelvin.movieapp.data.repository.cart.datasource.CartLocalDataSource
 import com.algokelvin.movieapp.data.repository.cart.datasource.CartRemoteDataSource
 import com.algokelvin.movieapp.data.repository.login.LoginRepositoryImpl
 import com.algokelvin.movieapp.data.repository.login.datasource.LoginLocalDataSource
@@ -73,12 +74,10 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideCartRepository(
-        cartRemoteDataSource: CartRemoteDataSource,
-        productLocalDataSource: ProductLocalDataSource,
+        cartLocalDataSource: CartLocalDataSource
     ): CartRepository {
         return CartRepositoryImpl(
-            cartRemoteDataSource,
-            productLocalDataSource,
+            cartLocalDataSource
         )
     }
 }
