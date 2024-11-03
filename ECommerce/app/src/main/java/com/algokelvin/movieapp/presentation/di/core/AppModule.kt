@@ -2,6 +2,7 @@ package com.algokelvin.movieapp.presentation.di.core
 
 import android.content.Context
 import com.algokelvin.movieapp.presentation.di.cart.CartSubComponent
+import com.algokelvin.movieapp.presentation.di.checkout.CheckoutSubComponent
 import com.algokelvin.movieapp.presentation.di.home.HomeSubComponent
 import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
 import com.algokelvin.movieapp.presentation.di.product.ProductCategorySubComponent
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     ProductCategorySubComponent::class,
     HomeSubComponent::class,
     CartSubComponent::class,
+    CheckoutSubComponent::class,
 ])
 class AppModule(private val context: Context) {
     @Singleton

@@ -7,4 +7,5 @@ interface CartLocalDataSource {
     suspend fun addProductInCart(cartDB: CartDB)
     suspend fun updateCountProductInCart(userId: Int, productId: Int, count: Int)
     suspend fun deleteProductInCart(userId: Int, productId: Int)
+    suspend fun deleteAllForCheckout(userId: Int)
 }

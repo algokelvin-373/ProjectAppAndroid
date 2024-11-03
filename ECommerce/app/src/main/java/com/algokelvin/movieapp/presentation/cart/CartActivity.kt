@@ -1,6 +1,8 @@
 package com.algokelvin.movieapp.presentation.cart
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,6 +13,7 @@ import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.cart.CartDB
 import com.algokelvin.movieapp.databinding.ActivityCartBinding
 import com.algokelvin.movieapp.databinding.ItemCartLayoutBinding
+import com.algokelvin.movieapp.presentation.checkout.CheckoutActivity
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemCart
 import com.algokelvin.movieapp.utils.EncryptLocal
@@ -37,6 +40,11 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
         profileId = EncryptLocal.getIdProfile(this)
 
         initListCart()
+
+        binding.btnCheckout.setOnClickListener {
+            val intentToCheckout = Intent(this, CheckoutActivity::class.java)
+            startActivity(intentToCheckout)
+        }
     }
 
     private fun initListCart() {
@@ -76,8 +84,16 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
             cartViewModel.getCartByUserId(id).observe(this, Observer { cart ->
                 if(cart != null){
                     cart.data?.let { listCart ->
-                        adapter.setList(listCart)
-                        adapter.notifyDataSetChanged()
+                        if (listCart.isNotEmpty()) {
+                            binding.messageEmptyCart.visibility = View.GONE
+                            binding.btnCheckout.isEnabled = true
+
+                            adapter.setList(listCart)
+                            adapter.notifyDataSetChanged()
+                        } else {
+                            binding.messageEmptyCart.visibility = View.VISIBLE
+                            binding.btnCheckout.isEnabled = false
+                        }
                     }
                 }else{
                     Toast.makeText(this,"No data cart", Toast.LENGTH_LONG).show()

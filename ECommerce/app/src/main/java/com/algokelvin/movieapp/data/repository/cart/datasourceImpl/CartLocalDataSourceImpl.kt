@@ -30,4 +30,10 @@ class CartLocalDataSourceImpl(
             cartDao.deleteProductInCart(userId, productId)
         }
     }
+
+    override suspend fun deleteAllForCheckout(userId: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            cartDao.deleteProductForCheckout(userId)
+        }
+    }
 }

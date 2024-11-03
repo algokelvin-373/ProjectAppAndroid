@@ -6,6 +6,7 @@ import com.algokelvin.movieapp.domain.repository.ProductCategoryRepository
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.usecase.AddProductToCartUseCase
+import com.algokelvin.movieapp.domain.usecase.CheckoutUseCase
 import com.algokelvin.movieapp.domain.usecase.DeleteProductInCartUseCase
 import com.algokelvin.movieapp.domain.usecase.GetCartByUserIdUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
@@ -68,5 +69,10 @@ class UseCaseModule {
     @Provides
     fun provideDeleteProductInCartUseCase(cartRepository: CartRepository): DeleteProductInCartUseCase {
         return DeleteProductInCartUseCase(cartRepository)
+    }
+
+    @Provides
+    fun provideCheckoutUseCase(cartRepository: CartRepository): CheckoutUseCase {
+        return CheckoutUseCase(cartRepository)
     }
 }

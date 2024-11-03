@@ -67,6 +67,8 @@ class CartRepositoryImpl(
         productId: Int
     ): String = deleteProduct(userId, productId)
 
+    override suspend fun deleteProductForCheckout(userId: Int): String = deleteForCheckout(userId)
+
     private suspend fun addProductInCartDB(cartDB: CartDB): String {
         try {
             localCart.addProductInCart(cartDB)
@@ -100,6 +102,15 @@ class CartRepositoryImpl(
             return "Success Delete Product In Cart"
         } catch (e: Exception) {
             return "Failed Delete Product In Cart"
+        }
+    }
+
+    private suspend fun deleteForCheckout(userId: Int): String {
+        try {
+            localCart.deleteAllForCheckout(userId)
+            return "Success Confirm Your Shopping"
+        } catch (e: Exception) {
+            return "Failed Confirm Your Shopping"
         }
     }
 }
