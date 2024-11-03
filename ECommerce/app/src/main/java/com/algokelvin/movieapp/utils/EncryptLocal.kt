@@ -14,9 +14,22 @@ object EncryptLocal {
         }
     }
 
+    fun saveIdProfile(context: Context, id: Int) {
+        val sharedPreferences = getEncryptedPrefs(context)
+        with(sharedPreferences.edit()) {
+            putInt("user_id", id)
+            apply()
+        }
+    }
+
     fun getToken(context: Context): String? {
         val sharedPreferences = getEncryptedPrefs(context)
         return sharedPreferences.getString("user_token", null)
+    }
+
+    fun getIdProfile(context: Context): Int? {
+        val sharedPreferences = getEncryptedPrefs(context)
+        return sharedPreferences.getInt("user_id", 0)
     }
 
     private fun getEncryptedPrefs(context: Context): SharedPreferences {

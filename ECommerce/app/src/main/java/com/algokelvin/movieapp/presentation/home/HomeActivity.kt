@@ -10,6 +10,7 @@ import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityHome2Binding
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.profile.ProfileBottomSheetFragment
+import com.algokelvin.movieapp.utils.EncryptLocal
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
@@ -20,6 +21,8 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHome2Binding
     private lateinit var homeViewModel: HomeViewModel
 
+    private var profileId : Int? = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home2)
@@ -28,13 +31,16 @@ class HomeActivity : AppCompatActivity() {
             .inject(this)
         homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class]
 
+        profileId = EncryptLocal.getIdProfile(this)
+
         binding.imgProfile.setOnClickListener {
-            val profileId = intent.getIntExtra("PROFILE_ID", 0)
-            homeViewModel.getProfileFromDB(profileId).observe(this, Observer { user ->
-                Toast.makeText(this, "User: "+user.username, Toast.LENGTH_SHORT).show()
-                val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
-                profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
-            })
+            profileId?.let { id ->
+                homeViewModel.getProfileFromDB(id).observe(this, Observer { user ->
+                    Toast.makeText(this, "User: "+user.username, Toast.LENGTH_SHORT).show()
+                    val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
+                    profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
+                })
+            }
         }
 
         initTabLayout()

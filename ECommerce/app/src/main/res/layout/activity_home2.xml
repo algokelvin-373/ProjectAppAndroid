@@ -16,7 +16,9 @@
                 android:id="@+id/logo_app"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_rate"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@mipmap/ic_shopping_yuk_round"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -54,13 +54,15 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.login(login).observe(this, Observer { token ->
                 if (token != null) {
                     if (token.errorMessage == null) {
-                        Toast.makeText(this, token.data?.token.toString(), Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this, token.data?.token.toString(), Toast.LENGTH_SHORT).show()
                         val tokenStr = token.data?.token
                         tokenStr?.let { it1 -> EncryptLocal.saveToken(this, it1) }
                         loginViewModel.getProfile(login).observe(this, Observer {  profile ->
                             Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
+                            val profileId = profile.data?.id
+                            profileId?.let { it1 -> EncryptLocal.saveIdProfile(this, it1) }
                             val intentToHome = Intent(this, HomeActivity::class.java)
-                            intentToHome.putExtra("PROFILE_ID", profile.data?.id)
+                            intentToHome.putExtra("PROFILE_ID", profileId)
                             startActivity(intentToHome)
                             finish()
                         })
