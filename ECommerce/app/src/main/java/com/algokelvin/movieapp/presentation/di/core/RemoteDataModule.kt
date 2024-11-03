@@ -1,6 +1,8 @@
 package com.algokelvin.movieapp.presentation.di.core
 
 import com.algokelvin.movieapp.data.api.ProductApiService
+import com.algokelvin.movieapp.data.repository.cart.datasource.CartRemoteDataSource
+import com.algokelvin.movieapp.data.repository.cart.datasourceImpl.CartRemoteDataSourceImpl
 import com.algokelvin.movieapp.data.repository.login.datasource.LoginRemoteDataSource
 import com.algokelvin.movieapp.data.repository.login.datasourceImpl.LoginRemoteDataSourceImpl
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductRemoteDataSource
@@ -37,5 +39,11 @@ class RemoteDataModule(private val apiKey: String) {
     @Provides
     fun provideProductCategoryRemoteDataModule(productApiService: ProductApiService): ProductCategoryRemoteDataSource {
         return ProductCategoryRemoteDataSourceImpl(productApiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCartRemoteDataModule(productApiService: ProductApiService): CartRemoteDataSource {
+        return CartRemoteDataSourceImpl(productApiService)
     }
 }

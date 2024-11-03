@@ -1,5 +1,6 @@
 package com.algokelvin.movieapp.presentation.di
 
+import com.algokelvin.movieapp.presentation.di.cart.CartSubComponent
 import com.algokelvin.movieapp.presentation.di.home.HomeSubComponent
 import com.algokelvin.movieapp.presentation.di.login.LoginSubComponent
 import com.algokelvin.movieapp.presentation.di.product.ProductCategorySubComponent
@@ -12,4 +13,5 @@ interface Injector {
     fun createLoginSubComponent(): LoginSubComponent
     fun createProductCategorySubComponent(): ProductCategorySubComponent
     fun createHomeSubComponent(): HomeSubComponent
+    fun createCartSubComponent(): CartSubComponent
 }

@@ -1,5 +1,6 @@
 package com.algokelvin.movieapp.presentation.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityHome2Binding
+import com.algokelvin.movieapp.presentation.cart.CartActivity
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.profile.ProfileBottomSheetFragment
 import com.algokelvin.movieapp.utils.EncryptLocal
@@ -41,6 +43,11 @@ class HomeActivity : AppCompatActivity() {
                     profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
                 })
             }
+        }
+
+        binding.imgCart.setOnClickListener {
+            val intentToCart = Intent(this, CartActivity::class.java)
+            startActivity(intentToCart)
         }
 
         initTabLayout()

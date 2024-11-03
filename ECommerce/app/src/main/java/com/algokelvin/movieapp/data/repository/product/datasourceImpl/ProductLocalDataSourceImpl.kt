@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 
 class ProductLocalDataSourceImpl(private val productDao: ProductDao): ProductLocalDataSource {
     override suspend fun getProductsFromDB(): List<Product> = productDao.getAllProducts()
+    override suspend fun getProductByIdFromDB(id: Int): Product = productDao.getProductById(id)
 
     override suspend fun saveProductsToDB(products: List<Product>) {
         CoroutineScope(Dispatchers.IO).launch {

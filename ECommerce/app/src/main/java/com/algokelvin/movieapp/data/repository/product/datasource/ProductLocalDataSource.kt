@@ -4,6 +4,7 @@ import com.algokelvin.movieapp.data.model.product.Product
 
 interface ProductLocalDataSource {
     suspend fun getProductsFromDB(): List<Product>
+    suspend fun getProductByIdFromDB(id: Int): Product
     suspend fun saveProductsToDB(products: List<Product>)
     suspend fun clearAll()
 }

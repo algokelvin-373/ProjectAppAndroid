@@ -1,5 +1,6 @@
 package com.algokelvin.movieapp.data.api
 
+import com.algokelvin.movieapp.data.model.cart.Cart
 import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.data.model.user.Token
@@ -16,6 +17,9 @@ interface ProductApiService {
 
     @GET("products/{id}")
     suspend fun getProductDetailList(@Path("id") id: String): Response<Product>
+
+    @GET("carts/user/{id}")
+    suspend fun getCartByIdUser(@Path("id") id: String): Response<ArrayList<Cart>>
 
     @POST("auth/login")
     suspend fun login(@Body login: Login): Response<Token>

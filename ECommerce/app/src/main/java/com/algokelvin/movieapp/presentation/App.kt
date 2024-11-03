@@ -3,6 +3,7 @@ package com.algokelvin.movieapp.presentation
 import android.app.Application
 import com.algokelvin.movieapp.BuildConfig
 import com.algokelvin.movieapp.presentation.di.Injector
+import com.algokelvin.movieapp.presentation.di.cart.CartSubComponent
 import com.algokelvin.movieapp.presentation.di.core.AppComponent
 import com.algokelvin.movieapp.presentation.di.core.AppModule
 import com.algokelvin.movieapp.presentation.di.core.DaggerAppComponent
@@ -44,5 +45,9 @@ class App: Application(), Injector {
 
     override fun createHomeSubComponent(): HomeSubComponent {
         return appComponent.homeSubComponent().create()
+    }
+
+    override fun createCartSubComponent(): CartSubComponent {
+        return appComponent.cartSubComponent().create()
     }
 }
