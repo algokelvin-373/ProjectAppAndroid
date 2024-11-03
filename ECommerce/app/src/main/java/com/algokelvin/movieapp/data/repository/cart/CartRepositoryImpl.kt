@@ -1,15 +1,8 @@
 package com.algokelvin.movieapp.data.repository.cart
 
-import android.util.Log
 import com.algokelvin.movieapp.data.api.ResponseResults
-import com.algokelvin.movieapp.data.model.cart.Cart
 import com.algokelvin.movieapp.data.model.cart.CartDB
-import com.algokelvin.movieapp.data.model.cart.CartDetail
-import com.algokelvin.movieapp.data.model.cart.ProductCountInCart
-import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.cart.datasource.CartLocalDataSource
-import com.algokelvin.movieapp.data.repository.cart.datasource.CartRemoteDataSource
-import com.algokelvin.movieapp.data.repository.product.datasource.ProductLocalDataSource
 import com.algokelvin.movieapp.domain.repository.CartRepository
 
 class CartRepositoryImpl(
@@ -63,6 +56,17 @@ class CartRepositoryImpl(
 
     override suspend fun getCartByUserId(userId: Int): ResponseResults<List<CartDB>> = getCartInDB(userId)
 
+    override suspend fun updateCountProductInCart(
+        userId: Int,
+        productId: Int,
+        count: Int
+    ): String = updateCountProduct(userId, productId, count)
+
+    override suspend fun deleteProductInCart(
+        userId: Int,
+        productId: Int
+    ): String = deleteProduct(userId, productId)
+
     private suspend fun addProductInCartDB(cartDB: CartDB): String {
         try {
             localCart.addProductInCart(cartDB)
@@ -78,6 +82,24 @@ class CartRepositoryImpl(
             return ResponseResults(listCart, null)
         } catch (e: Exception) {
             return ResponseResults(null, "Failed to Show Cart - ${e.message}")
+        }
+    }
+
+    private suspend fun updateCountProduct(userId: Int, productId: Int, count: Int): String {
+        try {
+            localCart.updateCountProductInCart(userId, productId, count)
+            return "Success Update Count Product"
+        } catch (e: Exception) {
+            return "Failed Update Count Product"
+        }
+    }
+
+    private suspend fun deleteProduct(userId: Int, productId: Int): String {
+        try {
+            localCart.deleteProductInCart(userId, productId)
+            return "Success Delete Product In Cart"
+        } catch (e: Exception) {
+            return "Failed Delete Product In Cart"
         }
     }
 }

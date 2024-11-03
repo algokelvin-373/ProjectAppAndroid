@@ -8,4 +8,6 @@ import com.algokelvin.movieapp.data.model.cart.CartDetail
 interface CartRepository {
     suspend fun addProductInCart(cartDB: CartDB): String
     suspend fun getCartByUserId(userId: Int): ResponseResults<List<CartDB>>
+    suspend fun updateCountProductInCart(userId: Int, productId: Int, count: Int): String
+    suspend fun deleteProductInCart(userId: Int, productId: Int): String
 }

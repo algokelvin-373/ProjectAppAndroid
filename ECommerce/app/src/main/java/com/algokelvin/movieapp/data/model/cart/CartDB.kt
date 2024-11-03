@@ -13,7 +13,7 @@ data class CartDB (
     val userId: Int,
 
     @ColumnInfo("cart_product_id")
-    val productId: Int?,
+    val productId: Int,
 
     @ColumnInfo(name = "cart_product_title")
     val productTitle: String?,

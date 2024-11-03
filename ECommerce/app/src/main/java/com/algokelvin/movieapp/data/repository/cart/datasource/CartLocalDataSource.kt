@@ -5,6 +5,6 @@ import com.algokelvin.movieapp.data.model.cart.CartDB
 interface CartLocalDataSource {
     suspend fun getCart(userId: Int): List<CartDB>
     suspend fun addProductInCart(cartDB: CartDB)
-    suspend fun updateCountProductInCart(productId: Int)
-    suspend fun deleteProductInCart(productId: Int)
+    suspend fun updateCountProductInCart(userId: Int, productId: Int, count: Int)
+    suspend fun deleteProductInCart(userId: Int, productId: Int)
 }

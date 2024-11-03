@@ -19,11 +19,15 @@ class CartLocalDataSourceImpl(
         }
     }
 
-    override suspend fun updateCountProductInCart(productId: Int) {
-        TODO("Not yet implemented")
+    override suspend fun updateCountProductInCart(userId: Int, productId: Int, count: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            cartDao.updateCountProductInCart(userId, productId, count)
+        }
     }
 
-    override suspend fun deleteProductInCart(productId: Int) {
-        TODO("Not yet implemented")
+    override suspend fun deleteProductInCart(userId: Int, productId: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            cartDao.deleteProductInCart(userId, productId)
+        }
     }
 }

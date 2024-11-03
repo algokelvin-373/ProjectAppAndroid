@@ -6,6 +6,7 @@ import com.algokelvin.movieapp.domain.repository.ProductCategoryRepository
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
 import com.algokelvin.movieapp.domain.repository.ProductRepository
 import com.algokelvin.movieapp.domain.usecase.AddProductToCartUseCase
+import com.algokelvin.movieapp.domain.usecase.DeleteProductInCartUseCase
 import com.algokelvin.movieapp.domain.usecase.GetCartByUserIdUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductsCategoryUseCase
@@ -13,6 +14,7 @@ import com.algokelvin.movieapp.domain.usecase.GetProductsUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProfileFromDBUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProfileUseCase
 import com.algokelvin.movieapp.domain.usecase.LoginUseCase
+import com.algokelvin.movieapp.domain.usecase.UpdateCountProductInCartUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -56,5 +58,15 @@ class UseCaseModule {
     @Provides
     fun provideAddProductToCartUseCase(cartRepository: CartRepository): AddProductToCartUseCase {
         return AddProductToCartUseCase(cartRepository)
+    }
+
+    @Provides
+    fun provideUpdateCountProductInCartUseCase(cartRepository: CartRepository): UpdateCountProductInCartUseCase {
+        return UpdateCountProductInCartUseCase(cartRepository)
+    }
+
+    @Provides
+    fun provideDeleteProductInCartUseCase(cartRepository: CartRepository): DeleteProductInCartUseCase {
+        return DeleteProductInCartUseCase(cartRepository)
     }
 }

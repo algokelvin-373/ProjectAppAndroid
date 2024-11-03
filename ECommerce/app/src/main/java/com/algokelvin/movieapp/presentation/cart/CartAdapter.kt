@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.cart.CartDB
-import com.algokelvin.movieapp.data.model.cart.ProductCountInCart
 import com.algokelvin.movieapp.databinding.ItemCartLayoutBinding
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemCart
 import com.bumptech.glide.Glide
@@ -57,10 +56,13 @@ class CartViewHolder(
            .into(binding.imgCart)
 
        binding.imgIncrease.setOnClickListener {
-           //onClickItemCart.onClickIncrease(productCountInCart.count)
+           onClickItemCart.onClickIncrease(binding, cartDB)
        }
        binding.imgDecrease.setOnClickListener {
-
+           onClickItemCart.onClickDecrease(binding, cartDB)
+       }
+       binding.imgDeleteItem.setOnClickListener {
+           onClickItemCart.onClickDelete(cartDB)
        }
    }
 }

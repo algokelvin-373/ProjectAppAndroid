@@ -8,7 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algokelvin.movieapp.R
+import com.algokelvin.movieapp.data.model.cart.CartDB
 import com.algokelvin.movieapp.databinding.ActivityCartBinding
+import com.algokelvin.movieapp.databinding.ItemCartLayoutBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemCart
 import com.algokelvin.movieapp.utils.EncryptLocal
@@ -41,6 +43,35 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
         binding.rvCart.layoutManager = LinearLayoutManager(this)
         adapter = CartAdapter(this)
         binding.rvCart.adapter = adapter
+        getListCart()
+    }
+
+    override fun onClickIncrease(bindingItem: ItemCartLayoutBinding, cartDB: CartDB) {
+        val countNow = cartDB.count + 1
+        bindingItem.itemCart.text = countNow.toString()
+        cartDB.apply {
+            updateListCart(userId, productId, countNow)
+            getListCart()
+        }
+    }
+
+    override fun onClickDecrease(bindingItem: ItemCartLayoutBinding, cartDB: CartDB) {
+        val countNow = cartDB.count - 1
+        bindingItem.itemCart.text = countNow.toString()
+        cartDB.apply {
+            updateListCart(userId, productId, countNow)
+            getListCart()
+        }
+    }
+
+    override fun onClickDelete(cartDB: CartDB) {
+        cartDB.apply {
+            deleteProductInCart(userId, productId)
+            getListCart()
+        }
+    }
+
+    private fun getListCart() {
         profileId?.let { id ->
             cartViewModel.getCartByUserId(id).observe(this, Observer { cart ->
                 if(cart != null){
@@ -55,17 +86,15 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
         }
     }
 
-    override fun onClickIncrease(item: Int) {
-        val countNow = item + 1
-        updateListCart()
+    private fun updateListCart(userId: Int, productId: Int, count: Int) {
+        cartViewModel.updateCountProduct(userId, productId, count).observe(this, Observer {
+            Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+        })
     }
 
-    override fun onClickDecrease(item: Int) {
-        val countNow = item - 1
-        updateListCart()
-    }
-
-    private fun updateListCart() {
-
+    private fun deleteProductInCart(userId: Int, productId: Int) {
+        cartViewModel.deleteProduct(userId, productId). observe(this, Observer {
+            Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+        })
     }
 }
