@@ -73,14 +73,6 @@
                     android:text="@string/sign_in"
                     android:padding="12dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/forgot_password"
-                    android:textColor="@color/design_default_color_primary" />
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
