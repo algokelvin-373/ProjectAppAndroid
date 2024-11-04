@@ -1,6 +1,5 @@
 package com.algokelvin.movieapp.data.repository.product
 
-import android.util.Log
 import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductCacheDataSource
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductLocalDataSource
@@ -33,7 +32,7 @@ class ProductRepositoryImpl(
                 productList = body
             }
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         return productList
@@ -45,7 +44,7 @@ class ProductRepositoryImpl(
         try {
             productList = local.getProductsFromDB()
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         if (productList.isNotEmpty()) {
@@ -64,7 +63,7 @@ class ProductRepositoryImpl(
         try {
             productList = cache.getProductsFromCache()
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         if (productList.isNotEmpty()) {

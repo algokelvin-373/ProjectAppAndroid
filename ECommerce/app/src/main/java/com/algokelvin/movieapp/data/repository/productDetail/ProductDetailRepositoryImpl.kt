@@ -1,6 +1,5 @@
 package com.algokelvin.movieapp.data.repository.productDetail
 
-import android.util.Log
 import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.productDetail.datasource.ProductDetailRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ProductDetailRepository
@@ -21,7 +20,7 @@ class ProductDetailRepositoryImpl(
                 product = body
             }
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         return product

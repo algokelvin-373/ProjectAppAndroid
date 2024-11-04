@@ -45,7 +45,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private fun confirmCheckout() {
         binding.btnConfirm.setBackgroundColor(resources.getColor(R.color.green_00ff00))
-        binding.btnConfirm.text = "Done"
+        binding.btnConfirm.text = getString(R.string.done)
 
         profileId?.let { id ->
             checkoutViewModel.confirmCheckout(id).observe(this) {

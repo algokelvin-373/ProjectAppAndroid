@@ -20,8 +20,10 @@
     <string name="description_product">Description Product</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="name_cart">Name Cart</string>
-    <string name="_100_terjual">100 Terjual</string>
+    <string name="item_sold">%s Sold</string>
     <string name="clothes">Clothes</string>
     <string name="profile_user">Profile User</string>
     <string name="total_all_price">$ %s</string>
+    <string name="done">Done</string>
+    <string name="items_product">%s Oty</string>
 </resources>

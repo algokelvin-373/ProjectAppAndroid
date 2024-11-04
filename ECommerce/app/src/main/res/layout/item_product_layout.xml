@@ -88,7 +88,7 @@
                 android:id="@+id/count_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_100_terjual"
+                android:text="@string/item_sold"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_icon_rate"
