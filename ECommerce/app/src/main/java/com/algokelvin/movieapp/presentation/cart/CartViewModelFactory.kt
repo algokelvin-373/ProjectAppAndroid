@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.domain.usecase.DeleteProductInCartUseCase
 import com.algokelvin.movieapp.domain.usecase.GetCartByUserIdUseCase
-import com.algokelvin.movieapp.domain.usecase.GetProfileUseCase
-import com.algokelvin.movieapp.domain.usecase.LoginUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateCountProductInCartUseCase
 
 class CartViewModelFactory(

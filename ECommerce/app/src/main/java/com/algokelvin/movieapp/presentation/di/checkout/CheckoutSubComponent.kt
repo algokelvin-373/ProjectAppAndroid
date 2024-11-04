@@ -1,8 +1,6 @@
 package com.algokelvin.movieapp.presentation.di.checkout
 
-import com.algokelvin.movieapp.presentation.cart.CartActivity
 import com.algokelvin.movieapp.presentation.checkout.CheckoutActivity
-import com.algokelvin.movieapp.presentation.login.LoginActivity
 import dagger.Subcomponent
 
 @CheckoutScope
