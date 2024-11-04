@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -18,6 +18,7 @@
                 android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/todo"
                 android:src="@mipmap/ic_shopping_yuk_round"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +30,7 @@
                 android:layout_height="35dp"
                 android:src="@drawable/ic_profile"
                 android:layout_marginEnd="4dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +41,7 @@
                 android:layout_height="35dp"
                 android:src="@drawable/ic_cart"
                 android:layout_marginEnd="8dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="@+id/img_profile"
                 app:layout_constraintEnd_toStartOf="@+id/img_profile"
                 app:layout_constraintTop_toTopOf="@+id/img_profile" />

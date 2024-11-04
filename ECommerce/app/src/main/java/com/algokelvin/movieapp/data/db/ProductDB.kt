@@ -11,7 +11,7 @@ import com.algokelvin.movieapp.data.model.user.User
     version = 4,
     exportSchema = false
 )
-abstract class ProductDB(): RoomDatabase() {
+abstract class ProductDB: RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun userDao(): UserDao
     abstract fun cartDao(): CartDao

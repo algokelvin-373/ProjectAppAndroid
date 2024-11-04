@@ -51,26 +51,6 @@ class ProductFragment : Fragment(), OnClickItemProduct {
         }*/
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //binding = DataBindingUtil.setContentView(this, R.layout.activity_product)
-
-        /*(context as Injector).createMovieSubComponent()
-            .inject(this)
-        productViewModel = ViewModelProvider(this, factory)[ProductViewModel::class]*/
-
-        //initRecyclerView()
-
-        /*binding.imgProfile.setOnClickListener {
-            val profileId = intent.getIntExtra("PROFILE_ID", 0)
-            productViewModel.getProfileFromDB(profileId).observe(this, Observer { user ->
-                Toast.makeText(this, "User: "+user.username, Toast.LENGTH_SHORT).show()
-                val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
-                profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
-            })
-        }*/
-    }
-
     /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.update, menu)

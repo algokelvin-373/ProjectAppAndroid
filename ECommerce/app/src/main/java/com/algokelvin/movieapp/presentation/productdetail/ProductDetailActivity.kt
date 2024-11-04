@@ -22,8 +22,6 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     private lateinit var productDetailViewModel: ProductDetailViewModel
 
-    private var product: Product? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
@@ -53,17 +51,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun addToCart(product: Product) {
         binding.btnAddToCart.setOnClickListener {
-            EncryptLocal.getIdProfile(this)?.let { profileId ->
-                /*val cartDB = product?.let { dataProduct ->
-                    CartDB(
-                        userId = profileId,
-                        productId = dataProduct.id,
-                        productTitle = dataProduct.title,
-                        productImage = dataProduct.image,
-                        productPrice = dataProduct.price,
-                        count = 1
-                    )
-                }*/
+            EncryptLocal.getIdProfile(this).let { profileId ->
                 val cartDB = CartDB(
                     userId = profileId,
                     productId = product.id,

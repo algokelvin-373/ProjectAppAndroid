@@ -13,8 +13,4 @@ class ProductViewModel(
         val productList = getProductsUseCase.execute()
         emit(productList)
     }
-    fun getProfileFromDB(id: Int) = liveData {
-        val profileUser = getProfileFromDBUseCase.execute(id)
-        emit(profileUser)
-    }
 }

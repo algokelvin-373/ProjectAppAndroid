@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     tools:srcCompat="@tools:sample/avatars"
-                    android:contentDescription="TODO" />
+                    android:contentDescription="@string/todo" />
 
             </androidx.cardview.widget.CardView>
 
@@ -42,10 +42,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="TextView"
+                tools:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
+                android:lines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_image_layout" />
@@ -56,6 +57,7 @@
                 android:layout_height="25dp"
                 android:src="@drawable/ic_rate"
                 android:layout_marginTop="4dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintStart_toStartOf="@+id/title_product"
                 app:layout_constraintTop_toBottomOf="@+id/title_product" />
 
@@ -63,7 +65,7 @@
                 android:id="@+id/rate_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.7"
+                tools:text="4.7"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:layout_marginStart="4dp"
@@ -77,6 +79,7 @@
                 android:layout_height="25dp"
                 android:src="@drawable/ic_dot_count"
                 android:layout_marginStart="4dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="@+id/img_icon_rate"
                 app:layout_constraintStart_toEndOf="@+id/rate_product"
                 app:layout_constraintTop_toTopOf="@+id/img_icon_rate" />
@@ -85,7 +88,7 @@
                 android:id="@+id/count_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100 Terjual"
+                android:text="@string/_100_terjual"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/img_icon_rate"
@@ -98,6 +101,7 @@
                 android:layout_height="25dp"
                 android:src="@drawable/ic_category"
                 android:layout_marginTop="4dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintStart_toStartOf="@+id/img_icon_rate"
                 app:layout_constraintTop_toBottomOf="@+id/img_icon_rate" />
 
@@ -105,7 +109,7 @@
                 android:id="@+id/category_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Clothes"
+                android:text="@string/clothes"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:layout_marginStart="4dp"

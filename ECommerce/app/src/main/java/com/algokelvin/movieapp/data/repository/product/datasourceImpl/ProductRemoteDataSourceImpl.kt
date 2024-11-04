@@ -7,7 +7,6 @@ import retrofit2.Response
 
 class ProductRemoteDataSourceImpl(
     private val service: ProductApiService,
-    private val apiKey: String,
 ): ProductRemoteDataSource {
     override suspend fun getProducts(): Response<ArrayList<Product>> = service.getProductsList()
 }

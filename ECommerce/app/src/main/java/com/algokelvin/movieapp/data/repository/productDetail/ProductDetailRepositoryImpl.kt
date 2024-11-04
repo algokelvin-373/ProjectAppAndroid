@@ -11,7 +11,7 @@ class ProductDetailRepositoryImpl(
 
     override suspend fun getProductDetail(id: String): Product = getProductDetailFromAPI(id)
 
-    suspend fun getProductDetailFromAPI(id: String): Product {
+    private suspend fun getProductDetailFromAPI(id: String): Product {
         lateinit var product: Product
 
         try {

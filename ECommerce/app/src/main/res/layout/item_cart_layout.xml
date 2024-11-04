@@ -19,6 +19,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lines="2"
-                android:text="Name Cart"
+                android:text="@string/name_cart"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -54,6 +55,7 @@
                     android:layout_height="25dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/todo"
                     android:src="@drawable/ic_decrease" />
 
                 <TextView
@@ -62,7 +64,7 @@
                     android:layout_height="25dp"
                     android:layout_margin="4dp"
                     android:padding="4dp"
-                    android:text="1"
+                    tools:text="1"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -73,6 +75,7 @@
                     android:layout_height="25dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/todo"
                     android:src="@drawable/ic_increase" />
 
             </LinearLayout>
@@ -83,6 +86,7 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_delete"
                 android:layout_marginEnd="8dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout" />

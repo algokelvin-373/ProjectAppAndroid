@@ -13,9 +13,9 @@ class ProductRepositoryImpl(
     private val cache: ProductCacheDataSource,
 ): ProductRepository {
 
-    override suspend fun getProducts(): List<Product>? =  getProductsFromCache()
+    override suspend fun getProducts(): List<Product> =  getProductsFromCache()
 
-    override suspend fun updateProducts(): List<Product>? {
+    override suspend fun updateProducts(): List<Product> {
         val newListOfProducts = getProductsFromAPI()
         local.clearAll()
         local.saveProductsToDB(newListOfProducts)
@@ -23,7 +23,7 @@ class ProductRepositoryImpl(
         return newListOfProducts
     }
 
-    suspend fun getProductsFromAPI(): List<Product> {
+    private suspend fun getProductsFromAPI(): List<Product> {
         lateinit var productList: ArrayList<Product>
 
         try {
@@ -39,7 +39,7 @@ class ProductRepositoryImpl(
         return productList
     }
 
-    suspend fun getProductsFromDB(): List<Product> {
+    private suspend fun getProductsFromDB(): List<Product> {
         lateinit var productList: List<Product>
 
         try {
@@ -58,7 +58,7 @@ class ProductRepositoryImpl(
         return productList
     }
 
-    suspend fun getProductsFromCache(): List<Product> {
+    private suspend fun getProductsFromCache(): List<Product> {
         lateinit var productList: List<Product>
 
         try {

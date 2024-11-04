@@ -20,7 +20,7 @@ class RemoteDataModule(private val apiKey: String) {
     @Singleton
     @Provides
     fun provideMovieRemoteDataModule(productApiService: ProductApiService): ProductRemoteDataSource {
-        return ProductRemoteDataSourceImpl(productApiService, apiKey)
+        return ProductRemoteDataSourceImpl(productApiService)
     }
 
     @Singleton

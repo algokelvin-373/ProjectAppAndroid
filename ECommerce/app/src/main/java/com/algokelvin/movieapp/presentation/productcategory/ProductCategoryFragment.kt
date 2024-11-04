@@ -28,7 +28,7 @@ class ProductCategoryFragment : Fragment(), OnClickItemProduct {
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var adapter: ProductAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.activity_product_category, container, false)
 
         (activity?.application as Injector).createProductCategorySubComponent()

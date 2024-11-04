@@ -11,7 +11,7 @@ class ProductCategoryRepositoryImpl(
 
     override suspend fun getProductsSortByCategory(): List<Product> = getProductsFromAPI()
 
-    suspend fun getProductsFromAPI(): List<Product> {
+    private suspend fun getProductsFromAPI(): List<Product> {
         lateinit var productList: ArrayList<Product>
 
         try {

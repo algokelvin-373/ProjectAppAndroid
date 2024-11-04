@@ -2,17 +2,6 @@ package com.algokelvin.movieapp.data.model.cart
 
 import com.google.gson.annotations.SerializedName
 
-data class CartDetail(
-    @SerializedName("id")
-    val id: Int,
-
-    @SerializedName("userId")
-    val userId: Int,
-
-    @SerializedName("products")
-    val products: ArrayList<ProductCountInCart>,
-)
-
 data class ProductCountInCart(
     @SerializedName("id")
     val id: Int,
