@@ -2,10 +2,8 @@ package com.algokelvin.movieapp.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.databinding.ActivityHome2Binding
@@ -37,11 +35,13 @@ class HomeActivity : AppCompatActivity() {
 
         binding.imgProfile.setOnClickListener {
             profileId?.let { id ->
-                homeViewModel.getProfileFromDB(id).observe(this, Observer { user ->
-                    Toast.makeText(this, "User: "+user.username, Toast.LENGTH_SHORT).show()
+                homeViewModel.getProfileFromDB(id).observe(this) { user ->
                     val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
-                    profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
-                })
+                    profileBottomSheetFragment.show(
+                        supportFragmentManager,
+                        profileBottomSheetFragment.tag
+                    )
+                }
             }
         }
 

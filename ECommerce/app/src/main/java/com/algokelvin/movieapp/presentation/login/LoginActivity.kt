@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.user.Login
@@ -51,13 +50,12 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordData.text.toString()
             val login = Login(username, password)
 
-            loginViewModel.login(login).observe(this, Observer { token ->
+            loginViewModel.login(login).observe(this) { token ->
                 if (token != null) {
                     if (token.errorMessage == null) {
-                        //Toast.makeText(this, token.data?.token.toString(), Toast.LENGTH_SHORT).show()
                         val tokenStr = token.data?.token
                         tokenStr?.let { it1 -> EncryptLocal.saveToken(this, it1) }
-                        loginViewModel.getProfile(login).observe(this, Observer {  profile ->
+                        loginViewModel.getProfile(login).observe(this) { profile ->
                             Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
                             val profileId = profile.data?.id
                             profileId?.let { it1 -> EncryptLocal.saveIdProfile(this, it1) }
@@ -65,12 +63,12 @@ class LoginActivity : AppCompatActivity() {
                             intentToHome.putExtra("PROFILE_ID", profileId)
                             startActivity(intentToHome)
                             finish()
-                        })
+                        }
                     } else {
                         Toast.makeText(this, token.errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 }
-            })
+            }
         }
     }
 

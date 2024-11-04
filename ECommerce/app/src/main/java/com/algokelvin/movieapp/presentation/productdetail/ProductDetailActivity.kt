@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.cart.CartDB
@@ -35,7 +34,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun initProductDetail() {
         val id = intent.getIntExtra("PRODUCT_ID", 0)
-        productDetailViewModel.getProductDetail(id.toString()).observe(this, Observer {
+        productDetailViewModel.getProductDetail(id.toString()).observe(this) {
             if (it != null) {
                 val product = it
                 Glide.with(binding.imageProduct.context)
@@ -46,7 +45,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 binding.descriptionProduct.text = product.description
                 addToCart(product)
             }
-        })
+        }
     }
 
     private fun addToCart(product: Product) {
@@ -61,9 +60,9 @@ class ProductDetailActivity : AppCompatActivity() {
                     count = 1
                 )
                 cartDB.let { data ->
-                    productDetailViewModel.addProductToCart(data).observe(this, Observer {
+                    productDetailViewModel.addProductToCart(data).observe(this) {
                         Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                    })
+                    }
                 }
             }
         }

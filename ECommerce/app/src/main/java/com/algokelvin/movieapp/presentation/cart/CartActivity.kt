@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.algokelvin.movieapp.R
@@ -81,8 +80,8 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
 
     private fun getListCart() {
         profileId?.let { id ->
-            cartViewModel.getCartByUserId(id).observe(this, Observer { cart ->
-                if(cart != null){
+            cartViewModel.getCartByUserId(id).observe(this) { cart ->
+                if (cart != null) {
                     cart.data?.let { listCart ->
                         if (listCart.isNotEmpty()) {
                             binding.messageEmptyCart.visibility = View.GONE
@@ -95,22 +94,22 @@ class CartActivity : AppCompatActivity(), OnClickItemCart {
                             binding.btnCheckout.isEnabled = false
                         }
                     }
-                }else{
-                    Toast.makeText(this,"No data cart", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "No data cart", Toast.LENGTH_LONG).show()
                 }
-            })
+            }
         }
     }
 
     private fun updateListCart(userId: Int, productId: Int, count: Int) {
-        cartViewModel.updateCountProduct(userId, productId, count).observe(this, Observer {
+        cartViewModel.updateCountProduct(userId, productId, count).observe(this) {
             Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
-        })
+        }
     }
 
     private fun deleteProductInCart(userId: Int, productId: Int) {
-        cartViewModel.deleteProduct(userId, productId). observe(this, Observer {
+        cartViewModel.deleteProduct(userId, productId). observe(this) {
             Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
-        })
+        }
     }
 }

@@ -23,4 +23,5 @@
     <string name="_100_terjual">100 Terjual</string>
     <string name="clothes">Clothes</string>
     <string name="profile_user">Profile User</string>
+    <string name="total_all_price">$ %s</string>
 </resources>
