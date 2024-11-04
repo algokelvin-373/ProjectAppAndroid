@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.domain.usecase.CheckoutUseCase
 import com.algokelvin.movieapp.domain.usecase.GetCartByUserIdUseCase
 
+@Suppress("UNCHECKED_CAST")
 class CheckoutViewModelFactory(
     private val getCartByUserIdUseCase: GetCartByUserIdUseCase,
     private val checkoutUseCase: CheckoutUseCase,

@@ -6,6 +6,7 @@ import com.algokelvin.movieapp.domain.usecase.DeleteProductInCartUseCase
 import com.algokelvin.movieapp.domain.usecase.GetCartByUserIdUseCase
 import com.algokelvin.movieapp.domain.usecase.UpdateCountProductInCartUseCase
 
+@Suppress("UNCHECKED_CAST")
 class CartViewModelFactory(
     private val getCartByUserIdUseCase: GetCartByUserIdUseCase,
     private val updateCountProductInCartUseCase: UpdateCountProductInCartUseCase,

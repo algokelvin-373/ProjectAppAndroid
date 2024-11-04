@@ -1,6 +1,7 @@
 package com.algokelvin.movieapp.data.model.product
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -31,6 +32,7 @@ data class Product (
     @SerializedName("image")
     val image: String?,
 
-    /*@SerializedName("rating")
-    val rating: Rating?*/
+    @SerializedName("rating")
+    @Embedded(prefix = "product_")
+    val rating: Rating?
 )

@@ -8,7 +8,7 @@ import com.algokelvin.movieapp.data.model.user.User
 
 @Database(
     entities = [Product::class, User::class, CartDB::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class ProductDB(): RoomDatabase() {

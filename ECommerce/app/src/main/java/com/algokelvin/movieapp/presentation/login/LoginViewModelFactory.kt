@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.domain.usecase.GetProfileUseCase
 import com.algokelvin.movieapp.domain.usecase.LoginUseCase
 
+@Suppress("UNCHECKED_CAST")
 class LoginViewModelFactory(
     private val loginUseCase: LoginUseCase,
     private val getProfileUseCase: GetProfileUseCase,
