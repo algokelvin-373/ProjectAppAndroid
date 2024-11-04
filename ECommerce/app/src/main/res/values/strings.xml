@@ -26,4 +26,5 @@
     <string name="total_all_price">$ %s</string>
     <string name="done">Done</string>
     <string name="items_product">%s Oty</string>
+    <string name="price_product">Price Product</string>
 </resources>

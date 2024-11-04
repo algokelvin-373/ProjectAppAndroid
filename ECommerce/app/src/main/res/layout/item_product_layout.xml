@@ -52,14 +52,36 @@
                 app:layout_constraintTop_toBottomOf="@+id/card_image_layout" />
 
             <ImageView
-                android:id="@+id/img_icon_rate"
+                android:id="@+id/img_icon_price"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_rate"
+                android:src="@drawable/ic_price"
                 android:layout_marginTop="4dp"
                 android:contentDescription="@string/todo"
                 app:layout_constraintStart_toStartOf="@+id/title_product"
                 app:layout_constraintTop_toBottomOf="@+id/title_product" />
+
+            <TextView
+                android:id="@+id/price_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/img_icon_price"
+                app:layout_constraintStart_toEndOf="@+id/img_icon_price"
+                app:layout_constraintTop_toTopOf="@+id/img_icon_price"
+                tools:text="4.7" />
+
+            <ImageView
+                android:id="@+id/img_icon_rate"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_rate"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@+id/title_product"
+                app:layout_constraintTop_toBottomOf="@+id/img_icon_price" />
 
             <TextView
                 android:id="@+id/rate_product"

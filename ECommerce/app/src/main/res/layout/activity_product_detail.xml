@@ -102,6 +102,36 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/title_price_product"
+                    android:text="@string/price_product"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/price_product"
+                    tools:text="$100"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <TextView
@@ -123,7 +153,7 @@
             android:layout_height="wrap_content"
             android:text="@string/description_product"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             app:layout_constraintEnd_toEndOf="@+id/title_description_product"

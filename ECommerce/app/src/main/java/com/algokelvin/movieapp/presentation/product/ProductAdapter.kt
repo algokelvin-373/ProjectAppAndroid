@@ -51,6 +51,7 @@ class MyViewHolder(
    fun bind(product: Product){
         binding.titleProduct.text = product.title
         binding.categoryProduct.text = product.category
+        binding.priceProduct.text = product.price.toString()
         binding.rateProduct.text = product.rating?.rate.toString()
         binding.countProduct.text = itemView.context.getString(R.string.item_sold, product.rating?.count.toString())
         Glide.with(binding.imageProduct.context)
