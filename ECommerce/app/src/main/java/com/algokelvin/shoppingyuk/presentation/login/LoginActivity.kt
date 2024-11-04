@@ -2,6 +2,7 @@ package com.algokelvin.shoppingyuk.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -46,6 +47,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initLogin() {
         binding.btnLogin.setOnClickListener {
+            binding.materialCardView.visibility = View.GONE
+            binding.layoutLoading.visibility = View.VISIBLE
+
             val username = binding.usernameData.text.toString()
             val password = binding.passwordData.text.toString()
             val login = Login(username, password)
@@ -66,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
                         }
                     } else {
                         Toast.makeText(this, token.errorMessage, Toast.LENGTH_SHORT).show()
+                        binding.materialCardView.visibility = View.VISIBLE
+                        binding.layoutLoading.visibility = View.GONE
                     }
                 }
             }
