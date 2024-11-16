@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.algokelvin.movieapp"
+    namespace = "com.algokelvin.shoppingyuk"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.algokelvin.movieapp"
+        applicationId = "com.algokelvin.shoppingyuk"
         minSdk = 30
         targetSdk = 34
         versionCode = 1
