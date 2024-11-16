@@ -5,18 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.user.User
 import com.algokelvin.movieapp.databinding.ProfilePageBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import javax.inject.Inject
 
 class ProfileBottomSheetFragment(private val user: User) : BottomSheetDialogFragment() {
     private lateinit var binding: ProfilePageBottomSheetBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.profile_page_bottom_sheet, container, false)
         return binding.root
     }

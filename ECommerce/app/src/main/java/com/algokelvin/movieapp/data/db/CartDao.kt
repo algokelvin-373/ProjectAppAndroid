@@ -5,8 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.algokelvin.movieapp.data.model.cart.CartDB
-import com.algokelvin.movieapp.data.model.product.Product
-import com.algokelvin.movieapp.data.model.user.User
 
 @Dao
 interface CartDao {

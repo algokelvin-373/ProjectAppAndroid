@@ -3,16 +3,11 @@ package com.algokelvin.movieapp.presentation.product
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.algokelvin.movieapp.R
@@ -21,7 +16,6 @@ import com.algokelvin.movieapp.databinding.ActivityProductBinding
 import com.algokelvin.movieapp.presentation.di.Injector
 import com.algokelvin.movieapp.presentation.onclick.OnClickItemProduct
 import com.algokelvin.movieapp.presentation.productdetail.ProductDetailActivity
-import com.algokelvin.movieapp.presentation.profile.ProfileBottomSheetFragment
 import javax.inject.Inject
 
 class ProductFragment : Fragment(), OnClickItemProduct {
@@ -50,26 +44,6 @@ class ProductFragment : Fragment(), OnClickItemProduct {
             val profileId = intent.getIntExtra("PROFILE_ID", 0)
             productViewModel.getProfileFromDB(profileId).observe(viewLifecycleOwner, Observer { user ->
                 Toast.makeText(context, "User: "+user.username, Toast.LENGTH_SHORT).show()
-                val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
-                profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
-            })
-        }*/
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //binding = DataBindingUtil.setContentView(this, R.layout.activity_product)
-
-        /*(context as Injector).createMovieSubComponent()
-            .inject(this)
-        productViewModel = ViewModelProvider(this, factory)[ProductViewModel::class]*/
-
-        //initRecyclerView()
-
-        /*binding.imgProfile.setOnClickListener {
-            val profileId = intent.getIntExtra("PROFILE_ID", 0)
-            productViewModel.getProfileFromDB(profileId).observe(this, Observer { user ->
-                Toast.makeText(this, "User: "+user.username, Toast.LENGTH_SHORT).show()
                 val profileBottomSheetFragment = ProfileBottomSheetFragment(user)
                 profileBottomSheetFragment.show(supportFragmentManager, profileBottomSheetFragment.tag)
             })
@@ -116,8 +90,8 @@ class ProductFragment : Fragment(), OnClickItemProduct {
     private fun displayPopularMovies(){
         binding.productProgressBar.visibility = View.VISIBLE
         val responseLiveData = productViewModel.getProducts()
-        responseLiveData.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
+        responseLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
                 binding.productProgressBar.visibility = View.GONE
@@ -125,7 +99,7 @@ class ProductFragment : Fragment(), OnClickItemProduct {
                 binding.productProgressBar.visibility = View.GONE
                 Toast.makeText(context,"No data available", Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 
     override fun onClickItemProduct(product: Product) {

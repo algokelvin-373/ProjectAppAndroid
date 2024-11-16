@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.domain.usecase.AddProductToCartUseCase
 import com.algokelvin.movieapp.domain.usecase.GetProductDetailUseCase
 
+@Suppress("UNCHECKED_CAST")
 class ProductDetailViewModelFactory(
     private val getProductDetailUseCase: GetProductDetailUseCase,
     private val addProductToCartUseCase: AddProductToCartUseCase,

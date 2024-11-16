@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.domain.usecase.GetProductsCategoryUseCase
 
+@Suppress("UNCHECKED_CAST")
 class ProductCategoryViewModelFactory(
     private val getProductsCategoryUseCase: GetProductsCategoryUseCase,
 ): ViewModelProvider.Factory {

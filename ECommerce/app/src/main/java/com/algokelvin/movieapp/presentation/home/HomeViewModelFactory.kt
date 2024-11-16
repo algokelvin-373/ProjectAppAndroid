@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.domain.usecase.GetProfileFromDBUseCase
 
+@Suppress("UNCHECKED_CAST")
 class HomeViewModelFactory(
     private val getProfileFromDBUseCase: GetProfileFromDBUseCase,
 ): ViewModelProvider.Factory {

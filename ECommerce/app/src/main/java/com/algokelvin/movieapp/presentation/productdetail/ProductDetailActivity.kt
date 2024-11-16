@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.algokelvin.movieapp.R
 import com.algokelvin.movieapp.data.model.cart.CartDB
@@ -22,8 +21,6 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     private lateinit var productDetailViewModel: ProductDetailViewModel
 
-    private var product: Product? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
@@ -37,7 +34,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun initProductDetail() {
         val id = intent.getIntExtra("PRODUCT_ID", 0)
-        productDetailViewModel.getProductDetail(id.toString()).observe(this, Observer {
+        productDetailViewModel.getProductDetail(id.toString()).observe(this) {
             if (it != null) {
                 val product = it
                 Glide.with(binding.imageProduct.context)
@@ -45,25 +42,16 @@ class ProductDetailActivity : AppCompatActivity() {
                     .into(binding.imageProduct)
                 binding.nameProduct.text = product.title
                 binding.categoryProduct.text = product.category
+                binding.priceProduct.text = getString(R.string.total_all_price, product.price.toString())
                 binding.descriptionProduct.text = product.description
                 addToCart(product)
             }
-        })
+        }
     }
 
     private fun addToCart(product: Product) {
         binding.btnAddToCart.setOnClickListener {
-            EncryptLocal.getIdProfile(this)?.let { profileId ->
-                /*val cartDB = product?.let { dataProduct ->
-                    CartDB(
-                        userId = profileId,
-                        productId = dataProduct.id,
-                        productTitle = dataProduct.title,
-                        productImage = dataProduct.image,
-                        productPrice = dataProduct.price,
-                        count = 1
-                    )
-                }*/
+            EncryptLocal.getIdProfile(this).let { profileId ->
                 val cartDB = CartDB(
                     userId = profileId,
                     productId = product.id,
@@ -73,9 +61,9 @@ class ProductDetailActivity : AppCompatActivity() {
                     count = 1
                 )
                 cartDB.let { data ->
-                    productDetailViewModel.addProductToCart(data).observe(this, Observer {
+                    productDetailViewModel.addProductToCart(data).observe(this) {
                         Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                    })
+                    }
                 }
             }
         }

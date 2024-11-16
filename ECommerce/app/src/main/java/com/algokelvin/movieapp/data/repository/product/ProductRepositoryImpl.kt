@@ -1,6 +1,5 @@
 package com.algokelvin.movieapp.data.repository.product
 
-import android.util.Log
 import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductCacheDataSource
 import com.algokelvin.movieapp.data.repository.product.datasource.ProductLocalDataSource
@@ -13,9 +12,9 @@ class ProductRepositoryImpl(
     private val cache: ProductCacheDataSource,
 ): ProductRepository {
 
-    override suspend fun getProducts(): List<Product>? =  getProductsFromCache()
+    override suspend fun getProducts(): List<Product> =  getProductsFromCache()
 
-    override suspend fun updateProducts(): List<Product>? {
+    override suspend fun updateProducts(): List<Product> {
         val newListOfProducts = getProductsFromAPI()
         local.clearAll()
         local.saveProductsToDB(newListOfProducts)
@@ -23,7 +22,7 @@ class ProductRepositoryImpl(
         return newListOfProducts
     }
 
-    suspend fun getProductsFromAPI(): List<Product> {
+    private suspend fun getProductsFromAPI(): List<Product> {
         lateinit var productList: ArrayList<Product>
 
         try {
@@ -33,19 +32,19 @@ class ProductRepositoryImpl(
                 productList = body
             }
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         return productList
     }
 
-    suspend fun getProductsFromDB(): List<Product> {
+    private suspend fun getProductsFromDB(): List<Product> {
         lateinit var productList: List<Product>
 
         try {
             productList = local.getProductsFromDB()
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         if (productList.isNotEmpty()) {
@@ -58,13 +57,13 @@ class ProductRepositoryImpl(
         return productList
     }
 
-    suspend fun getProductsFromCache(): List<Product> {
+    private suspend fun getProductsFromCache(): List<Product> {
         lateinit var productList: List<Product>
 
         try {
             productList = cache.getProductsFromCache()
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         if (productList.isNotEmpty()) {

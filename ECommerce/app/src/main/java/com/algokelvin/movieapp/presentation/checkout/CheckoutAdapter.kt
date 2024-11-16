@@ -50,7 +50,7 @@ class CheckoutViewHolder(
        val total = count.toFloat() * price!!
 
        binding.nameShop.text = cartDB.productTitle
-       binding.itemShop.text = cartDB.count.toString()+" Qty"
+       binding.itemShop.text = itemView.context.getString(R.string.items_product, cartDB.count.toString())
        binding.priceShop.text = total.toString()
 
        Glide.with(binding.imgShop.context)

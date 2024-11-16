@@ -1,7 +1,6 @@
 package com.algokelvin.movieapp.presentation.di.cart
 
 import com.algokelvin.movieapp.presentation.cart.CartActivity
-import com.algokelvin.movieapp.presentation.login.LoginActivity
 import dagger.Subcomponent
 
 @CartScope

@@ -27,7 +27,7 @@ object EncryptLocal {
         return sharedPreferences.getString("user_token", null)
     }
 
-    fun getIdProfile(context: Context): Int? {
+    fun getIdProfile(context: Context): Int {
         val sharedPreferences = getEncryptedPrefs(context)
         return sharedPreferences.getInt("user_id", 0)
     }

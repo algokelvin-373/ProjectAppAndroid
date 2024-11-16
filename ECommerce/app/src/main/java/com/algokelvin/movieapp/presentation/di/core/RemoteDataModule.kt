@@ -16,11 +16,11 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class RemoteDataModule(private val apiKey: String) {
+class RemoteDataModule {
     @Singleton
     @Provides
     fun provideMovieRemoteDataModule(productApiService: ProductApiService): ProductRemoteDataSource {
-        return ProductRemoteDataSourceImpl(productApiService, apiKey)
+        return ProductRemoteDataSourceImpl(productApiService)
     }
 
     @Singleton

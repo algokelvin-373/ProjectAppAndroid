@@ -1,6 +1,5 @@
 package com.algokelvin.movieapp.data.repository.login
 
-import android.util.Log
 import com.algokelvin.movieapp.data.api.ResponseResults
 import com.algokelvin.movieapp.data.model.user.Login
 import com.algokelvin.movieapp.data.model.user.Token
@@ -37,7 +36,6 @@ class LoginRepositoryImpl(
                 return ResponseResults(null, errorMessage)
             }
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
             return ResponseResults(null, e.message)
         }
     }
@@ -61,7 +59,6 @@ class LoginRepositoryImpl(
                 return ResponseResults(null, errorMessage)
             }
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
             return ResponseResults(null, e.message)
         }
     }
@@ -69,9 +66,8 @@ class LoginRepositoryImpl(
     private suspend fun saveProfile(user: User) {
         try {
             local.saveUserToDB(user)
-            Log.i("ALGOKELVIN_DEBUG", "Success Save User")
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN_DEBUG", e.message.toString())
+            //Log.i("ALGOKELVIN_DEBUG", e.message.toString())
         }
     }
 
@@ -80,9 +76,8 @@ class LoginRepositoryImpl(
 
         try {
             user = local.getUserFromDB(id)
-            Log.i("ALGOKELVIN_DEBUG", "Success Get User")
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN_DEBUG", e.message.toString())
+            //Log.i("ALGOKELVIN_DEBUG", e.message.toString())
         }
 
         return user

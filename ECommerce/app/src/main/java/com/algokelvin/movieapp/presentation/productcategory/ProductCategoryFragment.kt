@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.algokelvin.movieapp.R
@@ -29,7 +27,7 @@ class ProductCategoryFragment : Fragment(), OnClickItemProduct {
     private lateinit var productCategoryViewModel: ProductCategoryViewModel
     private lateinit var adapter: ProductAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.activity_product_category, container, false)
 
         (activity?.application as Injector).createProductCategorySubComponent()
@@ -65,8 +63,8 @@ class ProductCategoryFragment : Fragment(), OnClickItemProduct {
     private fun displayProductsSortByCategory() {
         binding.productProgressBar.visibility = View.VISIBLE
         val responseLiveData = productCategoryViewModel.getProductsSortByCategory()
-        responseLiveData.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
+        responseLiveData.observe(viewLifecycleOwner) {
+            if (it != null) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
                 binding.productProgressBar.visibility = View.GONE
@@ -74,7 +72,7 @@ class ProductCategoryFragment : Fragment(), OnClickItemProduct {
                 binding.productProgressBar.visibility = View.GONE
                 Toast.makeText(context,"No data available", Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 
     override fun onClickItemProduct(product: Product) {

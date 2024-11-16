@@ -1,6 +1,5 @@
 package com.algokelvin.movieapp.data.repository.productCategory
 
-import android.util.Log
 import com.algokelvin.movieapp.data.model.product.Product
 import com.algokelvin.movieapp.data.repository.productCategory.datasource.ProductCategoryRemoteDataSource
 import com.algokelvin.movieapp.domain.repository.ProductCategoryRepository
@@ -11,7 +10,7 @@ class ProductCategoryRepositoryImpl(
 
     override suspend fun getProductsSortByCategory(): List<Product> = getProductsFromAPI()
 
-    suspend fun getProductsFromAPI(): List<Product> {
+    private suspend fun getProductsFromAPI(): List<Product> {
         lateinit var productList: ArrayList<Product>
 
         try {
@@ -21,7 +20,7 @@ class ProductCategoryRepositoryImpl(
                 productList = body
             }
         } catch (e: Exception) {
-            Log.i("ALGOKELVIN", e.message.toString())
+            //Log.i("ALGOKELVIN", e.message.toString())
         }
 
         return productList.sortedBy { it.category }
