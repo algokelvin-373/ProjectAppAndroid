@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".EdtTextActivity">
 
     <EditText
@@ -23,36 +23,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_action"
-        android:textColor="@color/selector_btn_action"
-        android:text="Enter"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
+        android:focusable="false"
         android:paddingStart="20dp"
+        android:paddingTop="7dp"
         android:paddingEnd="20dp"
         android:paddingBottom="7dp"
-        android:paddingTop="7dp"
-        android:focusable="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Enter"
+        android:textAllCaps="false"
+        android:textColor="@color/selector_btn_action"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/edt_txt"
+        app:layout_constraintTop_toBottomOf="@+id/edt_txt" />
 
     <TextView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_back"
-        android:textColor="@color/selector_btn_back"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
         android:paddingStart="20dp"
+        android:paddingTop="7dp"
         android:paddingEnd="20dp"
         android:paddingBottom="7dp"
-        android:paddingTop="7dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="Back"
+        android:textAllCaps="false"
+        android:textColor="@color/selector_btn_back"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/edt_txt"
+        app:layout_constraintTop_toBottomOf="@+id/edt_txt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
