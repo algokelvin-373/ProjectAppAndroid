@@ -1,8 +1,12 @@
-## Action Every Minute
+## Enable Disable Button
 
-| ![Gambar 1](./documentation/SS01_ActionEveryMinute.jpg) | ![Gambar 2](./documentation/SS02_ActionEveryMinute.jpg) | ![Gambar 3](./documentation/SS03_ActionEveryMinute.jpg) |
-|:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
-|               Gambar 1: <br> Begin Action               |               Gambar 2: <br> Start Action               |           Gambar 3: <br> Action until 5 Times           |
+| ![Gambar 1](./documentation/SS_EnableDisableButton.gif) |
+|:-------------------------------------------------:|
+|          Gambar 1: Enable Disable Button          |
+
+## Implementation
+- MVVM
+- View Binding
 
 ## Environment
 <table>
@@ -12,9 +16,9 @@
         <td>Java JDK</td>
     </tr>
     <tr>
-        <td>7.2.2</td>
-        <td>7.3.3</td>
-        <td>17</td>
+        <td>4.2.0</td>
+        <td>6.7.1</td>
+        <td>1.8</td>
     </tr>
 </table>
 

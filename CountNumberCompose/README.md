@@ -1,8 +1,11 @@
-## Action Every Minute
+## Count Number Compose
 
-| ![Gambar 1](./documentation/SS01_ActionEveryMinute.jpg) | ![Gambar 2](./documentation/SS02_ActionEveryMinute.jpg) | ![Gambar 3](./documentation/SS03_ActionEveryMinute.jpg) |
-|:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
-|               Gambar 1: <br> Begin Action               |               Gambar 2: <br> Start Action               |           Gambar 3: <br> Action until 5 Times           |
+| ![Gambar 1](./documentation/SS_CountNumberCompose_01.jpg) | ![Gambar 2](./documentation/SS_CountNumberCompose_02.jpg) | ![Gambar 3](./documentation/SS_CountNumberCompose_03.jpg) |
+|:---------------------------------------------------------:|:---------------------------------------------------------:|:---------------------------------------------------------:|
+|                  Gambar 1: Page Count 1                   |                  Gambar 2: Page Count 2                   |                  Gambar 3: Page Count 3                   |
+
+## Implementation
+- Jetpack Compose
 
 ## Environment
 <table>
@@ -12,8 +15,8 @@
         <td>Java JDK</td>
     </tr>
     <tr>
-        <td>7.2.2</td>
-        <td>7.3.3</td>
+        <td>7.3.1</td>
+        <td>7.4</td>
         <td>17</td>
     </tr>
 </table>
