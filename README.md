@@ -68,6 +68,18 @@
                 - Init Project Input Output Application, Recorder Application, View Binding Input Data, View Model Count Application, and View Model Rectangle Application
             </td>
         </tr>
+        <tr>
+            <td>1.0.3</td>
+            <td>
+                - Update Documentation
+                - Clean project .gradle and .idea
+                - Documentation for LanguageChangeOne
+                - Documentation for EnableDisableButton
+                - Documentation for DesignUIToast
+                - Documentation for CountNumberCompose
+                - Documentation for AnimationApp
+            </td>
+        </tr>
     </tbody>
 </table>
 
