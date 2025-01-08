@@ -20,9 +20,10 @@
             <b>4.  Count Number Compose</b> <br>
             <b>5.  Design UI Toast</b> <br>
             <b>6.  Enable Disable Button</b> <br>
-            <b>8.  Input Output Application</b> <br>
-            <b>9.  Keyboard Simulator</b> <br>
-            <b>10. Language Change One</b> <br>
+            <b>7.  Input Output Application</b> <br>
+            <b>8.  Keyboard Simulator</b> <br>
+            <b>9.  Language Change One</b> <br>
+            <b>10. View Model Rectangle Application</b> <br>
         </td>
         <td>
             <b>11. Recorder Application</b> <br>
@@ -34,7 +35,6 @@
             <b>17. Two Number Operator With DTL</b> <br>
             <b>18. View Binding Input Data</b> <br>
             <b>19. View Model Count Application</b> <br>
-            <b>20. View Model Rectangle Application</b> <br>
         </td>
     </tr>
 </table>
