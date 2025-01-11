@@ -71,13 +71,13 @@
         <tr>
             <td>1.0.3</td>
             <td>
-                - Update Documentation
-                - Clean project .gradle and .idea
-                - Documentation for LanguageChangeOne
-                - Documentation for EnableDisableButton
-                - Documentation for DesignUIToast
-                - Documentation for CountNumberCompose
-                - Documentation for AnimationApp
+                - Update Documentation <br>
+                - Clean project .gradle and .idea <br>
+                - Documentation for LanguageChangeOne <br>
+                - Documentation for EnableDisableButton <br>
+                - Documentation for DesignUIToast <br>
+                - Documentation for CountNumberCompose <br>
+                - Documentation for AnimationApp <br>
             </td>
         </tr>
     </tbody>
