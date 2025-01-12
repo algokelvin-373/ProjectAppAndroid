@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg_item_product"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_shop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@string/todo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/name_shop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:lines="2"
+            android:text="@string/name_cart"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/img_shop"
+            app:layout_constraintEnd_toStartOf="@+id/item_shop"
+            app:layout_constraintStart_toEndOf="@+id/img_shop"
+            app:layout_constraintTop_toTopOf="@+id/img_shop" />
+
+        <TextView
+            android:id="@+id/item_shop"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:padding="4dp"
+            tools:text="4 Qty"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/price_shop"
+            app:layout_constraintEnd_toStartOf="@+id/price_shop"
+            app:layout_constraintTop_toTopOf="@+id/price_shop" />
+
+        <TextView
+            android:id="@+id/price_shop"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            tools:text="$1.35"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_shop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_shop" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
