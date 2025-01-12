@@ -14,16 +14,16 @@
 <table>
     <tr>
         <td>
-            <b>1.  Action Every Minute</b> <br>
-            <b>2.  Animation Application</b> <br>
-            <b>3.  Camera Application</b> <br>
-            <b>4.  Count Number Compose</b> <br>
-            <b>5.  Design UI Toast</b> <br>
-            <b>6.  Enable Disable Button</b> <br>
-            <b>7.  Input Output Application</b> <br>
-            <b>8.  Keyboard Simulator</b> <br>
-            <b>9.  Language Change One</b> <br>
-            <b>10. View Model Rectangle Application</b> <br>
+            <b>01.  Action Every Minute</b> <br>
+            <b>02.  Animation Application</b> <br>
+            <b>03.  Camera Application</b> <br>
+            <b>04.  Count Number Compose</b> <br>
+            <b>05.  Design UI Toast</b> <br>
+            <b>06.  Enable Disable Button</b> <br>
+            <b>07.  Input Output Application</b> <br>
+            <b>08.  Keyboard Simulator</b> <br>
+            <b>09.  Language Change One</b> <br>
+            <b>10.  View Model Rectangle Application</b> <br>
         </td>
         <td>
             <b>11. Recorder Application</b> <br>
@@ -78,6 +78,12 @@
                 - Documentation for DesignUIToast <br>
                 - Documentation for CountNumberCompose <br>
                 - Documentation for AnimationApp <br>
+            </td>
+        </tr>
+        <tr>
+            <td>1.0.4</td>
+            <td>
+                - Update Documentation <br>
             </td>
         </tr>
     </tbody>
