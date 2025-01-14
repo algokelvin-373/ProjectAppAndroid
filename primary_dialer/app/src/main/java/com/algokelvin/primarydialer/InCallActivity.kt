@@ -15,7 +15,7 @@ import com.algokelvin.primarydialer.databinding.ActivityInCallBinding
 
 class InCallActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInCallBinding
-    private lateinit var currentCall: Call
+    //private lateinit var currentCall: Call
     private lateinit var audioProcessor: AudioProcessingManager
     private lateinit var audioManager: AudioManager
     private lateinit var callTimer: Chronometer
@@ -52,9 +52,9 @@ class InCallActivity : AppCompatActivity() {
             audioManager.isSpeakerphoneOn = isSpeakerOn
         }
         binding.endCallButton.setOnClickListener {
-            if (currentCall != null) {
+            /*if (currentCall != null) {
                 currentCall.disconnect()
-            }
+            }*/
         }
     }
 
@@ -76,7 +76,7 @@ class InCallActivity : AppCompatActivity() {
             }*/
         }
 
-        if (currentCall != null) {
+        /*if (currentCall != null) {
             updateCallInfo()
             // Register callback
             currentCall.registerCallback(object : Call.Callback() {
@@ -86,15 +86,15 @@ class InCallActivity : AppCompatActivity() {
                 }
             })
             startAudioProcessing()
-        }
+        }*/
     }
 
     private fun updateCallInfo() {
-        val uri = currentCall.details.handle
+        /*val uri = currentCall.details.handle
         if (uri != null) {
             val phoneNumber = uri.schemeSpecificPart
             binding.phoneNumberText.text = phoneNumber
-        }
+        }*/
     }
 
     private fun handleCallStateChanged(state: Int) {
@@ -123,8 +123,8 @@ class InCallActivity : AppCompatActivity() {
         if (audioProcessor != null) {
             audioProcessor.stopProcessing()
         }
-        if (currentCall != null) {
+        /*if (currentCall != null) {
 //            currentCall.unregisterCallback();
-        }
+        }*/
     }
 }

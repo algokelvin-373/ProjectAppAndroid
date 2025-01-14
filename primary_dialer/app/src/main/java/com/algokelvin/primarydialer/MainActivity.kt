@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             if (phoneNumber.isNotEmpty() &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED
             ) {
-                //requestSetDefaultDialer(this)
                 enableAudioEffect()
                 makePhoneCall(phoneNumber)
             } else {
@@ -75,9 +74,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun makePhoneCall(phoneNumber: String) {
-        /*val intent = Intent(this, InCallActivity::class.java)
-        intent.putExtra("phone_number", phoneNumber)
-        startActivity(intent)*/
+//        val intent = Intent(this, InCallActivity::class.java)
+//        intent.putExtra("phone_number", phoneNumber)
+//        startActivity(intent)
 
         val intent = Intent(Intent.ACTION_CALL)
         intent.data = Uri.parse("tel:$phoneNumber")
