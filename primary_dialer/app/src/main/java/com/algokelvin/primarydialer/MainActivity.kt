@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity() {
             if (phoneNumber.isNotEmpty() &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED
             ) {
-                requestSetDefaultDialer(this)
-//                enableAudioEffect()
-//                makePhoneCall(phoneNumber)
+                //requestSetDefaultDialer(this)
+                enableAudioEffect()
+                makePhoneCall(phoneNumber)
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
             }
