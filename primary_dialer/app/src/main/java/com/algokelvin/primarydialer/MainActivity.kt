@@ -1,9 +1,7 @@
 package com.algokelvin.primarydialer
 
-import android.R.attr
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.media.audiofx.NoiseSuppressor
 import android.net.Uri
 import android.os.Bundle
@@ -11,12 +9,12 @@ import android.telecom.TelecomManager
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import com.algokelvin.primarydialer.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "TEST_AUDIO_CALL"
+    private val TAG = "PermissionHelper"
+    private val REQUEST_PHONE_ROLE: Int = 2
     private lateinit var binding: ActivityMainBinding
     private lateinit var noiseSuppressor: NoiseSuppressor
 
@@ -25,7 +23,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        requestSetDefaultDialer(this)
+        binding.btnActiveDialer.setOnClickListener {
+            requestRolePermission()
+        }
+
+        /*requestSetDefaultDialer(this)
 
         binding.callButton.setOnClickListener {
             val phoneNumber = binding.phoneNumberInput.text.toString()
@@ -37,7 +39,12 @@ class MainActivity : AppCompatActivity() {
             } else {
                 ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE), 1)
             }
-        }
+        }*/
+    }
+
+    private fun requestRolePermission() {
+        val permissionHelper = PermissionHelper()
+        permissionHelper.setPermission(this)
     }
 
     private fun requestSetDefaultDialer(context: Context) {
@@ -83,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    override fun onRequestPermissionsResult(
+    /*override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
@@ -92,5 +99,47 @@ class MainActivity : AppCompatActivity() {
         if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             binding.callButton.performClick()
         }
+    }*/
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("PermissionHelper", "11 Successfully set as default dialer")
+        Log.d("PermissionHelper", "RequestCode: $requestCode")
+        Log.d("PermissionHelper", "resultCode: $resultCode")
     }
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.d("PermissionHelper", "11 Successfully set as default dialer")
+        Log.d("PermissionHelper", "RequestCode: $requestCode")
+        Log.d("PermissionHelper", "resultCode: $resultCode")
+
+        *//*if (requestCode == REQUEST_PHONE_ROLE) {
+            if (resultCode == RESULT_OK) {
+                // Berhasil menjadi aplikasi telepon default
+                Log.d("PhoneRole", "Successfully set as default dialer")
+
+                // Tambahkan dialog atau toast untuk memberi tahu pengguna
+                AlertDialog.Builder(this)
+                    .setTitle("Aplikasi Telepon")
+                    .setMessage("Aplikasi ini sekarang menjadi aplikasi telepon default")
+                    .setPositiveButton("OK", null)
+                    .show()
+            } else {
+                // Pengguna menolak atau terjadi kesalahan
+                Log.d("PhoneRole", "Failed to set as default dialer")
+
+                // Tampilkan dialog penjelasan
+                AlertDialog.Builder(this)
+                    .setTitle("Izin Diperlukan")
+                    .setMessage("Aplikasi memerlukan izin untuk menjadi aplikasi telepon default. Mohon berikan izin untuk fungsionalitas penuh.")
+                    .setPositiveButton(
+                        "Coba Lagi"
+                    ) { dialog: DialogInterface?, which: Int -> requestRolePermission() }
+                    .setNegativeButton("Batal", null)
+                    .show()
+            }
+        }*//*
+    }*/
 }

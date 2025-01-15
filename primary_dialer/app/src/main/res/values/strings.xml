@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PrimaryDialer</string>
+    <string name="phoneAppLabel" product="default">Phone</string>
 </resources>
