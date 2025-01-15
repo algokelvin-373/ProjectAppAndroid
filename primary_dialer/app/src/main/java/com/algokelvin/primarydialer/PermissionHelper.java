@@ -33,13 +33,6 @@ public class PermissionHelper {
                         Log.d(TAG, "Already default dialer app");
                     }
                 }
-
-                /*if (!roleManager.isRoleHeld(RoleManager.ROLE_DIALER)) {
-                    Intent intent = roleManager.createRequestRoleIntent(RoleManager.ROLE_DIALER);
-                    mActivity.startActivityForResult(intent, 1);
-                } else {
-                    Log.d(TAG, "Already default dialer app");
-                }*/
             }
         } else {
             // Untuk versi Android sebelum Q
