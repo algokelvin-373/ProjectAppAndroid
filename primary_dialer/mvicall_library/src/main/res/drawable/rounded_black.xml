@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/white"
+    tools:targetApi="lollipop">     <!-- ripple color -->
+
+    <!-- for Button -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="25dp" />
+            <solid android:color="#292929" />
+        </shape>
+    </item>
+
+</layer-list>

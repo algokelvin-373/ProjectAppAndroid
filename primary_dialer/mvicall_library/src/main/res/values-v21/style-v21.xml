@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.TransparentHome" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.TransparentAnimation" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation.Left</item>
+    </style>
+
+</resources>

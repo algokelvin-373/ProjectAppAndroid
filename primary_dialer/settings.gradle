@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PrimaryDialer"
 include ':app'
+include ':mvicall_library'
