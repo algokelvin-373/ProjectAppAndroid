@@ -172,6 +172,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i("MviCallLibrary", "I'm Here CallCardFragment");
         Trace.beginSection(TAG + " onCreate");
         mTranslationOffset = getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
         final View view = inflater.inflate(R.layout.call_card_fragment, container, false);

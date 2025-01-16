@@ -22,8 +22,6 @@ public class MyInCallServiceImpl extends InCallService {
         Intent intent = new Intent(this, InCallActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-
-        // Tambahkan logic untuk menampilkan UI panggilan
     }
 
     @Override

@@ -13,13 +13,8 @@ import android.telecom.PhoneAccountHandle
 import android.telecom.TelecomManager
 import android.util.Log
 import android.view.View
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.algokelvin.primarydialer.databinding.ActivityMainInCallBinding
 
 class MainInCallActivity : AppCompatActivity() {
@@ -93,13 +88,6 @@ class MainInCallActivity : AppCompatActivity() {
                     Manifest.permission.CALL_PHONE
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return
             }
             telecomManager.placeCall(uri, extras)
@@ -122,7 +110,7 @@ class MainInCallActivity : AppCompatActivity() {
         if (requestCode == REQUEST_PHONE_ROLE) {
             if (resultCode == RESULT_OK) {
                 // Berhasil menjadi aplikasi telepon default
-                Log.d("PermissionHelper", "Successfully set as default dialer")
+                Log.d(TAG, "Successfully set as default dialer")
 
                 // Tambahkan dialog atau toast untuk memberi tahu pengguna
                 AlertDialog.Builder(this)
@@ -132,7 +120,7 @@ class MainInCallActivity : AppCompatActivity() {
                     .show()
             } else {
                 // Pengguna menolak atau terjadi kesalahan
-                Log.d("PermissionHelper", "Failed to set as default dialer")
+                Log.d(TAG, "Failed to set as default dialer")
 
                 // Tampilkan dialog penjelasan
                 AlertDialog.Builder(this)
