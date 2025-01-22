@@ -5,9 +5,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
-import android.media.AudioManager;
 import android.media.AudioRecord;
-import android.media.AudioTrack;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
@@ -19,7 +17,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -67,20 +64,22 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
     private Handler handler=null;
     private Thread mCaptureThread = null;
-    private boolean mIsRecording,mIsRealTimeTraning;
-    private int mFrequence = 48000;
-    private int mChannelConfig = AudioFormat.CHANNEL_IN_MONO;
-    private int mPlayChannelConfig = AudioFormat.CHANNEL_IN_DEFAULT;
-    private int mAudioEncoding = AudioFormat.ENCODING_PCM_16BIT;
-    private int bufferSize = AudioRecord.getMinBufferSize(mFrequence, mChannelConfig, mAudioEncoding)*10;//越大延时越高 效果越好
-    private boolean rt_flag =false;
+    private boolean mIsRecording, mIsRealTimeTraning;
 
-    private PlayTask mPlay_task;
-    private RecordTask mRecord_task;
+    private static final int SAMPLE_RATE = 44100; // Hz
+    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
+    private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+    private AudioRecord audioRecord;
+    private int bufferSize;
+
+    private boolean rt_flag = false;
+
+    //private PlayTask mPlay_task;
+    //private RecordTask mRecord_task;
     private TranTask mTran_task;
-    private RealTimeRecordTask mRealTimeRecord_Task;
+    //private RealTimeRecordTask mRealTimeRecord_Task;
     private RealTimeTranTask mRealTimeTran_task; //一个类
-    private RealTimePlayTask mRealTimePlay_task;
+    //private RealTimePlayTask mRealTimePlay_task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +95,11 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         mRecord = findViewById(R.id.audio_Record);
         mRecord.setOnClickListener(v -> {
             if (isRecording) {
-                stopAudioRecord();
+                //stopAudioRecord();
+                stopAudioNewMethod();
             } else {
-                startAudioRecord();
+                startAudioNewMethod();
+                //startAudioRecord();
             }
         });
 
@@ -151,6 +152,105 @@ public class MainRNNoiseActivity extends AppCompatActivity {
                 mRealtimeTran_Flag.setText("关闭实时降噪");
             }
         });
+    }
+
+    private void startAudioNewMethod() {
+        mRecord.setText("Stop Recording");
+        mPlay.setEnabled(false);
+        showToast("Recording started...");
+
+        bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT, bufferSize);
+        final byte[] audioData = new byte[bufferSize];
+        //String filePath = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), "recording.wav").getAbsolutePath();
+        // Simpan di folder /storage/emulated/0/Music
+        String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC) + "/recording.wav";
+
+
+        isRecording = true;
+        audioRecord.startRecording();
+        new Thread(() -> {
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                Log.i(TAG, "Ready to Recording");
+                while (isRecording) {
+                    int read = audioRecord.read(audioData, 0, audioData.length);
+                    if (read > 0) {
+                        outputStream.write(audioData, 0, read);
+                    }
+                }
+                saveAsWav(filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private void stopAudioNewMethod() {
+        if (isRecording) {
+            isRecording = false;
+            audioRecord.stop();
+            audioRecord.release();
+            mRecord.setText("Start Recording");
+            mPlay.setEnabled(true);
+            mTran.setEnabled(true);
+            showToast("Recording stopped");
+        }
+    }
+
+    private void saveAsWav(String filePath) {
+        Log.i(TAG, "filePath: "+filePath);
+        File pcmFile = new File(filePath);
+        File wavFile = new File(filePath.replace(".wav", "_final.wav"));
+        Log.i(TAG, "wavFile: "+wavFile.getAbsolutePath());
+
+        try (FileOutputStream outputStream = new FileOutputStream(wavFile)) {
+            // Header WAV
+            outputStream.write(wavHeader((int) pcmFile.length(), SAMPLE_RATE, CHANNEL_CONFIG));
+            try (FileInputStream inputStream = new FileInputStream(pcmFile)) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            }
+            pcmFile.delete(); // Hapus file PCM sementara
+        } catch (IOException e) {
+            Log.i(TAG, "Error: "+e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private byte[] wavHeader(int totalAudioLen, int sampleRate, int channelConfig) {
+        int totalDataLen = totalAudioLen + 36;
+        int channels = (channelConfig == AudioFormat.CHANNEL_IN_MONO) ? 1 : 2;
+        int byteRate = sampleRate * channels * 2;
+
+        return new byte[]{
+                // RIFF header
+                'R', 'I', 'F', 'F',
+                (byte) (totalDataLen & 0xff), (byte) ((totalDataLen >> 8) & 0xff),
+                (byte) ((totalDataLen >> 16) & 0xff), (byte) ((totalDataLen >> 24) & 0xff),
+                // WAVE header
+                'W', 'A', 'V', 'E',
+                // fmt subchunk
+                'f', 'm', 't', ' ',
+                16, 0, 0, 0, // Subchunk1 size
+                1, 0, // Audio format (PCM)
+                (byte) channels, 0,
+                (byte) (sampleRate & 0xff), (byte) ((sampleRate >> 8) & 0xff),
+                (byte) ((sampleRate >> 16) & 0xff), (byte) ((sampleRate >> 24) & 0xff),
+                (byte) (byteRate & 0xff), (byte) ((byteRate >> 8) & 0xff),
+                (byte) ((byteRate >> 16) & 0xff), (byte) ((byteRate >> 24) & 0xff),
+                (byte) (channels * 2), 0, // Block align
+                16, 0, // Bits per sample
+                // data subchunk
+                'd', 'a', 't', 'a',
+                (byte) (totalAudioLen & 0xff), (byte) ((totalAudioLen >> 8) & 0xff),
+                (byte) ((totalAudioLen >> 16) & 0xff), (byte) ((totalAudioLen >> 24) & 0xff)
+        };
     }
 
     private void startAudioRecord() {
@@ -232,12 +332,12 @@ public class MainRNNoiseActivity extends AppCompatActivity {
     }
 
     private void startAudioPlay2(File A) {
-        Log.i(TAG, "MainActivity - startAudioPlay2");
+        /*Log.i(TAG, "MainActivity - startAudioPlay2");
         mPlay2.setTag(this);
         mPlay2.setText("berhenti");
 
         mPlay_task = new PlayTask(A);
-        mPlay_task.execute();
+        mPlay_task.execute();*/
 
         showToast("Mulai memutar audio yang diproses");
     }
@@ -255,7 +355,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
     }
 
     private void startRealTimeAudioTran() {
-        Log.i(TAG, "MainActivity - startRealTimeAudioTran");
+        /*Log.i(TAG, "MainActivity - startRealTimeAudioTran");
         mRealtimeTran.setTag(this);
         mRealtimeTran.setText("Hentikan umpan balik waktu nyata");
         //三个线程
@@ -264,7 +364,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         mRealTimePlay_task= new RealTimePlayTask();
         mRealTimeRecord_Task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         mRealTimeTran_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        mRealTimePlay_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        mRealTimePlay_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);*/
 
         showToast("Umpan balik waktu nyata dimulai");
     }
@@ -379,7 +479,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
     }
 
 
-    class RecordTask extends AsyncTask<Void,Integer,Void> {
+    /*class RecordTask extends AsyncTask<Void,Integer,Void> {
         @Override
         protected Void doInBackground(Void... arg0) {
             mIsRecording = true;
@@ -440,8 +540,8 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
         }
 
-    }
-    class PlayTask extends AsyncTask<Void,Void,Void> {
+    }*/
+    /*class PlayTask extends AsyncTask<Void,Void,Void> {
         File AudioFile;
 
         PlayTask(File A) {
@@ -506,7 +606,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         protected void onPreExecute() {
 
         }
-    }
+    }*/
     class TranTask extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -552,7 +652,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         }
     }
 
-    class RealTimeRecordTask extends AsyncTask<Void,Integer,Void> {
+    /*class RealTimeRecordTask extends AsyncTask<Void,Integer,Void> {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         protected Void doInBackground(Void... arg0) {
@@ -612,7 +712,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
 
         }
-    }
+    }*/
 
     class RealTimeTranTask extends AsyncTask<Void,Void,Void> {
         @Override
@@ -684,9 +784,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         }
     }
 
-
-
-    class RealTimePlayTask extends AsyncTask<Void,Void,Void> {
+    /*class RealTimePlayTask extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... arg0) {
             mIsPlaying = true;
@@ -744,5 +842,5 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         protected void onPreExecute() {
 
         }
-    }
+    }*/
 }
