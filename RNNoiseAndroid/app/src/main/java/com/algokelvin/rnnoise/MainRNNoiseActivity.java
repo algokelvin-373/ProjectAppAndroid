@@ -8,6 +8,7 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -30,11 +31,19 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainRNNoiseActivity extends AppCompatActivity {
+    private final String TAG = "MainActivityLogger";
+    private MediaRecorder mediaRecorder;
+    private MediaPlayer mediaPlayer;
+    private String outputFilePath;
+    private boolean isRecording = false;
+    private boolean mIsPlaying = false;
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("denoise");
@@ -58,7 +67,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
     private Handler handler=null;
     private Thread mCaptureThread = null;
-    private boolean mIsRecording,mIsPlaying,mIsRealTimeTraning;
+    private boolean mIsRecording,mIsRealTimeTraning;
     private int mFrequence = 48000;
     private int mChannelConfig = AudioFormat.CHANNEL_IN_MONO;
     private int mPlayChannelConfig = AudioFormat.CHANNEL_IN_DEFAULT;
@@ -86,14 +95,14 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
         mRecord = findViewById(R.id.audio_Record);
         mRecord.setOnClickListener(v -> {
-            if (mRecord.getTag() == null) {
-                startAudioRecord();
-            } else {
+            if (isRecording) {
                 stopAudioRecord();
+            } else {
+                startAudioRecord();
             }
         });
 
-        mPlay = findViewById(R.id.audio_paly);
+        mPlay = findViewById(R.id.audio_play);
         mPlay.setEnabled(false);
         mPlay.setOnClickListener(v -> {
             if (mPlay.getTag() == null) {
@@ -146,76 +155,109 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
     private void startAudioRecord() {
         if (checkPermission()) {
-            PackageManager packageManager = this.getPackageManager();
-            if (!packageManager.hasSystemFeature(PackageManager.FEATURE_MICROPHONE)) {
-                showToast("This device doesn't have a mic!");
-                return;
+            // Create directory to save audio files
+            File audioDir = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC), "pauseRecordDemo");
+            if (!audioDir.exists()) {
+                audioDir.mkdirs();
             }
-            mRecord.setTag(this);
-            mRecord.setText("stop");
-            mPlay.setEnabled(false);
 
-            File fpath = new File(Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + "/pauseRecordDemo");
-            if (!fpath.exists()) {
-                fpath.mkdirs();
+            // Set output file path
+            outputFilePath = new File(audioDir, "audio_record.3gp").getAbsolutePath();
+
+            // Initialize MediaRecorder
+            mediaRecorder = new MediaRecorder();
+            mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mediaRecorder.setOutputFile(outputFilePath);
+
+            try {
+                mediaRecorder.prepare();
+                mediaRecorder.start();
+                isRecording = true;
+                mRecord.setText("Stop Recording");
+                mPlay.setEnabled(false);
+                showToast("Recording started...");
+            } catch (IOException e) {
+                Log.e(TAG, "MediaRecorder prepare failed: " + e.getMessage());
+                showToast("Failed to start recording");
             }
-            mRecord_task = new RecordTask();
-            mRecord_task.execute();
-
-            showToast("录音开始");
         } else {
             requestPermission();
         }
     }
 
     private void stopAudioRecord() {
-        mIsRecording = false;
-        mRecord.setTag(null);
-        mRecord.setText("开始录制");
-        mPlay.setEnabled(true);
-        mTran.setEnabled(true);
-        showToast("录音完毕");
+        Log.i(TAG, "MainActivity - stopAudioRecord");
+        if (mediaRecorder != null) {
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+            isRecording = false;
+            mRecord.setText("Start Recording");
+            mPlay.setEnabled(true);
+            mTran.setEnabled(true);
+            showToast("Recording stopped. File saved at: " + outputFilePath);
+            Log.i(TAG, "File saved at: " + outputFilePath);
+        }
     }
+
     private void stopRealTimeTran() {
+        Log.i(TAG, "MainActivity - stopRealTimeTran");
         mIsRealTimeTraning = false;
         mRealtimeTran.setTag(null);
-        mRealtimeTran.setText("实时返送");
+        mRealtimeTran.setText("Umpan balik waktu nyata");
         mRealtimeTran.setEnabled(true);
     }
 
     private void startAudioPlay(File A) {
+        Log.i(TAG, "MainActivity - startAudioPlay");
         mPlay.setTag(this);
-        mPlay.setText("停止");
+        mPlay.setText("Berhenti");
 
-        mPlay_task = new PlayTask(A);
-        mPlay_task.execute();
-
-        showToast("开始播放录音音频");
+        if (outputFilePath != null) {
+            mediaPlayer = new MediaPlayer();
+            try {
+                mediaPlayer.setDataSource(outputFilePath);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+                showToast("Mulai memutar audio yang direkam.");
+            } catch (IOException e) {
+                Log.e("AUDIO_PLAY", "MediaPlayer prepare failed: " + e.getMessage());
+                showToast("Failed to play audio");
+            }
+        } else {
+            showToast("No audio file found to play");
+        }
     }
+
     private void startAudioPlay2(File A) {
+        Log.i(TAG, "MainActivity - startAudioPlay2");
         mPlay2.setTag(this);
-        mPlay2.setText("停止");
+        mPlay2.setText("berhenti");
 
         mPlay_task = new PlayTask(A);
         mPlay_task.execute();
 
-        showToast("开始播放处理后音频");
+        showToast("Mulai memutar audio yang diproses");
     }
+
     private void startAudioTran() {
+        Log.i(TAG, "MainActivity - startAudioTran");
         mTran.setTag(this);
-        mTran.setText("转换中");
+        mTran.setText("Mengonversi");
         mTran.setEnabled(false);
 
         mTran_task= new TranTask();
         mTran_task.execute();
 
-        showToast("降噪开始");
+        showToast("Pengurangan kebisingan dimulai");
     }
 
     private void startRealTimeAudioTran() {
+        Log.i(TAG, "MainActivity - startRealTimeAudioTran");
         mRealtimeTran.setTag(this);
-        mRealtimeTran.setText("停止实时返送");
+        mRealtimeTran.setText("Hentikan umpan balik waktu nyata");
         //三个线程
         mRealTimeRecord_Task=new RealTimeRecordTask();
         mRealTimeTran_task= new RealTimeTranTask();
@@ -224,36 +266,67 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         mRealTimeTran_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         mRealTimePlay_task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-        showToast("实时返送开始");
+        showToast("Umpan balik waktu nyata dimulai");
     }
 
     private void stopAudioPlay(File A) {
-
-        mIsPlaying = false;
-
-        mPlay.setTag(null);
-        mPlay.setText("播放录音音频");
-
+        Log.i(TAG, "MainActivity - stopAudioPlay");
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+                showToast("Audio stopped");
+                mIsPlaying = false;
+                mPlay.setTag(null);
+                mPlay.setText("Putar audio yang direkam");
+            }
+            mediaPlayer.release();
+            mediaPlayer = null;
+        } else {
+            showToast("No audio is playing");
+        }
     }
+
     private void stopAudioPlay2(File A) {
-
+        Log.i(TAG, "MainActivity - stopAudioPlay2");
         mIsPlaying = false;
-
         mPlay2.setTag(null);
-        mPlay2.setText("播放处理后音频");
-
+        mPlay2.setText("Putar audio yang telah diproses");
     }
 
 
     private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(), WRITE_EXTERNAL_STORAGE);
-        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), RECORD_AUDIO);
-        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Untuk Android 13+ (API 33+), gunakan izin granular
+            int readImages = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.READ_MEDIA_IMAGES);
+            int readAudio = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.READ_MEDIA_AUDIO);
+            int readVideo = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.READ_MEDIA_VIDEO);
+            return readImages == PackageManager.PERMISSION_GRANTED &&
+                    readAudio == PackageManager.PERMISSION_GRANTED &&
+                    readVideo == PackageManager.PERMISSION_GRANTED;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // Untuk Android 10 hingga 12, gunakan izin scoped storage
+            int result = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE);
+            int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.RECORD_AUDIO);
+            return result == PackageManager.PERMISSION_GRANTED &&
+                    result1 == PackageManager.PERMISSION_GRANTED;
+        } else {
+            // Untuk Android 9 ke bawah
+            int result = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
+                    android.Manifest.permission.RECORD_AUDIO);
+            return result == PackageManager.PERMISSION_GRANTED &&
+                    result1 == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new
-                String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, REQ_PERMISSION_AUDIO);
+        ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, REQ_PERMISSION_AUDIO);
     }
 
     @Override

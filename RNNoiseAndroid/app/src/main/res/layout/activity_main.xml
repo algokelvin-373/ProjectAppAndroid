@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="录音降噪模块"
+        android:text="Modul Pengurangan kebisingan rekaman"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp" />
@@ -35,7 +35,7 @@
                 android:layout_height="90dip"
                 android:background="@drawable/button_circle"
                 android:layout_gravity="center"
-                android:text="开始录制" />
+                android:text="Mulai merekam" />
         </LinearLayout>
 
         <LinearLayout
@@ -43,12 +43,12 @@
             android:layout_height="100dp"
             android:orientation="vertical">
             <Button
-                android:id="@+id/audio_paly"
+                android:id="@+id/audio_play"
                 android:layout_width="90dip"
                 android:layout_height="90dip"
                 android:background="@drawable/button_circle"
                 android:layout_gravity="center"
-                android:text="播放录制音频" />
+                android:text="Putar audio" />
         </LinearLayout>
 
     </LinearLayout>
@@ -68,7 +68,7 @@
                 android:layout_height="90dip"
                 android:background="@drawable/button_circle"
                 android:layout_gravity="center"
-                android:text="降噪处理" />
+                android:text="Pengurangan bising" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,7 +82,7 @@
                 android:layout_height="90dip"
                 android:background="@drawable/button_circle"
                 android:layout_gravity="center"
-                android:text="播放处理音频" />
+                android:text="Putar audio telah diproses" />
 
         </LinearLayout>
     </LinearLayout>
@@ -91,7 +91,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="实时降噪模块"
+        android:text="Modul pengurangan kebisingan waktu nyata"
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp" />
@@ -112,7 +112,7 @@
                 android:layout_height="90dip"
                 android:background="@drawable/button_circle"
                 android:layout_gravity="center"
-                android:text="实时返送" />
+                android:text="Umpan balik waktu nyata" />
         </LinearLayout>
 
         <LinearLayout
@@ -126,7 +126,7 @@
                 android:layout_height="90dip"
                 android:background="@drawable/button_circle"
                 android:layout_gravity="center"
-                android:text="开启实时降噪" />
+                android:text="Aktifkan pengurangan kebisingan secara real-time" />
         </LinearLayout>
     </LinearLayout>
 
