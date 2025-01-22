@@ -24,6 +24,15 @@ Java_com_fryant_denoise_MainActivity_rnnoise(JNIEnv *env, jobject instance,jstri
     return 0;
 }
 
+JNIEXPORT jint JNICALL
+Java_com_algokelvin_rnnoise_MainRNNoiseActivity_rnnoise(JNIEnv *env, jobject thiz, jstring infile,
+                                                        jstring outfile) {
+    const char *infi=(*env)->GetStringUTFChars(env,infile, JNI_FALSE);
+    const char *outf=(*env)->GetStringUTFChars(env,outfile, JNI_FALSE);
+    dn(infi,outf);
+    return 0;
+}
+
 #ifdef __cplusplus
 }
 #endif
