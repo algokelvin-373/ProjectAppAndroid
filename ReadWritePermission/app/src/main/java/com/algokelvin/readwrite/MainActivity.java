@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
@@ -25,13 +26,17 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivityLogger";
     private static final int REQUEST_PERMISSION_CODE = 100;
 
+    // Sample File for Testing
+    private final String fileName1 = "recording_final.wav";
+    private final String fileName2 = "recording_final.pcm";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         if (checkPermissions()) {
-            readFileFromMusicFolder("recording_final.wav");
+            readFileFromMusicFolder(fileName2);
         } else {
             requestPermissions();
         }
@@ -58,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                readFileFromMusicFolder("recording_final.wav");
+                readFileFromMusicFolder(fileName2);
             } else {
                 Log.e(TAG, "Permission denied");
             }
@@ -107,22 +112,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readFileFromAbsolutePath(String filePath) {
-        if (isFileExists(filePath)) {
-            try (InputStream inputStream = Files.newInputStream(Paths.get(filePath));
-                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-
-                StringBuilder fileContent = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    fileContent.append(line).append("\n");
-                }
-
-                Log.i(TAG, "File content (from absolute path): ");
-            } catch (Exception e) {
-                Log.e(TAG, "Error reading file from absolute path", e);
-            }
-        } else {
+        if (!isFileExists(filePath)) {
             Log.e(TAG, "File not found: " + filePath);
+            return;
+        }
+        if (!hasReadPermission(filePath)) {
+            Log.e(TAG, "File " + filePath +" can be read");
+            return;
+        }
+
+        try (InputStream inputStream = Files.newInputStream(Paths.get(filePath));
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            StringBuilder fileContent = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append("\n");
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error reading file from absolute path", e);
         }
     }
 
@@ -133,5 +141,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "Error checking file existence", e);
             return false;
         }
+    }
+
+    private boolean hasReadPermission(String filePath) {
+        File file = new File(filePath);
+        return file.exists() && file.canRead();
     }
 }
