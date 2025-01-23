@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivityLogger";
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (checkPermissions()) {
-            readFileFromMusicFolder("abc.wav");
+            readFileFromMusicFolder("recording_final.wav");
         } else {
             requestPermissions();
         }
@@ -96,9 +98,40 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 Log.e(TAG, "File not found: " + fileName);
+                // Fallback: Try reading directly from the absolute path
+                readFileFromAbsolutePath("/storage/emulated/0/Music/" + fileName);
             }
         } catch (Exception e) {
             Log.e(TAG, "Query failed", e);
+        }
+    }
+
+    private void readFileFromAbsolutePath(String filePath) {
+        if (isFileExists(filePath)) {
+            try (InputStream inputStream = Files.newInputStream(Paths.get(filePath));
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+
+                StringBuilder fileContent = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    fileContent.append(line).append("\n");
+                }
+
+                Log.i(TAG, "File content (from absolute path): ");
+            } catch (Exception e) {
+                Log.e(TAG, "Error reading file from absolute path", e);
+            }
+        } else {
+            Log.e(TAG, "File not found: " + filePath);
+        }
+    }
+
+    private boolean isFileExists(String filePath) {
+        try {
+            return Files.exists(Paths.get(filePath));
+        } catch (Exception e) {
+            Log.e(TAG, "Error checking file existence", e);
+            return false;
         }
     }
 }
