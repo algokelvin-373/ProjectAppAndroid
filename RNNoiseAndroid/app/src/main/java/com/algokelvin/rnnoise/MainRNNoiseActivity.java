@@ -1,14 +1,17 @@
 package com.algokelvin.rnnoise;
 
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,6 +25,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,10 +45,15 @@ public class MainRNNoiseActivity extends AppCompatActivity {
     private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
 
+    private String pathFileInput = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Music/recording_final.pcm";
+    private String pathFileOutput = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Music/recording_final_output.pcm";
+    private Handler handler = null;
     private AudioRecord audioRecord;
+    private TranTask mTran_task;
     private Button mRecord;
     private Button mPlay;
     private Button mTran;
+    private Button mPlay2;
     private int bufferSize;
 
     @Override
@@ -56,6 +66,8 @@ public class MainRNNoiseActivity extends AppCompatActivity {
         if (!checkPermissions()) {
             requestPermissions();
         }
+
+        handler = new Handler();
 
         mRecord = findViewById(R.id.audio_Record);
         mRecord.setOnClickListener(v -> {
@@ -79,6 +91,14 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
         mTran = findViewById(R.id.audio_tran);
         mTran.setEnabled(false);
+        mTran.setOnClickListener(v -> {
+            if (mTran.getTag() == null) {
+                startAudioProcessing();
+            }
+        });
+
+        mPlay2 = findViewById(R.id.audio_play2);
+        mPlay2.setEnabled(false);
     }
 
     private boolean checkPermissions() {
@@ -198,12 +218,26 @@ public class MainRNNoiseActivity extends AppCompatActivity {
             while ((bytesRead = fileInputStream.read(data)) != -1) {
                 audioTrack.write(data, 0, bytesRead);
             }
-
             fileInputStream.close();
             audioTrack.stop();
             audioTrack.release();
         } catch (Exception e) {
             Log.e(TAG, "Error Play Record: "+ e.getMessage());
+        }
+    }
+
+    private void startAudioProcessing() {
+        if (isFileExists(pathFileInput) && isFileExists(pathFileOutput)) {
+            mTran.setTag(this);
+            mTran.setText("Mengonversi");
+            mTran.setEnabled(false);
+
+            TranTask tranTask = new TranTask();
+            tranTask.execute();
+
+            showToast("Pengurangan kebisingan dimulai");
+        } else {
+            Log.i(TAG, "Salah satu file ada yang tidak ada");
         }
     }
 
@@ -278,5 +312,52 @@ public class MainRNNoiseActivity extends AppCompatActivity {
                 timer.cancel();
             }
         }, cnt );
+    }
+
+    private boolean isFileExists(String filePath) {
+        try {
+            return Files.exists(Paths.get(filePath));
+        } catch (Exception e) {
+            Log.e(TAG, "Error checking file existence", e);
+            return false;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    class TranTask extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            try {
+                new Thread(){
+                    public void run(){
+                        rnnoise(pathFileInput, pathFileOutput);
+                        handler.post(runnableUi);
+                    }
+                }.start();
+            } catch (Exception e) {
+                Log.e(TAG, "error:" + e.getMessage());
+            }
+            return null;
+        }
+
+
+        Runnable   runnableUi=new  Runnable(){
+            @Override
+            public void run() {
+                mTran.setTag(null);
+                mTran.setEnabled(true);
+                mTran.setText("Pengurangan kebisingan");
+                mPlay2.setEnabled(true);
+                showToast("Pengurangan kebisingan selesai");
+            }
+
+        };
+        protected void onPostExecute(Void result) {
+
+        }
+
+        protected void onPreExecute() {
+
+        }
     }
 }

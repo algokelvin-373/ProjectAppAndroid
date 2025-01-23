@@ -76,7 +76,7 @@ public class MainReferenceActivity extends AppCompatActivity {
 
     //private PlayTask mPlay_task;
     //private RecordTask mRecord_task;
-    private TranTask mTran_task;
+    private TranTaskz mTran_task;
     //private RealTimeRecordTask mRealTimeRecord_Task;
     private RealTimeTranTask mRealTimeTran_task; //一个类
     //private RealTimePlayTask mRealTimePlay_task;
@@ -348,7 +348,7 @@ public class MainReferenceActivity extends AppCompatActivity {
         mTran.setText("Mengonversi");
         mTran.setEnabled(false);
 
-        mTran_task= new TranTask();
+        mTran_task= new TranTaskz();
         mTran_task.execute();
 
         showToast("Pengurangan kebisingan dimulai");
@@ -607,7 +607,7 @@ public class MainReferenceActivity extends AppCompatActivity {
 
         }
     }*/
-    class TranTask extends AsyncTask<Void,Void,Void> {
+    class TranTaskz extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
