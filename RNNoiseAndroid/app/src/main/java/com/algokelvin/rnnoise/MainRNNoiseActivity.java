@@ -2,7 +2,9 @@ package com.algokelvin.rnnoise;
 
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
+import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +35,7 @@ public class MainRNNoiseActivity extends AppCompatActivity {
     private final String TAG = "MainRNNoiseActivityLogger";
     private static final int REQUEST_PERMISSION_CODE = 100;
     private boolean isRecording = false;
+    private boolean isPlaying = false;
     private static final int SAMPLE_RATE = 44100; // Hz
     private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
@@ -65,6 +68,14 @@ public class MainRNNoiseActivity extends AppCompatActivity {
 
         mPlay = findViewById(R.id.audio_play);
         mPlay.setEnabled(false);
+        mPlay.setOnClickListener(v -> {
+            String filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC) + "/recording_final.wav";
+            if (isPlaying) {
+                //TODO
+            } else {
+                startPlayRecord(filePath);
+            }
+        });
 
         mTran = findViewById(R.id.audio_tran);
         mTran.setEnabled(false);
@@ -158,6 +169,41 @@ public class MainRNNoiseActivity extends AppCompatActivity {
             mPlay.setEnabled(true);
             mTran.setEnabled(true);
             showToast("Recording stopped");
+        }
+    }
+
+    private void startPlayRecord(String filePath) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            byte[] data = new byte[1024];
+            int bytesRead;
+
+            // AudioTrack configuration
+            int sampleRate = 44100; // Biasanya untuk .wav file
+            int channelConfig = AudioFormat.CHANNEL_OUT_MONO;
+            int audioFormat = AudioFormat.ENCODING_PCM_16BIT;
+
+            // Inisialisasi AudioTrack
+            AudioTrack audioTrack = new AudioTrack(
+                    AudioManager.STREAM_MUSIC,
+                    sampleRate,
+                    channelConfig,
+                    audioFormat,
+                    AudioTrack.getMinBufferSize(sampleRate, channelConfig, audioFormat),
+                    AudioTrack.MODE_STREAM
+            );
+
+            audioTrack.play();
+
+            while ((bytesRead = fileInputStream.read(data)) != -1) {
+                audioTrack.write(data, 0, bytesRead);
+            }
+
+            fileInputStream.close();
+            audioTrack.stop();
+            audioTrack.release();
+        } catch (Exception e) {
+            Log.e(TAG, "Error Play Record: "+ e.getMessage());
         }
     }
 
