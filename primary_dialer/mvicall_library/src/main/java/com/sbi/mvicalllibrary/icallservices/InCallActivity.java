@@ -135,6 +135,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
             actionBar.hide();
         }
 
+        Log.i("MviCallLibrary", "20. I'm Here onCreate");
         setContentView(R.layout.incall_screen);
         internalResolveIntent(getIntent());
 
@@ -235,7 +236,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
     private void startAudioProcessing() {
         try {
             Log.i("START AUDIO PROCESSING", "START AUDIO PROCESSING");
-            System.loadLibrary("native-lib");
+            //System.loadLibrary("native-lib");
             audioProcessing.startProcessing();
         } catch (UnsatisfiedLinkError e) {
             Log.e("ERROR AUDIO PROCESSING", "ERROR AUDIO PROCESSING");
@@ -332,6 +333,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
 
     @Override
     public void onFragmentAttached(Fragment fragment) {
+        Log.i("MviCallLibrary", "2. I'm Here onFragmentAttached");
         if (fragment instanceof DialpadFragment) {
             mDialpadFragment = (DialpadFragment) fragment;
         } else if (fragment instanceof IncomingFragment) {
@@ -456,6 +458,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
     }
 
     public CallCardFragment getCallCardFragment() {
+        Log.i("MviCallLibrary", "3. I'm Here getCallCardFragment");
         return mCallCardFragment;
     }
 
@@ -579,6 +582,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
     }
 
     private Fragment createNewFragmentForTag(String tag) {
+        Log.i("MviCallLibrary", "4. I'm Here createNewFragmentForTag");
         if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
             mDialpadFragment = new DialpadFragment();
             return mDialpadFragment;
@@ -609,6 +613,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
     }
 
     private int getContainerIdForFragment(String tag) {
+        Log.i("MviCallLibrary", "30. I'm Here getContainerIdForFragment");
         if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
             return R.id.answer_and_dialpad_container;
         } else if (TAG_ANSWER_FRAGMENT.equals(tag)) {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PrimaryDialer</string>
+    <string name="app_name_ku">PrimaryDialer</string>
     <string name="phoneAppLabel" product="default">Phone</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

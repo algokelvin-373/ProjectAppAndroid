@@ -26,6 +26,7 @@ public class AudioProccessing {
 
     @SuppressLint("MissingPermission")
     public void startProcessing() {
+        Log.i("AudioProcessing", "1. startProcessing");
         if (isProcessing) return;
 
         int bufferSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
@@ -60,6 +61,7 @@ public class AudioProccessing {
     }
 
     private void processAudioStream() {
+        Log.i("AudioProcessing", "2. processAudioStream");
         if (audioRecord.getState() != AudioRecord.STATE_INITIALIZED ||
                 audioTrack.getState() != AudioTrack.STATE_INITIALIZED) {
             return;
@@ -75,7 +77,17 @@ public class AudioProccessing {
         while (isProcessing) {
             int bytesRead = audioRecord.read(byteBuffer, 0, byteBuffer.length);
             if (bytesRead > 0) {
-                // Konversi byte ke float
+                Log.i("AudioProcessing", "2. byRead: "+ bytesRead);
+
+                for (int i = 0; i < bytesRead / 2; i++) {
+                    inputBuffer[i] = ((byteBuffer[i * 2] & 0xFF) | (byteBuffer[i * 2 + 1] << 8)) / 32768.0f;
+                }
+
+                audioTrack.write(byteBuffer, 0, byteBuffer.length);
+                Log.i("AudioProcessing", "2.1. WRITE AUDIO");
+
+                // This is method FraudHofer
+                /*// Konversi byte ke float
                 for (int i = 0; i < bytesRead / 2; i++) {
                     inputBuffer[i] = ((byteBuffer[i * 2] & 0xFF) |
                             (byteBuffer[i * 2 + 1] << 8)) / 32768.0f;
@@ -94,12 +106,13 @@ public class AudioProccessing {
                     // Tulis ke AudioTrack
                     audioTrack.write(byteBuffer, 0, byteBuffer.length);
                     Log.i("WRITE AUDIO", "WRITE AUDIO");
-                }
+                }*/
             }
         }
     }
 
     public void stopProcessing() {
+        Log.i("AudioProcessing", "3. startProcessing");
         isProcessing = false;
 
         if (processingThread != null) {
