@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/bg_popup"
+    android:insetRight="30dp"
+    android:insetLeft="30dp">
+</inset>
