@@ -15,8 +15,6 @@ import com.algokelvin.primarydialer.databinding.ActivityInCallBinding
 
 class InCallActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInCallBinding
-    //private lateinit var currentCall: Call
-    //private lateinit var audioProcessor: AudioProcessingManager
     private lateinit var audioManager: AudioManager
     private lateinit var callTimer: Chronometer
 
@@ -60,7 +58,6 @@ class InCallActivity : AppCompatActivity() {
 
     private fun setupAudioManager() {
         audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        //audioProcessor = AudioProcessingManager()
     }
 
     private fun setupCall() {
