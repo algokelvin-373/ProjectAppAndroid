@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/rela"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:scaleType="centerCrop">
+
+        <ImageView
+            android:id="@+id/dialer_logo"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="88dp"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginBottom="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="50dp">
+
+        <com.sbimv.mvicalls.util.RoundRectCornerImageView
+            android:id="@+id/ivBgDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:tint="#8F46317E"
+            tools:ignore="ContentDescription" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintFullscreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:id="@+id/frameFullDialer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintDimensionRatio="9:16"
+                    android:background="@android:color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                </FrameLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/rlBgDialerPurple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/bgGradient"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                tools:ignore="ContentDescription" />
+
+            <FrameLayout
+                android:id="@+id/floating_end_call_action_button_container"
+                android:layout_width="@dimen/end_call_floating_action_button_diameter"
+                android:layout_height="@dimen/end_call_floating_action_button_diameter"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/end_call_button_margin_bottom"
+                android:layout_alignParentBottom="true" >
+
+                <ImageButton
+                    android:id="@+id/floating_end_call_action_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignStart="@+id/floating_end_call_action_button_container"
+                    android:contentDescription="@string/onscreenEndCallText"
+                    android:scaleType="center"
+                    tools:ignore="ObsoleteLayoutParam" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

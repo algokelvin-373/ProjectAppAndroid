@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<declare-styleable name="CustomFontAttr">
+    <attr  format="enum" name="gayaFont">
+        <enum name="normal" value="0" />
+        <enum name="normal_italic" value="1" />
+        <enum name="semibold" value="2" />
+        <enum name="semibold_italic" value="3" />
+        <enum name="bold" value="4" />
+        <enum name="bold_italic" value="5" />
+    </attr>
+</declare-styleable>
+</resources>
