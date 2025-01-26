@@ -11,30 +11,33 @@
 
 <h3 align="center">The Material of Case Study Android Developer</h3>
 
-<table>
+<table align="center">
     <tr>
         <td>
             <b>01.  Action Every Minute</b> <br>
             <b>02.  Animation Application</b> <br>
-            <b>03.  Camera Application</b> <br>
-            <b>04.  Count Number Compose</b> <br>
-            <b>05.  Design UI Toast</b> <br>
-            <b>06.  Enable Disable Button</b> <br>
-            <b>07.  Input Output Application</b> <br>
-            <b>08.  Keyboard Simulator</b> <br>
-            <b>09.  Language Change One</b> <br>
-            <b>10.  View Model Rectangle Application</b> <br>
+            <b>03.  Birthday Card Compose</b> <br>
+            <b>04.  Camera Application</b> <br>
+            <b>05.  Count Number Compose</b> <br>
+            <b>06.  Design UI Toast</b> <br>
+            <b>07.  Enable Disable Button</b> <br>
+            <b>08.  Input Output Application</b> <br>
         </td>
         <td>
-            <b>11. Recorder Application</b> <br>
-            <b>12. Recyclerview Basic</b> <br>
-            <b>13. Share and Rare</b> <br>
-            <b>14. Show Dialog</b> <br>
-            <b>15. Switch Android</b> <br>
-            <b>16. Two Number Operator No DTL</b> <br>
+            <b>09.  Keyboard Simulator</b> <br>
+            <b>10.  Language Change One</b> <br>
+            <b>11.  Recorder Application</b> <br>
+            <b>12.  Recyclerview Basic</b> <br>
+            <b>13.  Share and Rare</b> <br>
+            <b>14.  Show Dialog</b> <br>
+            <b>15.  Switch Android</b> <br>
+            <b>16.  Two Number Operator No DTL</b> <br>
+        </td>
+        <td>
             <b>17. Two Number Operator With DTL</b> <br>
             <b>18. View Binding Input Data</b> <br>
             <b>19. View Model Count Application</b> <br>
+            <b>20.  View Model Rectangle Application</b> <br>
         </td>
     </tr>
 </table>
@@ -84,6 +87,7 @@
             <td>1.0.4</td>
             <td>
                 - Update Documentation <br>
+                - Create project Birthday Card Compose <br>
             </td>
         </tr>
     </tbody>
