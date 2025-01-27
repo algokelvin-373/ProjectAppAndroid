@@ -1,8 +1,8 @@
 ## Math2D3D
 
-| ![Gambar 1](./documentation/SS01.jpg) |
-|:-------------------------------------:|
-|     Gambar 1: <br> Math2D3D Page      |
+| ![Gambar 1](./documentation/SS1.jpg) |
+|:------------------------------------:|
+|     Gambar 1: <br> Math2D3D Page     |
 
 ## Environment
 <table>
