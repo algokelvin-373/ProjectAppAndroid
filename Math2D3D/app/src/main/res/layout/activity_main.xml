@@ -29,39 +29,57 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:text="Length"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edt_length_2d"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Input Length 2D"
-                android:inputType="numberDecimal"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Length"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_length_2d"
+                    android:layout_weight="0.25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Length 2D"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:text="Width"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/edt_width_2d"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Input Width 2D"
-                android:inputType="numberDecimal"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Width"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_width_2d"
+                    android:layout_weight="0.25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Width 2D"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_calculate_2d"
@@ -96,56 +114,83 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:text="Length"
-                android:textStyle="bold"
-                android:textSize="16sp"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edt_length_3d"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:hint="Input Length 3D"
-                android:inputType="numberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Length"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:text="Width"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                <EditText
+                    android:id="@+id/edt_length_3d"
+                    android:layout_weight="0.25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Length 3D"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edt_width_3d"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:hint="Input Width 3D"
-                android:inputType="numberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Width"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:text="Height"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                <EditText
+                    android:id="@+id/edt_width_3d"
+                    android:layout_weight="0.25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Width 3D"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edt_height_3d"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:hint="Input Height 3D"
-                android:inputType="numberDecimal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Height"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edt_height_3d"
+                    android:layout_weight="0.25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input Height 3D"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_calculate_3d"
