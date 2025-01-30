@@ -32,6 +32,14 @@ class MainActivity : AppCompatActivity() {
         btnRecord = findViewById(R.id.btnRecord)
         checkPermissions()
         setupCallDetector()
+
+        btnRecord.setOnClickListener {
+            if(isRecording) {
+                stopRecording()
+            } else {
+                startRecording()
+            }
+        }
     }
 
     private fun checkPermissions() {

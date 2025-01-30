@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
+import android.media.AudioManager
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Environment
@@ -67,20 +68,39 @@ class CallRecorderService : Service() {
     private fun startRecording() {
         Log.i(TAG, "startRecording")
         try {
-            // Mulai foreground service
-            startForeground(NOTIFICATION_ID, buildNotification())
+            // Pindahkan startForeground ke sebelum memulai MediaRecorder
+            //startForeground(NOTIFICATION_ID, buildNotification())
 
             mediaRecorder = MediaRecorder().apply {
-                setAudioSource(MediaRecorder.AudioSource.VOICE_CALL)
-                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                filename = "${Environment.getExternalStorageDirectory()}/${System.currentTimeMillis()}_recording.3gp"
+                // Gunakan MIC sebagai ganti VOICE_CALL
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+
+                // Format output
+                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+
+                // Encoder
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+
+                filename = "${getExternalFilesDir(Environment.DIRECTORY_MUSIC)}/${System.currentTimeMillis()}_recording.3gp"
                 setOutputFile(filename)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
+                // Optimasi untuk panggilan
+                setAudioSamplingRate(44100)
+                setAudioEncodingBitRate(192000)
+
                 prepare()
                 start()
+
+                // Aktifkan speakerphone
+                (getSystemService(AUDIO_SERVICE) as AudioManager).apply {
+                    isSpeakerphoneOn = true
+                    mode = AudioManager.MODE_IN_COMMUNICATION
+                }
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error starting recording: ${e.message}")
+            //stopForeground(true)
+            stopSelf()
         }
     }
 
