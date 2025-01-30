@@ -26,6 +26,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        pickFirst 'lib/**/libjingle_peerconnection_so.so'
+    }
     ndkVersion "25.2.9519653"
 }
 
