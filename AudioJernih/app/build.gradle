@@ -26,6 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    ndkVersion "25.2.9519653"
 }
 
 dependencies {
@@ -34,7 +35,19 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
 
-    
+    // WebRTC - Work
+    implementation 'io.getstream:stream-webrtc-android:1.3.7'
+    implementation 'io.github.webrtc-sdk:android:125.6422.06.1'
+
+    // RNNoise TFLite
+    implementation 'org.tensorflow:tensorflow-lite:2.14.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.14.0'
+
+    // Oboe (Low-latency audio)
+    implementation 'com.google.oboe:oboe:1.7.0'
+
+    // Firebase for Signaling
+    implementation 'com.google.firebase:firebase-firestore:24.9.1'
 
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
