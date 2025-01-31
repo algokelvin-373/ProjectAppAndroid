@@ -1,12 +1,19 @@
 package com.algokelvin.recordcall
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Button
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -15,6 +22,7 @@ import com.algokelvin.recordcall.service.CallRecorderService
 class MainActivity : AppCompatActivity() {
     private val TAG = "RecordCallingLogger"
     private lateinit var btnRecord: Button
+    private lateinit var btnRecordWhatsApp: Button
     private var isRecording = false
     private var isInCall = false
 
@@ -25,6 +33,17 @@ class MainActivity : AppCompatActivity() {
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
 
+    private val callReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Log.i(TAG, "Broadcast received: ${intent?.getBooleanExtra("isInCall", false)}")
+            Log.i(TAG, "callReceiver Berjalan")
+            val isInCall = intent?.getBooleanExtra("isInCall", false) ?: false
+            btnRecordWhatsApp.isEnabled = isInCall
+            btnRecordWhatsApp.text = if (isInCall) "Mulai Rekam Call WA" else "Non-Aktif"
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,11 +59,27 @@ class MainActivity : AppCompatActivity() {
                 startRecording()
             }
         }
+
+        btnRecordWhatsApp = findViewById(R.id.btnRecordWhatsApp)
+        checkAccessibilityPermission()
+        registerReceiver(callReceiver, IntentFilter("WHATSAPP_CALL_STATED_CHANGED"), RECEIVER_NOT_EXPORTED)
     }
 
     private fun checkPermissions() {
         if (PERMISSIONS.any { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, 101)
+        }
+    }
+
+    private fun checkAccessibilityPermission() {
+        val accessibilityEnabled = Settings.Secure.getInt(contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED) == 1
+        if (!accessibilityEnabled) {
+            AlertDialog.Builder(this)
+                .setTitle("Akses Diperlukan")
+                .setMessage("Aktifkan aksesibilitas untuk mendeteksi panggilan WhatsApp")
+                .setPositiveButton("Buka Pengaturan") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                }.show()
         }
     }
 
@@ -90,5 +125,10 @@ class MainActivity : AppCompatActivity() {
         startService(intent)
         isRecording = false
         btnRecord.text = "Mulai Rekam"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(callReceiver)
     }
 }
