@@ -72,9 +72,25 @@ class CallRecorderService : Service() {
 
     private fun startRecording() {
         Log.i(TAG, "startRecording")
+
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         try {
             // Pindahkan startForeground ke sebelum memulai MediaRecorder
             startForeground(NOTIFICATION_ID, buildNotification())
+
+            // 1. Atur mode audio SEBELUM memulai recorder
+            audioManager.apply {
+                mode = AudioManager.MODE_IN_COMMUNICATION  // <-- INI YANG DITAMBAHKAN
+                isSpeakerphoneOn = true
+                setParameters("noise_suppression=auto")  // Optimasi kualitas audio
+            }
+
+            // 2. Atur volume maksimal untuk input/output
+            audioManager.setStreamVolume(
+                AudioManager.STREAM_VOICE_CALL,
+                (audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL) * 0.75).toInt(),
+                0
+            )
 
             // Check directory is exist
             val outputDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC) ?: return
@@ -86,25 +102,21 @@ class CallRecorderService : Service() {
             val filePath = File(outputDir, filename).absolutePath
             Log.i(TAG, "create file path: "+ filePath)
 
+            // 4. Configuration MediaRecorder
             mediaRecorder = MediaRecorder().apply {
-                setAudioSource(MediaRecorder.AudioSource.MIC) // Gunakan MIC sebagai ganti VOICE_CALL
-                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4) // Format output
-                setAudioEncoder(MediaRecorder.AudioEncoder.AAC) // Encoder
+                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
                 setOutputFile(filePath)
-
-                // Atur parameter kualitas audio
-                setAudioSamplingRate(44100) // 44.1 kHz
-                setAudioEncodingBitRate(192000) // 192 kbps
+                setAudioSamplingRate(16000)  // Lower rate untuk voice call
+                setAudioEncodingBitRate(64000)
 
                 prepare()
                 start()
-
-                // Aktifkan speakerphone
-                /*(getSystemService(AUDIO_SERVICE) as AudioManager).apply {
-                    isSpeakerphoneOn = true
-                    mode = AudioManager.MODE_IN_COMMUNICATION
-                }*/
             }
+
+            // 5. Optimasi tambahan setelah recording mulai
+            audioManager.setParameters("voice_communication=on")
         } catch (e: Exception) {
             Log.e(TAG, "Error starting recording: ${e.message}\n${e.stackTraceToString()}")
 
@@ -113,6 +125,10 @@ class CallRecorderService : Service() {
                 Log.e(TAG, "Security Exception - Check permissions")
             }
 
+            // Reset audio mode jika gagal
+            audioManager.mode = AudioManager.MODE_NORMAL
+            audioManager.isSpeakerphoneOn = false
+
             // Hentikan service
             stopForeground(true)
             stopSelf()
@@ -120,17 +136,21 @@ class CallRecorderService : Service() {
     }
 
     private fun stopRecording() {
-        Log.i(TAG, "stopRecording")
-        mediaRecorder?.apply {
-            stop()
-            release()
-
-            // Trigger media scan
-            MediaScannerConnection.scanFile(this@CallRecorderService, arrayOf(filename), null) { path, uri ->
-                Log.d(TAG, "Media scanned. Path: $path")
+        try {
+            val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+            audioManager.apply {
+                mode = AudioManager.MODE_NORMAL
+                isSpeakerphoneOn = false
             }
+
+            mediaRecorder?.stop()
+            mediaRecorder?.release()
+        } catch (e: Exception) {
+            Log.e(TAG, "Stop error: ${e.message}")
         }
         mediaRecorder = null
+        stopForeground(true)
+        stopSelf()
     }
 
     override fun onDestroy() {
