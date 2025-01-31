@@ -7,6 +7,7 @@ import android.app.Service
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaRecorder
+import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Environment
 import android.os.IBinder
@@ -14,6 +15,10 @@ import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CallRecorderService : Service() {
     private val TAG = "RecordCallingLogger"
@@ -69,37 +74,47 @@ class CallRecorderService : Service() {
         Log.i(TAG, "startRecording")
         try {
             // Pindahkan startForeground ke sebelum memulai MediaRecorder
-            //startForeground(NOTIFICATION_ID, buildNotification())
+            startForeground(NOTIFICATION_ID, buildNotification())
+
+            // Check directory is exist
+            val outputDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC) ?: return
+            if (!outputDir.exists()) outputDir.mkdirs()
+
+            // Create name file
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val filename = "REC_${timestamp}.mp4"
+            val filePath = File(outputDir, filename).absolutePath
+            Log.i(TAG, "create file path: "+ filePath)
 
             mediaRecorder = MediaRecorder().apply {
-                // Gunakan MIC sebagai ganti VOICE_CALL
-                setAudioSource(MediaRecorder.AudioSource.MIC)
+                setAudioSource(MediaRecorder.AudioSource.MIC) // Gunakan MIC sebagai ganti VOICE_CALL
+                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4) // Format output
+                setAudioEncoder(MediaRecorder.AudioEncoder.AAC) // Encoder
+                setOutputFile(filePath)
 
-                // Format output
-                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-
-                // Encoder
-                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-
-                filename = "${getExternalFilesDir(Environment.DIRECTORY_MUSIC)}/${System.currentTimeMillis()}_recording.3gp"
-                setOutputFile(filename)
-
-                // Optimasi untuk panggilan
-                setAudioSamplingRate(44100)
-                setAudioEncodingBitRate(192000)
+                // Atur parameter kualitas audio
+                setAudioSamplingRate(44100) // 44.1 kHz
+                setAudioEncodingBitRate(192000) // 192 kbps
 
                 prepare()
                 start()
 
                 // Aktifkan speakerphone
-                (getSystemService(AUDIO_SERVICE) as AudioManager).apply {
+                /*(getSystemService(AUDIO_SERVICE) as AudioManager).apply {
                     isSpeakerphoneOn = true
                     mode = AudioManager.MODE_IN_COMMUNICATION
-                }
+                }*/
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error starting recording: ${e.message}")
-            //stopForeground(true)
+            Log.e(TAG, "Error starting recording: ${e.message}\n${e.stackTraceToString()}")
+
+            // Cek permission
+            if (e is SecurityException) {
+                Log.e(TAG, "Security Exception - Check permissions")
+            }
+
+            // Hentikan service
+            stopForeground(true)
             stopSelf()
         }
     }
@@ -109,6 +124,11 @@ class CallRecorderService : Service() {
         mediaRecorder?.apply {
             stop()
             release()
+
+            // Trigger media scan
+            MediaScannerConnection.scanFile(this@CallRecorderService, arrayOf(filename), null) { path, uri ->
+                Log.d(TAG, "Media scanned. Path: $path")
+            }
         }
         mediaRecorder = null
     }
