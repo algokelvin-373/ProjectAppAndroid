@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.algokelvin.recordcall.service.CallRecorderService
 
 class MainActivity : AppCompatActivity() {
@@ -36,10 +37,13 @@ class MainActivity : AppCompatActivity() {
     private val callReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.i(TAG, "Broadcast received: ${intent?.getBooleanExtra("isInCall", false)}")
-            Log.i(TAG, "callReceiver Berjalan")
+            Log.d(TAG, "Menerima broadcast: ${intent?.action}")
             val isInCall = intent?.getBooleanExtra("isInCall", false) ?: false
-            btnRecordWhatsApp.isEnabled = isInCall
-            btnRecordWhatsApp.text = if (isInCall) "Mulai Rekam Call WA" else "Non-Aktif"
+            Log.d(TAG, "Call state received: $isInCall")
+            runOnUiThread {
+                btnRecordWhatsApp.isEnabled = isInCall
+                btnRecordWhatsApp.text = if (isInCall) "RECORD" else "DISABLED"
+            }
         }
     }
 
@@ -62,7 +66,17 @@ class MainActivity : AppCompatActivity() {
 
         btnRecordWhatsApp = findViewById(R.id.btnRecordWhatsApp)
         checkAccessibilityPermission()
-        registerReceiver(callReceiver, IntentFilter("WHATSAPP_CALL_STATED_CHANGED"), RECEIVER_NOT_EXPORTED)
+        LocalBroadcastManager.getInstance(this)
+            .registerReceiver(callReceiver, IntentFilter("WHATSAPP_CALL_STATE_CHANGED"))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkCurrentCallState()
+    }
+
+    private fun checkCurrentCallState() {
+        btnRecordWhatsApp.isEnabled = isInCall
     }
 
     private fun checkPermissions() {
@@ -129,6 +143,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(callReceiver)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(callReceiver)
     }
 }
