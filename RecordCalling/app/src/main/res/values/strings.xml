@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RecordCall</string>
+    <string name="accessibility_service_description">Aktifkan untuk deteksi panggilan WhatsApp</string>
 </resources>
