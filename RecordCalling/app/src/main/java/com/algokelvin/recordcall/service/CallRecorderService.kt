@@ -7,6 +7,7 @@ import android.app.Service
 import android.content.Intent
 import android.media.AudioManager
 import android.media.MediaRecorder
+import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Environment
 import android.os.IBinder
@@ -14,6 +15,10 @@ import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CallRecorderService : Service() {
     private val TAG = "RecordCallingLogger"
@@ -67,50 +72,85 @@ class CallRecorderService : Service() {
 
     private fun startRecording() {
         Log.i(TAG, "startRecording")
+
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         try {
             // Pindahkan startForeground ke sebelum memulai MediaRecorder
-            //startForeground(NOTIFICATION_ID, buildNotification())
+            startForeground(NOTIFICATION_ID, buildNotification())
 
+            // 1. Atur mode audio SEBELUM memulai recorder
+            audioManager.apply {
+                mode = AudioManager.MODE_IN_COMMUNICATION  // <-- INI YANG DITAMBAHKAN
+                isSpeakerphoneOn = true
+                setParameters("noise_suppression=auto")  // Optimasi kualitas audio
+            }
+
+            // 2. Atur volume maksimal untuk input/output
+            audioManager.setStreamVolume(
+                AudioManager.STREAM_VOICE_CALL,
+                (audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL) * 0.75).toInt(),
+                0
+            )
+
+            // Check directory is exist
+            val outputDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC) ?: return
+            if (!outputDir.exists()) outputDir.mkdirs()
+
+            // Create name file
+            val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val filename = "REC_${timestamp}.mp4"
+            val filePath = File(outputDir, filename).absolutePath
+            Log.i(TAG, "create file path: "+ filePath)
+
+            // 4. Configuration MediaRecorder
             mediaRecorder = MediaRecorder().apply {
-                // Gunakan MIC sebagai ganti VOICE_CALL
                 setAudioSource(MediaRecorder.AudioSource.MIC)
-
-                // Format output
                 setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-
-                // Encoder
                 setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-
-                filename = "${getExternalFilesDir(Environment.DIRECTORY_MUSIC)}/${System.currentTimeMillis()}_recording.3gp"
-                setOutputFile(filename)
-
-                // Optimasi untuk panggilan
-                setAudioSamplingRate(44100)
-                setAudioEncodingBitRate(192000)
+                setOutputFile(filePath)
+                setAudioSamplingRate(16000)  // Lower rate untuk voice call
+                setAudioEncodingBitRate(64000)
 
                 prepare()
                 start()
-
-                // Aktifkan speakerphone
-                (getSystemService(AUDIO_SERVICE) as AudioManager).apply {
-                    isSpeakerphoneOn = true
-                    mode = AudioManager.MODE_IN_COMMUNICATION
-                }
             }
+
+            // 5. Optimasi tambahan setelah recording mulai
+            audioManager.setParameters("voice_communication=on")
         } catch (e: Exception) {
-            Log.e(TAG, "Error starting recording: ${e.message}")
-            //stopForeground(true)
+            Log.e(TAG, "Error starting recording: ${e.message}\n${e.stackTraceToString()}")
+
+            // Cek permission
+            if (e is SecurityException) {
+                Log.e(TAG, "Security Exception - Check permissions")
+            }
+
+            // Reset audio mode jika gagal
+            audioManager.mode = AudioManager.MODE_NORMAL
+            audioManager.isSpeakerphoneOn = false
+
+            // Hentikan service
+            stopForeground(true)
             stopSelf()
         }
     }
 
     private fun stopRecording() {
-        Log.i(TAG, "stopRecording")
-        mediaRecorder?.apply {
-            stop()
-            release()
+        try {
+            val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+            audioManager.apply {
+                mode = AudioManager.MODE_NORMAL
+                isSpeakerphoneOn = false
+            }
+
+            mediaRecorder?.stop()
+            mediaRecorder?.release()
+        } catch (e: Exception) {
+            Log.e(TAG, "Stop error: ${e.message}")
         }
         mediaRecorder = null
+        stopForeground(true)
+        stopSelf()
     }
 
     override fun onDestroy() {
