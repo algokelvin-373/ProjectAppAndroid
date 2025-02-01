@@ -9,9 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Trace;
@@ -42,7 +39,7 @@ import com.algokelvin.primarydialer.mvicall.widgetDialpad.animation.AnimUtils;
 import java.util.List;
 
 public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPresenter.CallCardUi> implements CallCardPresenter.CallCardUi {
-    private static final String TAG = "CallCardFragment";
+    private static final String TAG = "CallCardFragmentLogger";
     private AudioManager mAudioManager;
 
     private static int mCurrentRingerVolume;
@@ -51,24 +48,6 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     private int mMarginStart = 0;
     private int mMarginEnd = 0;
-
-    private class CallStateLabel {
-        private CharSequence mCallStateLabel;
-        private boolean mIsAutoDismissing;
-
-        public CallStateLabel(CharSequence callStateLabel, boolean isAutoDismissing) {
-            mCallStateLabel = callStateLabel;
-            mIsAutoDismissing = isAutoDismissing;
-        }
-
-        public CharSequence getCallStateLabel() {
-            return mCallStateLabel;
-        }
-
-        public boolean isAutoDismissing() {
-            return mIsAutoDismissing;
-        }
-    }
 
     private static final long CALL_STATE_LABEL_RESET_DELAY_MS = 3000;
     private static final long ACCESSIBILITY_ANNOUNCEMENT_DELAY_MS = 500;
@@ -98,12 +77,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     //debug53
     @Override
     public CallCardPresenter.CallCardUi getUi() {
+        Log.i(TAG, "1. getUi");
         return this;
     }
 
     //debug45
     @Override
     public CallCardPresenter createPresenter() {
+        Log.i(TAG, "2. createPresenter");
         return new CallCardPresenter();
     }
 
@@ -112,6 +93,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.i(TAG, "3. onCreate");
         mHandler = new Handler(Looper.getMainLooper());
         mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
         mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
@@ -124,12 +106,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i(TAG, "4. onActivityCreated");
     }
 
     //debug50
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.i("MviCallLibrary", "I'm Here CallCardFragment");
+        Log.i(TAG, "5. onCreateView");
         Trace.beginSection(TAG + " onCreate");
         mTranslationOffset = getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
         final View view = inflater.inflate(R.layout.fragment_call_card_modifier, container, false);
@@ -142,6 +125,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Log.i(TAG, "6. onViewCreated");
         mPulseAnimation = AnimationUtils.loadAnimation(view.getContext(), R.anim.dialpad_slide_in_bottom);
         mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
 
@@ -178,11 +162,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void onStart() {
         super.onStart();
+        Log.i(TAG, "7. onStart");
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.i(TAG, "8. onStop");
         try {
             muteRingerMode();
         } catch (Exception e) {
@@ -193,6 +179,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i(TAG, "9. onDestroy");
         try {
             resetCurrentRingerMode();
         } catch (Exception e) {
@@ -202,6 +189,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
 
     private void muteRingerMode() throws SecurityException{
+        Log.i(TAG, "10. muteRingerMode");
         if (mCurrentMusicVolume > 0){
             if (mAudioManager != null) {
                 mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mCurrentRingerVolume, 0);
@@ -211,6 +199,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     private void resetCurrentRingerMode() throws SecurityException{
+        Log.i(TAG, "11. resetCurrentRingerMode");
         if (mAudioManager != null) {
             mAudioManager.setStreamVolume(AudioManager.STREAM_RING, mCurrentRingerVolume, 0);
             mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mCurrentMusicVolume, 0);
@@ -220,6 +209,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setVisible(boolean on) {
+        Log.i(TAG, "12. setVisible");
         if (on) {
             getView().setVisibility(View.VISIBLE);
         } else {
@@ -229,11 +219,13 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setProgressSpinnerVisible(boolean visible) {
+        Log.i(TAG, "13. setProgressSpinnerVisible");
 //        mProgressSpinner.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void setCallCardVisible(final boolean visible) {
+        Log.i(TAG, "14. setCallCardVisible");
         final boolean isLayoutRtl = InCallPresenter.isRtl();
 
         final View videoView = getView().findViewById(R.id.incomingVideo);
@@ -302,6 +294,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
 
     public float getSpaceBesideCallCard() {
+        Log.i(TAG, "15. getSpaceBesideCallCard");
         if (mIsLandscape) {
             return getView().getWidth() - mPrimaryCallCardContainer.getWidth();
         } else {
@@ -317,6 +310,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimaryName(String name, boolean nameIsNumber) {
+        Log.i(TAG, "16. setPrimaryName");
 //        if (TextUtils.isEmpty(name)) {
 ////            mPrimaryName.setText(null);
 //        } else {
@@ -345,12 +339,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimaryImage(Drawable image) {
+        Log.i(TAG, "17. setPrimaryImage");
         if (image != null) {
         }
     }
 
     @Override
     public void setPrimaryPhoneNumber(String number) {
+        Log.i(TAG, "18. setPrimaryPhoneNumber");
 //        if (TextUtils.isEmpty(number)) {
 //            mPhoneNumber.setText(null);
 //            mPhoneNumber.setVisibility(View.GONE);
@@ -367,6 +363,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimaryLabel(String label) {
+        Log.i(TAG, "19. setPrimaryLabel");
 //        if (!TextUtils.isEmpty(label)) {
 //            mNumberLabel.setText(label);
 //            mNumberLabel.setVisibility(View.VISIBLE);
@@ -377,7 +374,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label, Drawable photo, boolean isSipCall) {
-        Log.d(TAG, "Setting primary call");
+        Log.i(TAG, "20. setPrimary");
         setPrimaryName(name, nameIsNumber);
 
 //        if (TextUtils.isEmpty(number) && TextUtils.isEmpty(label)) {
@@ -398,7 +395,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setSecondary(boolean show, String name, boolean nameIsNumber, String label, String providerLabel, boolean isConference, boolean isVideoCall) {
-
+        Log.i(TAG, "21. setSecondary");
 //        if (show != mSecondaryCallInfo.isShown()) {
 //            updateFabPositionForSecondaryCallInfo();
 //        }
@@ -427,8 +424,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setCallState(int state, int videoState, int sessionModificationState, DisconnectCause disconnectCause, String connectionLabel, Drawable callStateIcon, String gatewayNumber, boolean isWifi, boolean isConference) {
+        Log.i(TAG, "22. setCallState");
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
-        CallCardFragment.CallStateLabel callStateLabel = getCallStateLabelFromState(state, videoState, sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi, isConference);
+        CallStateLabel callStateLabel = getCallStateLabelFromState(state, videoState, sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi, isConference);
 
         Log.v(TAG, "setCallState " + callStateLabel.getCallStateLabel());
         Log.v(TAG, "AutoDismiss " + callStateLabel.isAutoDismissing());
@@ -490,7 +488,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //        }
     }
 
-    private void setCallStateLabel(CallCardFragment.CallStateLabel callStateLabel) {
+    /*private void setCallStateLabel(CallStateLabel callStateLabel) {
         Log.v(TAG, "setCallStateLabel : label = " + callStateLabel.getCallStateLabel());
 
         if (callStateLabel.isAutoDismissing()) {
@@ -512,9 +510,9 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
                 changeCallStateLabel(callStateLabel.getCallStateLabel());
             }
         }
-    }
+    }*/
 
-    private void changeCallStateLabel(CharSequence callStateLabel) {
+    /*private void changeCallStateLabel(CharSequence callStateLabel) {
 //        Log.v(this, "changeCallStateLabel : label = " + callStateLabel);
 //        if (!TextUtils.isEmpty(callStateLabel)) {
 //            mCallStateLabel.setText(callStateLabel);
@@ -529,10 +527,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //            mCallStateLabel.setAlpha(0);
 //            mCallStateLabel.setVisibility(View.GONE);
 //        }
-    }
+    }*/
 
     @Override
     public void setCallbackNumber(String callbackNumber, boolean isEmergencyCall) {
+        Log.i(TAG, "23. setCallbackNumber");
 //        if (mInCallMessageLabel == null) {
 //            return;
 //        }
@@ -554,6 +553,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setCallSubject(String callSubject) {
+        Log.i(TAG, "24. setCallSubject");
         boolean showSubject = !TextUtils.isEmpty(callSubject);
 
 //        mCallSubject.setVisibility(showSubject ? View.VISIBLE : View.GONE);
@@ -565,10 +565,12 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     }
 
     public boolean isAnimating() {
+        Log.i(TAG, "25. isAnimating");
         return mIsAnimating;
     }
 
     private void showInternetCallLabel(boolean show) {
+        Log.i(TAG, "26. showInternetCallLabel");
 //        if (show) {
 //            final String label = getView().getContext().getString(R.string.incall_call_type_label_sip);
 //            mCallTypeLabel.setVisibility(View.VISIBLE);
@@ -580,6 +582,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setPrimaryCallElapsedTime(boolean show, long duration) {
+        Log.i(TAG, "27. setPrimaryCallElapsedTime");
 //        if (show) {
 //            if (mElapsedTime.getVisibility() != View.VISIBLE) {
 //                AnimUtils.fadeIn(mElapsedTime, AnimUtils.DEFAULT_DURATION);
@@ -594,7 +597,8 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //        }
     }
 
-    private CallCardFragment.CallStateLabel getCallStateLabelFromState(int state, int videoState, int sessionModificationState, DisconnectCause disconnectCause, String label, boolean isGatewayCall, boolean isWifi, boolean isConference) {
+    private CallStateLabel getCallStateLabelFromState(int state, int videoState, int sessionModificationState, DisconnectCause disconnectCause, String label, boolean isGatewayCall, boolean isWifi, boolean isConference) {
+        Log.i(TAG, "28. getCallStateLabelFromState");
         final Context context = getView().getContext();
         CharSequence callStateLabel = null;
 
@@ -664,10 +668,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             default:
                 Log.wtf(TAG, "updateCallStateWidgets: unexpected call: " + state);
         }
-        return new CallCardFragment.CallStateLabel(callStateLabel, isAutoDismissing);
+        return new CallStateLabel(callStateLabel, isAutoDismissing);
     }
 
-    private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {
+    /*private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {
 //        mSecondaryCallInfo.setVisibility(View.VISIBLE);
 //
 //        if (mSecondaryCallName == null) {
@@ -681,9 +685,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //            mSecondaryCallProviderInfo.setVisibility(View.VISIBLE);
 //            mSecondaryCallProviderLabel = getView().findViewById(R.id.secondaryCallProviderLabel);
 //        }
-    }
+    }*/
 
     public void dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
+        Log.i(TAG, "29. dispatchPopulateAccessibilityEvent");
 //        if (event.getEventType() == AccessibilityEvent.TYPE_ANNOUNCEMENT) {
 //            dispatchPopulateAccessibilityEvent(event, mCallStateLabel);
 //            dispatchPopulateAccessibilityEvent(event, mPrimaryName);
@@ -703,6 +708,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void sendAccessibilityAnnouncement() {
+        Log.i(TAG, "30. sendAccessibilityAnnouncement");
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -721,6 +727,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void setEndCallButtonEnabled(boolean enabled, boolean animate) {
+        Log.i(TAG, "31. setEndCallButtonEnabled");
 //        if (enabled != mFloatingActionButton.isEnabled()) {
 //            if (animate) {
 //                if (enabled) {
@@ -744,28 +751,32 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void showHdAudioIndicator(boolean visible) {
+        Log.i(TAG, "32. showHdAudioIndicator");
 //        mHdAudioIcon.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showForwardIndicator(boolean visible) {
-
+        Log.i(TAG, "33. showForwardIndicator");
 //        mForwardIcon.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showManageConferenceCallButton(boolean visible) {
+        Log.i(TAG, "34. showManageConferenceCallButton");
 //        mManageConferenceCallButton.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public boolean isManageConferenceVisible() {
+        Log.i(TAG, "35. isManageConferenceVisible");
         return false;
 //        return mManageConferenceCallButton.getVisibility() == View.VISIBLE;
     }
 
     @Override
     public boolean isCallSubjectVisible() {
+        Log.i(TAG, "36. isCallSubjectVisible");
         return false;
 //        return mCallSubject.getVisibility() == View.VISIBLE;
     }
@@ -789,7 +800,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mCurrentThemeColors = themeColors;
     }*/
 
-    private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
+    /*private void dispatchPopulateAccessibilityEvent(AccessibilityEvent event, View view) {
         if (view == null) return;
         final List<CharSequence> eventText = event.getText();
         int size = eventText.size();
@@ -797,10 +808,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         if (size == eventText.size()) {
             eventText.add(null);
         }
-    }
+    }*/
     //debug59
     @Override
     public void animateForNewOutgoingCall() {
+        Log.i(TAG, "37. animateForNewOutgoingCall");
         final ViewGroup parent = (ViewGroup) mPrimaryCallCardContainer.getParent();
 
         final ViewTreeObserver observer = getView().getViewTreeObserver();
@@ -860,15 +872,18 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 
     @Override
     public void showNoteSentToast() {
+        Log.i(TAG, "38. showNoteSentToast");
         Toast.makeText(getContext(), R.string.note_sent, Toast.LENGTH_LONG).show();
     }
 
     public void onDialpadVisibilityChange(boolean isShown) {
+        Log.i(TAG, "39. onDialpadVisibilityChange");
         mIsDialpadShowing = isShown;
         updateFabPosition();
     }
     //debug60
     private void updateFabPosition() {
+        Log.i(TAG, "40. updateFabPosition");
         int offsetY = 0;
         if (!mIsDialpadShowing) {
             offsetY = mFloatingActionButtonVerticalOffset;
@@ -886,6 +901,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     @Override
     public void onResume() {
         super.onResume();
+        Log.i(TAG, "41. onResume");
         if (mAnimatorSet != null && mAnimatorSet.isRunning()) {
             mAnimatorSet.cancel();
         }
@@ -908,7 +924,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         });
     }
 
-    private void updateFabPositionForSecondaryCallInfo() {
+    /*private void updateFabPositionForSecondaryCallInfo() {
 //        mSecondaryCallInfo.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 //            @Override
 //            public void onGlobalLayout() {
@@ -920,9 +936,10 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //                onDialpadVisibilityChange(mIsDialpadShowing);
 //            }
 //        });
-    }
+    }*/
     //debug61
     private Animator getShrinkAnimator(int startHeight, int endHeight) {
+        Log.i(TAG, "42. getShrinkAnimator");
         final ObjectAnimator shrinkAnimator = ObjectAnimator.ofInt(mPrimaryCallCardContainer, "bottom", startHeight, endHeight);
         shrinkAnimator.setDuration(mShrinkAnimationDuration);
         shrinkAnimator.addListener(new AnimatorListenerAdapter() {
@@ -935,7 +952,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return shrinkAnimator;
     }
 
-    private void assignTranslateAnimation(View view, int offset) {
+    /*private void assignTranslateAnimation(View view, int offset) {
         view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         view.buildLayer();
         view.setTranslationY(mTranslationOffset * offset);
@@ -945,10 +962,11 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private void setViewStatePostAnimation(View view) {
         view.setTranslationY(0);
         view.setAlpha(1);
-    }
+    }*/
 
     //debug62
     private void setViewStatePostAnimation(View.OnLayoutChangeListener layoutChangeListener) {
+        Log.i(TAG, "43. setViewStatePostAnimation");
 //        setViewStatePostAnimation(mCallButtonsContainer);
 //        setViewStatePostAnimation(mCallStateLabel);
 //        setViewStatePostAnimation(mPrimaryName);
@@ -971,7 +989,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-    private boolean isSafe() {
+    /*private boolean isSafe() {
         return !(this.isRemoving() || this.getActivity() == null || this.isDetached() || !this.isAdded() || this.getView() == null);
-    }
+    }*/
 }

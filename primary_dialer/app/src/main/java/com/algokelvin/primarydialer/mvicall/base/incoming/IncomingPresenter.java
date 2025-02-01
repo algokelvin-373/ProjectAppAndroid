@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> implements CallList.CallUpdateListener, InCallPresenter.InCallUiListener, InCallPresenter.IncomingCallListener, CallList.Listener {
 
+    private final String TAG = "IncomingPresenterLogger";
     private String mCallId;
     private Call mCall = null;
     private boolean mHasTextMessages = false;
@@ -37,9 +39,12 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
         return sInCallPresenter;
     }
 
-    public IncomingPresenter(){}
+    public IncomingPresenter(){
+        Log.i(TAG, "1. IncomingPresenter");
+    }
 
     public IncomingPresenter(OnInCommingNumber onInCommingNumber){
+        Log.i(TAG, "2. IncomingPresenter");
         mOnInCommingNumber = onInCommingNumber;
         if (mOnInCommingNumber != null && !TextUtils.isEmpty(_msisdn)){
             if (isIncomingCall) {
@@ -50,6 +55,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     public void onIncommingCallAdded(android.telecom.Call call) {
+        Log.i(TAG, "3. onIncommingCallAdded");
         String phoneNumber = infoPhoneNumber(call);
         if (!TextUtils.isEmpty(phoneNumber)) {
             if (call.getState() == android.telecom.Call.STATE_RINGING) {
@@ -59,6 +65,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     private String infoPhoneNumber(android.telecom.Call details){
+        Log.i(TAG, "4. infoPhoneNumber");
         String subscribeInfo;
         CharSequence charSequence;
         Uri uri = details.getDetails().getHandle();
@@ -74,6 +81,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
 
     @Override
     public void onUiShowing(boolean showing) {
+        Log.i(TAG, "5. onUiShowing");
         if (showing) {
             final CallList calls = CallList.getInstance();
             Call call;
@@ -95,20 +103,24 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
 
     @Override
     public void onIncomingCall(@NonNull Call call) {
+        Log.i(TAG, "6. onIncomingCall");
         System.out.println(call);
     }
 
     @Override
     public void onCallListChange(@NonNull CallList list) {
+        Log.i(TAG, "7. onCallListChange");
         System.out.println(list);
     }
 
     @Override
     public void onDisconnect(@NonNull Call call) {
+        Log.i(TAG, "8. onDisconnect");
         System.out.println(call);
     }
 
     public void onSessionModificationStateChange(int sessionModificationState) {
+        Log.i(TAG, "9. onSessionModificationStateChange");
         boolean isUpgradePending = sessionModificationState == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
 
         if (!isUpgradePending) {
@@ -119,18 +131,22 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
 
     @Override
     public void onLastForwardedNumberChange() {
+        Log.i(TAG, "10. onLastForwardedNumberChange");
     }
 
     @Override
     public void onChildNumberChange() {
+        Log.i(TAG, "11. onChildNumberChange");
     }
 
     private boolean isVideoUpgradePending(Call call) {
+        Log.i(TAG, "12. isVideoUpgradePending");
         return call.getSessionModificationState() == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST;
     }
 
     @Override
     public void onUpgradeToVideo(@NonNull Call call) {
+        Log.i(TAG, "13. onUpgradeToVideo");
         if (getUi() == null) {
             return;
         }
@@ -147,6 +163,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     private void processIncomingCall(Call call) {
+        Log.i(TAG, "14. processIncomingCall");
         mCallId = call.getId();
         mCall = call;
         CallList.getInstance().addCallUpdateListener(mCallId, this);
@@ -157,6 +174,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     private boolean showAnswerUi(boolean show) {
+        Log.i(TAG, "15. showAnswerUi");
         final InCallActivity activity = InCallPresenter.getInstance().getActivity();
         if (activity != null) {
             activity.showAnswerFragment(show);
@@ -170,6 +188,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     private void processVideoUpgradeRequestCall(Call call) {
+        Log.i(TAG, "16. processVideoUpgradeRequestCall");
         mCallId = call.getId();
         mCall = call;
 
@@ -194,12 +213,13 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
         ui.showTargets(IncomingFragment.TARGET_SET_FOR_VIDEO_ACCEPT_REJECT_REQUEST, modifyToVideoState);
     }
 
-    private boolean isEnabled(int videoState, int mask) {
+    /*private boolean isEnabled(int videoState, int mask) {
         return (videoState & mask) == mask;
-    }
+    }*/
 
     @Override
     public void onCallChanged(@NonNull Call call) {
+        Log.i(TAG, "17. onCallChanged");
         if (call.getState() != Call.State.INCOMING) {
             boolean isUpgradePending = isVideoUpgradePending(call);
             if (!isUpgradePending) {
@@ -225,6 +245,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     public void onAnswer(int videoState, @NonNull Context context) {
+        Log.i(TAG, "18. onAnswer");
         if (mCallId == null) {
             return;
         }
@@ -241,7 +262,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
     }
 
     public void onDecline(@NonNull Context context) {
-
+        Log.i(TAG, "19. onDecline");
         if (mOnInCommingNumber != null) {
             try {
                 mOnInCommingNumber.onDeclineCall();
@@ -257,23 +278,26 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
         }
     }
 
-    public void onText() {
+    /*public void onText() {
         if (getUi() != null) {
             TelecomUtil.silenceRinger(getUi().getContext());
             getUi().showMessageDialog();
         }
-    }
+    }*/
 
     public void rejectCallWithMessage(@NonNull String message) {
+        Log.i(TAG, "20. rejectCallWithMessage");
         TelecomAdapter.getInstance().rejectCall(mCall.getId(), true, message);
         onDismissDialog();
     }
 
     public void onDismissDialog() {
+        Log.i(TAG, "21. onDismissDialog");
         InCallPresenter.getInstance().onDismissDialog();
     }
 
     private void configureAnswerTargetsForSms(Call call, List<String> textMsgs) {
+        Log.i(TAG, "22. configureAnswerTargetsForSms");
         if (getUi() == null) {
             return;
         }
@@ -300,7 +324,7 @@ public class IncomingPresenter extends Presenter<IncomingPresenter.AnswerUi> imp
 
     @Override
     public void onIncomingCall(@NonNull InCallPresenter.InCallState oldState, @NonNull InCallPresenter.InCallState newState, @NonNull Call call) {
-
+        Log.i(TAG, "23. onIncomingCall");
         Call modifyCall = CallList.getInstance().getVideoUpgradeRequestCall();
         if (modifyCall != null) {
             showAnswerUi(false);

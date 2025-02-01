@@ -16,6 +16,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telecom.VideoProfile;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.Window;
@@ -51,6 +52,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class InCallPresenter implements CallList.Listener, CircularRevealFragment.OnCircularRevealCompleteListener {
 
+    private static final String TAG = "InCallPresenterLogger";
     private static final String EXTRA_FIRST_TIME_SHOWN = "com.android.incallui.intent.extra.FIRST_TIME_SHOWN";
     private static final Bundle EMPTY_EXTRAS = new Bundle();
 
@@ -92,6 +94,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
         @Override
         public void onPostDialWait(android.telecom.Call telecomCall, String remainingPostDialSequence) {
+            Log.i(TAG, "1. onPostDialWait");
             final Call call = mCallList.getCallByTelecommCall(telecomCall);
             if (call == null) {
                 return;
@@ -101,6 +104,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
         //debug64 //debug77
         @Override
         public void onDetailsChanged(android.telecom.Call telecomCall, android.telecom.Call.Details details) {
+            Log.i(TAG, "2. onDetailsChanged");
             final Call call = mCallList.getCallByTelecommCall(telecomCall);
             if (call == null) {
                 return;
@@ -112,6 +116,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
         @Override
         public void onConferenceableCallsChanged(android.telecom.Call telecomCall, List<android.telecom.Call> conferenceableCalls) {
+            Log.i(TAG, "3. onConferenceableCallsChanged");
             onDetailsChanged(telecomCall, telecomCall.getDetails());
         }
 
@@ -119,23 +124,26 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug1
     public static synchronized InCallPresenter getInstance() {
+        Log.i(TAG, "4. getInstance");
         if (sInCallPresenter == null) {
             sInCallPresenter = new InCallPresenter();
         }
         return sInCallPresenter;
     }
 
-    static synchronized void setInstance(InCallPresenter inCallPresenter) {
+    /*static synchronized void setInstance(InCallPresenter inCallPresenter) {
         sInCallPresenter = inCallPresenter;
-    }
+    }*/
 
     //debug31
     public InCallState getInCallState() {
+        Log.i(TAG, "4. getInstance");
         return mInCallState;
     }
 
     //debug16
     public void setUp(Context context, CallList callList, AudioModeProvider audioModeProvider, StatusBarNotifier statusBarNotifier, ContactInfoCache contactInfoCache, ProximitySensor proximitySensor) {
+        Log.i(TAG, "4. getInstance");
         if (mServiceConnected) {
             Preconditions.checkState(context == mContext);
             Preconditions.checkState(callList == mCallList);
@@ -168,6 +176,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug11
     public void tearDown() {
+        Log.i(TAG, "4. getInstance");
         mServiceConnected = false;
         attemptCleanup();
         VideoPauseController.getInstance().tearDown();
@@ -175,6 +184,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
 
     private void attemptFinishActivity() {
+        Log.i(TAG, "4. getInstance");
         final boolean doFinish = (mInCallActivity != null && isActivityStarted());
         if (doFinish) {
             mInCallActivity.setExcludeFromRecents(true);
@@ -188,6 +198,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug25
     public void setActivity(InCallActivity inCallActivity) {
+        Log.i(TAG, "4. getInstance");
         if (inCallActivity == null) {
             throw new IllegalArgumentException("registerActivity cannot be called with null");
         }
@@ -197,6 +208,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void unsetActivity(InCallActivity inCallActivity) {
+        Log.i(TAG, "4. getInstance");
         if (inCallActivity == null) {
             throw new IllegalArgumentException("unregisterActivity cannot be called with null");
         }
@@ -211,6 +223,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug26
     private void updateActivity(InCallActivity inCallActivity) {
+        Log.i(TAG, "4. getInstance");
         boolean updateListeners = false;
         boolean doAttemptCleanup = false;
 
@@ -253,11 +266,13 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void onBringToForeground(boolean showDialpad) {
+        Log.i(TAG, "4. getInstance");
         bringToForeground(showDialpad);
     }
 
     //debug19
     public void onCallAdded(@NonNull android.telecom.Call call) {
+        Log.i(TAG, "4. getInstance");
         setBoundAndWaitingForOutgoingCall(false, null);
         call.registerCallback(mCallCallback);
 
@@ -277,6 +292,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug14
     public String infoPhoneNumber(android.telecom.Call details){
+        Log.i(TAG, "4. getInstance");
         String subscribeInfo = "";
         Uri uri = details.getDetails().getHandle();
         String decode = Uri.decode(uri != null ? uri.getSchemeSpecificPart() : null);
@@ -291,12 +307,14 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug73 //debug86
     public void onCallRemoved(android.telecom.Call call) {
+        Log.i(TAG, "4. getInstance");
         call.unregisterCallback(mCallCallback);
         isConference = false;
     }
 
     //debug15
     public void onCanAddCallChanged(boolean canAddCall) {
+        Log.i(TAG, "4. getInstance");
         for (CanAddCallListener listener : mCanAddCallListeners) {
             listener.onCanAddCallChanged(canAddCall);
         }
@@ -306,6 +324,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     //debug5
     @Override
     public void onCallListChange(CallList callList) {
+        Log.i(TAG, "4. getInstance");
         if (mInCallActivity != null && mInCallActivity.getCallCardFragment() != null && mInCallActivity.getCallCardFragment().isAnimating()) {
             mAwaitingCallListUpdate = true;
             return;
@@ -333,6 +352,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     @Override
     public void onIncomingCall(Call call) {
+        Log.i(TAG, "4. getInstance");
         InCallState newState = startOrFinishUi(InCallState.INCOMING);
         InCallState oldState = mInCallState;
         mInCallState = newState;
@@ -344,11 +364,13 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     @Override
     public void onUpgradeToVideo(Call call) {
+        Log.i(TAG, "4. getInstance");
     }
 
     //debug67 //debug80
     @Override
     public void onDisconnect(Call call) {
+        Log.i(TAG, "4. getInstance");
         maybeShowErrorDialogOnDisconnect(call);
         onCallListChange(mCallList);
         isConference = false;
@@ -359,6 +381,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug6
     public InCallState getPotentialStateFromCallList(CallList callList) {
+        Log.i(TAG, "4. getInstance");
 
         InCallState newState = InCallState.NO_CALLS;
 
@@ -388,6 +411,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug17
     public void setBoundAndWaitingForOutgoingCall(boolean isBound, PhoneAccountHandle handle) {
+        Log.i(TAG, "4. getInstance");
         mBoundAndWaitingForOutgoingCall = isBound;
         mPendingPhoneAccountHandle = handle;
         if (isBound && mInCallState == InCallState.NO_CALLS) {
@@ -398,6 +422,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     //debug40
     @Override
     public void onCircularRevealComplete(FragmentManager fm) {
+        Log.i(TAG, "4. getInstance");
         if (mInCallActivity != null) {
             mInCallActivity.showCallCardFragment(true);
             mInCallActivity.getCallCardFragment().animateForNewOutgoingCall();
@@ -406,6 +431,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
     //debug63
     public void onShrinkAnimationComplete() {
+        Log.i(TAG, "4. getInstance");
         if (mAwaitingCallListUpdate) {
             onCallListChange(mCallList);
         }
@@ -413,11 +439,13 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug3
     public void addIncomingCallListener(IncomingCallListener listener) {
+        Log.i(TAG, "4. getInstance");
         Preconditions.checkNotNull(listener);
         mIncomingCallListeners.add(listener);
     }
     //debug75 //debug89
     public void removeIncomingCallListener(IncomingCallListener listener) {
+        Log.i(TAG, "4. getInstance");
         if (listener != null) {
             mIncomingCallListeners.remove(listener);
         }
@@ -425,12 +453,14 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug2
     public void addListener(InCallStateListener listener) {
+        Log.i(TAG, "4. getInstance");
         Preconditions.checkNotNull(listener);
         mListeners.add(listener);
     }
 
     //debug74 //debug88
     public void removeListener(InCallStateListener listener) {
+        Log.i(TAG, "4. getInstance");
         if (listener != null) {
             mListeners.remove(listener);
         }
@@ -438,55 +468,63 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug55
     public void addDetailsListener(InCallDetailsListener listener) {
+        Log.i(TAG, "4. getInstance");
         Preconditions.checkNotNull(listener);
         mDetailsListeners.add(listener);
     }
 
     public void removeDetailsListener(InCallDetailsListener listener) {
+        Log.i(TAG, "4. getInstance");
         if (listener != null) {
             mDetailsListeners.remove(listener);
         }
     }
 
     public void addCanAddCallListener(CanAddCallListener listener) {
+        Log.i(TAG, "4. getInstance");
         Preconditions.checkNotNull(listener);
         mCanAddCallListeners.add(listener);
     }
 
     public void removeCanAddCallListener(CanAddCallListener listener) {
+        Log.i(TAG, "4. getInstance");
         if (listener != null) {
             mCanAddCallListeners.remove(listener);
         }
     }
 
-    public void addOrientationListener(InCallOrientationListener listener) {
+    /*public void addOrientationListener(InCallOrientationListener listener) {
         Preconditions.checkNotNull(listener);
         mOrientationListeners.add(listener);
-    }
+    }*/
 
-    public void removeOrientationListener(InCallOrientationListener listener) {
+    /*public void removeOrientationListener(InCallOrientationListener listener) {
         if (listener != null) {
             mOrientationListeners.remove(listener);
         }
-    }
+    }*/
 
     //debug56
     public void addInCallEventListener(InCallEventListener listener) {
+        Log.i(TAG, "4. getInstance");
         Preconditions.checkNotNull(listener);
         mInCallEventListeners.add(listener);
     }
 
     public void removeInCallEventListener(InCallEventListener listener) {
+        Log.i(TAG, "4. getInstance");
         if (listener != null) {
             mInCallEventListeners.remove(listener);
         }
     }
 
     public ProximitySensor getProximitySensor() {
+        Log.i(TAG, "4. getInstance");
         return mProximitySensor;
     }
 
     public void handleAccountSelection(PhoneAccountHandle accountHandle, boolean setDefault) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList != null) {
             Call call = mCallList.getWaitingForAccountCall();
             if (call != null) {
@@ -497,6 +535,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void cancelAccountSelection() {
+        Log.i(TAG, "4. getInstance");
         mAccountSelectionCancelled = true;
         if (mCallList != null) {
             Call call = mCallList.getWaitingForAccountCall();
@@ -508,6 +547,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void hangUpOngoingCall(Context context) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList == null) {
             if (mStatusBarNotifier == null) {
                 StatusBarNotifier.clearAllCallNotifications(context);
@@ -528,6 +568,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void answerIncomingCall(Context context, int videoState) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList == null) {
             StatusBarNotifier.clearAllCallNotifications(context);
             return;
@@ -541,6 +582,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void declineIncomingCall(Context context) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList == null) {
             StatusBarNotifier.clearAllCallNotifications(context);
             return;
@@ -553,6 +595,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void acceptUpgradeRequest(int videoState, Context context) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList == null) {
             StatusBarNotifier.clearAllCallNotifications(context);
             return;
@@ -567,6 +610,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void declineUpgradeRequest(Context context) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList == null) {
             StatusBarNotifier.clearAllCallNotifications(context);
             return;
@@ -582,19 +626,22 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug70 //debug83
     public boolean isShowingInCallUi() {
+        Log.i(TAG, "4. getInstance");
         return (isActivityStarted() && mInCallActivity.isVisible());
     }
 
     //debug8
     public boolean isActivityStarted() {
+        Log.i(TAG, "4. getInstance");
         return (mInCallActivity != null && !mInCallActivity.isDestroyed() && !mInCallActivity.isFinishing());
     }
 
-    public boolean isChangingConfigurations() {
+    /*public boolean isChangingConfigurations() {
         return mIsChangingConfigurations;
-    }
+    }*/
 
     void updateIsChangingConfigurations() {
+        Log.i(TAG, "4. getInstance");
         mIsChangingConfigurations = false;
         if (mInCallActivity != null) {
             mIsChangingConfigurations = mInCallActivity.isChangingConfigurations();
@@ -603,6 +650,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug36
     public void onUiShowing(boolean showing) {
+        Log.i(TAG, "4. getInstance");
         if (mProximitySensor != null) {
             mProximitySensor.onInCallShowing(showing);
         }
@@ -631,38 +679,45 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug4
     public void addInCallUiListener(InCallUiListener listener) {
+        Log.i(TAG, "4. getInstance");
         mInCallUiListeners.add(listener);
     }
 
     //debug29
     void onActivityStarted() {
+        Log.i(TAG, "4. getInstance");
         notifyVideoPauseController(true);
     }
 
     void onActivityStopped() {
+        Log.i(TAG, "4. getInstance");
         notifyVideoPauseController(false);
     }
 
     //debug30
     private void notifyVideoPauseController(boolean showing) {
+        Log.i(TAG, "4. getInstance");
         if (!mIsChangingConfigurations) {
             VideoPauseController.getInstance().onUiShowing(showing);
         }
     }
 
     public void bringToForeground(boolean showDialpad) {
+        Log.i(TAG, "4. getInstance");
         if (!isShowingInCallUi() && mInCallState != InCallState.NO_CALLS) {
             showInCall(showDialpad, false /* newOutgoingCall */);
         }
     }
 
     public void onPostDialCharWait(String callId, String chars) {
+        Log.i(TAG, "4. getInstance");
         if (isActivityStarted()) {
             mInCallActivity.showPostCharWaitDialog(callId, chars);
         }
     }
 
     public boolean handleCallKey() {
+        Log.i(TAG, "4. getInstance");
         final CallList calls = mCallList;
         final Call incomingCall = calls.getIncomingCall();
         if (incomingCall != null) {
@@ -696,38 +751,40 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void onDismissDialog() {
+        Log.i(TAG, "4. getInstance");
         if (mInCallState == InCallState.NO_CALLS) {
             attemptFinishActivity();
             attemptCleanup();
         }
     }
 
-    public boolean toggleFullscreenMode() {
+    /*public boolean toggleFullscreenMode() {
         mIsFullScreen = !mIsFullScreen;
         notifyFullscreenModeChange(mIsFullScreen);
         return mIsFullScreen;
-    }
+    }*/
 
-    public void setFullScreen(boolean isFullScreen) {
+    /*public void setFullScreen(boolean isFullScreen) {
         if (mIsFullScreen == isFullScreen) {
             return;
         }
         mIsFullScreen = isFullScreen;
         notifyFullscreenModeChange(mIsFullScreen);
-    }
+    }*/
 
-    public boolean isFullscreen() {
+    /*public boolean isFullscreen() {
         return mIsFullScreen;
-    }
+    }*/
 
-    public void notifyFullscreenModeChange(boolean isFullscreenMode) {
+    /*public void notifyFullscreenModeChange(boolean isFullscreenMode) {
         for (InCallEventListener listener : mInCallEventListeners) {
             listener.onFullscreenModeChanged(isFullscreenMode);
         }
-    }
+    }*/
 
     //debug68 //debug81
     private void maybeShowErrorDialogOnDisconnect(Call call) {
+        Log.i(TAG, "4. getInstance");
         if (isActivityStarted() && call.getState() == Call.State.DISCONNECTED) {
             if (call.getAccountHandle() == null && !call.isConferenceCall()) {
                 setDisconnectCauseForMissingAccounts(call);
@@ -739,6 +796,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug7
     private InCallState startOrFinishUi(InCallState newState) {
+        Log.i(TAG, "4. getInstance");
         if (newState == mInCallState) {
             return newState;
         }
@@ -770,6 +828,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug22
     public static boolean isCallWithNoValidAccounts(Call call) {
+        Log.i(TAG, "4. getInstance");
         if (call != null && !call.isEmergencyCall()) {
             Bundle extras = call.getIntentExtras();
 
@@ -784,6 +843,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     private void setDisconnectCauseForMissingAccounts(Call call) {
+        Log.i(TAG, "4. getInstance");
         android.telecom.Call telecomCall = call.getTelecommCall();
 
         Bundle extras = telecomCall.getDetails().getIntentExtras();
@@ -803,6 +863,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug73 //debug87
     private void attemptCleanup() {
+        Log.i(TAG, "4. getInstance");
         boolean shouldCleanup = (mInCallActivity == null && !mServiceConnected && mInCallState == InCallState.NO_CALLS);
 
         if (shouldCleanup) {
@@ -847,22 +908,26 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug7
     public void showInCall(final boolean showDialpad, final boolean newOutgoingCall) {
+        Log.i(TAG, "4. getInstance");
         mContext.startActivity(getInCallIntent(showDialpad, newOutgoingCall));
     }
 
     //debug9
     public void onServiceBind() {
+        Log.i(TAG, "4. getInstance");
         mServiceBound = true;
     }
 
     //debug8
     public void onServiceUnbind() {
+        Log.i(TAG, "4. getInstance");
         InCallPresenter.getInstance().setBoundAndWaitingForOutgoingCall(false, null);
         mServiceBound = false;
     }
 
     //debug10
     public void maybeStartRevealAnimation(Intent intent) {
+        Log.i(TAG, "4. getInstance");
         if (intent == null || mInCallActivity != null) {
             return;
         }
@@ -887,6 +952,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug18
     public Intent getInCallIntent(boolean showDialpad, boolean newOutgoingCall) {
+        Log.i(TAG, "4. getInstance");
         final Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -900,6 +966,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     public InCallCameraManager getInCallCameraManager() {
         synchronized (this) {
+            Log.i(TAG, "4. getInstance");
             if (mInCallCameraManager == null) {
                 mInCallCameraManager = new InCallCameraManager(mContext);
             }
@@ -909,6 +976,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void onDeviceRotationChange(int rotation) {
+        Log.i(TAG, "4. getInstance");
         if (mCallList != null) {
             mCallList.notifyCallsOfDeviceRotation(toRotationAngle(rotation));
         } else {
@@ -916,6 +984,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public static int toRotationAngle(int rotation) {
+        Log.i(TAG, "4. getInstance");
         int rotationAngle;
         switch (rotation) {
             case Surface.ROTATION_0:
@@ -937,6 +1006,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void onDeviceOrientationChange(int orientation) {
+        Log.i(TAG, "4. getInstance");
         for (InCallOrientationListener listener : mOrientationListeners) {
             listener.onDeviceOrientationChanged(orientation);
         }
@@ -976,6 +1046,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug72 //debug85
     public boolean getCallCardFragmentVisible() {
+        Log.i(TAG, "4. getInstance");
         if (mInCallActivity != null && mInCallActivity.getCallCardFragment() != null) {
             return mInCallActivity.getCallCardFragment().isVisible();
         }
@@ -983,6 +1054,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public void showConferenceCallManager(boolean show) {
+        Log.i(TAG, "4. getInstance");
         if (mInCallActivity == null) {
             return;
         }
@@ -991,11 +1063,13 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public static boolean isRtl() {
+        Log.i(TAG, "4. getInstance");
         return TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
     }
 
     //debug33
     public void setThemeColors() {
+        Log.i(TAG, "4. getInstance");
         mThemeColors = getColorsFromCall(mCallList.getFirstCall());
 
         if (mInCallActivity == null) {
@@ -1017,11 +1091,13 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug37
     public MaterialColorMapUtils.MaterialPalette getThemeColors() {
+        Log.i(TAG, "4. getInstance");
         return mThemeColors;
     }
 
     //debug34
     private MaterialColorMapUtils.MaterialPalette getColorsFromCall(Call call) {
+        Log.i(TAG, "4. getInstance");
         if (call == null) {
             return getColorsFromPhoneAccountHandle(mPendingPhoneAccountHandle);
         } else {
@@ -1031,6 +1107,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug35
     private MaterialColorMapUtils.MaterialPalette getColorsFromPhoneAccountHandle(PhoneAccountHandle phoneAccountHandle) {
+        Log.i(TAG, "4. getInstance");
         int highlightColor = PhoneAccount.NO_HIGHLIGHT_COLOR;
         if (phoneAccountHandle != null) {
             final TelecomManager tm = getTelecomManager();
@@ -1047,6 +1124,7 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
 
     //debug12
     public TelecomManager getTelecomManager() {
+        Log.i(TAG, "4. getInstance");
         if (mTelecomManager == null) {
             mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
         }
@@ -1054,10 +1132,12 @@ public class InCallPresenter implements CallList.Listener, CircularRevealFragmen
     }
 
     public InCallActivity getActivity() {
+        Log.i(TAG, "4. getInstance");
         return mInCallActivity;
     }
 
     public IncomingPresenter getAnswerPresenter() {
+        Log.i(TAG, "4. getInstance");
         return mIncomingPresenter;
     }
 
