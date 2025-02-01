@@ -2,14 +2,11 @@ package com.algokelvin.primarydialer
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.ComponentName
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.telecom.PhoneAccount
-import android.telecom.PhoneAccountHandle
 import android.telecom.TelecomManager
 import android.util.Log
 import android.view.View
@@ -32,7 +29,7 @@ class MainInCallActivity : AppCompatActivity() {
         //Activate dialer
         binding.btnActiveDialer.setOnClickListener { v: View? ->
             requestRolePermission()
-            registerPhoneAccount()
+            //registerPhoneAccount()
         }
 
         binding.callButton.setOnClickListener { view: View? ->
@@ -55,18 +52,8 @@ class MainInCallActivity : AppCompatActivity() {
     }
 
     private fun requestRolePermission() {
-        val permissionHelper: PermissionHelper = PermissionHelper()
+        val permissionHelper = PermissionHelper()
         permissionHelper.setPermission(this)
-    }
-
-    private fun registerPhoneAccount() {
-        val telecomManager = getSystemService(TELECOM_SERVICE) as TelecomManager
-        val componentName: ComponentName = ComponentName(this, MyInCallServiceImpl::class.java)
-        val phoneAccountHandle = PhoneAccountHandle(componentName, "DefaultDialer")
-        val phoneAccount = PhoneAccount.builder(phoneAccountHandle, "Default Dialer")
-            .setCapabilities(PhoneAccount.CAPABILITY_CALL_PROVIDER)
-            .build()
-        telecomManager.registerPhoneAccount(phoneAccount)
     }
 
     private fun setDefaultDialer() {
@@ -91,8 +78,7 @@ class MainInCallActivity : AppCompatActivity() {
                 return
             }
             telecomManager.placeCall(uri, extras)
-        } else {
-            // Jika TelecomManager gagal, gunakan fallback
+        } else { // If TelecomManager failed, use fallback
             val intent = Intent(Intent.ACTION_CALL)
             intent.setData(Uri.parse("tel:$phoneNumber"))
             startActivity(intent)
