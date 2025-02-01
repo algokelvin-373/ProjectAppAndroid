@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -39,10 +40,16 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "Broadcast received: ${intent?.getBooleanExtra("isInCall", false)}")
             Log.d(TAG, "Menerima broadcast: ${intent?.action}")
             val isInCall = intent?.getBooleanExtra("isInCall", false) ?: false
-            Log.d(TAG, "Call state received: $isInCall")
+            Log.d(TAG, "Received call state: $isInCall")
+
             runOnUiThread {
                 btnRecordWhatsApp.isEnabled = isInCall
                 btnRecordWhatsApp.text = if (isInCall) "RECORD" else "DISABLED"
+
+                // Untuk debugging UI
+                btnRecordWhatsApp.setBackgroundColor(
+                    if (isInCall) Color.GREEN else Color.RED
+                )
             }
         }
     }
@@ -70,13 +77,46 @@ class MainActivity : AppCompatActivity() {
             .registerReceiver(callReceiver, IntentFilter("WHATSAPP_CALL_STATE_CHANGED"))
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         checkCurrentCallState()
     }
 
     private fun checkCurrentCallState() {
         btnRecordWhatsApp.isEnabled = isInCall
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+        startPolling() // Mulai polling saat activity aktif
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopPolling()
+    }
+
+    private fun startPolling() {
+        handler.postDelayed(pollingRunnable, 1000)
+    }
+
+    private fun stopPolling() {
+        handler.removeCallbacks(pollingRunnable)
+    }
+
+    private val pollingRunnable = object : Runnable {
+        override fun run() {
+            checkForcedCallState()
+            handler.postDelayed(this, 1000) // Polling setiap 1 detik
+        }
+    }
+
+    private fun checkForcedCallState() {
+        runOnUiThread {
+            btnRecordWhatsApp.isEnabled = true
+            btnRecordWhatsApp.text = "RECORD"
+            btnRecordWhatsApp.setBackgroundColor(Color.GREEN)
+        }
     }
 
     private fun checkPermissions() {
