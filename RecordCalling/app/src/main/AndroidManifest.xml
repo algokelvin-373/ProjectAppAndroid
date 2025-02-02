@@ -18,6 +18,13 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
+    <!-- Untuk Xiaomi -->
+    <uses-permission android:name="miui.permission.USE_INTERNAL_GLOBAL_AUTO_START" />
+    <uses-permission android:name="miui.permission.OPTIMIZE_POWER_MODULE" />
+
+    <!-- Untuk OPPO -->
+    <uses-permission android:name="com.oppo.permission.OPPO_COMPONENT_SAFE" />
+
     <application
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"

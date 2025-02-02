@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
@@ -23,6 +25,7 @@ import com.algokelvin.recordcall.service.CallRecorderService
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "RecordCallingLogger"
+    private lateinit var handler: Handler
     private lateinit var btnRecord: Button
     private lateinit var btnRecordWhatsApp: Button
     private var isRecording = false
@@ -34,22 +37,19 @@ class MainActivity : AppCompatActivity() {
         android.Manifest.permission.PROCESS_OUTGOING_CALLS,
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-
+    // Perbaikan receiver
     private val callReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.i(TAG, "Broadcast received: ${intent?.getBooleanExtra("isInCall", false)}")
-            Log.d(TAG, "Menerima broadcast: ${intent?.action}")
             val isInCall = intent?.getBooleanExtra("isInCall", false) ?: false
-            Log.d(TAG, "Received call state: $isInCall")
+            Log.d(TAG, "Updating button to: ${if (isInCall) "ENABLED" else "DISABLED"}")
 
             runOnUiThread {
-                btnRecordWhatsApp.isEnabled = isInCall
-                btnRecordWhatsApp.text = if (isInCall) "RECORD" else "DISABLED"
-
-                // Untuk debugging UI
-                btnRecordWhatsApp.setBackgroundColor(
-                    if (isInCall) Color.GREEN else Color.RED
-                )
+                btnRecordWhatsApp.apply {
+                    isEnabled = isInCall
+                    text = if (isInCall) "RECORD" else "DISABLED"
+                    setBackgroundColor(if (isInCall) Color.GREEN else Color.RED)
+                    alpha = if (isInCall) 1.0f else 0.5f
+                }
             }
         }
     }
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        handler = Handler(Looper.getMainLooper())
         btnRecord = findViewById(R.id.btnRecord)
         checkPermissions()
         setupCallDetector()
@@ -88,12 +89,50 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        startPolling() // Mulai polling saat activity aktif
+        checkRealCallState()
+        startStateRefreshLoop()
+        //requestCallStateUpdate()
+    }
+
+    private fun checkManufacturerSettings() {
+        when {
+            Build.MANUFACTURER.equals("xiaomi", ignoreCase = true) -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Pengaturan Xiaomi Diperlukan")
+                    .setMessage("Aktifkan:\n1. Autostart\n2. Tampilkan di atas aplikasi lain\n3. Mode tidak terbatas")
+                    .setPositiveButton("Buka Pengaturan") { _, _ ->
+                        startActivity(Intent("miui.intent.action.POWER_HIDE_MODE_APP_LIST"))
+                    }.show()
+            }
+            Build.MANUFACTURER.equals("oppo", ignoreCase = true) -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Pengaturan OPPO Diperlukan")
+                    .setMessage("Aktifkan:\n1. Start in background\n2. Auto-start")
+                    .setPositiveButton("Buka Pengaturan") { _, _ ->
+                        startActivity(Intent("com.oppo.safe.permission.startup"))
+                    }.show()
+            }
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        stopPolling()
+        handler.removeCallbacksAndMessages(null)
+        //stopPolling()
+    }
+
+    private fun startStateRefreshLoop() {
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                checkRealCallState()
+                handler.postDelayed(this, 3000) // Update setiap 3 detik
+            }
+        }, 3000)
+    }
+
+    private fun requestCallStateUpdate() {
+        val intent = Intent("REQUEST_CALL_STATE_UPDATE")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
     private fun startPolling() {
@@ -106,18 +145,28 @@ class MainActivity : AppCompatActivity() {
 
     private val pollingRunnable = object : Runnable {
         override fun run() {
-            checkForcedCallState()
-            handler.postDelayed(this, 1000) // Polling setiap 1 detik
+            checkRealCallState()  // <-- GANTI KE FUNGSI REAL CHECK
+            handler.postDelayed(this, 1000)
         }
     }
 
-    private fun checkForcedCallState() {
+    private fun checkRealCallState() {
+        // Request update state ke service
+//        val intent = Intent("ACTION_REQUEST_CALL_STATE")
+//        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+        // Paksa update state saat activity aktif
+        LocalBroadcastManager.getInstance(this)
+            .sendBroadcast(Intent("WHATSAPP_CALL_STATE_CHANGED"))
+    }
+
+    /*private fun checkForcedCallState() {
         runOnUiThread {
             btnRecordWhatsApp.isEnabled = true
             btnRecordWhatsApp.text = "RECORD"
             btnRecordWhatsApp.setBackgroundColor(Color.GREEN)
         }
-    }
+    }*/
 
     private fun checkPermissions() {
         if (PERMISSIONS.any { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }) {
