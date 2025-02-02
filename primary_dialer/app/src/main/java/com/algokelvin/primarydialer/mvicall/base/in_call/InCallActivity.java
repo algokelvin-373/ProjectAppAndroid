@@ -125,7 +125,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
     private OrientationEventListener mOrientationEventListener;
     private static int sPreviousRotation = -1;
 
-    //debug20
+    //used
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle icicle) {
@@ -213,12 +213,14 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         telephonyManager.registerTelephonyCallback(getMainExecutor(), telephonyCallback);
     }
 
+    //used
     private void setupAudioManager() {
         Log.i(TAG, "2. setupAudioManager");
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         //audioProcessing = new AudioProcessing();
     }
 
+    //used
     private void setupCall() {
         Log.i(TAG, "3. setupCall");
         String callId = getIntent().getStringExtra("call_id");
@@ -261,7 +263,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-    //debug13
+    //used
     private void toBeShownOnLockScreen(){
         Log.i(TAG, "6. toBeShownOnLockScreen ");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -283,7 +285,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         super.onSaveInstanceState(out);
     }
 
-    //debug24
+    //used
     @Override
     protected void onStart() {
         super.onStart();
@@ -293,7 +295,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         InCallPresenter.getInstance().onActivityStarted();
     }
 
-    //debug32
+    //used
     @Override
     protected void onResume() {
         super.onResume();
@@ -318,6 +320,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
+    //used
     @Override
     protected void onPause() {
         Log.i(TAG, "10. onPause");
@@ -332,7 +335,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         super.onPause();
     }
 
-
+    //used
     @Override
     protected void onStop() {
         Log.i(TAG, "11. onStop");
@@ -342,7 +345,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         super.onStop();
     }
 
-
+    //used
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onDestroy() {
@@ -358,7 +361,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
     }
 
 
-    //debug48
+    //used
     @Override
     public void onFragmentAttached(Fragment fragment) {
         Log.i(TAG, "13. onFragmentAttached");
@@ -376,18 +379,19 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-    //debug71 //debug84
+    //used
     boolean isVisible() {
         Log.i(TAG, "14. isVisible");
         return mIsVisible;
     }
 
+    //used
     private boolean hasPendingDialogs() {
         Log.i(TAG, "15. hasPendingDialogs");
         return mDialog != null || (mIncomingFragment != null && mIncomingFragment.hasPendingDialogs());
     }
 
-
+    //used
     @Override
     public void finish() {
         Log.i(TAG, "16. finish");
@@ -396,7 +400,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-
+    //used
     @Override
     public void onBackPressed() {
         Log.i(TAG, "17. onBackPressed");
@@ -496,14 +500,14 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-    //debug28
+    //used
     public CallCardFragment getCallCardFragment() {
         Log.i(TAG, "23. getCallCardFragment");
         Log.i("MviCallLibrary", "3. I'm Here getCallCardFragment");
         return mCallCardFragment;
     }
 
-    //debug21
+    //used
     private void internalResolveIntent(Intent intent) {
         Log.i(TAG, "24. internalResolveIntent");
         final String action = intent.getAction();
@@ -581,7 +585,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-    //debug23
+    //used
     public void dismissKeyguard(boolean dismiss) {
         Log.i(TAG, "26. dismissKeyguard");
         if (mDismissKeyguard == dismiss) {
@@ -595,7 +599,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-    //debug42
+    //used
     private void showFragment(String tag, boolean show, boolean executeImmediately) {
         Log.i(TAG, "27. showFragment");
         Trace.beginSection("showFragment - " + tag);
@@ -628,7 +632,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
         Trace.endSection();
     }
-    //debug44
+    //used
     private Fragment createNewFragmentForTag(String tag) {
         Log.i(TAG, "28. createNewFragmentForTag");
         if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
@@ -646,7 +650,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
         throw new IllegalStateException("Unexpected fragment: " + tag);
     }
-    //debug43
+    //used
     private FragmentManager getFragmentManagerForTag(String tag) {
         Log.i(TAG, "29. getFragmentManagerForTag");
         if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
@@ -661,7 +665,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         throw new IllegalStateException("Unexpected fragment: " + tag);
     }
 
-    //debug47
+    //used
     private int getContainerIdForFragment(String tag) {
         Log.i(TAG, "30. getContainerIdForFragment");
         if (TAG_DIALPAD_FRAGMENT.equals(tag)) {
@@ -704,7 +708,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         return mDialpadFragment != null && mDialpadFragment.isVisible();
     }
 
-    //debug41
+    //used
     public void showCallCardFragment(boolean show) {
         Log.i(TAG, "33. showCallCardFragment");
         showFragment(TAG_CALLCARD_FRAGMENT, show, true);
@@ -717,6 +721,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         mCallCardFragment.getView().setVisibility(show ? View.GONE : View.VISIBLE);
     }
 
+    //used
     public void showAnswerFragment(boolean show) {
         Log.i(TAG, "35. showAnswerFragment");
         showFragment(TAG_ANSWER_FRAGMENT, show, true);
@@ -744,7 +749,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         return super.dispatchPopulateAccessibilityEvent(event);
     }
 
-    //debug69 //debug82
+    //used
     public void maybeShowErrorDialogOnDisconnect(DisconnectCause disconnectCause) {
         Log.i(TAG, "38. maybeShowErrorDialogOnDisconnect");
         if (!isFinishing() && !TextUtils.isEmpty(disconnectCause.getDescription()) && (disconnectCause.getCode() == DisconnectCause.ERROR || disconnectCause.getCode() == DisconnectCause.RESTRICTED)) {
@@ -777,7 +782,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         InCallPresenter.getInstance().onDismissDialog();
     }*/
 
-    //debug27
+    //used
     public void setExcludeFromRecents(boolean exclude) {
         Log.i(TAG, "41. setExcludeFromRecents");
         try {
@@ -801,7 +806,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }
     }
 
-    //debug76 //debug90
+    //used
     private void stopAudioProcessing() {
         Log.i(TAG, "42. stopAudioProcessing");
         /*if (audioProcessing != null) {
@@ -809,7 +814,7 @@ public class InCallActivity extends AppCompatActivity implements FragmentDisplay
         }*/
     }
 
-    //debug38
+    //used
     @RequiresApi(api = Build.VERSION_CODES.S)
     private class MyTelephonyCallback extends TelephonyCallback implements TelephonyCallback.CallStateListener {
         @Override

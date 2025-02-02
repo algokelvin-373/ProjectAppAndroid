@@ -18,6 +18,7 @@ import android.telecom.DisconnectCause;
 import android.telecom.VideoProfile;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +31,13 @@ import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import com.sbi.mvicalllibrary.icallservices.BaseFragment;
-import com.sbi.mvicalllibrary.icallservices.Call;
-import com.sbi.mvicalllibrary.icallservices.CallCardFragment;
-import com.sbi.mvicalllibrary.icallservices.CallCardPresenter;
-import com.sbi.mvicalllibrary.icallservices.CallUtils;
-import com.sbi.mvicalllibrary.icallservices.InCallPresenter;
-import com.sbi.mvicalllibrary.icallservices.IncomingPresenter;
-import com.sbi.mvicalllibrary.icallservices.Log;
-import com.sbi.mvicalllibrary.icallservices.common.MaterialColorMapUtils;
-import com.sbi.mvicalllibrary.icallservices.widgetDialpad.animation.AnimUtils;
+import com.algokelvin.primarydialer.R;
+import com.algokelvin.primarydialer.mvicall.base.call_card.CallCardFragment;
+import com.algokelvin.primarydialer.mvicall.base.call_card.CallCardPresenter;
+import com.algokelvin.primarydialer.mvicall.base.in_call.InCallPresenter;
+import com.algokelvin.primarydialer.mvicall.base.incoming.IncomingPresenter;
+import com.algokelvin.primarydialer.mvicall.common.MaterialColorMapUtils;
+import com.algokelvin.primarydialer.mvicall.widgetDialpad.animation.AnimUtils;
 
 import java.util.List;
 
@@ -111,11 +109,11 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
         super.onCreate(savedInstanceState);
 
         mHandler = new Handler(Looper.getMainLooper());
-        mShrinkAnimationDuration = getResources().getInteger(com.sbi.mvicalllibrary.R.integer.shrink_animation_duration);
-        mVideoAnimationDuration = getResources().getInteger(com.sbi.mvicalllibrary.R.integer.video_animation_duration);
-        mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(com.sbi.mvicalllibrary.R.dimen.floating_action_button_vertical_offset);
-        mFabNormalDiameter = getResources().getDimensionPixelOffset(com.sbi.mvicalllibrary.R.dimen.end_call_floating_action_button_diameter);
-        mFabSmallDiameter = getResources().getDimensionPixelOffset(com.sbi.mvicalllibrary.R.dimen.end_call_floating_action_button_small_diameter);
+        mShrinkAnimationDuration = getResources().getInteger(R.integer.shrink_animation_duration);
+        mVideoAnimationDuration = getResources().getInteger(R.integer.video_animation_duration);
+        mFloatingActionButtonVerticalOffset = getResources().getDimensionPixelOffset(R.dimen.floating_action_button_vertical_offset);
+        mFabNormalDiameter = getResources().getDimensionPixelOffset(R.dimen.end_call_floating_action_button_diameter);
+        mFabSmallDiameter = getResources().getDimensionPixelOffset(R.dimen.end_call_floating_action_button_small_diameter);
     }
 
     @Override
@@ -127,8 +125,8 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i("MviCallLibrary", "I'm Here CallCardFragment");
         Trace.beginSection(TAG + " onCreate");
-        mTranslationOffset = getResources().getDimensionPixelSize(com.sbi.mvicalllibrary.R.dimen.call_card_anim_translate_y_offset);
-        final View view = inflater.inflate(com.sbi.mvicalllibrary.R.layout.call_card_fragment, container, false);
+        mTranslationOffset = getResources().getDimensionPixelSize(R.dimen.call_card_anim_translate_y_offset);
+        final View view = inflater.inflate(R.layout.call_card_fragment, container, false);
         Trace.endSection();
         return view;
     }
@@ -137,10 +135,10 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mPulseAnimation = AnimationUtils.loadAnimation(view.getContext(), com.sbi.mvicalllibrary.R.anim.dialpad_slide_in_bottom);
-        mPrimaryCallCardContainer = view.findViewById(com.sbi.mvicalllibrary.R.id.primary_call_info_container);
+        mPulseAnimation = AnimationUtils.loadAnimation(view.getContext(), R.anim.dialpad_slide_in_bottom);
+        mPrimaryCallCardContainer = view.findViewById(R.id.primary_call_info_container);
 
-        View mCallStateButton = view.findViewById(com.sbi.mvicalllibrary.R.id.callStateButton);
+        View mCallStateButton = view.findViewById(R.id.callStateButton);
         mCallStateButton.setOnLongClickListener(v -> {
             getPresenter().onCallStateButtonTouched();
             return false;
@@ -263,7 +261,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
     public void setCallCardVisible(final boolean visible) {
         final boolean isLayoutRtl = InCallPresenter.isRtl();
 
-        final View videoView = getView().findViewById(com.sbi.mvicalllibrary.R.id.incomingVideo);
+        final View videoView = getView().findViewById(R.id.incomingVideo);
         if (videoView == null) {
             return;
         }
@@ -333,8 +331,8 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
             return getView().getWidth() - mPrimaryCallCardContainer.getWidth();
         } else {
             final int callCardHeight;
-            if (mPrimaryCallCardContainer.getTag(com.sbi.mvicalllibrary.R.id.view_tag_callcard_actual_height) != null) {
-                callCardHeight = (int) mPrimaryCallCardContainer.getTag(com.sbi.mvicalllibrary.R.id.view_tag_callcard_actual_height);
+            if (mPrimaryCallCardContainer.getTag(R.id.view_tag_callcard_actual_height) != null) {
+                callCardHeight = (int) mPrimaryCallCardContainer.getTag(R.id.view_tag_callcard_actual_height);
             } else {
                 callCardHeight = mPrimaryCallCardContainer.getHeight();
             }
@@ -404,7 +402,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
 
     @Override
     public void setPrimary(String number, String name, boolean nameIsNumber, String label, Drawable photo, boolean isSipCall) {
-        Log.d(this, "Setting primary call");
+        //Log.d(this, "Setting primary call");
         setPrimaryName(name, nameIsNumber);
 
 //        if (TextUtils.isEmpty(number) && TextUtils.isEmpty(label)) {
@@ -455,12 +453,12 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
     @Override
     public void setCallState(int state, int videoState, int sessionModificationState, DisconnectCause disconnectCause, String connectionLabel, Drawable callStateIcon, String gatewayNumber, boolean isWifi, boolean isConference) {
         boolean isGatewayCall = !TextUtils.isEmpty(gatewayNumber);
-        CallCardFragment.CallStateLabel callStateLabel = getCallStateLabelFromState(state, videoState, sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi, isConference);
+        CallStateLabel callStateLabel = getCallStateLabelFromState(state, videoState, sessionModificationState, disconnectCause, connectionLabel, isGatewayCall, isWifi, isConference);
 
-        Log.v(this, "setCallState " + callStateLabel.getCallStateLabel());
-        Log.v(this, "AutoDismiss " + callStateLabel.isAutoDismissing());
-        Log.v(this, "DisconnectCause " + disconnectCause.toString());
-        Log.v(this, "gateway " + connectionLabel + gatewayNumber);
+//        Log.v(this, "setCallState " + callStateLabel.getCallStateLabel());
+//        Log.v(this, "AutoDismiss " + callStateLabel.isAutoDismissing());
+//        Log.v(this, "DisconnectCause " + disconnectCause.toString());
+//        Log.v(this, "gateway " + connectionLabel + gatewayNumber);
 
 //        boolean isSubjectShowing = mCallSubject.getVisibility() == View.VISIBLE;
 
@@ -517,7 +515,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
 //        }
     }
 
-    private void setCallStateLabel(CallCardFragment.CallStateLabel callStateLabel) {
+    /*private void setCallStateLabel(CallStateLabel callStateLabel) {
         Log.v(this, "setCallStateLabel : label = " + callStateLabel.getCallStateLabel());
 
         if (callStateLabel.isAutoDismissing()) {
@@ -539,7 +537,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
                 changeCallStateLabel(callStateLabel.getCallStateLabel());
             }
         }
-    }
+    }*/
 
     private void changeCallStateLabel(CharSequence callStateLabel) {
 //        Log.v(this, "changeCallStateLabel : label = " + callStateLabel);
@@ -621,7 +619,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
 //        }
     }
 
-    private CallCardFragment.CallStateLabel getCallStateLabelFromState(int state, int videoState, int sessionModificationState, DisconnectCause disconnectCause, String label, boolean isGatewayCall, boolean isWifi, boolean isConference) {
+    private CallStateLabel getCallStateLabelFromState(int state, int videoState, int sessionModificationState, DisconnectCause disconnectCause, String label, boolean isGatewayCall, boolean isWifi, boolean isConference) {
         final Context context = getView().getContext();
         CharSequence callStateLabel = null;
 
@@ -636,32 +634,32 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
                 if ((isAccount || isWifi || isConference) && hasSuggestedLabel) {
                     callStateLabel = label;
                 } else if (sessionModificationState == Call.SessionModificationState.REQUEST_REJECTED) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_video_call_rejected);
+                    callStateLabel = context.getString(R.string.card_title_video_call_rejected);
                     isAutoDismissing = true;
                 } else if (sessionModificationState == Call.SessionModificationState.REQUEST_FAILED) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_video_call_error);
+                    callStateLabel = context.getString(R.string.card_title_video_call_error);
                     isAutoDismissing = true;
                 } else if (sessionModificationState == Call.SessionModificationState.WAITING_FOR_RESPONSE) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_video_call_requesting);
+                    callStateLabel = context.getString(R.string.card_title_video_call_requesting);
                 } else if (sessionModificationState == Call.SessionModificationState.RECEIVED_UPGRADE_TO_VIDEO_REQUEST) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_video_call_requesting);
+                    callStateLabel = context.getString(R.string.card_title_video_call_requesting);
                 } else if (CallUtils.isVideoCall(videoState)) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_video_call);
+                    callStateLabel = context.getString(R.string.card_title_video_call);
                 }
                 break;
             case Call.State.ONHOLD:
-                callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_on_hold);
+                callStateLabel = context.getString(R.string.card_title_on_hold);
                 break;
             case Call.State.CONNECTING:
             case Call.State.DIALING:
                 if (hasSuggestedLabel && !isWifi) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.calling_via_template, label);
+                    callStateLabel = context.getString(R.string.calling_via_template, label);
                 } else {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_dialing);
+                    callStateLabel = context.getString(R.string.card_title_dialing);
                 }
                 break;
             case Call.State.REDIALING:
-                callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_redialing);
+                callStateLabel = context.getString(R.string.card_title_redialing);
                 break;
             case Call.State.INCOMING:
             case Call.State.CALL_WAITING:
@@ -669,29 +667,29 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
                 if (isWifi && hasSuggestedLabel) {
                     callStateLabel = label;
                 } else if (isAccount) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.incoming_via_template, label);
+                    callStateLabel = context.getString(R.string.incoming_via_template, label);
                 } else if (VideoProfile.isTransmissionEnabled(videoState) || VideoProfile.isReceptionEnabled(videoState)) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.notification_incoming_video_call);
+                    callStateLabel = context.getString(R.string.notification_incoming_video_call);
                 } else {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_incoming_call);
+                    callStateLabel = context.getString(R.string.card_title_incoming_call);
                 }
                 break;
             case Call.State.DISCONNECTING:
-                callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_hanging_up);
+                callStateLabel = context.getString(R.string.card_title_hanging_up);
                 break;
             case Call.State.DISCONNECTED:
                 callStateLabel = disconnectCause.getLabel();
                 if (TextUtils.isEmpty(callStateLabel)) {
-                    callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_call_ended);
+                    callStateLabel = context.getString(R.string.card_title_call_ended);
                 }
                 break;
             case Call.State.CONFERENCED:
-                callStateLabel = context.getString(com.sbi.mvicalllibrary.R.string.card_title_conf_call);
+                callStateLabel = context.getString(R.string.card_title_conf_call);
                 break;
             default:
-                Log.wtf(this, "updateCallStateWidgets: unexpected call: " + state);
+                //Log.i(this, "updateCallStateWidgets: unexpected call: " + state);
         }
-        return new CallCardFragment.CallStateLabel(callStateLabel, isAutoDismissing);
+        return new CallStateLabel(callStateLabel, isAutoDismissing);
     }
 
     private void showAndInitializeSecondaryCallInfo(boolean hasProvider) {
@@ -804,7 +802,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
             return;
         }
 
-        if (getResources().getBoolean(com.sbi.mvicalllibrary.R.bool.is_layout_landscape)) {
+        if (getResources().getBoolean(R.bool.is_layout_landscape)) {
             final GradientDrawable drawable = (GradientDrawable) mPrimaryCallCardContainer.getBackground();
             drawable.setColor(themeColors.mPrimaryColor);
         } else {
@@ -843,11 +841,11 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
                 }
                 observer.removeOnGlobalLayoutListener(this);
 
-                final CallCardFragment.LayoutIgnoringListener listener = new CallCardFragment.LayoutIgnoringListener();
+                final LayoutIgnoringListener listener = new LayoutIgnoringListener();
                 mPrimaryCallCardContainer.addOnLayoutChangeListener(listener);
 
                 final int originalHeight = mPrimaryCallCardContainer.getHeight();
-                mPrimaryCallCardContainer.setTag(com.sbi.mvicalllibrary.R.id.view_tag_callcard_actual_height, originalHeight);
+                mPrimaryCallCardContainer.setTag(R.id.view_tag_callcard_actual_height, originalHeight);
                 mPrimaryCallCardContainer.setBottom(parent.getHeight());
 
 //                mFloatingActionButtonContainer.setVisibility(View.GONE);
@@ -871,7 +869,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
                 animator.addListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mPrimaryCallCardContainer.setTag(com.sbi.mvicalllibrary.R.id.view_tag_callcard_actual_height, null);
+                        mPrimaryCallCardContainer.setTag(R.id.view_tag_callcard_actual_height, null);
                         setViewStatePostAnimation(listener);
                         mIsAnimating = false;
                         InCallPresenter.getInstance().onShrinkAnimationComplete();
@@ -887,7 +885,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
 
     @Override
     public void showNoteSentToast() {
-        Toast.makeText(getContext(), com.sbi.mvicalllibrary.R.string.note_sent, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), R.string.note_sent, Toast.LENGTH_LONG).show();
     }
 
     public void onDialpadVisibilityChange(boolean isShown) {
@@ -916,7 +914,7 @@ public class CallCardModifierFragment extends BaseFragment<CallCardPresenter, Ca
             mAnimatorSet.cancel();
         }
 
-        mIsLandscape = getResources().getBoolean(com.sbi.mvicalllibrary.R.bool.is_layout_landscape);
+        mIsLandscape = getResources().getBoolean(R.bool.is_layout_landscape);
 
         final ViewGroup parent = ((ViewGroup) mPrimaryCallCardContainer.getParent());
         final ViewTreeObserver observer = parent.getViewTreeObserver();

@@ -96,7 +96,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
 
     }
 
-    //debug46
+    //used
     public CallCardPresenter() {
         Log.i(TAG, "1. CallCardPresenter");
         mCallTimer = new CallTimer(new Runnable() {
@@ -131,7 +131,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
 
         onStateChange(null, InCallPresenter.getInstance().getInCallState(), calls);
     }*/
-    //debug54
+    //used
     @Override
     public void onUiReady(CallCardUi ui) {
         super.onUiReady(ui);
@@ -149,6 +149,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         InCallPresenter.getInstance().addInCallEventListener(this);
     }
 
+    //used
     @Override
     public void onUiUnready(CallCardUi ui) {
         super.onUiUnready(ui);
@@ -284,7 +285,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
 
         maybeSendAccessibilityEvent(oldState, newState);
     }
-    //debug65 //debug78
+    //used
     @Override
     public void onDetailsChanged(Call call, Details details) {
         Log.i(TAG, "6. onDetailsChanged");
@@ -372,7 +373,7 @@ public class CallCardPresenter extends Presenter<CallCardPresenter.CallCardUi> i
         }
         return null;
     }
-    //debug66 //debug79
+    //used
     private void updatePrimaryCallState() {
         Log.i(TAG, "13. updatePrimaryCallState");
         if (getUi() != null && mPrimary != null) {

@@ -74,21 +74,21 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
     private Handler mHandler;
 
 
-    //debug53
+    //used
     @Override
     public CallCardPresenter.CallCardUi getUi() {
         Log.i(TAG, "1. getUi");
         return this;
     }
 
-    //debug45
+    //used
     @Override
     public CallCardPresenter createPresenter() {
         Log.i(TAG, "2. createPresenter");
         return new CallCardPresenter();
     }
 
-    //debug49
+    //used
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,14 +102,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mFabSmallDiameter = getResources().getDimensionPixelOffset(R.dimen.end_call_floating_action_button_small_diameter);
     }
 
-    //debug52
+    //used
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.i(TAG, "4. onActivityCreated");
     }
 
-    //debug50
+    //used
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i(TAG, "5. onCreateView");
@@ -120,7 +120,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         return view;
     }
 
-    //debug51
+    //used
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -158,13 +158,14 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             onDestroy();
         });
     }
-    //debug57
+    //used
     @Override
     public void onStart() {
         super.onStart();
         Log.i(TAG, "7. onStart");
     }
 
+    //used
     @Override
     public void onStop() {
         super.onStop();
@@ -187,7 +188,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
-
+    //used
     private void muteRingerMode() throws SecurityException{
         Log.i(TAG, "10. muteRingerMode");
         if (mCurrentMusicVolume > 0){
@@ -198,6 +199,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         }
     }
 
+    //used
     private void resetCurrentRingerMode() throws SecurityException{
         Log.i(TAG, "11. resetCurrentRingerMode");
         if (mAudioManager != null) {
@@ -564,6 +566,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //        }
     }
 
+    //used
     public boolean isAnimating() {
         Log.i(TAG, "25. isAnimating");
         return mIsAnimating;
@@ -881,7 +884,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
         mIsDialpadShowing = isShown;
         updateFabPosition();
     }
-    //debug60
+    //used
     private void updateFabPosition() {
         Log.i(TAG, "40. updateFabPosition");
         int offsetY = 0;
@@ -897,7 +900,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
 //        mFloatingActionButtonController.resize(mIsDialpadShowing ? mFabSmallDiameter : mFabNormalDiameter, true);
     }
 
-    //debug58
+    //used
     @Override
     public void onResume() {
         super.onResume();

@@ -44,18 +44,21 @@ public class IncomingFragment extends BaseFragment<IncomingPresenter, IncomingPr
     public IncomingFragment() {
     }
 
+    //used
     @Override
     public IncomingPresenter createPresenter() {
         Log.i(TAG, "1. createPresenter");
         return InCallPresenter.getInstance().getAnswerPresenter();
     }
 
+    //used
     @Override
     public IncomingPresenter.AnswerUi getUi() {
         Log.i(TAG, "2. getUi");
         return this;
     }
 
+    //used
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i(TAG, "3. onCreateView");
@@ -73,17 +76,19 @@ public class IncomingFragment extends BaseFragment<IncomingPresenter, IncomingPr
         return view;
     }
 
+    //used
     @Override
     public void onShowAnswerUi(boolean shown) {
         Log.i(TAG, "4. onShowAnswerUi");
     }
 
+    //used
     public void showTargets(int targetSet) {
         Log.i(TAG, "5. showTargets");
         showTargets(targetSet, VideoProfile.STATE_BIDIRECTIONAL);
     }
 
-
+    //used
     @Override
     public void showTargets(int targetSet, int videoState) {
         Log.i(TAG, "6. showTargets");
@@ -191,6 +196,7 @@ public class IncomingFragment extends BaseFragment<IncomingPresenter, IncomingPr
         }
     }
 
+    //used
     public boolean hasPendingDialogs() {
         Log.i(TAG, "13. hasPendingDialogs");
         return !(mCannedResponsePopup == null && mCustomMessagePopup == null);
@@ -238,6 +244,7 @@ public class IncomingFragment extends BaseFragment<IncomingPresenter, IncomingPr
         sendButton.setEnabled(false);
     }
 
+    //used
     @Override
     public void configureMessageDialog(List<String> textResponses) {
         Log.i(TAG, "15. configureMessageDialog");
@@ -249,6 +256,7 @@ public class IncomingFragment extends BaseFragment<IncomingPresenter, IncomingPr
         }
     }
 
+    //used
     @Override
     public Context getContext() {
         Log.i(TAG, "16. getContext");
