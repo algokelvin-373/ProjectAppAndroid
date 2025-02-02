@@ -37,22 +37,19 @@ class MainActivity : AppCompatActivity() {
         android.Manifest.permission.PROCESS_OUTGOING_CALLS,
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-
+    // Perbaikan receiver
     private val callReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.i(TAG, "Broadcast received: ${intent?.getBooleanExtra("isInCall", false)}")
-            Log.d(TAG, "Menerima broadcast: ${intent?.action}")
             val isInCall = intent?.getBooleanExtra("isInCall", false) ?: false
-            Log.d(TAG, "Received call state: $isInCall")
+            Log.d(TAG, "Updating button to: ${if (isInCall) "ENABLED" else "DISABLED"}")
 
             runOnUiThread {
-                btnRecordWhatsApp.isEnabled = isInCall
-                btnRecordWhatsApp.text = if (isInCall) "RECORD" else "DISABLED"
-
-                // Untuk debugging UI
-                btnRecordWhatsApp.setBackgroundColor(
-                    if (isInCall) Color.GREEN else Color.RED
-                )
+                btnRecordWhatsApp.apply {
+                    isEnabled = isInCall
+                    text = if (isInCall) "RECORD" else "DISABLED"
+                    setBackgroundColor(if (isInCall) Color.GREEN else Color.RED)
+                    alpha = if (isInCall) 1.0f else 0.5f
+                }
             }
         }
     }
@@ -97,6 +94,27 @@ class MainActivity : AppCompatActivity() {
         //requestCallStateUpdate()
     }
 
+    private fun checkManufacturerSettings() {
+        when {
+            Build.MANUFACTURER.equals("xiaomi", ignoreCase = true) -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Pengaturan Xiaomi Diperlukan")
+                    .setMessage("Aktifkan:\n1. Autostart\n2. Tampilkan di atas aplikasi lain\n3. Mode tidak terbatas")
+                    .setPositiveButton("Buka Pengaturan") { _, _ ->
+                        startActivity(Intent("miui.intent.action.POWER_HIDE_MODE_APP_LIST"))
+                    }.show()
+            }
+            Build.MANUFACTURER.equals("oppo", ignoreCase = true) -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Pengaturan OPPO Diperlukan")
+                    .setMessage("Aktifkan:\n1. Start in background\n2. Auto-start")
+                    .setPositiveButton("Buka Pengaturan") { _, _ ->
+                        startActivity(Intent("com.oppo.safe.permission.startup"))
+                    }.show()
+            }
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         handler.removeCallbacksAndMessages(null)
@@ -134,8 +152,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkRealCallState() {
         // Request update state ke service
-        val intent = Intent("ACTION_REQUEST_CALL_STATE")
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+//        val intent = Intent("ACTION_REQUEST_CALL_STATE")
+//        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+        // Paksa update state saat activity aktif
+        LocalBroadcastManager.getInstance(this)
+            .sendBroadcast(Intent("WHATSAPP_CALL_STATE_CHANGED"))
     }
 
     /*private fun checkForcedCallState() {

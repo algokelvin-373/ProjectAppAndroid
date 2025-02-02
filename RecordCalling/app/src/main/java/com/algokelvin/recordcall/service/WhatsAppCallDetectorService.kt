@@ -85,9 +85,31 @@ class WhatsAppCallDetectorService: AccessibilityService() {
                 //"com.whatsapp:id/call_toolbar"
             )
 
+            // Cek semua node yang terlihat di layar
             val isInCall = indicators.any { id ->
-                root.findAccessibilityNodeInfosByViewId(id).isNotEmpty()
+                root.findAccessibilityNodeInfosByViewId(id).any { node ->
+                    node.isVisibleToUser // Pastikan elemen terlihat oleh pengguna
+                }
             }
+
+            // Deteksi alternatif via teks
+            val textIndicators = listOf("ongoing call", "menit", "detik")
+            val textNodes = root.findAccessibilityNodeInfosByText(".*".toRegex().toString())
+            val hasCallText = textNodes.any { node ->
+                textIndicators.any { indicator ->
+                    node.text?.toString()?.contains(indicator, true) == true
+                }
+            }
+
+            // Log untuk debugging
+            Log.i(TAG,
+                """
+                    [WhatsApp Detection]
+                    View ID Match: $isInCall
+                    Text Match: $hasCallText
+                    Final Result: ${isInCall || hasCallText}
+                    """.trimIndent()
+            )
 
             val endCallButton = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/end_call_button").isNotEmpty()
             val callDuration = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_duration").isNotEmpty()
@@ -109,7 +131,9 @@ class WhatsAppCallDetectorService: AccessibilityService() {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
-    override fun onInterrupt() { }
+    override fun onInterrupt() {
+        sendCallStateBroadcast(false)
+    }
 
     /*override fun onServiceConnected() {
         super.onServiceConnected()
