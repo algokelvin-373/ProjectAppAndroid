@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
@@ -23,6 +25,7 @@ import com.algokelvin.recordcall.service.CallRecorderService
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "RecordCallingLogger"
+    private lateinit var handler: Handler
     private lateinit var btnRecord: Button
     private lateinit var btnRecordWhatsApp: Button
     private var isRecording = false
@@ -59,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        handler = Handler(Looper.getMainLooper())
         btnRecord = findViewById(R.id.btnRecord)
         checkPermissions()
         setupCallDetector()
