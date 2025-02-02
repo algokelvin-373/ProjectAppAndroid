@@ -92,12 +92,29 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        startPolling() // Mulai polling saat activity aktif
+        checkRealCallState()
+        startStateRefreshLoop()
+        //requestCallStateUpdate()
     }
 
     override fun onPause() {
         super.onPause()
-        stopPolling()
+        handler.removeCallbacksAndMessages(null)
+        //stopPolling()
+    }
+
+    private fun startStateRefreshLoop() {
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                checkRealCallState()
+                handler.postDelayed(this, 3000) // Update setiap 3 detik
+            }
+        }, 3000)
+    }
+
+    private fun requestCallStateUpdate() {
+        val intent = Intent("REQUEST_CALL_STATE_UPDATE")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
     private fun startPolling() {
@@ -110,18 +127,24 @@ class MainActivity : AppCompatActivity() {
 
     private val pollingRunnable = object : Runnable {
         override fun run() {
-            checkForcedCallState()
-            handler.postDelayed(this, 1000) // Polling setiap 1 detik
+            checkRealCallState()  // <-- GANTI KE FUNGSI REAL CHECK
+            handler.postDelayed(this, 1000)
         }
     }
 
-    private fun checkForcedCallState() {
+    private fun checkRealCallState() {
+        // Request update state ke service
+        val intent = Intent("ACTION_REQUEST_CALL_STATE")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+    }
+
+    /*private fun checkForcedCallState() {
         runOnUiThread {
             btnRecordWhatsApp.isEnabled = true
             btnRecordWhatsApp.text = "RECORD"
             btnRecordWhatsApp.setBackgroundColor(Color.GREEN)
         }
-    }
+    }*/
 
     private fun checkPermissions() {
         if (PERMISSIONS.any { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }) {

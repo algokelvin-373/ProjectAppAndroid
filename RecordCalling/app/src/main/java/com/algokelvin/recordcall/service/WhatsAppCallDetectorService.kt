@@ -1,7 +1,10 @@
 package com.algokelvin.recordcall.service
 
 import android.accessibilityservice.AccessibilityService
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -28,6 +31,22 @@ class WhatsAppCallDetectorService: AccessibilityService() {
                 else -> {}
             }
         }
+    }
+
+    private val requestReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "ACTION_REQUEST_CALL_STATE") {
+                val currentState = detectCallState()
+                sendCallStateBroadcast(currentState)
+            }
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        // Daftarkan receiver untuk request state
+        val filter = IntentFilter("ACTION_REQUEST_CALL_STATE")
+        LocalBroadcastManager.getInstance(this).registerReceiver(requestReceiver, filter)
     }
 
     private fun handleWindowStateChange(event: AccessibilityEvent) {
@@ -59,20 +78,26 @@ class WhatsAppCallDetectorService: AccessibilityService() {
 
     private fun detectCallState(): Boolean {
         return rootInActiveWindow?.let { root ->
-            // Deteksi yang lebih akurat dengan 2 kondisi wajib
-            //val hasCallDuration = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_duration").isNotEmpty()
-//            val hasCallToolbar = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_toolbar").isNotEmpty()
-//            val hasVoipCallButton = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/voip_call_button").isNotEmpty()
-//            val hasEndCallButton = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/end_call_button").isNotEmpty()
+            // Gunakan kombinasi beberapa indikator
+            val indicators = listOf(
+                "com.whatsapp:id/end_call_button",
+                //"com.whatsapp:id/call_duration",
+                //"com.whatsapp:id/call_toolbar"
+            )
 
-            // Hanya return true jika kedua kondisi terpenuhi
-            //Log.i(TAG, "hasCallDuration: $hasCallDuration")
-//            Log.i(TAG, "hasCallToolbar: $hasCallToolbar")
-//            Log.i(TAG, "hasVoipCallButton: $hasVoipCallButton")
-//            Log.i(TAG, "hasEndCallButton: $hasEndCallButton")
-            val result = true
-            Log.i(TAG, "Result: $result")
-            result
+            val isInCall = indicators.any { id ->
+                root.findAccessibilityNodeInfosByViewId(id).isNotEmpty()
+            }
+
+            val endCallButton = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/end_call_button").isNotEmpty()
+            val callDuration = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_duration").isNotEmpty()
+            val callToolbar = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_toolbar").isNotEmpty()
+            Log.i(TAG, "endCallButton: $endCallButton")
+            Log.i(TAG, "callDuration: $callDuration")
+            Log.i(TAG, "callToolbar: $callToolbar")
+
+            Log.i(TAG, "Call state detected: $isInCall")
+            isInCall
         } ?: false
     }
 
@@ -86,12 +111,12 @@ class WhatsAppCallDetectorService: AccessibilityService() {
 
     override fun onInterrupt() { }
 
-    override fun onServiceConnected() {
+    /*override fun onServiceConnected() {
         super.onServiceConnected()
-        sendPersistentCallState()
-    }
+        //sendPersistentCallState()
+    }*/
 
-    private fun sendPersistentCallState() {
+    /*private fun sendPersistentCallState() {
         handler.post(object : Runnable {
             override fun run() {
                 val isInCall = true // Force true untuk testing
@@ -99,5 +124,12 @@ class WhatsAppCallDetectorService: AccessibilityService() {
                 handler.postDelayed(this, 3000) // Update setiap 3 detik
             }
         })
+    }*/
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Unregister receiver
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(requestReceiver)
+        handler.removeCallbacksAndMessages(null)
     }
 }
