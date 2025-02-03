@@ -129,6 +129,14 @@ class WhatsAppCallDetectorService: AccessibilityService() {
             putExtra("isInCall", isInCall)
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+        // Start/stop floating window
+        val serviceIntent = Intent(this@WhatsAppCallDetectorService, FloatingWindowService::class.java)
+        if (isInCall) {
+            startService(serviceIntent)
+        } else {
+            stopService(serviceIntent)
+        }
     }
 
     override fun onInterrupt() {

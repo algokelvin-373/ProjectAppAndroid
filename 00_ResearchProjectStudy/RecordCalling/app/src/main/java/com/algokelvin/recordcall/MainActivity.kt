@@ -176,12 +176,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAccessibilityPermission() {
         val accessibilityEnabled = Settings.Secure.getInt(contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED) == 1
-        if (!accessibilityEnabled) {
+        val overlayPermitted = Settings.canDrawOverlays(this)
+
+        if (!accessibilityEnabled || !overlayPermitted) {
             AlertDialog.Builder(this)
-                .setTitle("Akses Diperlukan")
-                .setMessage("Aktifkan aksesibilitas untuk mendeteksi panggilan WhatsApp")
-                .setPositiveButton("Buka Pengaturan") { _, _ ->
+                .setTitle("Permission Required")
+                .setMessage("Enable accessibility and overlay permissions")
+                .setPositiveButton("Settings") { _, _ ->
                     startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                    if (!overlayPermitted) {
+                        startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+                    }
                 }.show()
         }
     }
