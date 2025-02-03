@@ -10,7 +10,7 @@
         android:id="@+id/btn_record"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/ic_record"
+        android:src="@drawable/ic_recording"
         android:contentDescription="Record Button"/>
 
     <ImageView
