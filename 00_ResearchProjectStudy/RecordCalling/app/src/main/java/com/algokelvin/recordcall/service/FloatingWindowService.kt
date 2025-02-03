@@ -146,7 +146,7 @@ class FloatingWindowService : Service() {
             if (!outputDir.exists()) outputDir.mkdirs()
 
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-            val filename = "REC_WA_${timestamp}.mp4"
+            val filename = "REC_WA_${timestamp}.wav"
             val filePath = File(outputDir, filename).absolutePath
 
             // 4. Initialize AudioRecord
@@ -179,19 +179,34 @@ class FloatingWindowService : Service() {
     private fun writeAudioDataToFile(filePath: String) {
         val buffer = ByteArray(1024)
         var outputStream: FileOutputStream? = null
+        var totalBytes = 0L
 
         try {
-            outputStream = FileOutputStream(filePath)
-            writeWavHeader(outputStream, 44100, 16, 1)
+            val file = File(filePath)
+            outputStream = FileOutputStream(file)
+
+            // Tulis header sementara
+            writeWavHeader(outputStream, 44100, 16, 1, 0)
+
+            // Mulai rekaman
+            audioRecord?.startRecording()
 
             while (isRecording) {
                 val bytesRead = audioRecord?.read(buffer, 0, buffer.size) ?: 0
                 if (bytesRead > 0) {
                     outputStream.write(buffer, 0, bytesRead)
+                    totalBytes += bytesRead
                 }
             }
+
+            // Update header dengan ukuran sebenarnya
+            outputStream.channel.use {
+                it.position(0)
+                writeWavHeader(outputStream, 44100, 16, 1, totalBytes.toInt())
+            }
+
         } catch (e: Exception) {
-            Log.e(TAG, "Recording error: ${e.message}")
+            Log.e(TAG, "Recording error: ${e.stackTraceToString()}")
         } finally {
             outputStream?.close()
         }
@@ -201,26 +216,29 @@ class FloatingWindowService : Service() {
         out: FileOutputStream,
         sampleRate: Int,
         bitsPerSample: Int,
-        channels: Int
+        channels: Int,
+        dataSize: Int
     ) {
         val byteRate = sampleRate * channels * bitsPerSample / 8
         val blockAlign = channels * bitsPerSample / 8
-        val dataSize = 0 // Will be updated later
 
-        // Write WAV header
-        out.write("RIFF".toByteArray())
-        out.write(intToByteArray(36 + dataSize))
-        out.write("WAVE".toByteArray())
-        out.write("fmt ".toByteArray())
-        out.write(intToByteArray(16))
-        out.write(shortToByteArray(1.toShort())) // PCM format
-        out.write(shortToByteArray(channels.toShort()))
-        out.write(intToByteArray(sampleRate))
-        out.write(intToByteArray(byteRate))
-        out.write(shortToByteArray(blockAlign.toShort()))
-        out.write(shortToByteArray(bitsPerSample.toShort()))
-        out.write("data".toByteArray())
-        out.write(intToByteArray(dataSize))
+        // Header WAV
+        val header = ByteArray(44)
+        System.arraycopy("RIFF".toByteArray(), 0, header, 0, 4)
+        System.arraycopy(intToByteArray(36 + dataSize), 0, header, 4, 4)
+        System.arraycopy("WAVE".toByteArray(), 0, header, 8, 4)
+        System.arraycopy("fmt ".toByteArray(), 0, header, 12, 4)
+        System.arraycopy(intToByteArray(16), 0, header, 16, 4) // Subchunk size
+        System.arraycopy(shortToByteArray(1), 0, header, 20, 2) // Audio format (PCM)
+        System.arraycopy(shortToByteArray(channels.toShort()), 0, header, 22, 2)
+        System.arraycopy(intToByteArray(sampleRate), 0, header, 24, 4)
+        System.arraycopy(intToByteArray(byteRate), 0, header, 28, 4)
+        System.arraycopy(shortToByteArray(blockAlign.toShort()), 0, header, 32, 2)
+        System.arraycopy(shortToByteArray(bitsPerSample.toShort()), 0, header, 34, 2)
+        System.arraycopy("data".toByteArray(), 0, header, 36, 4)
+        System.arraycopy(intToByteArray(dataSize), 0, header, 40, 4)
+
+        out.write(header)
     }
 
     // Helper functions
@@ -246,9 +264,10 @@ class FloatingWindowService : Service() {
             }
             recordingThread?.join()
         } catch (e: Exception) {
-            Log.e(TAG, "Error stopping recording: ${e.message}")
+            Log.e(TAG, "Error stopping recording: ${e.stackTraceToString()}")
+        } finally {
+            audioRecord = null
         }
-        audioRecord = null
     }
 
 
