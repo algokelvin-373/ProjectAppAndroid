@@ -1,12 +1,16 @@
 package com.algokelvin.recordcall.service
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.PixelFormat
+import android.media.AudioFormat
 import android.media.AudioManager
+import android.media.AudioRecord
 import android.media.MediaRecorder
 import android.media.MediaScannerConnection
 import android.os.Build
@@ -18,19 +22,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.algokelvin.recordcall.R
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.RandomAccessFile
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class FloatingWindowService : Service() {
     private val TAG = "RecordCallingLogger"
+    private var recordingFilePath: String? = null
     private var mediaRecorder: MediaRecorder? = null
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
     private var isRecording = false
+    private var audioRecord: AudioRecord? = null
+    private var recordingThread: Thread? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -110,113 +121,153 @@ class FloatingWindowService : Service() {
 
     private fun startRecordingWhatsAppCall() {
         try {
-            Log.i(TAG, "startRecording - WA Call")
+            Log.i(TAG, "startRecording - WA Call (AudioRecord)")
 
+            // 1. Audio configuration
             val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-            audioManager.mode = AudioManager.MODE_NORMAL
-            audioManager.isSpeakerphoneOn = false
-            Thread.sleep(300) // Jeda untuk stabilisasi audio
-            Log.i(TAG, "startRecording - Step 1")
-
             audioManager.apply {
                 mode = AudioManager.MODE_IN_COMMUNICATION
                 isSpeakerphoneOn = true
                 setParameters("noise_suppression=auto")
-                setStreamVolume(
-                    AudioManager.STREAM_VOICE_CALL,
-                    (getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL) * 0.75).toInt(),
-                    0
-                )
             }
-            Log.i(TAG, "startRecording - Step 2")
 
-            val audioSources = arrayOf(
-                MediaRecorder.AudioSource.VOICE_COMMUNICATION,
-                MediaRecorder.AudioSource.MIC,
-                MediaRecorder.AudioSource.VOICE_RECOGNITION
-            )
-            Log.i(TAG, "startRecording - Step 3")
+            // 2. AudioRecord parameters
+            val sampleRate = 44100
+            val channelConfig = AudioFormat.CHANNEL_IN_MONO
+            val audioFormat = AudioFormat.ENCODING_PCM_16BIT
+            val minBufferSize = AudioRecord.getMinBufferSize(
+                sampleRate,
+                channelConfig,
+                audioFormat
+            ) * 2
 
-            val outputDir = if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-                File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), "WhatsApp Records").apply { mkdirs() }
-            } else {
-                filesDir
-            }
-            Log.i(TAG, "startRecording - Step 4")
+            // 3. Create output file
+            val outputDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC) ?: return
+            if (!outputDir.exists()) outputDir.mkdirs()
 
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
             val filename = "REC_WA_${timestamp}.mp4"
             val filePath = File(outputDir, filename).absolutePath
-            Log.i(TAG, "startRecording - Step 5")
 
-            mediaRecorder = MediaRecorder().apply {
-                Log.i(TAG, "startRecording - Step 6")
-                for (source in audioSources) {
-                    try {
-                        setAudioSource(source)
-                        break
-                    } catch (e: Exception) {
-                        Log.w(TAG, "Audio source $source unavailable: ${e.message}")
-                    }
-                }
-                Log.i(TAG, "startRecording - Step 7")
-
-                // Konfigurasi format dan encoder
-                setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-
-                // Parameter low-latency
-                setAudioSamplingRate(8000)
-                setAudioEncodingBitRate(12200)
-                setAudioChannels(1)
-                setOutputFile(filePath)
-                Log.i(TAG, "startRecording - Step 8")
-
-                try {
-                    prepare()
-                } catch (e: Exception) {
-                    Log.e(TAG, "Prepare error: ${e.stackTraceToString()}")
-                    // Fallback ke format MP4 jika 3GP gagal
-                    try {
-                        setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-                        setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-                        prepare()
-                    } catch (e2: Exception) {
-                        Log.e(TAG, "MP4 prepare failed: ${e2.stackTraceToString()}")
-                        throw e2
-                    }
-                }
-                Log.i(TAG, "startRecording - Step 9")
-
-                start()
-
-                Log.i(TAG, "startRecording - Step 10")
+            // 4. Initialize AudioRecord
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.RECORD_AUDIO
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
             }
+            audioRecord = AudioRecord(
+                MediaRecorder.AudioSource.VOICE_COMMUNICATION,
+                sampleRate,
+                channelConfig,
+                audioFormat,
+                minBufferSize
+            )
 
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.cancelAll()
+            // 5. Start recording thread
+            isRecording = true
+            recordingThread = Thread {
+                writeAudioDataToFile(filePath)
+            }.apply { start() }
 
-            Log.i(TAG, "startRecording - Step 11")
-
-            // 7. Paksa scan media
-            MediaScannerConnection.scanFile(
-                this,
-                arrayOf(filePath),
-                arrayOf("audio/mp4")
-            ) { path, uri ->
-                Log.d(TAG, "Scanned $path: $uri")
-            }
-
-            Log.i(TAG, "startRecording - Step 12")
-
-            audioManager.setParameters("voice_communication=on")
         } catch (e: Exception) {
-            Log.e(TAG, "Error start recording WA Call: ${e.message} - ${e.localizedMessage}")
-            stopRecordingWhatsAppCall()
+            Log.e(TAG, "Error starting recording: ${e.stackTraceToString()}")
         }
     }
 
+    private fun writeAudioDataToFile(filePath: String) {
+        val buffer = ByteArray(1024)
+        var outputStream: FileOutputStream? = null
+
+        try {
+            outputStream = FileOutputStream(filePath)
+            writeWavHeader(outputStream, 44100, 16, 1)
+
+            while (isRecording) {
+                val bytesRead = audioRecord?.read(buffer, 0, buffer.size) ?: 0
+                if (bytesRead > 0) {
+                    outputStream.write(buffer, 0, bytesRead)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Recording error: ${e.message}")
+        } finally {
+            outputStream?.close()
+        }
+    }
+
+    private fun writeWavHeader(
+        out: FileOutputStream,
+        sampleRate: Int,
+        bitsPerSample: Int,
+        channels: Int
+    ) {
+        val byteRate = sampleRate * channels * bitsPerSample / 8
+        val blockAlign = channels * bitsPerSample / 8
+        val dataSize = 0 // Will be updated later
+
+        // Write WAV header
+        out.write("RIFF".toByteArray())
+        out.write(intToByteArray(36 + dataSize))
+        out.write("WAVE".toByteArray())
+        out.write("fmt ".toByteArray())
+        out.write(intToByteArray(16))
+        out.write(shortToByteArray(1.toShort())) // PCM format
+        out.write(shortToByteArray(channels.toShort()))
+        out.write(intToByteArray(sampleRate))
+        out.write(intToByteArray(byteRate))
+        out.write(shortToByteArray(blockAlign.toShort()))
+        out.write(shortToByteArray(bitsPerSample.toShort()))
+        out.write("data".toByteArray())
+        out.write(intToByteArray(dataSize))
+    }
+
+    // Helper functions
+    private fun intToByteArray(i: Int): ByteArray = ByteArray(4).apply {
+        this[0] = (i and 0xFF).toByte()
+        this[1] = (i shr 8 and 0xFF).toByte()
+        this[2] = (i shr 16 and 0xFF).toByte()
+        this[3] = (i shr 24 and 0xFF).toByte()
+    }
+
+    private fun shortToByteArray(s: Short): ByteArray = ByteArray(2).apply {
+        this[0] = (s.toInt() and 0xFF).toByte()
+        this[1] = (s.toInt() shr 8 and 0xFF).toByte()
+    }
+
     private fun stopRecordingWhatsAppCall() {
+        Log.i(TAG, "stopRecording - WA Call")
+        try {
+            isRecording = false
+            audioRecord?.apply {
+                stop()
+                release()
+            }
+            recordingThread?.join()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error stopping recording: ${e.message}")
+        }
+        audioRecord = null
+    }
+
+
+    /*private fun stopRecordingWhatsAppCall() {
+        Log.i(TAG, "stopRecording - WA Call")
+        try {
+            isRecording = false
+            audioRecord?.apply {
+                stop()
+                release()
+            }
+            recordingThread?.join()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error stopping recording: ${e.message}")
+        }
+        audioRecord = null
+    }*/
+
+    /*private fun stopRecordingWhatsAppCall() {
         Log.i(TAG, "stopRecording - WA Call")
         try {
             val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
@@ -233,7 +284,7 @@ class FloatingWindowService : Service() {
         mediaRecorder = null
         //stopForeground(true)
         //stopSelf()
-    }
+    }*/
 
     override fun onDestroy() {
         super.onDestroy()
