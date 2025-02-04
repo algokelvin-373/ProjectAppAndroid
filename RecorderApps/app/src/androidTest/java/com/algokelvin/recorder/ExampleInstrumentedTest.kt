@@ -1,4 +1,4 @@
-package com.tsm.recorder
+package com.algokelvin.recorder
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.tsm.recorder", appContext.packageName)
+        assertEquals("com.algokelvin.recorder", appContext.packageName)
     }
 }

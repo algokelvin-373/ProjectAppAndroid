@@ -1,4 +1,4 @@
-package com.tsm.recorder
+package com.algokelvin.recorder
 
 import android.Manifest
 import android.content.ContentValues
@@ -17,11 +17,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_main.*
+import com.algokelvin.recorder.databinding.ActivityMainBinding
 import java.io.File
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private val dir: File = File(Environment.getExternalStorageDirectory().absolutePath + "/soundrecorder/")
     private var output: String? = null
     private var mediaRecorder: MediaRecorder? = null
@@ -39,13 +40,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //checkNeededPermissions()
         checkPermissions()
 
-        button_play_recording.setOnClickListener {
-            if (button_play_recording.text == "Start") {
+        binding.buttonPlayRecording.setOnClickListener {
+            if (binding.buttonPlayRecording.text == "Start") {
                 /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED &&
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     val permissions = arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     requestPermissions()
                 }
-            } else if (button_play_recording.text == "Stop") {
+            } else if (binding.buttonPlayRecording.text == "Stop") {
                 stopRecording()
             }
         }
@@ -122,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 prepare()
                 start()
             }
-            button_play_recording.text = ("Stop")
+            binding.buttonPlayRecording.text = ("Stop")
 
             isRecording = true
             startTime = System.currentTimeMillis()
@@ -146,7 +148,7 @@ class MainActivity : AppCompatActivity() {
                 val elapsedTime = System.currentTimeMillis() - startTime
                 val seconds = (elapsedTime / 1000) % 60
                 val minutes = (elapsedTime / (1000 * 60)) % 60
-                txt_record_time.text = String.format("%02d:%02d", minutes, seconds)
+                binding.txtRecordTime.text = String.format("%02d:%02d", minutes, seconds)
                 handler.postDelayed(this, 1000)
             }
         }
@@ -156,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         override fun run() {
             if (isRecording) {
                 val maxAmplitude = recorder?.maxAmplitude?.toFloat() ?: 0f
-                visualizer_audio.addAmplitude(maxAmplitude)
+                binding.visualizerAudio.addAmplitude(maxAmplitude)
                 handler.postDelayed(this, 100)
             }
         }
@@ -194,7 +196,7 @@ class MainActivity : AppCompatActivity() {
         handler.removeCallbacks(updateTimeRunnable)
         handler.removeCallbacks(updateVisualizer())
         saveRecordingToMediaStore(outputFilePath)
-        button_play_recording.text = "Start"
+        binding.buttonPlayRecording.text = "Start"
         Toast.makeText(this, "Success Recording", Toast.LENGTH_SHORT).show()
     }
 
@@ -240,13 +242,13 @@ class MainActivity : AppCompatActivity() {
 
                 mediaPlayer.setOnCompletionListener {
                     Log.i(ConstantVal.TAG, "Record is end")
-                    button_play_recording.text = ("Start")
-                    button_play_recording.setBackgroundColor(ContextCompat.getColor(this, R.color.purple_700))
+                    binding.buttonPlayRecording.text = ("Start")
+                    binding.buttonPlayRecording.setBackgroundColor(ContextCompat.getColor(this, R.color.purple_700))
                 }
 
                 mediaPlayer.start()
-                button_play_recording.text = ("Play")
-                button_play_recording.setBackgroundColor(ContextCompat.getColor(this, R.color.grey))
+                binding.buttonPlayRecording.text = ("Play")
+                binding.buttonPlayRecording.setBackgroundColor(ContextCompat.getColor(this, R.color.grey))
             } catch (e: IOException) {
                 Log.e(ConstantVal.TAG, "prepare() failed")
             }
