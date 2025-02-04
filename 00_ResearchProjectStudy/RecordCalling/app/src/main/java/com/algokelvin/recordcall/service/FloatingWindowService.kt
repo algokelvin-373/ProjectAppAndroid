@@ -123,8 +123,24 @@ class FloatingWindowService : Service() {
         try {
             Log.i(TAG, "startRecording - WA Call (AudioRecord)")
 
+            // Di dalam method startRecordingWhatsAppCall()
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                Log.e(TAG, "RECORD_AUDIO permission not granted")
+                return
+            }
+
             // 1. Audio configuration
             val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+            val result = audioManager.requestAudioFocus(
+                null,
+                AudioManager.STREAM_VOICE_CALL,
+                AudioManager.AUDIOFOCUS_GAIN_TRANSIENT
+            )
+
+            if (result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                Log.e(TAG, "Audio focus not granted")
+                return
+            }
             audioManager.apply {
                 mode = AudioManager.MODE_IN_COMMUNICATION
                 isSpeakerphoneOn = true
@@ -139,7 +155,7 @@ class FloatingWindowService : Service() {
                 sampleRate,
                 channelConfig,
                 audioFormat
-            ) * 2
+            )
 
             // 3. Create output file
             val outputDir = getExternalFilesDir(Environment.DIRECTORY_MUSIC) ?: return
@@ -157,12 +173,13 @@ class FloatingWindowService : Service() {
             ) {
                 return
             }
+            val bufferSize = minBufferSize * 4
             audioRecord = AudioRecord(
                 MediaRecorder.AudioSource.VOICE_COMMUNICATION,
                 sampleRate,
                 channelConfig,
                 audioFormat,
-                minBufferSize
+                bufferSize
             )
 
             // 5. Start recording thread
@@ -178,15 +195,15 @@ class FloatingWindowService : Service() {
 
     private fun writeAudioDataToFile(filePath: String) {
         val buffer = ByteArray(1024)
-        var outputStream: FileOutputStream? = null
+        var randomAccessFile: RandomAccessFile? = null
         var totalBytes = 0L
 
         try {
             val file = File(filePath)
-            outputStream = FileOutputStream(file)
+            randomAccessFile = RandomAccessFile(file, "rw")
 
             // Tulis header sementara
-            writeWavHeader(outputStream, 44100, 16, 1, 0)
+            writeWavHeader(randomAccessFile, 44100, 16, 1, 0)
 
             // Mulai rekaman
             audioRecord?.startRecording()
@@ -194,26 +211,24 @@ class FloatingWindowService : Service() {
             while (isRecording) {
                 val bytesRead = audioRecord?.read(buffer, 0, buffer.size) ?: 0
                 if (bytesRead > 0) {
-                    outputStream.write(buffer, 0, bytesRead)
+                    randomAccessFile.write(buffer, 0, bytesRead)
                     totalBytes += bytesRead
                 }
             }
 
             // Update header dengan ukuran sebenarnya
-            outputStream.channel.use {
-                it.position(0)
-                writeWavHeader(outputStream, 44100, 16, 1, totalBytes.toInt())
-            }
+            randomAccessFile.seek(0)
+            writeWavHeader(randomAccessFile, 44100, 16, 1, totalBytes.toInt())
 
         } catch (e: Exception) {
             Log.e(TAG, "Recording error: ${e.stackTraceToString()}")
         } finally {
-            outputStream?.close()
+            randomAccessFile?.close()
         }
     }
 
     private fun writeWavHeader(
-        out: FileOutputStream,
+        raf: RandomAccessFile,
         sampleRate: Int,
         bitsPerSample: Int,
         channels: Int,
@@ -222,36 +237,36 @@ class FloatingWindowService : Service() {
         val byteRate = sampleRate * channels * bitsPerSample / 8
         val blockAlign = channels * bitsPerSample / 8
 
-        // Header WAV
-        val header = ByteArray(44)
-        System.arraycopy("RIFF".toByteArray(), 0, header, 0, 4)
-        System.arraycopy(intToByteArray(36 + dataSize), 0, header, 4, 4)
-        System.arraycopy("WAVE".toByteArray(), 0, header, 8, 4)
-        System.arraycopy("fmt ".toByteArray(), 0, header, 12, 4)
-        System.arraycopy(intToByteArray(16), 0, header, 16, 4) // Subchunk size
-        System.arraycopy(shortToByteArray(1), 0, header, 20, 2) // Audio format (PCM)
-        System.arraycopy(shortToByteArray(channels.toShort()), 0, header, 22, 2)
-        System.arraycopy(intToByteArray(sampleRate), 0, header, 24, 4)
-        System.arraycopy(intToByteArray(byteRate), 0, header, 28, 4)
-        System.arraycopy(shortToByteArray(blockAlign.toShort()), 0, header, 32, 2)
-        System.arraycopy(shortToByteArray(bitsPerSample.toShort()), 0, header, 34, 2)
-        System.arraycopy("data".toByteArray(), 0, header, 36, 4)
-        System.arraycopy(intToByteArray(dataSize), 0, header, 40, 4)
-
-        out.write(header)
+        raf.write("RIFF".toByteArray())
+        raf.write(intToByteArray(36 + dataSize))  // ChunkSize
+        raf.write("WAVE".toByteArray())
+        raf.write("fmt ".toByteArray())
+        raf.write(intToByteArray(16))             // Subchunk1Size
+        raf.write(shortToByteArray(1))            // AudioFormat (PCM)
+        raf.write(shortToByteArray(channels.toShort()))
+        raf.write(intToByteArray(sampleRate))
+        raf.write(intToByteArray(byteRate))
+        raf.write(shortToByteArray(blockAlign.toShort()))
+        raf.write(shortToByteArray(bitsPerSample.toShort()))
+        raf.write("data".toByteArray())
+        raf.write(intToByteArray(dataSize))       // Subchunk2Size
     }
 
     // Helper functions
-    private fun intToByteArray(i: Int): ByteArray = ByteArray(4).apply {
-        this[0] = (i and 0xFF).toByte()
-        this[1] = (i shr 8 and 0xFF).toByte()
-        this[2] = (i shr 16 and 0xFF).toByte()
-        this[3] = (i shr 24 and 0xFF).toByte()
+    private fun intToByteArray(i: Int): ByteArray {
+        return byteArrayOf(
+            (i and 0xFF).toByte(),
+            (i shr 8 and 0xFF).toByte(),
+            (i shr 16 and 0xFF).toByte(),
+            (i shr 24 and 0xFF).toByte()
+        )
     }
 
-    private fun shortToByteArray(s: Short): ByteArray = ByteArray(2).apply {
-        this[0] = (s.toInt() and 0xFF).toByte()
-        this[1] = (s.toInt() shr 8 and 0xFF).toByte()
+    private fun shortToByteArray(s: Short): ByteArray {
+        return byteArrayOf(
+            (s.toInt() and 0xFF).toByte(),
+            (s.toInt() shr 8 and 0xFF).toByte()
+        )
     }
 
     private fun stopRecordingWhatsAppCall() {
