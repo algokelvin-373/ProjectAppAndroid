@@ -1,4 +1,4 @@
-package com.tsm.recorder
+package com.algokelvin.recorder
 
 import android.content.Context
 import android.graphics.Canvas
@@ -18,9 +18,9 @@ class VisualizerView(context: Context, attributeSet: AttributeSet): View(context
         invalidate()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        canvas?.let {
+        canvas.let {
             val paint = Paint().apply {
                 color = Color.BLUE
                 strokeWidth = 5f
