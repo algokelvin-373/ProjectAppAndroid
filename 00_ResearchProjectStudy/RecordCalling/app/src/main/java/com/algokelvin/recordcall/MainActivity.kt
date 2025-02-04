@@ -3,7 +3,6 @@ package com.algokelvin.recordcall
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
@@ -62,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         handler = Handler(Looper.getMainLooper())
         btnRecord = findViewById(R.id.btnRecord)
         checkPermissions()
+        checkAccessibilityPermission()
         setupCallDetector()
 
         btnRecord.setOnClickListener {
@@ -71,30 +71,15 @@ class MainActivity : AppCompatActivity() {
                 startRecording()
             }
         }
-
-        btnRecordWhatsApp = findViewById(R.id.btnRecordWhatsApp)
-        checkAccessibilityPermission()
-        LocalBroadcastManager.getInstance(this)
-            .registerReceiver(callReceiver, IntentFilter("WHATSAPP_CALL_STATE_CHANGED"))
     }
-
-    /*override fun onResume() {
-        super.onResume()
-        checkCurrentCallState()
-    }
-
-    private fun checkCurrentCallState() {
-        btnRecordWhatsApp.isEnabled = isInCall
-    }*/
 
     override fun onResume() {
         super.onResume()
         checkRealCallState()
         startStateRefreshLoop()
-        //requestCallStateUpdate()
     }
 
-    private fun checkManufacturerSettings() {
+    /*private fun checkManufacturerSettings() {
         when {
             Build.MANUFACTURER.equals("xiaomi", ignoreCase = true) -> {
                 AlertDialog.Builder(this)
@@ -113,12 +98,11 @@ class MainActivity : AppCompatActivity() {
                     }.show()
             }
         }
-    }
+    }*/
 
     override fun onPause() {
         super.onPause()
         handler.removeCallbacksAndMessages(null)
-        //stopPolling()
     }
 
     private fun startStateRefreshLoop() {
@@ -130,43 +114,11 @@ class MainActivity : AppCompatActivity() {
         }, 3000)
     }
 
-    private fun requestCallStateUpdate() {
-        val intent = Intent("REQUEST_CALL_STATE_UPDATE")
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
-    }
-
-    private fun startPolling() {
-        handler.postDelayed(pollingRunnable, 1000)
-    }
-
-    private fun stopPolling() {
-        handler.removeCallbacks(pollingRunnable)
-    }
-
-    private val pollingRunnable = object : Runnable {
-        override fun run() {
-            checkRealCallState()  // <-- GANTI KE FUNGSI REAL CHECK
-            handler.postDelayed(this, 1000)
-        }
-    }
-
     private fun checkRealCallState() {
-        // Request update state ke service
-//        val intent = Intent("ACTION_REQUEST_CALL_STATE")
-//        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
-
-        // Paksa update state saat activity aktif
         LocalBroadcastManager.getInstance(this)
             .sendBroadcast(Intent("WHATSAPP_CALL_STATE_CHANGED"))
     }
 
-    /*private fun checkForcedCallState() {
-        runOnUiThread {
-            btnRecordWhatsApp.isEnabled = true
-            btnRecordWhatsApp.text = "RECORD"
-            btnRecordWhatsApp.setBackgroundColor(Color.GREEN)
-        }
-    }*/
 
     private fun checkPermissions() {
         if (PERMISSIONS.any { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }) {
@@ -175,14 +127,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkAccessibilityPermission() {
-        val accessibilityEnabled = Settings.Secure.getInt(contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED) == 1
-        if (!accessibilityEnabled) {
+        val accessibilityEnabled = Settings.Secure.getInt(
+            contentResolver,
+            Settings.Secure.ACCESSIBILITY_ENABLED
+        ) == 1
+
+        val overlayPermitted = Settings.canDrawOverlays(this)
+
+        if (!accessibilityEnabled || !overlayPermitted) {
             AlertDialog.Builder(this)
-                .setTitle("Akses Diperlukan")
-                .setMessage("Aktifkan aksesibilitas untuk mendeteksi panggilan WhatsApp")
+                .setTitle("Izin Diperlukan")
+                .setMessage("Aktifkan:\n1. Aksesibilitas\n2. Izin tampil di atas aplikasi")
                 .setPositiveButton("Buka Pengaturan") { _, _ ->
+                    // Buka pengaturan aksesibilitas
                     startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-                }.show()
+
+                    // Buka pengaturan overlay setelah 1 detik
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+                    }, 1000)
+                }
+                .setCancelable(false)
+                .show()
         }
     }
 

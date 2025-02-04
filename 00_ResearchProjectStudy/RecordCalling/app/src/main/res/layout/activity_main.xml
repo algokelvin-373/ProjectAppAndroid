@@ -16,11 +16,11 @@
         android:text="Mulai Rekam"
         android:enabled="false"/>
 
-    <Button
+    <!--<Button
         android:id="@+id/btnRecordWhatsApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mulai Rekam Call WA"
-        android:enabled="false"/>
+        android:enabled="false"/>-->
 
 </LinearLayout>

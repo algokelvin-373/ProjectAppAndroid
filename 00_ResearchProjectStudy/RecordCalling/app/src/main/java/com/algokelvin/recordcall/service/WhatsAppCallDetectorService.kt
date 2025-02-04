@@ -78,48 +78,36 @@ class WhatsAppCallDetectorService: AccessibilityService() {
 
     private fun detectCallState(): Boolean {
         return rootInActiveWindow?.let { root ->
-            // Gunakan kombinasi beberapa indikator
-            val indicators = listOf(
-                "com.whatsapp:id/end_call_button",
-                //"com.whatsapp:id/call_duration",
-                //"com.whatsapp:id/call_toolbar"
-            )
+            try {
+                // Gunakan kombinasi 3 indikator utama
+                val indicators = listOf(
+                    "com.whatsapp:id/end_call_button",
+                    "com.whatsapp:id/call_duration",
+                    "com.whatsapp:id/voip_call_time"
+                )
 
-            // Cek semua node yang terlihat di layar
-            val isInCall = indicators.any { id ->
-                root.findAccessibilityNodeInfosByViewId(id).any { node ->
-                    node.isVisibleToUser // Pastikan elemen terlihat oleh pengguna
+                // Cek semua node yang terlihat
+                val isInCall = indicators.any { id ->
+                    root.findAccessibilityNodeInfosByViewId(id).any { node ->
+                        node.isVisibleToUser && node.isClickable
+                    }
                 }
+
+                // Logging detail
+                Log.d("CallDetection",
+                    """
+                WhatsApp Call Detection:
+                - End Button: ${root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/end_call_button").size}
+                - Duration: ${root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_duration").size}
+                - VOIP Time: ${root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/voip_call_time").size}
+                Result: $isInCall
+                """.trimIndent()
+                )
+
+                isInCall
+            } finally {
+                root.recycle()
             }
-
-            // Deteksi alternatif via teks
-            val textIndicators = listOf("ongoing call", "menit", "detik")
-            val textNodes = root.findAccessibilityNodeInfosByText(".*".toRegex().toString())
-            val hasCallText = textNodes.any { node ->
-                textIndicators.any { indicator ->
-                    node.text?.toString()?.contains(indicator, true) == true
-                }
-            }
-
-            // Log untuk debugging
-            Log.i(TAG,
-                """
-                    [WhatsApp Detection]
-                    View ID Match: $isInCall
-                    Text Match: $hasCallText
-                    Final Result: ${isInCall || hasCallText}
-                    """.trimIndent()
-            )
-
-            val endCallButton = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/end_call_button").isNotEmpty()
-            val callDuration = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_duration").isNotEmpty()
-            val callToolbar = root.findAccessibilityNodeInfosByViewId("com.whatsapp:id/call_toolbar").isNotEmpty()
-            Log.i(TAG, "endCallButton: $endCallButton")
-            Log.i(TAG, "callDuration: $callDuration")
-            Log.i(TAG, "callToolbar: $callToolbar")
-
-            Log.i(TAG, "Call state detected: $isInCall")
-            isInCall
         } ?: false
     }
 
@@ -129,26 +117,19 @@ class WhatsAppCallDetectorService: AccessibilityService() {
             putExtra("isInCall", isInCall)
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
+        // Start/stop floating window
+        val serviceIntent = Intent(this@WhatsAppCallDetectorService, FloatingWindowService::class.java)
+        if (isInCall) {
+            startService(serviceIntent)
+        } else {
+            stopService(serviceIntent)
+        }
     }
 
     override fun onInterrupt() {
         sendCallStateBroadcast(false)
     }
-
-    /*override fun onServiceConnected() {
-        super.onServiceConnected()
-        //sendPersistentCallState()
-    }*/
-
-    /*private fun sendPersistentCallState() {
-        handler.post(object : Runnable {
-            override fun run() {
-                val isInCall = true // Force true untuk testing
-                sendCallStateBroadcast(isInCall)
-                handler.postDelayed(this, 3000) // Update setiap 3 detik
-            }
-        })
-    }*/
 
     override fun onDestroy() {
         super.onDestroy()
