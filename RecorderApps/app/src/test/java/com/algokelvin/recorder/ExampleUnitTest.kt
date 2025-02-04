@@ -1,4 +1,4 @@
-package com.tsm.recorder
+package com.algokelvin.recorder
 
 import org.junit.Test
 

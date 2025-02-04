@@ -1,4 +1,4 @@
-package com.tsm.recorder
+package com.algokelvin.recorder
 
 import android.Manifest
 import android.content.ContentValues
@@ -17,7 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.android.synthetic.main.activity_main.*
+import com.tsm.recorder.ConstantVal
 import java.io.File
 import java.io.IOException
 
