@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.algokelvin.recorder.databinding.ActivityMainBinding
-import com.tsm.recorder.ConstantVal
 import java.io.File
 import java.io.IOException
 
