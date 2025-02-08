@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ViewAndViewGroup</string>
+    <string name="linear_layout">Linear Layout</string>
+    <string name="relative_layout">Relative Layout</string>
 </resources>
