@@ -5,7 +5,10 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
+import android.media.AudioManager
+import android.media.MediaRecorder
 import android.os.Build
+import android.os.Environment
 import android.os.IBinder
 import android.util.Log
 import android.view.Gravity
@@ -18,6 +21,8 @@ class FloatingService : Service() {
     private val TAG = "RecordWaCall"
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
+    private lateinit var recorder: MediaRecorder
+    private var isRecording = false
 
     override fun onCreate() {
         super.onCreate()
@@ -59,6 +64,47 @@ class FloatingService : Service() {
         floatingView.findViewById<View>(R.id.ivCloseFloating).setOnClickListener {
             stopSelf()
         }
+        floatingView.findViewById<View>(R.id.ivCallIcon).setOnClickListener {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+                    if (audioManager.isMusicActive) {
+                        Log.e(TAG, "Audio sedang digunakan oleh aplikasi lain!")
+                    } else {
+                        Log.d(TAG, "Recording Started")
+                        startRecording()
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error: ${e.message}")
+            }
+        }
+    }
+
+    private fun startRecording() {
+        if (isRecording) return
+
+        val filePath = "${getExternalFilesDir(Environment.DIRECTORY_MUSIC)}/whatsapp_call_${System.currentTimeMillis()}.mp4"
+
+        recorder = MediaRecorder().apply {
+            setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION)
+            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            setOutputFile(filePath)
+            prepare()
+            start()
+        }
+        isRecording = true
+        Log.d("RecordWaCall", "Recording started: $filePath")
+    }
+
+    private fun stopRecording() {
+        if (isRecording) {
+            recorder.stop()
+            recorder.release()
+            isRecording = false
+            Log.d("RecordWaCall", "Recording stopped")
+        }
     }
 
     override fun onDestroy() {
@@ -66,6 +112,7 @@ class FloatingService : Service() {
         if (::floatingView.isInitialized) {
             windowManager.removeView(floatingView)
         }
+        stopRecording()
     }
 
     override fun onBind(intent: Intent?): IBinder? {

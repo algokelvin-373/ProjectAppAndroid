@@ -1,6 +1,9 @@
 package com.algokelvin.recordcallwa
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -23,6 +26,16 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "Requesting Overlay Permission")
             startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+                return
+            }
+        }
+
     }
 
     private fun isNotificationServiceEnabled(): Boolean {
