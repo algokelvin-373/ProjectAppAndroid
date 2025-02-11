@@ -1,5 +1,6 @@
 package com.algokelvin.recordcallwa
 
+import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
@@ -15,6 +16,8 @@ class FloatingService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        startForeground(1, Notification.Builder(this).setContentTitle("WhatsApp Call Monitoring").build())
+
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         floatingView = LayoutInflater.from(this).inflate(R.layout.floating_layout, null)
 
