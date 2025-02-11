@@ -19,18 +19,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
         }
 
-        if (Settings.canDrawOverlays(this)) {
-            Log.i(TAG, "Settings.canDrawOverlays")
-            startService(Intent(this, FloatingService::class.java))
-        } else {
-            Log.i(TAG, "ACTION_MANAGE_OVERLAY_PERMISSION")
-            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-            startActivity(intent)
+        if (!Settings.canDrawOverlays(this)) {
+            Log.i(TAG, "Requesting Overlay Permission")
+            startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
         }
     }
 
     private fun isNotificationServiceEnabled(): Boolean {
-        val contentResolver = applicationContext.contentResolver
         val enabledListeners = Settings.Secure.getString(contentResolver, "enabled_notification_listeners")
         return enabledListeners?.contains(packageName) == true
     }

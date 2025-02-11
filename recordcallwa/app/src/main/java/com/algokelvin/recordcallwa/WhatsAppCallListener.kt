@@ -3,32 +3,38 @@ package com.algokelvin.recordcallwa
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.content.Intent
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 
 class WhatsAppCallListener : NotificationListenerService() {
     private val TAG = "RecordWaCall"
+    private lateinit var notificationText: String
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         val packageName = sbn.packageName
-        val notificationText = sbn.notification.extras.getString("android.text", "")
+        notificationText = sbn.notification.extras.getString("android.text", "")
 
-        Log.d(TAG, "Notification from: $packageName - Text: $notificationText")
+        Log.d(TAG, "Notification received: $packageName - Text: $notificationText")
 
         if (packageName == "com.whatsapp") {
-            Log.d(TAG, "WA Notification: $notificationText")
+            Log.d(TAG, "WhatsApp Notification: $notificationText")
         }
 
-        if (packageName == "com.whatsapp" && (notificationText?.contains("Berdering…", true) == true ||
-                    notificationText?.contains("calling you", true) == true)) {
-            Log.d(TAG, "WhatsApp Call Detected! Starting FloatingService...")
-            startService(Intent(this, FloatingService::class.java))
+        if (packageName == "com.whatsapp" && notificationText != null) {
+            if (notificationText.contains("Berdering…", true) || notificationText.contains("calling you", true)) {
+                Log.d(TAG, "WhatsApp Call Detected! Starting FloatingService...")
+                val intent = Intent(applicationContext, FloatingService::class.java)
+                applicationContext.startForegroundService(intent)
+            }
         }
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
-        /*if (sbn.packageName == "com.whatsapp") {
+        if (!notificationText.contains("Berdering…", true) || !notificationText.contains("calling you", true)) {
             Log.d(TAG, "WhatsApp Call Ended! Stopping FloatingService...")
             stopService(Intent(this, FloatingService::class.java))
-        }*/
+        }
     }
 }
