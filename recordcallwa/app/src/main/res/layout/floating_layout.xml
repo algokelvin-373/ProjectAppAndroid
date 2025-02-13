@@ -18,7 +18,7 @@
         android:id="@+id/tvFloatingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Via Call WA Berjalan\nRecord Memproses"
+        android:text="Via Call WA Berjalan\nMulai Recorder"
         android:textSize="14sp"
         android:textColor="@color/black"
         android:paddingStart="8dp"/>

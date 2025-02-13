@@ -16,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 
 class FloatingService : Service() {
@@ -67,8 +68,10 @@ class FloatingService : Service() {
         }
 
         val icRecorder = floatingView.findViewById<ImageView>(R.id.ivCallIcon)
+        val txtRecorder = floatingView.findViewById<TextView>(R.id.tvFloatingText)
         icRecorder.setOnClickListener {
             icRecorder.setImageResource(R.drawable.ic_recorder_on)
+            txtRecorder.text = "Via Call WA Berjalan\nRecord Memproses"
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
