@@ -15,6 +15,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.core.app.NotificationCompat
 
 class FloatingService : Service() {
@@ -64,7 +65,10 @@ class FloatingService : Service() {
         floatingView.findViewById<View>(R.id.ivCloseFloating).setOnClickListener {
             stopSelf()
         }
-        floatingView.findViewById<View>(R.id.ivCallIcon).setOnClickListener {
+
+        val icRecorder = floatingView.findViewById<ImageView>(R.id.ivCallIcon)
+        icRecorder.setOnClickListener {
+            icRecorder.setImageResource(R.drawable.ic_recorder_on)
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager

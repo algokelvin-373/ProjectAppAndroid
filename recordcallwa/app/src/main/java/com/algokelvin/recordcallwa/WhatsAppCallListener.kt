@@ -22,6 +22,7 @@ class WhatsAppCallListener : NotificationListenerService() {
             Log.d(TAG, "WhatsApp Notification: $notificationText")
         }
 
+        // For Android 13
         if (packageName == "com.whatsapp" && notificationText != null) {
             if (notificationText.contains("Berdering…", true) || notificationText.contains("calling you", true)) {
                 Log.d(TAG, "WhatsApp Call Detected! Starting FloatingService...")
@@ -32,6 +33,7 @@ class WhatsAppCallListener : NotificationListenerService() {
     }
 
     override fun onNotificationRemoved(sbn: StatusBarNotification) {
+        // For Android 13
         if (!notificationText.contains("Berdering…", true) || !notificationText.contains("calling you", true)) {
             Log.d(TAG, "WhatsApp Call Ended! Stopping FloatingService...")
             stopService(Intent(this, FloatingService::class.java))
