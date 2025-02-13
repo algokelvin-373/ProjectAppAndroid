@@ -3,6 +3,7 @@ package com.algokelvin.recordcallwa
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.media.AudioManager
@@ -18,6 +19,8 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
+import com.algokelvin.recordcallwa.recorder.ServerRecorderListener
+import com.algokelvin.recordcallwa.recorder.ServerRecordingState
 
 class FloatingService : Service() {
     private val TAG = "RecordWaCall"
@@ -79,7 +82,7 @@ class FloatingService : Service() {
                         Log.e(TAG, "Audio sedang digunakan oleh aplikasi lain!")
                     } else {
                         Log.d(TAG, "Recording Started")
-                        startRecording()
+                        //startRecording()
                     }
                 }
             } catch (e: Exception) {
@@ -114,12 +117,53 @@ class FloatingService : Service() {
         }
     }
 
+    private fun startRecordingNew(
+        context: Context,
+        encoder: Int,
+        recordingFile: String,
+        audioChannels: Int,
+        encodingBitrate: Int,
+        audioSamplingRate: Int,
+        audioSource: Int,
+        mediaRecorderOutputFormat: Int,
+        mediaRecorderAudioEncoder: Int,
+        recordingGain: Int,
+        serverRecorderListener: ServerRecorderListener
+    ) {
+        val realRecordingFile = CacheFileProvider.provideCacheFile(context, recordingFile)
+        val realAudioSource = if (App.hasCaptureAudioOutputPermission()) {
+            Log.d(TAG, "startRecording() -> hasCaptureAudioOutputPermission() is true. Changing audioSource to MediaRecorder.AudioSource.VOICE_CALL")
+            MediaRecorder.AudioSource.VOICE_CALL
+        } else {
+            audioSource
+        }
+
+        val recorderConfig = RecorderConfig.fromPrimitives(encoder, realRecordingFile, audioChannels, encodingBitrate, audioSamplingRate, realAudioSource, mediaRecorderOutputFormat, mediaRecorderAudioEncoder, recordingGain, serverRecorderListener)
+        Log.d(TAG, "startRecording() -> is recorder null ${recorder == null}, is recorder recording ${recorder?.getState() == ServerRecordingState.Recording}")
+        Log.d(TAG, "startRecording() -> Calling stopRecording() just in case we have a dangling recorder. IPC communication is quite complicated and fragile.")
+
+        recorder = when (Encoder.fromIdOrDefault(encoder)) {
+            Encoder.AndroidMediaRecorder -> {
+                if (CLog.isDebug()) {
+                    CLog.log(logTag, "startRecording() -> This is an a normal call and encoder is AndroidMediaRecorder. Returning AndroidMediaAudioRecorder")
+                }
+                AndroidMediaAudioRecorder(recorderConfig)
+            }
+
+            Encoder.MediaCodec -> {
+                Log.i(TAG, "startRecording() -> This is an a normal call and encoder is MediaCodec. Returning MediaCodecAudioRecorder2")
+                MediaCodecAudioRecorder2(recorderConfig)
+            }
+        }
+        recorder.startRecording()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (::floatingView.isInitialized) {
             windowManager.removeView(floatingView)
         }
-        stopRecording()
+        //stopRecording()
     }
 
     override fun onBind(intent: Intent?): IBinder? {
