@@ -19,6 +19,12 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
+import com.algokelvin.recordcallwa.recorder.AndroidMediaAudioRecorder
+import com.algokelvin.recordcallwa.recorder.App
+import com.algokelvin.recordcallwa.recorder.CacheFileProvider
+import com.algokelvin.recordcallwa.recorder.Encoder
+import com.algokelvin.recordcallwa.recorder.Recorder
+import com.algokelvin.recordcallwa.recorder.RecorderConfig
 import com.algokelvin.recordcallwa.recorder.ServerRecorderListener
 import com.algokelvin.recordcallwa.recorder.ServerRecordingState
 
@@ -26,8 +32,8 @@ class FloatingService : Service() {
     private val TAG = "RecordWaCall"
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
-    private lateinit var recorder: MediaRecorder
-    private var isRecording = false
+    private var recorder: Recorder? = null
+    //private var isRecording = false
 
     override fun onCreate() {
         super.onCreate()
@@ -91,7 +97,7 @@ class FloatingService : Service() {
         }
     }
 
-    private fun startRecording() {
+    /*private fun startRecording() {
         if (isRecording) return
 
         val filePath = "${getExternalFilesDir(Environment.DIRECTORY_MUSIC)}/whatsapp_call_${System.currentTimeMillis()}.mp4"
@@ -106,16 +112,16 @@ class FloatingService : Service() {
         }
         isRecording = true
         Log.d("RecordWaCall", "Recording started: $filePath")
-    }
+    }*/
 
-    private fun stopRecording() {
+    /*private fun stopRecording() {
         if (isRecording) {
             recorder.stop()
             recorder.release()
             isRecording = false
             Log.d("RecordWaCall", "Recording stopped")
         }
-    }
+    }*/
 
     private fun startRecordingNew(
         context: Context,
@@ -142,11 +148,9 @@ class FloatingService : Service() {
         Log.d(TAG, "startRecording() -> is recorder null ${recorder == null}, is recorder recording ${recorder?.getState() == ServerRecordingState.Recording}")
         Log.d(TAG, "startRecording() -> Calling stopRecording() just in case we have a dangling recorder. IPC communication is quite complicated and fragile.")
 
-        recorder = when (Encoder.fromIdOrDefault(encoder)) {
+        /*recorder = when (Encoder.fromIdOrDefault(encoder)) {
             Encoder.AndroidMediaRecorder -> {
-                if (CLog.isDebug()) {
-                    CLog.log(logTag, "startRecording() -> This is an a normal call and encoder is AndroidMediaRecorder. Returning AndroidMediaAudioRecorder")
-                }
+                Log.i(TAG, "startRecording() -> This is an a normal call and encoder is AndroidMediaRecorder. Returning AndroidMediaAudioRecorder")
                 AndroidMediaAudioRecorder(recorderConfig)
             }
 
@@ -154,8 +158,16 @@ class FloatingService : Service() {
                 Log.i(TAG, "startRecording() -> This is an a normal call and encoder is MediaCodec. Returning MediaCodecAudioRecorder2")
                 MediaCodecAudioRecorder2(recorderConfig)
             }
-        }
-        recorder.startRecording()
+        }*/
+        Log.i(TAG, "startRecording() -> This is an a normal call and encoder is AndroidMediaRecorder. Returning AndroidMediaAudioRecorder")
+        recorder = AndroidMediaAudioRecorder(recorderConfig)
+        recorder?.startRecording()
+    }
+
+    private fun stopRecordingNew() {
+        Log.i(TAG, "stopRecording()")
+        recorder?.stopRecording()
+        recorder = null
     }
 
     override fun onDestroy() {
@@ -163,6 +175,7 @@ class FloatingService : Service() {
         if (::floatingView.isInitialized) {
             windowManager.removeView(floatingView)
         }
+        stopRecordingNew()
         //stopRecording()
     }
 
