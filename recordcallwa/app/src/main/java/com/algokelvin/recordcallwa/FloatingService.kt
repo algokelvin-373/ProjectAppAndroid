@@ -28,6 +28,7 @@ import com.algokelvin.recordcallwa.recorder.Recorder
 import com.algokelvin.recordcallwa.recorder.RecorderConfig
 import com.algokelvin.recordcallwa.recorder.ServerRecorderListener
 import com.algokelvin.recordcallwa.recorder.ServerRecordingState
+import java.io.File
 
 class FloatingService : Service() {
     private val TAG = "RecordWaCall"
@@ -58,6 +59,40 @@ class FloatingService : Service() {
         super.onCreate()
         Log.d(TAG, "FloatingService started!")
 
+        //recordingAndroid13()
+        recordingAndroid14More()
+    }
+
+    private fun recordingAndroid14More() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+                if (audioManager.isMusicActive) {
+                    Log.e(TAG, "Audio sedang digunakan oleh aplikasi lain!")
+                } else {
+                    Log.d(TAG, "Recording Started")
+                    //startRecording()
+                    startRecordingNew(
+                        context = applicationContext,
+                        encoder = 2,
+                        recordingFile = "wa_${System.currentTimeMillis()}.m4a",
+                        audioChannels = 2,
+                        encodingBitrate = 64000,
+                        audioSamplingRate = 44100,
+                        audioSource = 6,
+                        mediaRecorderAudioEncoder = 2,
+                        mediaRecorderOutputFormat = 3,
+                        recordingGain = 8,
+                        serverRecorderListener = serverRecorderListener
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error: ${e.message}")
+        }
+    }
+
+    private fun recordingAndroid13() {
         val channelId = "floating_service_channel"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
@@ -115,9 +150,9 @@ class FloatingService : Service() {
                             audioChannels = 2,
                             encodingBitrate = 64000,
                             audioSamplingRate = 44100,
-                            audioSource = 6,
-                            mediaRecorderAudioEncoder = 2,
-                            mediaRecorderOutputFormat = 3,
+                            audioSource = MediaRecorder.AudioSource.VOICE_RECOGNITION,
+                            mediaRecorderAudioEncoder = MediaRecorder.AudioEncoder.AMR_WB,
+                            mediaRecorderOutputFormat = MediaRecorder.OutputFormat.AMR_NB,
                             recordingGain = 8,
                             serverRecorderListener = serverRecorderListener
                         )
@@ -168,7 +203,9 @@ class FloatingService : Service() {
         recordingGain: Int,
         serverRecorderListener: ServerRecorderListener
     ) {
-        val realRecordingFile = CacheFileProvider.provideCacheFile(context, recordingFile)
+        //val realRecordingFile = CacheFileProvider.provideCacheFile(context, recordingFile)
+        val realRecordingFile = File(CacheFileProvider.getExternalCacheDirectory(context), recordingFile)
+        //val realRecordingFile = "${getExternalFilesDir(Environment.DIRECTORY_MUSIC)}/whatsapp_call_${System.currentTimeMillis()}.m4a"
         val realAudioSource = if (App.hasCaptureAudioOutputPermission()) {
             Log.d(TAG, "startRecording() -> hasCaptureAudioOutputPermission() is true. Changing audioSource to MediaRecorder.AudioSource.VOICE_CALL")
             MediaRecorder.AudioSource.VOICE_CALL
