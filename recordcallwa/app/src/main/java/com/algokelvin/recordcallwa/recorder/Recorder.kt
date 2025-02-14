@@ -1,7 +1,6 @@
 package com.algokelvin.recordcallwa.recorder
 
 import android.content.Context
-import com.nll.helper.server.ServerRecordingState
 
 interface Recorder {
     /**

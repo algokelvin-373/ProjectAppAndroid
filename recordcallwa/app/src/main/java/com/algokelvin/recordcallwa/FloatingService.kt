@@ -23,6 +23,7 @@ import com.algokelvin.recordcallwa.recorder.AndroidMediaAudioRecorder
 import com.algokelvin.recordcallwa.recorder.App
 import com.algokelvin.recordcallwa.recorder.CacheFileProvider
 import com.algokelvin.recordcallwa.recorder.Encoder
+import com.algokelvin.recordcallwa.recorder.IRemoteServiceListener
 import com.algokelvin.recordcallwa.recorder.Recorder
 import com.algokelvin.recordcallwa.recorder.RecorderConfig
 import com.algokelvin.recordcallwa.recorder.ServerRecorderListener
@@ -34,6 +35,24 @@ class FloatingService : Service() {
     private lateinit var floatingView: View
     private var recorder: Recorder? = null
     //private var isRecording = false
+
+    private val listeners = mutableListOf<IRemoteServiceListener>()
+    private var serverRecordingState: ServerRecordingState = ServerRecordingState.Stopped
+    private val serverRecorderListener = object : ServerRecorderListener {
+        override fun onRecordingStateChange(newState: ServerRecordingState) {
+            Log.i(TAG, "onRecordingStateChange() -> newState: $newState")
+
+            serverRecordingState = newState
+            listeners.forEach { listener ->
+                try {
+                    Log.i(TAG, "onRecordingStateChange() -> listener: $listener")
+                    listener.onRecordingStateChange(newState.asResponseCode())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -89,6 +108,19 @@ class FloatingService : Service() {
                     } else {
                         Log.d(TAG, "Recording Started")
                         //startRecording()
+                        startRecordingNew(
+                            context = applicationContext,
+                            encoder = 2,
+                            recordingFile = "wa_${System.currentTimeMillis()}.m4a",
+                            audioChannels = 2,
+                            encodingBitrate = 64000,
+                            audioSamplingRate = 44100,
+                            audioSource = 6,
+                            mediaRecorderAudioEncoder = 2,
+                            mediaRecorderOutputFormat = 3,
+                            recordingGain = 8,
+                            serverRecorderListener = serverRecorderListener
+                        )
                     }
                 }
             } catch (e: Exception) {
