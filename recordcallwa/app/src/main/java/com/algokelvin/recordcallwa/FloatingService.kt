@@ -64,31 +64,63 @@ class FloatingService : Service() {
     }
 
     private fun recordingAndroid14More() {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-                if (audioManager.isMusicActive) {
-                    Log.e(TAG, "Audio sedang digunakan oleh aplikasi lain!")
-                } else {
-                    Log.d(TAG, "Recording Started")
-                    //startRecording()
-                    startRecordingNew(
-                        context = applicationContext,
-                        encoder = 2,
-                        recordingFile = "wa_${System.currentTimeMillis()}.m4a",
-                        audioChannels = 2,
-                        encodingBitrate = 64000,
-                        audioSamplingRate = 44100,
-                        audioSource = 6,
-                        mediaRecorderAudioEncoder = 2,
-                        mediaRecorderOutputFormat = 3,
-                        recordingGain = 8,
-                        serverRecorderListener = serverRecorderListener
-                    )
+        val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        val floatingView = LayoutInflater.from(this).inflate(R.layout.floating_layout, null)
+
+        val params = WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            else
+                WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            PixelFormat.TRANSLUCENT
+        )
+
+        params.gravity = Gravity.TOP or Gravity.START
+        params.x = 100
+        params.y = 100
+
+        windowManager.addView(floatingView, params)
+
+        floatingView.findViewById<View>(R.id.ivCloseFloating).setOnClickListener {
+            windowManager.removeView(floatingView)
+        }
+
+        val icRecorder = floatingView.findViewById<ImageView>(R.id.ivCallIcon)
+        val txtRecorder = floatingView.findViewById<TextView>(R.id.tvFloatingText)
+        icRecorder.setOnClickListener {
+            icRecorder.setImageResource(R.drawable.ic_recorder_on)
+            txtRecorder.text = "Via Call WA Berjalan\nRecord Memproses"
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+                    if (audioManager.isMusicActive) {
+                        Log.e(TAG, "Audio sedang digunakan oleh aplikasi lain!")
+                    } else {
+                        Log.d(TAG, "Recording Started")
+                        //startRecording()
+                        startRecordingNew(
+                            context = applicationContext,
+                            encoder = 2,
+                            recordingFile = "wa_${System.currentTimeMillis()}.m4a",
+                            audioChannels = 2,
+                            encodingBitrate = 64000,
+                            audioSamplingRate = 44100,
+                            audioSource = 6,
+                            mediaRecorderAudioEncoder = 3,
+                            mediaRecorderOutputFormat = 2,
+                            recordingGain = 8,
+                            serverRecorderListener = serverRecorderListener
+                        )
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error: ${e.message}")
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Error: ${e.message}")
         }
     }
 

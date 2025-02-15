@@ -28,7 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         if (!Settings.canDrawOverlays(this)) {
             Log.i(TAG, "Requesting Overlay Permission")
-            startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+            //startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION))
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")
+            )
+            startActivity(intent)
         }
 
     }
