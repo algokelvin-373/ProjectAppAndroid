@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ShoppingYuk</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="todo">TODO</string>
+    <string name="your_cart">Your Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="your_cart_is_empty">Your Cart is Empty</string>
+    <string name="your_shopping">Your Shopping</string>
+    <string name="total">Total</string>
+    <string name="_100_00">$100.00</string>
+    <string name="confirm">Confirm</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="detail_product">Detail Product</string>
+    <string name="name_product">Name Product</string>
+    <string name="category_product">Category Product</string>
+    <string name="description_product">Description Product</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="name_cart">Name Cart</string>
+    <string name="item_sold">%s Sold</string>
+    <string name="clothes">Clothes</string>
+    <string name="profile_user">Profile User</string>
+    <string name="total_all_price">$ %s</string>
+    <string name="done">Done</string>
+    <string name="items_product">%s Oty</string>
+    <string name="price_product">Price Product</string>
+</resources>
