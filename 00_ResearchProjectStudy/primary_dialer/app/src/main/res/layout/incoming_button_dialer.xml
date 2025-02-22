@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlButton_Dialer"
+    android:translationZ="90dp"
+    android:layout_marginBottom="75dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/floating_answer_call_container"
+        android:layout_width="@dimen/end_call_floating_action_button_diameter_hangup"
+        android:layout_height="@dimen/end_call_floating_action_button_diameter_hangup"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:translationZ="1dp"
+        android:layout_marginBottom="@dimen/end_call_button_margin_bottom_apptoapp"
+        android:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/floating_answer_call"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/onscreenEndCallText"
+            android:scaleType="center"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/floating_out_call_container"
+        android:layout_width="@dimen/end_call_floating_action_button_diameter"
+        android:layout_height="@dimen/end_call_floating_action_button_diameter"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:translationZ="1dp"
+        android:layout_marginBottom="@dimen/end_call_button_margin_bottom_apptoapp"
+        android:visibility="gone"
+        android:background="@drawable/fab_red">
+
+        <ImageButton
+            android:id="@+id/floating_out_call"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/end_call_background"
+            android:contentDescription="@string/onscreenEndCallText"
+            android:scaleType="center"
+            android:src="@drawable/ic_end_call" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/floating_decline_call_container"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:translationZ="1dp"
+        android:layout_toStartOf="@+id/floating_answer_call_container"
+        android:layout_marginBottom="@dimen/end_call_button_margin_bottom_apptoapp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="8dp">
+
+        <ImageButton
+            android:id="@+id/floating_end_call"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/onscreenEndCallText"
+            android:scaleType="center" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/floating_like_call_container"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:translationZ="1dp"
+        android:layout_toEndOf="@+id/floating_answer_call_container"
+        android:layout_marginBottom="@dimen/end_call_button_margin_bottom_apptoapp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="30dp">
+
+        <ImageButton
+            android:id="@+id/imgLikeDialer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/end_call_background"
+            android:contentDescription="@string/onscreenEndCallText"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_floating_love_icon" />
+
+    </FrameLayout>
+
+</RelativeLayout>

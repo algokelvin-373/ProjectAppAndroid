@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="wa">#0d8240</color>
+    <color name="dialer_theme_color">#0288d1</color>
+    <color name="dialer_theme_color_dark">#0277bd</color>
+    <color name="background_dialpad">#fcfcfc</color>
+    <color name="dialpad_primary_text_color">@color/dialer_theme_color</color>
+    <color name="dialpad_secondary_text_color">#737373</color>
+
+    <color name="colorPrimary">#373737</color>
+    <color name="colorPrimaryDark">#282828</color>
+    <color name="colorAccent">#0ac5ed</color>
+
+    <color name="grey_ACACACF">#ACACAC</color>
+    <color name="grey_e4e4e4">#e4e4e4</color>
+    <color name="grey_868686">#868686</color>
+    <color name="grey_cecece">#cecece</color>
+    <color name="green_11b404">#11b404</color>
+    <color name="black_semi_opaque">#C000</color>
+    <color name="blue_logo">#0ac5ed</color>
+    <color name="grey_2">#636363</color>
+    <color name="orange">#FFA64D</color>
+    <color name="orange_reward">#fbab18</color>
+    <color name="abu_abu">#dddddd</color>
+    <color name="green_whatsapp">#00a859</color>
+    <color name="orange_gmail">#f14336</color>
+    <color name="green_line">#55d037</color>
+    <color name="purple_coin">#65499D</color>
+
+    <color name="dialpad_icon_tint">#b3b3b3</color>
+    <color name="dialpad_voicemail_tint">#919191</color>
+
+    <color name="quickcontact_default_photo_tint_color">#607D8B</color>
+    <color name="quickcontact_default_photo_tint_color_dark">#455A64</color>
+
+    <array name="letter_tile_colors">
+        <item>#DB4437</item>
+        <item>#E91E63</item>
+        <item>#9C27B0</item>
+        <item>#673AB7</item>
+        <item>#3F51B5</item>
+        <item>#4285F4</item>
+        <item>#039BE5</item>
+        <item>#0097A7</item>
+        <item>#009688</item>
+        <item>#0F9D58</item>
+        <item>#689F38</item>
+        <item>#EF6C00</item>
+        <item>#FF5722</item>
+        <item>#757575</item>
+    </array>
+
+    <array name="letter_tile_colors_dark">
+        <item>#C53929</item>
+        <item>#C2185B</item>
+        <item>#7B1FA2</item>
+        <item>#512DA8</item>
+        <item>#303F9F</item>
+        <item>#3367D6</item>
+        <item>#0277BD</item>
+        <item>#006064</item>
+        <item>#00796B</item>
+        <item>#0B8043</item>
+        <item>#33691E</item>
+        <item>#E65100</item>
+        <item>#E64A19</item>
+        <item>#424242</item>
+    </array>
+
+    <color name="incall_background_color">@color/dialer_theme_color</color>
+    <color name="incall_accent_color">#ffffff</color>
+    <color name="incall_accent_transparance_color">#40FFFFFF</color>
+    <color name="incall_call_banner_text_color">#ffffff</color>
+    <color name="selectable_icon_tint">@color/white</color>
+    <color name="incall_call_banner_subtext_color">#ccffffff</color>
+    <color name="incall_banner_secondary_background_color">#f5f5f5</color>
+    <color name="incall_banner_secondary_text_color">#333333</color>
+
+    <color name="incall_action_bar_background_color">@color/incall_background_color</color>
+    <color name="incall_action_bar_text_color">@color/incall_call_banner_text_color</color>
+
+    <color name="conference_call_manager_background_color">#f8f8f8</color>
+    <color name="conference_call_manager_caller_name_text_color">#4d4d4d</color>
+    <color name="conference_call_manager_icon_color">#999999</color>
+    <color name="conference_call_manager_secondary_text_color">#999999</color>
+    <color name="secondary_call_info_divider_highlight_color">#ffffff</color>
+
+    <color name="end_call_touch_feedback_tint">#dddddd</color>
+    <color name="dialpad_digits_text_color">#333</color>
+    <color name="incall_dialpad_background">#ffffff</color>
+
+    <color name="statusbar_background_color">@color/dialer_theme_color</color>
+
+    <color name="glowpad_text_widget_ring_color">#ffffff</color>
+    <color name="glowpad_widget_active_color">#ffffff</color>
+    <color name="glowpad_text_widget_normal_tint">#cccccc</color>
+    <color name="glowpad_call_widget_normal_tint">@color/dialtacts_theme_color</color>
+    <color name="glowpad_end_call_widget_normal_tint">#ff1744</color>
+    <color name="glowpad_incoming_widget_tint">#a3a3a3</color>
+    <color name="glowpad_incoming_widget_background_tint">#ffffff</color>
+    <color name="dialtacts_theme_color">#0288d1</color>
+    <color name="incall_dialpad_touch_tint">#330288d1</color>
+
+    <array name="background_colors">
+        <item>#00796B</item>
+        <item>#3367D6</item>
+        <item>#303F9F</item>
+        <item>#7B1FA2</item>
+        <item>#C2185B</item>
+        <item>#C53929</item>
+    </array>
+
+    <array name="background_colors_dark">
+        <item>#00695C</item>
+        <item>#2A56C6</item>
+        <item>#283593</item>
+        <item>#6A1B9A</item>
+        <item>#AD1457</item>
+        <item>#B93221</item>
+    </array>
+
+    <color name="ripple_light">#40000000</color>
+    <color name="image_placeholder">#DDDDDD</color>
+    <color name="letter_tile_default_color">#cccccc</color>
+    <color name="letter_tile_font_color">#ffffff</color>
+
+    //v2
+    //intro
+    <color name="purpleintro">#462E80</color>
+    <color name="color_purple_global">#46317E</color>
+    <color name="color_purple_button">#54408E</color>
+    <color name="color_purple_toolbar">#382664</color>
+    <color name="color_purple_lb_1">#A513B7</color>
+    <color name="color_purple_lb_2">#C44BD3</color>
+    <color name="color_purple_rgb">#B246317E</color>
+    <color name="color_grey_rgb">#E5FFFFFF</color>
+    <color name="orangebutton">#FBB254</color>
+    <color name="color_black_text">#333333</color>
+    <color name="color_green_switch">#50EAA3</color>
+    <color name="color_green_sidebar">#34ED74</color>
+    <color name="color_green_success">#6FCF97</color>
+    <color name="color_grey_selectornav">#CDD2E0</color>
+    <color name="color_grey_bgview">#C7CCD7</color>
+    <color name="color_grey_textswipe">#5C6166</color>
+    <color name="color_grey_indicator">#E5E5E5</color>
+    <color name="color_grey_toolbar">#CDD2DF</color>
+    <color name="color_grey_edittext">#EDEEEF</color>
+    <color name="color_search_edittext">#878E9F</color>
+    <color name="color_orange_nav">#FFB43B</color>
+    <color name="color_orange_bg">#FDB349</color>
+    <color name="color_red_alert">#EB5757</color>
+    <color name="color_red_bg_female">#CF5285</color>
+    <color name="color_rgb_white">#E5FFFFFF</color>
+    <color name="color_rgb_green">#8C6FCF97</color>
+    <color name="color_transparent">#59FFFFFF</color>
+    <color name="color_card_source_menu">#FAFAFA</color>
+    <color name="color_bg_alarm">#E5E3EB</color>
+
+    <color name="grey">#FF424242</color>
+    <color name="transparent">#0000ffff</color>
+    <color name="green">#6FCF97</color>
+    <color name="greyalarm">#8C333333</color>
+    <color name="color_bg_webview">#F5F6F8</color>
+    <color name="colorPlaceholder">#b1b1b1</color>
+</resources>
