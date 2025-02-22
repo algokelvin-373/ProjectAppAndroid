@@ -1,0 +1,27 @@
+package com.algokelvin.primarydialer.mvicall.common;
+
+import android.os.Build.VERSION;
+
+/**
+ * Class used to override the current sdk version to test specific branches of compatibility
+ * logic. When such branching occurs, use {@link #getSdkVersion(int)} rather than explicitly
+ * calling {@link VERSION#SDK_INT}. This allows the sdk version to be forced to a specific value.
+ */
+public class SdkVersionOverride {
+
+    /**
+     * Flag used to determine if override sdk versions are returned.
+     */
+    private static final boolean ALLOW_OVERRIDE_VERSION = false;
+
+    /**
+     * Gets the sdk version
+     *
+     * @param overrideVersion the version to attempt using
+     * @return overrideVersion if the {@link #ALLOW_OVERRIDE_VERSION} flag is set to {@code true},
+     * otherwise the current version
+     */
+    public static int getSdkVersion(int overrideVersion) {
+        return ALLOW_OVERRIDE_VERSION ? overrideVersion : VERSION.SDK_INT;
+    }
+}
