@@ -1,5 +1,7 @@
 ## Count App
 
+Aplikasi Android sederhana untuk menghitung perjumlahan dua angka.
+
 | ![Gambar 1](./documentation/SS_CountApp_01.jpg) | ![Gambar 2](./documentation/SS_CountApp_02.jpg) |
 |:-----------------------------------------------:|:-----------------------------------------------:|
 |       Gambar 1: <br> Vertical Orientation       |      Gambar 2: <br> Horizontal Orientation      |
@@ -9,22 +11,18 @@
 |          Gambar 3: <br> Implementation          |
 
 ## Implementation
-- MVVM Architecture
-- LiveData
-- Data Binding
+- **MVVM Architecture**: Menggunakan Model-View-ViewModel untuk memisahkan logika bisnis dari UI.
+- **Data Binding**: Menggunakan Data Binding untuk mengakses view dengan aman dan mudah.
+- **LiveData**: Menggunakan LiveData untuk mengamati perubahan data dan memperbarui UI secara otomatis.
 
-<table>
-    <tr>
-        <td>Android Gradle Plugins Version</td>
-        <td>Gradle Version</td>
-        <td>Java JDK</td>
-    </tr>
-    <tr>
-        <td>8.5.0</td>
-        <td>8.7</td>
-        <td>17</td>
-    </tr>
-</table>
+## Environment
+- **Android Gradle**: 8.5.0
+- **Plugins Version**: 8.7
+- **Gradle Version**: 8.0
+- **Java JDK**: 17
+- **Kotlin Version**: 1.9.0
+- **Min SDK**: 21
+- **Target SDK**: 34
 
 ## Contributors
 Thanks all contributors for build this repository

@@ -1,5 +1,7 @@
 ## Two Number Operator No DTL (Data Tampilan Logic)
 
+Aplikasi Android sederhana untuk menghitung 2 angka - Tanpa DTL (Data Tampilan Logic)
+
 | ![Gambar 1](./documentation/SS01_TwoNumberOperator.jpg) | ![Gambar 2](./documentation/SS02_TwoNumberOperator.jpg) | ![Gambar 3](./documentation/SS03_TwoNumberOperator.jpg) |
 |:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
 |              Gambar 1: <br> Halaman Utama               |           Gambar 2: <br> Operator Perjumlahan           |           Gambar 3: <br> Operator Pengurangan           |
@@ -8,18 +10,13 @@ This is an implementation Two Number Operator's Project No DTL
 ![Gambar 4](./documentation/SS04_TwoNumberOperator.png)
 
 ## Environment
-<table>
-    <tr>
-        <td>Android Gradle Plugins Version</td>
-        <td>Gradle Version</td>
-        <td>Java JDK</td>
-    </tr>
-    <tr>
-        <td>8.5.0</td>
-        <td>8.7</td>
-        <td>17</td>
-    </tr>
-</table>
+- **Android Gradle**: 8.5.0
+- **Plugins Version**: 8.7
+- **Gradle Version**: 8.0
+- **Java JDK**: 17
+- **Kotlin Version**: 1.9.0
+- **Min SDK**: 21
+- **Target SDK**: 34
 
 ## Contributors
 Thanks all contributors for build this repository
