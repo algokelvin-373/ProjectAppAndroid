@@ -1,6 +1,6 @@
-## Recorder App
+## Share and Rare
 
-Aplikasi Android Sederhana - Recorder
+Aplikasi Android sederhana - Share and Rare
 
 ## Screen Shoot
 | ![Gambar 1]() | ![Gambar 2]() |

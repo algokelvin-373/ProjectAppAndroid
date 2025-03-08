@@ -1,6 +1,6 @@
-## Recorder App
+## Show Dialog
 
-Aplikasi Android Sederhana - Recorder
+Aplikasi Android sederhana untuk menampilkan Dialog
 
 ## Screen Shoot
 | ![Gambar 1]() | ![Gambar 2]() |

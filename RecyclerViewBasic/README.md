@@ -1,6 +1,6 @@
-## Recorder App
+## RecyclerView
 
-Aplikasi Android Sederhana - Recorder
+Aplikasi Android Sederhana - RecyclerView
 
 ## Screen Shoot
 | ![Gambar 1]() | ![Gambar 2]() |
