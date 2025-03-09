@@ -9,18 +9,13 @@
 - View Binding
 
 ## Environment
-<table>
-    <tr>
-        <td>Android Gradle Plugins Version</td>
-        <td>Gradle Version</td>
-        <td>Java JDK</td>
-    </tr>
-    <tr>
-        <td>4.2.0</td>
-        <td>6.7.1</td>
-        <td>1.8</td>
-    </tr>
-</table>
+- **Android Gradle**: 8.5.0
+- **Plugins Version**: 8.7
+- **Gradle Version**: 8.0
+- **Java JDK**: 17
+- **Kotlin Version**: 1.9.0
+- **Min SDK**: 21
+- **Target SDK**: 34
 
 ## Contributors
 Thanks all contributors for build this repository

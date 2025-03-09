@@ -1,13 +1,11 @@
-## Two Number Operator No DTL (Data Tampilan Logic)
+## RecyclerView
 
-Aplikasi Android sederhana untuk menghitung 2 angka - Tanpa DTL (Data Tampilan Logic)
+Aplikasi Android Sederhana - RecyclerView
 
-| ![Gambar 1](./documentation/SS01_TwoNumberOperator.jpg) | ![Gambar 2](./documentation/SS02_TwoNumberOperator.jpg) | ![Gambar 3](./documentation/SS03_TwoNumberOperator.jpg) |
-|:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
-|              Gambar 1: <br> Halaman Utama               |           Gambar 2: <br> Operator Perjumlahan           |           Gambar 3: <br> Operator Pengurangan           |
-
-This is an implementation Two Number Operator's Project No DTL
-![Gambar 4](./documentation/SS04_TwoNumberOperator.png)
+## Screen Shoot
+| ![Gambar 1]() | ![Gambar 2]() |
+|:-------------:|:--------------:|
+|Gambar 1: <br> |Gambar 2: <br> |
 
 ## Environment
 - **Android Gradle**: 8.5.0
