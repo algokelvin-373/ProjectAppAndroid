@@ -1,5 +1,5 @@
 <h1 align="center">Project Application Android</h1>
-<h4 align="center">Version 1.0.4</h3>
+<h4 align="center">Version 1.0.5</h3>
 
 <p align="center">
   <a href="https://github.com/algokelvin-373"><img alt="Github" src="https://img.shields.io/github/followers/algokelvin-373?label=follow&style=social"></a>
@@ -88,6 +88,12 @@
             <td>
                 - Update Documentation <br>
                 - Create project Birthday Card Compose <br>
+            </td>
+        </tr>
+        <tr>
+            <td>1.0.5</td>
+            <td>
+                - Update Documentation Every Project <br>
             </td>
         </tr>
     </tbody>
