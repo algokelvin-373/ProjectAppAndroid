@@ -1,26 +1,21 @@
 ## View Binding (Java Code)
 
+Aplikasi Android - Memahami Konsep View Binding
+
 | ![Gambar 1](./documentation/Video_ViewBindingName.gif) |
 |:------------------------------------------------------:|
 |              Gambar 1: <br> Add Data Name              |
 
 ## Implementation
-- View Binding
-- Java Code
+- **View Binding**: Menggunakan View Binding untuk mengakses view dengan aman dan mudah.
 
 ## Environment
-<table>
-    <tr>
-        <td>Android Gradle Plugins Version</td>
-        <td>Gradle Version</td>
-        <td>Java JDK</td>
-    </tr>
-    <tr>
-        <td>7.3.3</td>
-        <td>7.2.2</td>
-        <td>17</td>
-    </tr>
-</table>
+- **Android Gradle**: 8.5.0
+- **Plugins Version**: 8.7
+- **Gradle Version**: 8.0
+- **Java JDK**: 17
+- **Min SDK**: 21
+- **Target SDK**: 34
 
 ## Contributors
 Thanks all contributors for build this repository
