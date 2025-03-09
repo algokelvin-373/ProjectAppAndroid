@@ -1,26 +1,26 @@
 ## Rectangle App
 
+Aplikasi Android sederhana untuk menghitung luas dan keliling persegi panjang.
+
+## Screen Shoot
 | ![Gambar 1](./documentation/SS01_RectangleApp.jpg) | ![Gambar 2](./documentation/SS02_RectangleApp.jpg) |
 |:--------------------------------------------------:|:--------------------------------------------------:|
 |            Gambar 1: <br> Rectangle App            |        Gambar 2: <br> Get Result Calculate         |
 
 ## Implementation
-- MVVM Architecture
-- View Binding
+- **MVVM Architecture**: Menggunakan Model-View-ViewModel untuk memisahkan logika bisnis dari UI.
+- **View Binding**: Menggunakan View Binding untuk mengakses view dengan aman dan mudah.
+- **LiveData**: Menggunakan LiveData untuk mengamati perubahan data dan memperbarui UI secara otomatis.
+- **Kotlin Coroutines**: Menggunakan coroutines untuk menangani operasi asinkron seperti panggilan jaringan atau database.
 
 ## Environment
-<table>
-    <tr>
-        <td>Android Gradle Plugins Version</td>
-        <td>Gradle Version</td>
-        <td>Java JDK</td>
-    </tr>
-    <tr>
-        <td>8.5.0</td>
-        <td>8.7</td>
-        <td>17</td>
-    </tr>
-</table>
+- **Android Gradle**: 8.5.0
+- **Plugins Version**: 8.7
+- **Gradle Version**: 8.0
+- **Java JDK**: 17
+- **Kotlin Version**: 1.9.0
+- **Min SDK**: 21
+- **Target SDK**: 34
 
 ## Contributors
 Thanks all contributors for build this repository

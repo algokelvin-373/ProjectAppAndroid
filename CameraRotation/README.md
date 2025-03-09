@@ -1,13 +1,11 @@
-## Two Number Operator No DTL (Data Tampilan Logic)
+## Camera Rotation
 
-Aplikasi Android sederhana untuk menghitung 2 angka - Tanpa DTL (Data Tampilan Logic)
+| ![Gambar 1](./documentation/SS_Animation_01.gif) |
+|:------------------------------------------------:|
+|         Gambar 1: <br> Card Birthday             |
 
-| ![Gambar 1](./documentation/SS01_TwoNumberOperator.jpg) | ![Gambar 2](./documentation/SS02_TwoNumberOperator.jpg) | ![Gambar 3](./documentation/SS03_TwoNumberOperator.jpg) |
-|:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
-|              Gambar 1: <br> Halaman Utama               |           Gambar 2: <br> Operator Perjumlahan           |           Gambar 3: <br> Operator Pengurangan           |
-
-This is an implementation Two Number Operator's Project No DTL
-![Gambar 4](./documentation/SS04_TwoNumberOperator.png)
+## Implementation
+- ???
 
 ## Environment
 - **Android Gradle**: 8.5.0
