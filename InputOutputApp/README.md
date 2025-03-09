@@ -1,11 +1,11 @@
-## Birthday Card Compose
+## Input Output
 
-| ![Gambar 1](./documentation/SS_Animation_01.gif) |
-|:------------------------------------------------:|
-|         Gambar 1: <br> Card Birthday             |
+Aplikasi Android Sederhana - Input Output
 
-## Implementation
-- Jetpack Compose Android
+## Screen Shoot
+| ![Gambar 1]() | ![Gambar 2]() |
+|:-------------:|:--------------:|
+|Gambar 1: <br> |Gambar 2: <br> |
 
 ## Environment
 - **Android Gradle**: 8.5.0
