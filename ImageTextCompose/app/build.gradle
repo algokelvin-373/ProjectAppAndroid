@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.algokelvin.imagetext'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.algokelvin.imagetext"
         minSdk 24
-        targetSdk 34
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
@@ -35,6 +35,7 @@ android {
     }
     buildFeatures {
         compose true
+        viewBinding true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.1'
@@ -47,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime.ktx
     implementation libs.androidx.activity.compose
