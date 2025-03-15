@@ -1,6 +1,8 @@
 package com.algokelvin.ui.compose
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,12 +14,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -65,9 +69,19 @@ fun ImageIcon(id: Int) {
     )
 }
 
+@Composable
+fun ButtonAction(context: Context) {
+    Button(onClick = {
+        Toast.makeText(context, "Toast Jetpack Compose", Toast.LENGTH_SHORT).show()
+    }) {
+        Text(text = "Click Me")
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun UiComposeLayout() {
+    val mContext = LocalContext.current
     UiComposeTheme {
         Column(
             modifier = Modifier
@@ -81,6 +95,8 @@ fun UiComposeLayout() {
             SubTitleText("My Logo is Jetpack Compose")
             Box(modifier = Modifier.height(2.dp))
             ImageIcon(R.drawable.ic_compose)
+            Box(modifier = Modifier.height(2.dp))
+            ButtonAction(mContext)
         }
     }
 }
