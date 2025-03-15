@@ -72,7 +72,10 @@ fun ImageIcon(id: Int) {
 @Composable
 fun ButtonAction(context: Context) {
     Button(onClick = {
-        Toast.makeText(context, "Toast Jetpack Compose", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,
+            "Toast Jetpack Compose",
+            Toast.LENGTH_SHORT
+        ).show()
     }) {
         Text(text = "Click Me")
     }
