@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Timer</string>
+    <string name="time_out">Time Out</string>
+</resources>
