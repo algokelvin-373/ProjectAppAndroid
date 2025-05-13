@@ -1,0 +1,76 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="abc_action_button_min_width_material">48dp</dimen>
+    <dimen name="abc_action_button_min_width_overflow_material">36dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="dialpad_key_numbers_size">@dimen/dialpad_key_numbers_default_size</dimen>
+    <dimen name="dialpad_key_numbers_default_size">36sp</dimen>
+    <dimen name="dialpad_key_letters_size">12sp</dimen>
+    <dimen name="dialpad_key_pound_size">23sp</dimen>
+    <dimen name="dialpad_key_star_size">36sp</dimen>
+    <dimen name="dialpad_key_height">64dp</dimen>
+    <dimen name="dialpad_key_number_margin_bottom">@dimen/dialpad_key_number_default_margin_bottom</dimen>
+    <dimen name="dialpad_key_number_default_margin_bottom">3dp</dimen>
+    <dimen name="dialpad_zero_key_number_margin_bottom">@dimen/dialpad_zero_key_number_default_margin_bottom</dimen>
+    <dimen name="dialpad_zero_key_number_default_margin_bottom">1dp</dimen>
+    <dimen name="dialpad_symbol_margin_bottom">13dp</dimen>
+    <dimen name="dialpad_digits_text_size">34sp</dimen>
+    <dimen name="dialpad_digits_text_min_size">24sp</dimen>
+    <dimen name="dialpad_digits_height">60dp</dimen>
+    <dimen name="dialpad_digits_adjustable_text_size">@dimen/dialpad_digits_text_size</dimen>
+    <dimen name="dialpad_digits_adjustable_height">@dimen/dialpad_digits_height</dimen>
+    <dimen name="dialpad_digits_padding">16dp</dimen>
+    <dimen name="dialpad_digits_menu_left_padding">8dp</dimen>
+    <dimen name="dialpad_digits_menu_right_padding">10dp</dimen>
+    <dimen name="dialpad_voicemail_icon_padding_top">2dp</dimen>
+    <dimen name="dialpad_key_button_translate_y">100dp</dimen>
+    <dimen name="dialpad_overflow_margin">8dp</dimen>
+    <dimen name="dialpad_space_above_keys">14dp</dimen>
+    <dimen name="dialpad_space_below_keys">8dp</dimen>
+    <dimen name="floating_action_button_width">56dp</dimen>
+    <dimen name="floating_action_button_translation_z">8dp</dimen>
+    <dimen name="floating_action_button_list_bottom_padding">88dp</dimen>
+    <dimen name="floating_action_button_margin_right">16dp</dimen>
+
+    <dimen name="in_call_button_dimension">48dp</dimen>
+    <dimen name="call_button_margin_vertical">8dp</dimen>
+    <dimen name="call_button_margin_horizontal">6dp</dimen>
+
+    <dimen name="ild_margin_height">10dp</dimen>
+    <bool name="is_layout_landscape">false</bool>
+    <dimen name="call_banner_height">90dp</dimen>
+    <dimen name="incall_action_bar_elevation">3dp</dimen>
+    <dimen name="call_banner_side_padding">48dp</dimen>
+    <dimen name="call_banner_primary_call_container_top_padding">48dp</dimen>
+    <dimen name="secondary_call_info_horizontal_padding">24dp</dimen>
+    <dimen name="secondary_call_info_vertical_padding">32dp</dimen>
+    <dimen name="secondary_call_info_text_size">16sp</dimen>
+    <dimen name="call_status_text_size">16sp</dimen>
+    <dimen name="call_status_text_min_size">12sp</dimen>
+    <dimen name="call_name_text_size">16sp</dimen>
+    <dimen name="call_name_text_min_size">28sp</dimen>
+    <dimen name="call_label_text_size">16sp</dimen>
+    <dimen name="dialpad_elevation">2dp</dimen>
+    <dimen name="floating_action_button_vertical_offset">-24dp</dimen>
+    <dimen name="notification_icon_size">64dp</dimen>
+    <dimen name="incoming_call_widget_circle_size">56dp</dimen>
+    <dimen name="end_call_button_margin_bottom">15dp</dimen>
+    <dimen name="end_call_button_margin_bottom_apptoapp">25dp</dimen>
+    <dimen name="call_card_anim_translate_y_offset">50dp</dimen>
+    <dimen name="video_preview_small_dimension">90dp</dimen>
+    <dimen name="video_preview_margin">20dp</dimen>
+    <dimen name="end_call_floating_action_button_diameter">72dp</dimen>
+    <dimen name="end_call_floating_action_button_diameter_hangup">82dp</dimen>
+    <dimen name="end_call_floating_action_button_small_diameter">56dp</dimen>
+    <dimen name="conference_call_manager_padding_top">64dp</dimen>
+    <dimen name="conference_call_manager_button_dimension">46dp</dimen>
+    <dimen name="contact_browser_list_item_photo_size">40dp</dimen>
+    <item name="letter_to_tile_ratio" type="dimen">67%</item>
+    <dimen name="frequently_contacted_title_top_margin_when_first_row">16dp</dimen>
+    <dimen name="frequently_contacted_title_top_margin">57dp</dimen>
+    <dimen name="design_navigation_icon_padding" tools:override="true">10dp</dimen>
+</resources>

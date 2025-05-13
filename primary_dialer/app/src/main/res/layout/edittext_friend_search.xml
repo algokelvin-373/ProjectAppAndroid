@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/et_search_main"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_marginTop="24dp"
+    android:hint="Ketik nama temanmu"
+    android:textColorHint="@color/color_search_edittext"
+    android:inputType="text"
+    android:imeOptions="actionSearch"
+    android:maxLines="1"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:textSize="17sp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" />

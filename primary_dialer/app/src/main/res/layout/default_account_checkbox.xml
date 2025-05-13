@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+    <CheckBox
+        android:id="@+id/default_account_checkbox_view"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dip"
+        android:layout_marginLeft="13dip"
+        android:layout_marginBottom="20dip"
+        android:gravity="center"
+        android:textAlignment="viewStart"
+        android:text="Always use this for calls"
+        android:textColor="@color/grey_ACACACF"
+        tools:ignore="RtlCompat" />
+</LinearLayout>
