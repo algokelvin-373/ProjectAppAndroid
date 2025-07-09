@@ -43,12 +43,15 @@ public class TimerService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "Service started");
 
+        createNotificationChannel();
+
         if (!isRunning) {
             startTimeMillis = System.currentTimeMillis();
             isRunning = true;
             runnable = new Runnable() {
                 @Override
                 public void run() {
+                    Log.d(TAG, "Runnable running...");
                     updateNotification();
                     handler.postDelayed(this, 500); // Update setiap 0.5 detik
                 }
@@ -56,37 +59,38 @@ public class TimerService extends Service {
             handler.post(runnable);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            // Gunakan FOREGROUND_SERVICE_TYPE_TIMER untuk SDK 34+
-            startForeground(NOTIFICATION_ID, getNotification("00:00:00"), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Untuk SDK 26 - 33
-            startForeground(NOTIFICATION_ID, getNotification("00:00:00"));
+        // Start foreground
+        Notification notification = getNotification("00:00:00");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForeground(NOTIFICATION_ID, notification);
         } else {
-            // Untuk versi lebih rendah
-            startForeground(NOTIFICATION_ID, getNotification("00:00:00"));
+            startForeground(NOTIFICATION_ID, notification);
         }
 
         return START_STICKY;
     }
 
     private void updateNotification() {
+        Log.d(TAG, "Updating notification...");
         long elapsed = System.currentTimeMillis() - startTimeMillis;
         String time = formatTime(elapsed);
-
-        notificationManager.notify(NOTIFICATION_ID, getNotification(time));
+        Log.d(TAG, "Elapsed: " + elapsed + " ms -> Time: " + time);
+        Notification notification = getNotification(time);
+        notificationManager.notify(NOTIFICATION_ID, notification);
     }
 
     private Notification getNotification(String timeText) {
         Intent notificationIntent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         return new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Timer Berjalan")
                 .setContentText("Waktu: " + timeText)
-                .setSmallIcon(R.drawable.ic_run_history)
+                .setSmallIcon(R.drawable.ic_run_history) // Pastikan ikon valid
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(false)
+                .setOngoing(true)
                 .build();
     }
 
@@ -102,7 +106,7 @@ public class TimerService extends Service {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
                     "Timer Foreground",
-                    NotificationManager.IMPORTANCE_LOW
+                    NotificationManager.IMPORTANCE_DEFAULT // 👈 Diubah dari LOW
             );
             notificationManager.createNotificationChannel(channel);
         }
