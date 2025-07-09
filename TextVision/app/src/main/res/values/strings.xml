@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TextVision</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="extract_text">Extract Text</string>
+</resources>
