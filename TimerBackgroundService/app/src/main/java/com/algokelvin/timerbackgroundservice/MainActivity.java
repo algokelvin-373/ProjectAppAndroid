@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "TimerServices";
 
     private TextView tvTimer;
     private Button btnGo;

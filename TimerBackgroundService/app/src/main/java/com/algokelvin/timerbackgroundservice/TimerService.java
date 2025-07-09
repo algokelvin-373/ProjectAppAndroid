@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -45,7 +46,6 @@ public class TimerService extends Service {
         if (!isRunning) {
             startTimeMillis = System.currentTimeMillis();
             isRunning = true;
-
             runnable = new Runnable() {
                 @Override
                 public void run() {
@@ -56,7 +56,16 @@ public class TimerService extends Service {
             handler.post(runnable);
         }
 
-        startForeground(NOTIFICATION_ID, getNotification("00:00:00"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            // Gunakan FOREGROUND_SERVICE_TYPE_TIMER untuk SDK 34+
+            startForeground(NOTIFICATION_ID, getNotification("00:00:00"), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Untuk SDK 26 - 33
+            startForeground(NOTIFICATION_ID, getNotification("00:00:00"));
+        } else {
+            // Untuk versi lebih rendah
+            startForeground(NOTIFICATION_ID, getNotification("00:00:00"));
+        }
 
         return START_STICKY;
     }
