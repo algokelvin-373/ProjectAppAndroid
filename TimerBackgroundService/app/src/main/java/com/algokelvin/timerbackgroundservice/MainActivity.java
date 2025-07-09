@@ -2,7 +2,10 @@ package com.algokelvin.timerbackgroundservice;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class MainActivity extends Activity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -20,6 +24,16 @@ public class MainActivity extends Activity {
 
     private TextView tvTimer;
     private Button btnGo;
+
+    private BroadcastReceiver timerUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String time = intent.getStringExtra("time");
+            if (time != null && tvTimer != null) {
+                tvTimer.setText(time);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +49,9 @@ public class MainActivity extends Activity {
                 startTimerService();
             }
         });
+
+        LocalBroadcastManager.getInstance(this)
+                .registerReceiver(timerUpdateReceiver, new IntentFilter("TIMER_UPDATE"));
 
         Log.d(TAG, "MainActivity onCreate");
     }
@@ -64,5 +81,6 @@ public class MainActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "MainActivity onDestroy");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(timerUpdateReceiver);
     }
 }

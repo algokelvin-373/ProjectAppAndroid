@@ -14,6 +14,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class TimerService extends Service {
 
@@ -77,6 +78,10 @@ public class TimerService extends Service {
         Log.d(TAG, "Elapsed: " + elapsed + " ms -> Time: " + time);
         Notification notification = getNotification(time);
         notificationManager.notify(NOTIFICATION_ID, notification);
+
+        Intent broadcastIntent = new Intent("TIMER_UPDATE");
+        broadcastIntent.putExtra("time", time);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
     }
 
     private Notification getNotification(String timeText) {
