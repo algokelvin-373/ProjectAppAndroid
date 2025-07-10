@@ -11,12 +11,9 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -29,26 +26,25 @@ public class MainActivity extends Activity {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 2;
     private static final String TAG = "TimerServices";
-
-    private long serviceStartTime = 0L;
+    private static final String PREFS_NAME = "timer_prefs";
+    private static final String KEY_START_TIME = "service_start_time";
 
     private TextView tvTimer;
     private Button btnGo;
+    private long serviceStartTime = 0L;
 
     private BroadcastReceiver timerUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String time = intent.getStringExtra("time");
             serviceStartTime = intent.getLongExtra("startTimeMillis", 0);
-
-            if (serviceStartTime != 0) {
-                long currentElapsedTime = System.currentTimeMillis() - serviceStartTime;
-                String updatedTime = formatTime(currentElapsedTime);
-                if (tvTimer != null) {
-                    tvTimer.setText(updatedTime);
+            if (tvTimer != null) {
+                if (serviceStartTime != 0) {
+                    long currentElapsedTime = System.currentTimeMillis() - serviceStartTime;
+                    tvTimer.setText(formatTime(currentElapsedTime));
+                } else if (time != null) {
+                    tvTimer.setText(time);
                 }
-            } else if (time != null && tvTimer != null) {
-                tvTimer.setText(time);
             }
         }
     };
@@ -57,34 +53,24 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         tvTimer = findViewById(R.id.tv_timer);
         btnGo = findViewById(R.id.btn_go);
 
-        btnGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startTimerService();
-            }
-        });
+        btnGo.setOnClickListener(v -> startTimerService());
 
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(timerUpdateReceiver, new IntentFilter("TIMER_UPDATE"));
-
-        Log.d(TAG, "MainActivity onCreate");
     }
 
     private void startTimerService() {
         List<String> permissionsToRequest = new ArrayList<>();
 
-        // Check Access Fine Location
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                         != PackageManager.PERMISSION_GRANTED) {
             permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
 
-        // Check Post Notification for Android 13+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -92,8 +78,9 @@ public class MainActivity extends Activity {
         }
 
         if (!permissionsToRequest.isEmpty()) {
-            String[] permissionsArray = permissionsToRequest.toArray(new String[0]);
-            ActivityCompat.requestPermissions(this, permissionsArray, LOCATION_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this,
+                    permissionsToRequest.toArray(new String[0]),
+                    LOCATION_PERMISSION_REQUEST_CODE);
         } else {
             Intent serviceIntent = new Intent(MainActivity.this, TimerService.class);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -103,15 +90,8 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "MainActivity onResume");
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "MainActivity onDestroy");
         LocalBroadcastManager.getInstance(this).unregisterReceiver(timerUpdateReceiver);
     }
 
@@ -126,7 +106,6 @@ public class MainActivity extends Activity {
                     break;
                 }
             }
-
             if (allGranted) {
                 Intent serviceIntent = new Intent(MainActivity.this, TimerService.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
