@@ -1,5 +1,7 @@
 package com.algokelvin.timerbackgroundservice;
 
+import static com.algokelvin.timerbackgroundservice.Utils.formatTime;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -28,6 +30,8 @@ public class MainActivity extends Activity {
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 2;
     private static final String TAG = "TimerServices";
 
+    private long serviceStartTime = 0L;
+
     private TextView tvTimer;
     private Button btnGo;
 
@@ -35,7 +39,15 @@ public class MainActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String time = intent.getStringExtra("time");
-            if (time != null && tvTimer != null) {
+            serviceStartTime = intent.getLongExtra("startTimeMillis", 0);
+
+            if (serviceStartTime != 0) {
+                long currentElapsedTime = System.currentTimeMillis() - serviceStartTime;
+                String updatedTime = formatTime(currentElapsedTime);
+                if (tvTimer != null) {
+                    tvTimer.setText(updatedTime);
+                }
+            } else if (time != null && tvTimer != null) {
                 tvTimer.setText(time);
             }
         }

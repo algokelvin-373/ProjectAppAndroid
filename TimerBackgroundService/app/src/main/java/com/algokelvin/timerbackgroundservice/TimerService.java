@@ -1,15 +1,17 @@
 package com.algokelvin.timerbackgroundservice;
 
+import static com.algokelvin.timerbackgroundservice.Utils.formatTime;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -25,9 +27,8 @@ public class TimerService extends Service {
     private long startTimeMillis = 0L;
     private boolean isRunning = false;
 
-    private Handler handler = new Handler();
+    private Handler handler;
     private Runnable runnable;
-
     private NotificationManager notificationManager;
 
     public TimerService() {}
@@ -38,14 +39,16 @@ public class TimerService extends Service {
         Log.d(TAG, "Service created");
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         createNotificationChannel();
+        handler = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d(TAG, "Service started");
 
-        createNotificationChannel();
+        //createNotificationChannel();
 
+        Log.d(TAG, "isRunning: "+ !isRunning);
         if (!isRunning) {
             startTimeMillis = System.currentTimeMillis();
             isRunning = true;
@@ -72,15 +75,17 @@ public class TimerService extends Service {
     }
 
     private void updateNotification() {
-        Log.d(TAG, "Updating notification...");
         long elapsed = System.currentTimeMillis() - startTimeMillis;
         String time = formatTime(elapsed);
+        Log.d(TAG, "Updating notification...");
         Log.d(TAG, "Elapsed: " + elapsed + " ms -> Time: " + time);
+
         Notification notification = getNotification(time);
         notificationManager.notify(NOTIFICATION_ID, notification);
 
         Intent broadcastIntent = new Intent("TIMER_UPDATE");
         broadcastIntent.putExtra("time", time);
+        broadcastIntent.putExtra("startTimeMillis", startTimeMillis);
         LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
     }
 
@@ -92,18 +97,11 @@ public class TimerService extends Service {
         return new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Timer Berjalan")
                 .setContentText("Waktu: " + timeText)
-                .setSmallIcon(R.drawable.ic_run_history) // Pastikan ikon valid
+                .setSmallIcon(R.drawable.ic_run_history)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .build();
-    }
-
-    private String formatTime(long millis) {
-        int hours = (int) (millis / 1000 / 3600);
-        int minutes = (int) ((millis / 1000) / 60) % 60;
-        int seconds = (int) (millis / 1000) % 60;
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
     private void createNotificationChannel() {
@@ -111,7 +109,7 @@ public class TimerService extends Service {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
                     "Timer Foreground",
-                    NotificationManager.IMPORTANCE_DEFAULT // 👈 Diubah dari LOW
+                    NotificationManager.IMPORTANCE_DEFAULT
             );
             notificationManager.createNotificationChannel(channel);
         }
@@ -121,7 +119,9 @@ public class TimerService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "Service destroyed");
-        handler.removeCallbacks(runnable);
+        if (handler != null && runnable != null) {
+            handler.removeCallbacks(runnable);
+        }
         isRunning = false;
     }
 
