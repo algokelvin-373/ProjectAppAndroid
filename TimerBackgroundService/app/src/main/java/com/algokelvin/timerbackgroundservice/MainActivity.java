@@ -18,6 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.work.Constraints;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
+import com.algokelvin.timerbackgroundservice.workmanager.TimerWorker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,21 +39,7 @@ public class MainActivity extends Activity {
     private Button btnGo;
     private long serviceStartTime = 0L;
 
-    private BroadcastReceiver timerUpdateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String time = intent.getStringExtra("time");
-            serviceStartTime = intent.getLongExtra("startTimeMillis", 0);
-            if (tvTimer != null) {
-                if (serviceStartTime != 0) {
-                    long currentElapsedTime = System.currentTimeMillis() - serviceStartTime;
-                    tvTimer.setText(formatTime(currentElapsedTime));
-                } else if (time != null) {
-                    tvTimer.setText(time);
-                }
-            }
-        }
-    };
+    private BroadcastReceiver timerUpdateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +48,29 @@ public class MainActivity extends Activity {
         tvTimer = findViewById(R.id.tv_timer);
         btnGo = findViewById(R.id.btn_go);
 
-        btnGo.setOnClickListener(v -> startTimerService());
+        timerUpdateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String time = intent.getStringExtra("time");
+                serviceStartTime = intent.getLongExtra("startTimeMillis", 0);
+                if (tvTimer != null) {
+                    if (serviceStartTime != 0) {
+                        long currentElapsedTime = System.currentTimeMillis() - serviceStartTime;
+                        tvTimer.setText(formatTime(currentElapsedTime));
+                    } else if (time != null) {
+                        tvTimer.setText(time);
+                    }
+                }
+            }
+        };
 
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(timerUpdateReceiver, new IntentFilter("TIMER_UPDATE"));
+
+        btnGo.setOnClickListener(v -> startTimerWithWorkManager());
     }
 
-    private void startTimerService() {
+    private void startTimerWithWorkManager() {
         List<String> permissionsToRequest = new ArrayList<>();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
@@ -82,11 +90,22 @@ public class MainActivity extends Activity {
                     permissionsToRequest.toArray(new String[0]),
                     LOCATION_PERMISSION_REQUEST_CODE);
         } else {
-            Intent serviceIntent = new Intent(MainActivity.this, TimerService.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(serviceIntent);
-            }
+            scheduleTimerWorker();
         }
+    }
+
+    private void scheduleTimerWorker() {
+        Constraints constraints = new Constraints.Builder()
+                //.setRequiresBatteryNotLow(true)   // Opsional
+                //.setRequiresCharging(true)         // Opsional
+                .build();
+
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(TimerWorker.class)
+                .setInitialDelay(0, java.util.concurrent.TimeUnit.MILLISECONDS)
+                .build();
+
+        WorkManager.getInstance(this)
+                .enqueueUniqueWork("timerWorker", ExistingWorkPolicy.REPLACE, workRequest);
     }
 
     @Override
