@@ -9,9 +9,11 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -105,5 +107,35 @@ public class UriUtils {
         }
 
         return size;
+    }
+
+    public static void saveVideoToMoviesFolder(Context context, Uri sourceUri) {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Video.Media.DISPLAY_NAME, "processed_video_" + System.currentTimeMillis() + ".mp4");
+        values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
+        values.put(MediaStore.Video.Media.RELATIVE_PATH, "Movies/VideoProcessing");
+
+        Uri outputUri = context.getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values);
+
+        if (outputUri != null) {
+            try (InputStream inputStream = context.getContentResolver().openInputStream(sourceUri);
+                 OutputStream outputStream = context.getContentResolver().openOutputStream(outputUri)) {
+
+                if (inputStream == null || outputStream == null) {
+                    return;
+                }
+
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("SaveVideo", "Gagal menyalin video", e);
+            }
+        } else {
+            Log.e("SaveVideo", "Gagal membuat URI tujuan");
+        }
     }
 }

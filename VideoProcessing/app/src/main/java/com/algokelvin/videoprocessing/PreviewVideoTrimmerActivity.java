@@ -93,12 +93,13 @@ public class PreviewVideoTrimmerActivity extends AppCompatActivity {
                 /* context */ this,
                 /* input   */ uri,
                 /* height  */ 720,
-                /* bitrate */ 1_000_000,
+                /* bitrate */ 2_000_000,
                 /* cb      */ new VideoProcessingUtils.VideoCompressListener() {
                     @Override
                     public void onSuccess(Uri outputUri) {
                         long fileSize = UriUtils.getFileSize(PreviewVideoTrimmerActivity.this, outputUri);
                         Log.i("VideoCompress", String.valueOf(fileSize));
+                        UriUtils.saveVideoToMoviesFolder(PreviewVideoTrimmerActivity.this, outputUri);
                     }
 
                     @Override
