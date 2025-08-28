@@ -39,7 +39,7 @@
         android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_trim_video"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -107,5 +107,14 @@
                 app:haloColor="@android:color/white" />
         </FrameLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_trim_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/trim_video"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

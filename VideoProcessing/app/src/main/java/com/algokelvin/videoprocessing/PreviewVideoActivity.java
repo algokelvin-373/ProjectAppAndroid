@@ -1,6 +1,7 @@
 package com.algokelvin.videoprocessing;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
@@ -12,7 +13,9 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.media3.common.util.UnstableApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +35,7 @@ public class PreviewVideoActivity extends AppCompatActivity {
 
     private ExoPlayer player;
     private Uri uri;
+    private VideoProcessingUtils videoProcessing;
     private long durationMs = 0L;
     private long selStartMs = 0L;
     private long selEndMs = 0L;
@@ -85,10 +89,12 @@ public class PreviewVideoActivity extends AppCompatActivity {
         binding.rangeSlider.setTickInactiveTintList(android.content.res.ColorStateList.valueOf(android.graphics.Color.TRANSPARENT));
         binding.rangeSlider.setTickActiveTintList(android.content.res.ColorStateList.valueOf(android.graphics.Color.TRANSPARENT));
 
+        videoProcessing = new VideoProcessingUtils();
         uri = Uri.parse(getIntent().getStringExtra(VIDEO_URI));
         binding.btnPlayCenter.setImageResource(R.drawable.ic_video_play);
         binding.btnPlayCenter.setEnabled(false);
         binding.btnPlayCenter.setOnClickListener( v -> togglePlay());
+        binding.btnTrimVideo.setOnClickListener(v -> trimmerVideo());
         playVideo();
         onSelectionOverlay();
         setDurationSlideThumbnails();
@@ -308,6 +314,34 @@ public class PreviewVideoActivity extends AppCompatActivity {
                 } catch (Exception ignored) {}
             }
         });
+    }
+
+    private void trimmerVideo() {
+        videoProcessing.trim(
+                this,
+                uri,
+                selStartMs,
+                selEndMs,
+                new VideoProcessingUtils.VideoTrimListener() {
+                    @Override
+                    public void onCompleted(String outputPath) {
+                        runOnUiThread(() -> {
+                            previewResultVideoTrim(outputPath);
+                        });
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                    }
+                }
+        );
+    }
+
+    @OptIn(markerClass = UnstableApi.class)
+    private void previewResultVideoTrim(String outputPath) {
+        Intent toPostVideoPage = new Intent(this, PreviewVideoActivity.class);
+        toPostVideoPage.putExtra(VIDEO_URI, outputPath);
+        startActivity(toPostVideoPage);
     }
 
     private List<Bitmap> extractThumbnails(MediaMetadataRetriever retriever, long durationMs, int count) {
