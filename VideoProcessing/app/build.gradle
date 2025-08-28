@@ -36,4 +36,8 @@ dependencies {
     implementation libs.material
     implementation libs.activity
     implementation libs.constraintlayout
+
+    // ExoPlayer for native video preview
+    implementation(libs.com.google.android.exoplayer.exoplayer)
+    implementation(libs.exoplayer.ui)
 }
