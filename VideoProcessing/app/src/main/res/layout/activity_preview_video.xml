@@ -19,6 +19,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:use_controller="false" />
 
+    <ImageButton
+        android:id="@+id/btnPlayCenter"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_video_pause"
+        app:layout_constraintBottom_toBottomOf="@+id/playerView"
+        app:layout_constraintEnd_toEndOf="@+id/playerView"
+        app:layout_constraintStart_toStartOf="@+id/playerView"
+        app:layout_constraintTop_toTopOf="@+id/playerView"
+        app:tint="#FFFFFF" />
+
     <!-- STRIP THUMBNAIL + RANGE -->
     <LinearLayout
         android:id="@+id/timelineSectionLayout"
@@ -70,11 +83,11 @@
                 android:scrollbars="none" />
 
             <!-- overlay box white -->
-<!--            <com.sbimv.mvicalls.ui.SelectionOverlayView-->
-<!--                android:id="@+id/selectionOverlay"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:clickable="false"/>-->
+            <com.algokelvin.videoprocessing.ui.SelectionOverlayView
+                android:id="@+id/selectionOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="false"/>
 
             <!-- slider transparent (just for interaction) -->
             <com.google.android.material.slider.RangeSlider
