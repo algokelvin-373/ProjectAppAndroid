@@ -20,6 +20,9 @@
         android:theme="@style/Theme.VideoProcessing"
         tools:targetApi="31">
         <activity
+            android:name=".PreviewVideoTrimmerActivity"
+            android:exported="false" />
+        <activity
             android:name=".PreviewVideoActivity"
             android:exported="false" />
         <activity

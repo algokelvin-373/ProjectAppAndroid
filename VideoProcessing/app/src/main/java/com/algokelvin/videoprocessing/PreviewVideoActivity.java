@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 public class PreviewVideoActivity extends AppCompatActivity {
+    private static final String VIDEO_URI_TRIMMER = "video_uri_trimmer";
     private static final String VIDEO_URI = "video_uri";
     private final long max_window_ms = 8_000;
     private ActivityPreviewVideoBinding binding;
@@ -339,8 +340,8 @@ public class PreviewVideoActivity extends AppCompatActivity {
 
     @OptIn(markerClass = UnstableApi.class)
     private void previewResultVideoTrim(String outputPath) {
-        Intent toPostVideoPage = new Intent(this, PreviewVideoActivity.class);
-        toPostVideoPage.putExtra(VIDEO_URI, outputPath);
+        Intent toPostVideoPage = new Intent(this, PreviewVideoTrimmerActivity.class);
+        toPostVideoPage.putExtra(VIDEO_URI_TRIMMER, outputPath);
         startActivity(toPostVideoPage);
     }
 
