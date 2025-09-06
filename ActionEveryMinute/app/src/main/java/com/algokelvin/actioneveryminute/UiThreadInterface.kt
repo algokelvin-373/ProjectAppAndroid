@@ -1,4 +1,4 @@
-package algokelvin.app.actioneveryminute
+package com.algokelvin.actioneveryminute
 
 interface UiThreadInterface {
     fun uiThread()

@@ -1,6 +1,6 @@
-package algokelvin.app.actioneveryminute
+package com.algokelvin.actioneveryminute
 
-import algokelvin.app.actioneveryminute.databinding.ActivityMainBinding
+import com.algokelvin.actioneveryminute.databinding.ActivityMainBinding
 import java.util.*
 
 class MainActivity : BindingActivity<ActivityMainBinding>(), UiThreadInterface {
