@@ -14,15 +14,15 @@
 <table align="center">
     <tr>
         <td>
-            <b>01.  Action Every Minute</b> <br>
-            <b>02.  Animation Application</b> <br>
-            <b>03.  Birthday Card Compose</b> <br>
-            <b>04.  Calculator Compose</b> <br>
-            <b>05.  Camera Application</b> <br>
-            <b>06.  Clean Architecture MVVM</b> <br>
-            <b>07.  Connect Health Application</b> <br>
-            <b>08.  Count Number Compose</b> <br>
-            <b>09.  Design UI Toast</b> <br>
+            <b>01.  Action Every Minute</b>✅ <br>
+            <b>02.  Animation</b>✅ <br>
+            <b>03.  Birthday Card Compose</b>⏳ <br>
+            <b>04.  Calculator Compose</b>⏳ <br>
+            <b>05.  Camera Application</b>⏳ <br>
+            <b>06.  Clean Architecture MVVM</b>⏳ <br>
+            <b>07.  Connect Health Application</b>⏳ <br>
+            <b>08.  Count Number Compose</b>⏳ <br>
+            <b>09.  UI Toast</b>✅ <br>
             <b>10.  E-Commerce</b> <br>
             <b>11.  Enable Disable Button</b> <br>
             <b>12.  Gallery Compose</b> <br>
