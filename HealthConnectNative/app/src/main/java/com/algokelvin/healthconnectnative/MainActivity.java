@@ -13,18 +13,17 @@ import androidx.health.connect.client.records.ExerciseSessionRecord;
 import androidx.health.connect.client.records.HeartRateRecord;
 import androidx.health.connect.client.records.StepsRecord;
 import androidx.health.connect.client.records.TotalCaloriesBurnedRecord;
-import androidx.health.connect.client.records.WeightRecord;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static kotlin.jvm.JvmClassMappingKt.getKotlinClass;
-import kotlin.reflect.KClass;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "HealthConnectSync";
     private HealthConnectManager healthConnectManager;
     private ActivityResultLauncher<Set<String>> permissionsLauncher;
+    private boolean isHealthConnected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void onPermissionsResult(Set<String> grantedPermissions) {
         if (grantedPermissions != null && !grantedPermissions.isEmpty()) {
             Toast.makeText(this, "Permissions granted: " + grantedPermissions.size(), Toast.LENGTH_SHORT).show();
+            isHealthConnected = true;
         } else {
             Toast.makeText(this, "No permissions granted", Toast.LENGTH_SHORT).show();
         }

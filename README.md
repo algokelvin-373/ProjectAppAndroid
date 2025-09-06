@@ -23,18 +23,18 @@
             <b>07.  Connect Health Application</b>⏳ <br>
             <b>08.  Count Number Compose</b>⏳ <br>
             <b>09.  UI Toast</b>✅ <br>
-            <b>10.  E-Commerce</b> <br>
-            <b>11.  Enable Disable Button</b> <br>
-            <b>12.  Gallery Compose</b> <br>
-            <b>13.  GenerateQR</b> <br>
-            <b>14.  Image Text</b> <br>
-            <b>15.  Image Text Compose</b> <br>
-            <b>16.  Input Output Application</b> <br>
+            <b>10.  E-Commerce</b>⏳ <br>
+            <b>11.  UI Button</b>✅ <br>
+            <b>12.  Gallery Compose</b>⏳ <br>
+            <b>13.  GenerateQR</b>⏳ <br>
+	    <b>14.  Health Connect Natice</b>✅ <br>
+            <b>14.  UI Text Image</b>✅ <br>
+            <b>15.  Compose Text Image</b>✅ <br>
         </td>
         <td>
-            <b>17.  Insert Local DB No Transaction</b> <br>
-            <b>18.  Keyboard Simulator</b> <br>
-            <b>19.  Key Store Application</b> <br>
+            <b>17.  Insert Local DB No Transaction</b>⏳ <br>
+            <b>18.  Keyboard Simulator</b>✅ <br>
+            <b>19.  Key Store</b>✅ <br>
             <b>20.  Language Change One</b> <br>
             <b>21.  Layer Map Google Training</b> <br>
             <b>22.  Login Play Open Source</b> <br>
