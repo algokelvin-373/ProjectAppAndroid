@@ -42,16 +42,14 @@
             <b>24.  Movie TV Show</b>⏳ <br>
             <b>25.  Notification</b>⏳ <br>
             <b>26.  Open File Mobile</b>✅ <br>
-            <b>27.  Performance Scroll Data</b> <br>
-            <b>28.  Primary Dialer</b> <br>
-            <b>29.  Quiz Application</b> <br>
-            <b>30.  Read Write Permission</b> <br>
-            <b>31.  Recorder Application</b> <br>
-            <b>32.  Recyclerview Basic</b> <br>
+            <b>27.  Scroll View Data</b>✅ <br>
+            <b>28.  Primary Dialer</b>✅ <br>
+            <b>30.  Read Write Permission</b>✅ <br>
+            <b>31.  Recorder Application</b>⏳ <br>
+            <b>32.  UI RecyclerView</b>✅ <br>
         </td>
         <td>
-            <b>33.  Retrofit Coroutine Application</b> <br>
-            <b>33.  Share and Rare</b> <br>
+            <b>33.  Retrofit Coroutine</b>✅ <br>
             <b>34.  Show Dialog</b> <br>
             <b>35.  Switch Android</b> <br>
             <b>36.  Text Vision</b> <br>
