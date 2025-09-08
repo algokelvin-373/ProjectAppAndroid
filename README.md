@@ -35,13 +35,13 @@
             <b>17.  Insert Local DB No Transaction</b>⏳ <br>
             <b>18.  Keyboard Simulator</b>✅ <br>
             <b>19.  Key Store</b>✅ <br>
-            <b>20.  Language Change One</b> <br>
-            <b>21.  Layer Map Google Training</b> <br>
-            <b>22.  Login Play Open Source</b> <br>
-            <b>23.  Math2D3D</b> <br>
-            <b>24.  Movie App MVVM Clean Architecture</b> <br>
-            <b>25.  Notification</b> <br>
-            <b>26.  Open File Mobile</b> <br>
+            <b>20.  Language Change One</b>✅ <br>
+            <b>21.  Layer Map Google</b>✅ <br>
+            <b>22.  Login Play</b>✅ <br>
+            <b>23.  Math 2D 3D</b>✅ <br>
+            <b>24.  Movie TV Show</b>⏳ <br>
+            <b>25.  Notification</b>⏳ <br>
+            <b>26.  Open File Mobile</b>✅ <br>
             <b>27.  Performance Scroll Data</b> <br>
             <b>28.  Primary Dialer</b> <br>
             <b>29.  Quiz Application</b> <br>
