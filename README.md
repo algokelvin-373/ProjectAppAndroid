@@ -50,21 +50,15 @@
         </td>
         <td>
             <b>33.  Retrofit Coroutine</b>✅ <br>
-            <b>34.  Show Dialog</b> <br>
-            <b>35.  Switch Android</b> <br>
-            <b>36.  Text Vision</b> <br>
-            <b>37.  Timer Season 1</b> <br>
-            <b>38.  Timer Season 2</b> <br>
-            <b>39.  To Do List Season 1</b> <br>
-            <b>40.  To Do List Season 2</b> <br>
-            <b>41.  Two Number Operator No DTL</b> <br>
-            <b>42.  Two Number Operator With DTL</b> <br>
+            <b>34.  Show Dialog</b>✅ <br>
+            <b>35.  Switch Android</b>✅ <br>
+            <b>36.  Text Vision</b>✅ <br>
+            <b>37.  Timer</b>✅ <br>
+            <b>39.  To Do List</b>✅ <br>
+            <b>41.  Two Number Operator No DTL</b>✅ <br>
+            <b>42.  Two Number Operator With DTL</b>✅ <br>
             <b>43.  UI Compose</b> <br>
-            <b>44.  View and View Group</b> <br>
-            <b>45.  View Binding Input Data</b> <br>
-            <b>46.  View Model Count Application</b> <br>
-            <b>47.  View Model Rectangle Application</b> <br>
-            <b>48.  Visitor Application</b> <br>
+            <b>48.  Visitor Application</b>⏳ <br>
         </td>
     </tr>
 </table>
