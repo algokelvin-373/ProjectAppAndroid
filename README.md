@@ -14,22 +14,21 @@
 <table align="center">
     <tr>
         <td>
-            <b>01.  Action Every Minute</b>✅ <br>
-            <b>02.  Animation</b>✅ <br>
+            <b>01.  Action Every Minute</b>✅✅ <br>
+            <b>02.  Animation</b>✅✅ <br>
             <b>03.  Birthday Card Compose</b>⏳ <br>
             <b>04.  Calculator Compose</b>⏳ <br>
             <b>05.  Camera Application</b>⏳ <br>
             <b>06.  Clean Architecture MVVM</b>⏳ <br>
-            <b>07.  Connect Health Application</b>⏳ <br>
             <b>08.  Count Number Compose</b>⏳ <br>
-            <b>09.  UI Toast</b>✅ <br>
+            <b>09.  UI Toast</b>✅✅ <br>
             <b>10.  E-Commerce</b>⏳ <br>
-            <b>11.  UI Button</b>✅ <br>
+            <b>11.  UI Button</b>✅✅ <br>
             <b>12.  Gallery Compose</b>⏳ <br>
             <b>13.  GenerateQR</b>⏳ <br>
-	    <b>14.  Health Connect Natice</b>✅ <br>
-            <b>14.  UI Text Image</b>✅ <br>
-            <b>15.  Compose Text Image</b>✅ <br>
+	    <b>14.  Health Connect Natice</b>✅⏳ <br>
+            <b>14.  UI Text Image</b>✅⏳ <br>
+            <b>15.  Compose Text Image</b>✅✅ <br>
         </td>
         <td>
             <b>17.  Insert Local DB No Transaction</b>⏳ <br>
