@@ -41,22 +41,22 @@
             <b>24.  Movie TV Show</b>⏳ <br>
             <b>25.  Notification</b>⏳ <br>
             <b>26.  Open File Mobile</b>✅ <br>
-            <b>27.  Scroll View Data</b>✅ <br>
+            <b>27.  Scroll View Data</b>✅✅ <br>
             <b>28.  Primary Dialer</b>✅ <br>
-            <b>30.  Read Write Permission</b>✅ <br>
+            <b>30.  Read Write Permission</b>✅✅ <br>
             <b>31.  Recorder Application</b>⏳ <br>
-            <b>32.  UI RecyclerView</b>✅ <br>
+            <b>32.  UI RecyclerView</b>✅✅ <br>
         </td>
         <td>
-            <b>33.  Retrofit Coroutine</b>✅ <br>
-            <b>34.  Show Dialog</b>✅ <br>
-            <b>35.  Switch Android</b>✅ <br>
-            <b>36.  Text Vision</b>✅ <br>
-            <b>37.  Timer</b>✅ <br>
-            <b>39.  To Do List</b>✅ <br>
-            <b>41.  Two Number Operator No DTL</b>✅ <br>
-            <b>42.  Two Number Operator With DTL</b>✅ <br>
-            <b>43.  UI Compose</b> <br>
+            <b>33.  Retrofit Coroutine</b>✅✅ <br>
+            <b>34.  Show Dialog</b>✅✅ <br>
+            <b>35.  Switch Android</b>✅✅ <br>
+            <b>36.  Text Vision</b>✅✅ <br>
+            <b>37.  Timer</b>✅✅ <br>
+            <b>39.  To Do List</b>✅✅ <br>
+            <b>41.  Two Number Operator No DTL</b>✅✅ <br>
+            <b>42.  Two Number Operator With DTL</b>✅✅ <br>
+            <b>43.  UI Compose</b>✅✅ <br>
             <b>48.  Visitor Application</b>⏳ <br>
         </td>
     </tr>
