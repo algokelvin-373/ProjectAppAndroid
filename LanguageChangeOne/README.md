@@ -1,11 +1,9 @@
-## Enable Disable Button
+## Language Change
 
 | ![Gambar 1](./documentation/SS_LanguageChangeOne_01.jpg) | ![Gambar 2](./documentation/SS_LanguageChangeOne_02.jpg) | ![Gambar 3](./documentation/SS_LanguageChangeOne_03.jpg) |
 |:--------------------------------------------------------:|:--------------------------------------------------------:|:--------------------------------------------------------:|
 |              Gambar 1: In Japanese Language              |             Gambar 2: In Indonesian Language             |              Gambar 3: In English Language               |
 
-## Implementation
-- Nothing
 
 ## Environment
 <table>
