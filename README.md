@@ -35,9 +35,9 @@
             <b>22.  Math 2D 3D</b>✅✅ <br>
             <b>23.  Movie TV Show</b>⏳ <br>
             <b>24.  Notification</b>⏳ <br>
-            <b>25.  Open File Mobile</b>✅ <br>
+            <b>25.  Open File Mobile</b>✅⏳ <br>
             <b>26.  Scroll View Data</b>✅✅ <br>
-            <b>27.  Primary Dialer</b>✅ <br>
+            <b>27.  Primary Dialer</b>✅⏳ <br>
             <b>28.  Read Write Permission</b>✅✅ <br>
             <b>29.  Recorder Application</b>⏳ <br>
 	        <b>31.  Retrofit Coroutine</b>✅✅ <br>
@@ -53,7 +53,7 @@
             <b>30.  UI RecyclerView</b>✅✅ <br>
             <b>14.  UI Text Image</b>✅⏳ <br>
             <b>08.  UI Toast</b>✅✅ <br>
-            <b>40.  Visitor Application</b>⏳ <br>
+            <b>40.  Video Processing</b>✅✅ <br>
         </td>
         <td>
             
