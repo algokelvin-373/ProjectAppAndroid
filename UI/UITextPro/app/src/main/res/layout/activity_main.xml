@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -18,63 +17,37 @@
             android:layout_height="100dp"/>
 
         <TextView
-            android:text="Text 1 12sp black"
-            android:textAlignment="center"
-            android:textSize="12sp"
-            android:textColor="@color/black"
+            android:id="@+id/text1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Text 2 16sp red"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textColor="@color/red"
+            android:id="@+id/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Text 3 20sp blue bold"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="@color/blue"
-            android:textStyle="bold"
+            android:id="@+id/text3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Text 4 22sp green italic"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:textColor="@color/green"
-            android:textStyle="italic"
+            android:id="@+id/text4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Text 5 24sp red bold italic"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textColor="@color/red"
-            android:textStyle="bold|italic"
+            android:id="@+id/text5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Text 6 28sp red sans-serif-black"
-            android:textAlignment="center"
-            android:textSize="28sp"
-            android:textColor="@color/red"
-            android:fontFamily="sans-serif-black"
+            android:id="@+id/text6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Text 7 30sp black monospace"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:fontFamily="monospace"
+            android:id="@+id/text7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
