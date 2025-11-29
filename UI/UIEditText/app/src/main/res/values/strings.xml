@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">UiEditText</string>
     <string name="output_label">Output: %1$s</string>
+    <string name="hint_input">Enter text here</string>
+    <string name="button_show">Show</string>
+    <string name="screen_title">Nice EditText</string>
+    <string name="button_clear">Clear</string>
 </resources>

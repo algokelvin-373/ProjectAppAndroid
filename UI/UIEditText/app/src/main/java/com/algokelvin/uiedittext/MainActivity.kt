@@ -16,11 +16,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val editText = binding.editTextInput
         val buttonShow = binding.buttonShow
+        val buttonClear = binding.buttonClear
         val output = binding.textViewOutput
 
         // Update output TextView as user types
@@ -37,6 +39,11 @@ class MainActivity : AppCompatActivity() {
         buttonShow.setOnClickListener {
             val text = editText.text.toString()
             Toast.makeText(this, text.ifEmpty { "(empty)" }, Toast.LENGTH_SHORT).show()
+        }
+
+        // Clear input
+        buttonClear.setOnClickListener {
+            editText.text?.clear()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
