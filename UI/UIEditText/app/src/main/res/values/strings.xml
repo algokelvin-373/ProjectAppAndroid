@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UiEditText</string>
+    <string name="output_label">Output: %1$s</string>
 </resources>
