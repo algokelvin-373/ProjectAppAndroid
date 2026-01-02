@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">VideoProcessing</string>
+    <string name="take_video_from_gallery">Take Video from Gallery</string>
+    <string name="take_video_using_camera">Take Video using Camera</string>
+    <string name="trim_video">Trim Video</string>
+</resources>

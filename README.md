@@ -14,59 +14,49 @@
 <table align="center">
     <tr>
         <td>
-            <b>01.  Action Every Minute</b> <br>
-            <b>02.  Animation Application</b> <br>
-            <b>03.  Birthday Card Compose</b> <br>
-            <b>04.  Calculator Compose</b> <br>
-            <b>05.  Camera Application</b> <br>
-            <b>06.  Clean Architecture MVVM</b> <br>
-            <b>07.  Connect Health Application</b> <br>
-            <b>08.  Count Number Compose</b> <br>
-            <b>09.  Design UI Toast</b> <br>
-            <b>10.  E-Commerce</b> <br>
-            <b>11.  Enable Disable Button</b> <br>
-            <b>12.  Gallery Compose</b> <br>
-            <b>13.  GenerateQR</b> <br>
-            <b>14.  Image Text</b> <br>
-            <b>15.  Image Text Compose</b> <br>
-            <b>16.  Input Output Application</b> <br>
+            <b>01.  Action Every Minute</b>✅✅ <br>
+            <b>02.  Animation</b>✅✅ <br>
+            <b>03.  Birthday Card Compose</b>⏳ <br>
+            <b>04.  Calculator Compose</b>⏳ <br>
+            <b>05.  Camera Application</b>⏳ <br>
+            <b>06.  Clean Architecture MVVM</b>⏳ <br>
+            <b>07.  Count Number Compose</b>⏳ <br>
+            <b>09.  E-Commerce</b>⏳ <br>
+            <b>11.  Gallery Compose</b>⏳ <br>
+            <b>12.  GenerateQR</b>⏳ <br>
+	        <b>13.  Health Connect Natice</b>✅⏳ <br>
+            <b>15.  Compose Text Image</b>✅✅ <br>
+	        <b>16.  Insert Local DB No Transaction</b>⏳ <br>
+            <b>17.  Keyboard Simulator</b>✅✅ <br>
+            <b>18.  Key Store</b>✅✅ <br>
+            <b>19.  Language Change One</b>✅✅ <br>
+            <b>20.  Layer Map Google</b>✅✅ <br>
+            <b>21.  Login Play</b>✅✅ <br>
+            <b>22.  Math 2D 3D</b>✅✅ <br>
+            <b>23.  Movie TV Show</b>⏳ <br>
+            <b>24.  Notification</b>⏳ <br>
+            <b>25.  Open File Mobile</b>✅⏳ <br>
+            <b>26.  Scroll View Data</b>✅✅ <br>
+            <b>27.  Primary Dialer</b>✅⏳ <br>
+            <b>28.  Read Write Permission</b>✅✅ <br>
+            <b>29.  Recorder Application</b>⏳ <br>
+	        <b>31.  Retrofit Coroutine</b>✅✅ <br>
+            <b>32.  Show Dialog</b>✅✅ <br>
+            <b>33.  Switch Android</b>✅✅ <br>
+            <b>34.  Text Vision</b>✅✅ <br>
+            <b>35.  Timer</b>✅✅ <br>
+            <b>36.  To Do List</b>✅✅ <br>
+            <b>37.  Two Number Operator No DTL</b>✅✅ <br>
+            <b>38.  Two Number Operator With DTL</b>✅✅ <br>
+            <b>10.  UI Button</b>✅✅ <br>
+            <b>39.  UI Compose</b>✅✅ <br>
+            <b>30.  UI RecyclerView</b>✅✅ <br>
+            <b>14.  UI Text Image</b>✅⏳ <br>
+            <b>08.  UI Toast</b>✅✅ <br>
+            <b>40.  Video Processing</b>✅✅ <br>
         </td>
         <td>
-            <b>17.  Insert Local DB No Transaction</b> <br>
-            <b>18.  Keyboard Simulator</b> <br>
-            <b>19.  Key Store Application</b> <br>
-            <b>20.  Language Change One</b> <br>
-            <b>21.  Layer Map Google Training</b> <br>
-            <b>22.  Login Play Open Source</b> <br>
-            <b>23.  Math2D3D</b> <br>
-            <b>24.  Movie App MVVM Clean Architecture</b> <br>
-            <b>25.  Notification</b> <br>
-            <b>26.  Open File Mobile</b> <br>
-            <b>27.  Performance Scroll Data</b> <br>
-            <b>28.  Primary Dialer</b> <br>
-            <b>29.  Quiz Application</b> <br>
-            <b>30.  Read Write Permission</b> <br>
-            <b>31.  Recorder Application</b> <br>
-            <b>32.  Recyclerview Basic</b> <br>
-        </td>
-        <td>
-            <b>33.  Retrofit Coroutine Application</b> <br>
-            <b>33.  Share and Rare</b> <br>
-            <b>34.  Show Dialog</b> <br>
-            <b>35.  Switch Android</b> <br>
-            <b>36.  Text Vision</b> <br>
-            <b>37.  Timer Season 1</b> <br>
-            <b>38.  Timer Season 2</b> <br>
-            <b>39.  To Do List Season 1</b> <br>
-            <b>40.  To Do List Season 2</b> <br>
-            <b>41.  Two Number Operator No DTL</b> <br>
-            <b>42.  Two Number Operator With DTL</b> <br>
-            <b>43.  UI Compose</b> <br>
-            <b>44.  View and View Group</b> <br>
-            <b>45.  View Binding Input Data</b> <br>
-            <b>46.  View Model Count Application</b> <br>
-            <b>47.  View Model Rectangle Application</b> <br>
-            <b>48.  Visitor Application</b> <br>
+            
         </td>
     </tr>
 </table>

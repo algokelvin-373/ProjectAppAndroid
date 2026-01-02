@@ -12,8 +12,8 @@
         <td>Java JDK</td>
     </tr>
     <tr>
-        <td>8.5.0</td>
-        <td>8.7</td>
+        <td>8.11.1</td>
+        <td>8.10.1</td>
         <td>17</td>
     </tr>
 </table>
