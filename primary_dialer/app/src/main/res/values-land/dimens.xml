@@ -1,9 +1,0 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-      <dimen name="fab_margin">48dp</dimen>
-    <dimen name="dialpad_key_margin_right" tools:ignore="MissingDefaultResource">5dp</dimen>
-    <!-- Right margins for specific keys to align them correctly -->
-    <dimen name="dialpad_key_one_margin_right" tools:ignore="MissingDefaultResource">3dp</dimen>
-    <dimen name="dialpad_key_text_width" tools:ignore="MissingDefaultResource">35dp</dimen>
-    <dimen name="dialpad_key_number_width" tools:ignore="MissingDefaultResource">20sp</dimen>
-    <dimen name="dialpad_symbol_margin_bottom">0dp</dimen>
-   </resources>
