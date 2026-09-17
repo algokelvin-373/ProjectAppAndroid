@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.SurfaceView;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ public class MainActivity extends com.algokelvin.camera.CameraSurfaceHolder {
     private final String[] permissions = { Manifest.permission.CAMERA };
     SurfaceView surfaceView;
     TextView txtDegree;
+    Button btnCapture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,9 @@ public class MainActivity extends com.algokelvin.camera.CameraSurfaceHolder {
 
         txtDegree = findViewById(R.id.txt_degree);
         surfaceView = findViewById(R.id.camerapreview);
+        btnCapture = findViewById(R.id.btn_capture);
         setCameraSurface(txtDegree, surfaceView);
+        btnCapture.setOnClickListener(view -> captureImage());
 
         if (hasNoPermissions()) {
             requestPermission();
@@ -55,9 +59,15 @@ public class MainActivity extends com.algokelvin.camera.CameraSurfaceHolder {
             if (allGranted) { // Initialize the camera if all permissions are granted
                 initCamera();
             } else { // Handle the case where some permissions are not granted
-                Toast.makeText(this, "Some permissions are not granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.camera_permission_denied, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        releaseCamera();
+        super.onPause();
     }
 
 }

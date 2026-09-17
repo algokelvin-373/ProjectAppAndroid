@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Camera</string>
+    <string name="capture">Capture</string>
+    <string name="default_degree">0</string>
+    <string name="camera_not_ready">Camera is not ready</string>
+    <string name="camera_permission_denied">Camera permission is required</string>
+    <string name="image_saved">Saved: %1$s</string>
+    <string name="image_save_failed">Failed to save image</string>
 </resources>
