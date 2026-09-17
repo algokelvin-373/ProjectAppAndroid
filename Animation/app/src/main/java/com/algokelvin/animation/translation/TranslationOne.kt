@@ -15,10 +15,23 @@ class TranslationOne : AppCompatActivity() {
         binding = ActivityTranslationOneBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*
-        Make TextView translate X to coordinate 200 with duration 2 seconds.
-        This method use the module 'animator-featuring'
-         */
-        animatorController.animatorTextView(binding.txtHello, "translationX", 200f, 2000)
+        binding.btnStart.setOnClickListener {
+            animatorController.translateX(binding.txtHello, 200f, 2000)
+        }
+        binding.btnReverse.setOnClickListener {
+            animatorController.translateX(binding.txtHello, -200f, 2000)
+        }
+        binding.btnReset.setOnClickListener {
+            animatorController.reset(binding.txtHello)
+        }
+        binding.btnAlpha.setOnClickListener {
+            animatorController.fade(binding.txtHello, 0.2f, 1000)
+        }
+        binding.btnRotation.setOnClickListener {
+            animatorController.rotate(binding.txtHello, 360f, 1000)
+        }
+        binding.btnScale.setOnClickListener {
+            animatorController.scale(binding.txtHello, 1.6f, 1000)
+        }
     }
 }

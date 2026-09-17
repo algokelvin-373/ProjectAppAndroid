@@ -3,21 +3,34 @@ package com.algokelvin.animation.translation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.algokelvin.animation.AnimatorController
-import com.algokelvin.animation.databinding.ActivityTranslationOneBinding
+import com.algokelvin.animation.databinding.ActivityTranslationTwoBinding
 
 class TranslationTwo : AppCompatActivity() {
-    private lateinit var binding: ActivityTranslationOneBinding
+    private lateinit var binding: ActivityTranslationTwoBinding
     private val animatorController = AnimatorController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTranslationOneBinding.inflate(layoutInflater)
+        binding = ActivityTranslationTwoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*
-        Make TextView translate X to coordinate -200 with duration 1 seconds.
-        This method use the module 'animator-featuring'
-         */
-        animatorController.animatorTextView(binding.txtHello, "translationX", -200f, 1000)
+        binding.btnStart.setOnClickListener {
+            animatorController.translateX(binding.txtHello, -200f, 1000)
+        }
+        binding.btnReverse.setOnClickListener {
+            animatorController.translateX(binding.txtHello, 200f, 1000)
+        }
+        binding.btnReset.setOnClickListener {
+            animatorController.reset(binding.txtHello)
+        }
+        binding.btnAlpha.setOnClickListener {
+            animatorController.fade(binding.txtHello, 0.2f, 1000)
+        }
+        binding.btnRotation.setOnClickListener {
+            animatorController.rotate(binding.txtHello, -360f, 1000)
+        }
+        binding.btnScale.setOnClickListener {
+            animatorController.scale(binding.txtHello, 1.6f, 1000)
+        }
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".translation.TranslationOne">
+    tools:context=".translation.TranslationTwo">
 
     <LinearLayout
         android:id="@+id/content"
@@ -21,7 +21,7 @@
             android:id="@+id/txt_hello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hello_translation_part01"
+            android:text="@string/hello_translation_part02"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
