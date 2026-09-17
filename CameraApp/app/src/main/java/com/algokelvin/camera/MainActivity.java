@@ -11,11 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 public class MainActivity extends com.algokelvin.camera.CameraSurfaceHolder {
-    private final String[] permissions = {
-            Manifest.permission.CAMERA,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_EXTERNAL_STORAGE
-    };
+    private final String[] permissions = { Manifest.permission.CAMERA };
     SurfaceView surfaceView;
     TextView txtDegree;
 
