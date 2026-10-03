@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,19 +12,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private final String TAG = "MainActivityDeepLink";
+    private static final String TAG = "DeepLink";
+
+    private TextView tvData, tvHost, tvPath, tvCode, tvRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        handleDeepLink(getIntent()); // RUN DEBUG DEEP LINK DI SINI
+
+        tvData = findViewById(R.id.tv_data);
+        tvHost = findViewById(R.id.tv_host);
+        tvPath = findViewById(R.id.tv_path);
+        tvCode = findViewById(R.id.tv_code);
+        tvRef = findViewById(R.id.tv_ref);
+
+        handleDeepLink(getIntent());
     }
 
     @Override
     protected void onNewIntent(@NonNull Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG, "onNewIntent CALLED");
         setIntent(intent);
         handleDeepLink(intent);
     }
@@ -31,41 +40,37 @@ public class MainActivity extends AppCompatActivity {
     private void handleDeepLink(Intent intent) {
         if (intent == null) return;
 
-        Log.d(TAG, "action=" + intent.getAction());
-        Log.d(TAG, "dataString=" + intent.getDataString());
-        Log.d(TAG, "extras=" + intent.getExtras());
-
         Uri data = intent.getData();
         if (data == null) {
-            Log.w(TAG, "DATA NULL (normal kalau buka dari icon/Run)");
+            Log.d(TAG, "No deep link data. Launched from launcher.");
+            tvData.setText("No deep link data (launched from app icon)");
+            tvHost.setText("");
+            tvPath.setText("");
+            tvCode.setText("");
+            tvRef.setText("");
             return;
         }
 
-        Log.d(TAG, "URI=" + data.toString());
+        Log.d(TAG, "Deep link: " + data);
+        tvData.setText(data.toString());
 
-        // Example link: https://example.com/promo/ABC?ref=ig
-        String host = data.getHost();             // example.com
-        String path = data.getPath();             // /promo/ABC
-        List<String> segments = data.getPathSegments(); // ["promo", "ABC"]
+        String host = data.getHost();
+        String path = data.getPath();
 
-        if ("example.com".equals(host) && segments.size() >= 2) {
-            String first = segments.get(0); // "promo"
-            String code  = segments.get(1); // "ABC"
+        tvHost.setText(host != null ? "Host: " + host : "Host: -");
+        tvPath.setText(path != null ? "Path: " + path : "Path: -");
 
-            if ("promo".equals(first)) {
-                String ref = data.getQueryParameter("ref");
-                Log.d(TAG, "Ref: "+ ref);
-
-                // Navigate ke page promo (example Activity)
-                /*Intent i = new Intent(this, PromoActivity.class);
-                i.putExtra("code", code);
-                i.putExtra("ref", ref);
-                startActivity(i);*/
-            } else {
-                Log.e(TAG, "ERROR 2");
-            }
-        } else {
-            Log.e(TAG, "ERROR 1");
+        List<String> segments = data.getPathSegments();
+        String code = null;
+        if (segments != null && segments.size() >= 2 && "promo".equals(segments.get(0))) {
+            code = segments.get(1);
         }
+
+        tvCode.setText(code != null ? "Code: " + code : "Code: -");
+
+        String ref = data.getQueryParameter("ref");
+        tvRef.setText(ref != null ? "Ref: " + ref : "Ref: -");
+
+        Log.d(TAG, "host=" + host + ", path=" + path + ", code=" + code + ", ref=" + ref);
     }
 }
