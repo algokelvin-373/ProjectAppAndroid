@@ -134,6 +134,8 @@ public class KeyboardController extends AppCompatActivity implements View.OnClic
             removeText(String.valueOf(txtInputData.getText()));
         } else if (id == R.id.keyBtn_Cancel) {
             finish();
+        } else if (id == R.id.keyBtn_OK) {
+            // OK button pressed
         }
     }
     private void addText(String character) {
